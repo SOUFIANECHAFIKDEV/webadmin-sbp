@@ -1,0 +1,24 @@
+<button (click)="changeShowList()"> {{Label}}</button>
+
+<div class="list-container" *ngIf="showList" (click)="showList = !showList">
+</div>
+<div class="ul-container" *ngIf="showList">
+  <ul>
+    <li *ngFor="let column of columns;let i = index" (click)="ColumnSelected(column,i)">
+      <div class="btn-li">
+
+        <i class="fa fa-check i-not-check" [ngClass]="{ 'i-check': checked[i] == true }"></i>{{ column }}
+      </div>
+    </li>
+    <li style="margin-top: 1em;" *ngIf="showNone != undefined">
+      <div class="btn-li" (click)="operations('none')">
+        {{ showNone }}
+      </div>
+    </li>
+    <li *ngIf="showAll != undefined">
+      <div class="btn-li" (click)="operations('all')">
+        {{showAll}}
+      </div>
+    </li>
+  </ul>
+</div>

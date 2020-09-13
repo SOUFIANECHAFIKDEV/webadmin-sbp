@@ -1,0 +1,52 @@
+.card-body {
+    overflow: inherit !important;
+  }
+  .dropzone { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    font-weight: 200;
+    height: 300px;
+    border: 2px dashed #065cb3;
+    border-radius: 5px;
+    background: white;
+    margin: 10px 0;
+  
+    &.hovering {
+        border: 2px solid #f16624;
+        color: #dadada !important;
+    }
+  
+    .file-label {
+        font-size: 1.2em;
+    }
+  }
+  
+  .btn-sm{
+   // padding: 0.25rem 0.5rem  !important;
+    font-size: 0.875rem  !important;
+    line-height: 1.73rem  !important;
+    border-radius: 0.21rem  !important;
+    padding-top: 0px !important;
+  }
+  
+  .btn-mail {
+    color: white !important;
+    background-color: #0f9497 !important;
+    border-color: #2DCEE3 !important;
+  }
+  
+  .textarea-single-ligne {
+    width: 95.5%;
+    float: right;
+  }
+
+  .devis-type {
+    position: absolute;
+    right: 260px;
+    font-size: 15px;
+    color: #2373c5;
+    font-weight: bold;
+  }
+  

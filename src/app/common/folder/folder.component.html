@@ -1,0 +1,29 @@
+<div class="chantier-folder">
+    <!-- <div class="open-folder" *ngIf="showActions == chantier?.id">
+        <button class="btn btn-md" [routerLink]="['./portes',chantier?.id]">Ouvrez {{ chantier?.id }}</button>
+    </div> -->
+
+    <div class="chantie-statut" [ngClass]="{'statut-EnEtude':(chantier?.statut == statutChantier.EnEtude),
+    'statut-Accepte': chantier?.statut == statutChantier.Accepte,
+    'statut-Termine':chantier?.statut == statutChantier.Termine,
+    'statut-NonAccepte':chantier?.statut == statutChantier.NonAcceptee}">
+        <span>{{ getLabelleByStatut(chantier.statut) }}</span>
+    </div>
+
+    <div class="chantier-name">{{ chantier.nom }}</div>
+    <div class="btn-group" role="group" aria-label="Basic example"
+        [ngStyle]="{'margin-left':deleteAction ? '4rem' : '5rem' }" *ngIf="showActions == chantier?.id">
+        <button type="button" class="btn btn-md btn-actions" [routerLink]="['./detail',chantier?.id]" placement="bottom"
+            ngbTooltip="{{'labels.afficher' | translate}} {{'labels.chantier' | translate}}"><i
+                class="ft-eye"></i></button>
+        <button type="button" class="btn btn-md btn-actions" (click)="edit()" placement="bottom"
+            ngbTooltip="{{'labels.modifier' | translate}} {{'labels.chantier' | translate}}"><i
+                class="ft-edit"></i></button>
+        <ng-container *ngIf="deleteAction">
+            <button type="button" class="btn btn-md btn-actions" (click)="delete()"><i class="ft-trash-2"
+                    placement="bottom"
+                    ngbTooltip="{{'labels.supprimer' | translate}} {{'labels.chantier' | translate}}"></i></button>
+        </ng-container>
+
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'synagenda.title' | translate }}</h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <!-- <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+      <button type="button" class="btn btn-primary btn-md" (click)="add()"   data-toggle="modal"  placement="bottom" ngbTooltip="NOUVEAU">{{ 'labels.valide' | translate }}</button>          
+        </div> -->
+  </div>
+</div>
+
+<!-- 
+  <section id="multi-column">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+         
+          <div class="card-content collapse show"> -->
+
+<section id="multi-column">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="card box-shadow-0 border-primary">
+        <div class="card-header card-head-inverse bg-primary">
+          <h4 class="card-title"> <i class="ft-clipboard"></i> {{ 'labels.confAgenda' | translate }}</h4>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+
+            <form class="form form-horizontal" [formGroup]="form" (ngSubmit)="update()">
+
+              <div class="card-body init-card-body card-dashboard">
+
+
+                <!-- <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 label-control">{{
+                            'labels.comptegmail' | translate }}</label>
+                      <div class="col-md-8">
+                        <input type="text" formControlName="comptegmail" class="form-control"
+                          placeholder="{{ 'labels.comptegmail' | translate }}">
+  
+                      </div>
+                    </div>
+                  </div>
+                
+                </div> -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 label-control">{{
+                          'labels.calendarId' | translate }}</label>
+                      <div class="col-md-8">
+                        <input type="text" formControlName="calendarId" class="form-control"
+                          placeholder="{{ 'labels.calendarId' | translate }}">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row ">
+                      <label class="col-md-3 label-control">{{
+                          'labels.ApplicationName' | translate }}</label>
+                      <div class="col-md-9">
+                        <input type="text" formControlName="applicationName" class="form-control"
+                          placeholder="{{ 'labels.ApplicationName' | translate }}">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-md-3 label-control">{{
+                          'labels.clientId' | translate }}</label>
+                      <div class="col-md-8">
+                        <input type="text" formControlName="clientId" class="form-control"
+                          placeholder="{{ 'labels.clientId' | translate }}">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row ">
+                      <label class="col-md-3 label-control">{{
+                          'labels.clientSecret' | translate }}</label>
+                      <div class="col-md-9">
+                        <input type="text" formControlName="clientSecret" class="form-control"
+                          placeholder="{{ 'labels.clientSecret' | translate }}">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-actions ">
+                  <div class="pull-right">
+                    <button class="btn btn-success" type="submit" placement="bottom"
+                      ngbTooltip="{{ 'labels.save' | translate }}"> {{ 'labels.save' | translate }} </button>
+                  </div><br>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Multi-column ordering table -->
+</section>
+
+
+
+
+
+
+<div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+  <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div>

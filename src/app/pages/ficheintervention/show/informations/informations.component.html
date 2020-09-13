@@ -1,0 +1,287 @@
+<div class="content-body">
+    <section id="horizontal-form-layouts">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="zoom: 1;">
+                    <!-- <div class="card-header">
+                        <div class="heading-elements">
+
+                            <button type="button" class="btn btn-round " data-toggle="" aria-haspopup=""
+                                aria-expanded="" [ngClass]="{
+                          'statut-Brouillon': ficheIntervention?.status == statutficheIntervention.Brouillon,
+                          'statut-Planifiee': ficheIntervention?.status == statutficheIntervention.Planifiee,
+                          'statut-Realise':ficheIntervention?.status == statutficheIntervention.Realisee,
+                          'statut-Facturee':ficheIntervention?.status == statutficheIntervention.Facturee,
+                          'statut-Annulee':ficheIntervention?.status == statutficheIntervention.Annulee}">
+                                {{ getLabelleByStatut(ficheIntervention?.status)}} <i class="ft-alert-triangle"
+                                    style="font-weight: 600; font-size: 1.25rem; color: #FFC107; position: relative; top: 2px; "
+                                    *ngIf="compareDate(ficheIntervention?.dateFin) && ficheIntervention?.status == statutficheIntervention.Planifiee"></i></button>
+                        </div>
+
+                    </div> -->
+                    <div class="card-header">
+
+                        <div class="heading-elements pdfView">
+                            <!-- <a data-toggle="modal" data-target="#PdfView" class="btn btn-eye"
+                                (click)="generatePDFBase64(ficheIntervention?.id)"
+                                style="color:white; margin-right: 1rem;" placement="bottom"
+                                ngbTooltip="{{'labels.VisualiserPdf' | translate}}">
+                                <i class="ft-eye" style="color:white;  background-color: #2DCEE3;"></i>
+                            </a> -->
+                            <a data-toggle="modal" data-target="#PdfView" class="btn btn-eye"
+                                (click)="generatePDFBase64(ficheIntervention?.id)"
+                                style="color:white; margin-right: 1rem;" placement="bottom"
+                                ngbTooltip="{{'labels.VisualiserPdf' | translate}}">
+                                <span>{{'labels.VisualiserPdf' | translate}}</span>
+                                <i class="ft-eye" style="color:white;  background-color:#268EA6;"></i>
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form class="form form-horizontal">
+                                <div class="form-body">
+                                    <h4 class="form-section"><i
+                                            class="ft-user"></i>{{'labels.infoFicheIntervention' | translate}}</h4>
+                                    <div class="row">
+                                        <!-- reference -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="reference">{{'labels.reference' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="reference" class="form-control"
+                                                        [value]="ficheIntervention?.reference" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- chantier -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="chantier">{{'labels.chantier' | translate}}</label>
+                                                <div class="col-md-9">
+
+                                                    <input type="text" class="form-control"
+                                                        [value]="ficheIntervention?.chantier?.nom " disabled>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- client -->
+                                        <div class="col-6">
+                                            <div class="form-group row">
+                                                <label class="col-3 label-control"
+                                                    for="client">{{'labels.client' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="client" class="form-control"
+                                                        [value]="ficheIntervention?.chantier?.client?.nom" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- adresseIntervention -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="adresseFacturation">{{'labels.siteIntervention' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="adresseIntervention" class="form-control"
+                                                        [value]="adresseFacturation?.designation" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- dateDebut -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="dateDebut">{{'labels.dateDebut' | translate}}
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="dateDebut" class="form-control"
+                                                        [value]="ficheIntervention?.dateDebut | date : 'dd/MM/yyyy  HH:mm:ss' "
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- dateFin -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="dateFin">{{'labels.dateFin' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="dateDebut" class="form-control"
+                                                        [value]="ficheIntervention?.dateFin | date : 'dd/MM/yyyy  HH:mm:ss' "
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- nombre panier -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="nombrePanier">{{'labels.nombrePanier' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="nombrePanier" class="form-control"
+                                                        [value]="ficheIntervention?.nombrePanier" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="nombreDeplacement">{{'labels.nombreDeplacement' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="nombreDeplacement" class="form-control"
+                                                        [value]="ficheIntervention?.nombreDeplacement" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- objet -->
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-1 label-control"
+                                                    for="objet">{{'labels.objet' | translate}}</label>
+                                                <div class="col-md-11 cssAngular">
+                                                    <textarea [innerHTML]="ficheIntervention?.objet" id="objet"
+                                                        class="richTextArea"
+                                                        style="width: 95.5%;float: right;border: 1px solid #ccd6e6;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- rapport -->
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-1 label-control"
+                                                    for="rapport">{{'labels.rapport' | translate}}</label>
+                                                <div class="col-md-11">
+                                                    <div class="richTextArea"
+                                                        style="width: 95.5%;float: right;border: 1px solid #ccd6e6;"
+                                                        [innerHTML]="ficheIntervention?.rapport"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 class="form-section"> <i
+                                            class="ft-users"></i>{{'labels.techniciens' | translate}}</h4>
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <select-user [usersToDispaly]="techniciens" [readOnly]="true">
+                                            </select-user>
+                                        </div>
+
+                                    </div>
+
+                                    <h4 class="form-section"> <i
+                                            class="ft-shopping-cart"></i>{{'labels.prestations' | translate}}</h4>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table-article [load]="emitter" [articles]="prestations"
+                                                [showPrices]="false" [displaysGeneralCalculation]="false">
+                                            </table-article>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Document associé-->
+                                <ng-container *ngIf="ficheIntervention?.facture!= null ">
+                                    <h4 class="form-section"><i
+                                            class="fa fa-files-o"></i>{{'labels.documentAssocie' | translate}}</h4>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ 'labels.type' | translate }}</th>
+                                                    <th>{{ 'labels.reference' | translate }}</th>
+                                                    <th>{{ 'labels.date_creation' | translate }}</th>
+                                                    <th>{{ 'labels.statut' | translate }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <!-- facture -->
+                                                <tr *ngIf="ficheIntervention?.facture!= null">
+                                                    <td> {{ 'labels.facture' | translate }} </td>
+                                                    <td><a
+                                                            [routerLink]="[ '/factures/detail', ficheIntervention?.facture?.id ]">{{ ficheIntervention?.facture?.reference }}</a>
+                                                    </td>
+                                                    <td> {{ ficheIntervention?.facture?.dateCreation | date:'dd/MM/yyyy' }}
+                                                    </td>
+                                                    <td> <span
+                                                            *ngIf="ficheIntervention?.facture?.status == statutFacture.Brouillon"
+                                                            class="badge badge-default badge-brouillon">
+                                                            {{ 'labels.brouillon' | translate }}</span>
+                                                        <span
+                                                            *ngIf="ficheIntervention?.facture?.status == statutFacture.Encours"
+                                                            class="badge badge-default badge-planifiee">{{ 'labels.encours' | translate }}</span>
+                                                        <span
+                                                            *ngIf="ficheIntervention?.facture?.status == statutFacture.Cloture"
+                                                            class="badge badge-default badge-success">{{ 'labels.cloturee' | translate }}</span>
+                                                        <span
+                                                            *ngIf="ficheIntervention?.facture?.status == statutFacture.Enretard"
+                                                            class="badge badge-default badge-enretard">{{ 'labels.enretard' | translate }}</span>
+                                                        <span
+                                                            *ngIf="ficheIntervention?.facture?.status == statutFacture.Annule"
+                                                            class="badge badge-default badge-annuler">{{ 'labels.annuleef' | translate }}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </ng-container>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade text-left" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="PdfView">
+                    <i class="ft-file-minus"></i>
+                    {{ 'labels.VisualiserPdf' | translate }}
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="card-body download-Model">
+
+                    <!-- <a class="btn btn-secondary" style="color:white;" (click)="generatePDF()" placement="bottom"
+                    ngbTooltip="{{'labels.telecharger' | translate}}">
+                    {{ 'labels.telecharger' | translate }} <i class="fa fa-download"></i>
+                  </a> -->
+
+                    <app-visualiser-pdf [base64]="base64"></app-visualiser-pdf>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-secondary"
+                    data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+                <button type="button" class="btn btn-success" (click)="generatePDF(ficheIntervention?.id)">
+                    {{ 'labels.telecharger' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

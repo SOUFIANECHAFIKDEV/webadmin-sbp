@@ -1,0 +1,183 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" style="margin-top: 1rem;">
+
+    <a *ngIf="depense" class="btn btn-secondary" style="color:white;" (click)="dupliquerDepense()" placement="bottom"
+      ngbTooltip="{{ 'labels.dupliquer' | translate }}">
+      {{ 'labels.dupliquer' | translate }} <i class="fa fa-copy"></i>
+    </a>
+    <span style="width:12px"></span>
+
+    <button *ngIf="depense?.status!=statutDepense.Annule && depense?.status!=statutDepense.Brouillon " type="button"
+      class="btn btn-danger btn-md" placement="bottom" [container]="'body'" (click)="annulerParAvoir()"
+      ngbTooltip="{{ 'labels.annulerParAvoir' | translate }} ">{{ 'labels.annuler' | translate }}
+    </button>
+    <span style="width:12px"></span>
+    <a *ngIf="depense &&  depense?.status != statutDepense?.Cloture" class=" btn btn-primary" placement="bottom"
+      ngbTooltip="{{ 'toolip.edit' | translate }}" [routerLink]="['/depense/modifier', depense?.id]">
+      {{ 'labels.modifier' | translate }} <i class="ft-edit"></i>
+    </a>
+
+
+
+  </div>
+</div>
+<div class="content-header row">
+  <div class="content-header-left col-12 mb-1">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title">
+          {{ 'show.title' | translate }} {{ depense?.reference }}
+        </h3>
+      </div>
+      <div>
+
+        <span *ngIf="depense?.status == statutDepense.Brouillon"
+          class="btn btn-round  badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+        <span *ngIf="depense?.status == statutDepense.Encours"
+          class="btn btn-round  badge-planifiee ">{{ 'labels.encours' | translate }}</span>
+        <span *ngIf="depense?.status == statutDepense.Cloture"
+          class="btn btn-round  badge-success">{{ 'labels.cloturee' | translate }}</span>
+        <span *ngIf="depense?.status == statutDepense.Enretard"
+          class="btn btn-round  badge-enretard">{{ 'labels.enretard' | translate }}</span>
+        <span *ngIf="depense?.status == statutDepense.Annule"
+          class="btn btn-round  badge-annuler">{{ 'labels.annulee' | translate }}</span>
+      </div>
+    </div>
+
+
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/depense']">{{ 'title' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'show.title' | translate }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client"
+                aria-expanded="true">{{ 'show.information' | translate }}</a>
+            </li>
+            <li class="nav-item" *ngIf="
+            depense?.status != statutDepense?.Brouillon &&
+            depense?.status != statutDepense?.Annule
+          ">
+              <a class="nav-link" id="paiement-tab" data-toggle="pill" href="#paiement"
+                aria-expanded="true">{{ 'show.paiement' | translate }}</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique"
+                aria-expanded="false">{{ 'show.historique' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="memos-tab" data-toggle="pill" href="#memos" aria-expanded="false"
+                placement="bottom" ngbTooltip="{{ 'show.notes' | translate }}">
+                {{ 'show.notes' | translate }} <span class="memo-badge">{{ memos?.length }}</span>
+              </a>
+            </li>
+
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+
+              <information-depense [articles]="articles" [depense]="depense" [memos]="avoirdoc"
+                (download)="downloadPieceJointe($event)">
+              </information-depense>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="paiement" aria-labelledby="paiement-tab" aria-expanded="true">
+              <paiement-depense [depense]="depense" (refresh)="refresh()"></paiement-depense>
+            </div>
+
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+            <div class="tab-pane" id="memos" role="tabpanel" aria-labelledby="memos-tab">
+              <common-memos [memos]="memos" (valueChange)="saveMemo($event)" (download)="downloadPieceJointe($event)"
+                [processIsStarting]="processIsStarting"></common-memos>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade text-left" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel35"> {{'labels.addavoir' | translate}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <fieldset class="form-group floating-label-form-group">
+            <label for="title1">{{'commun.Comment' | translate}}</label>
+            <textarea class="form-control" [(ngModel)]="commentaire" name="commentaire" id="title1" rows="3"
+              placeholder="saisir ici un commentaire"></textarea>
+          </fieldset>
+          <div class="dropzone" (dropped)="startUpload($event.target.files)">
+
+            <h3>{{'commun.PieceJoint' | translate}}</h3>
+            <div class="file">
+              <label class="file-label text-center">
+                <label for="fileavoir" class="btn btn-light"> {{ 'commun.chooseFile' | translate }}
+                </label>
+                <input class="file-input" type="file" (change)="startUpload($event.target.files)" id="fileavoir"
+                  [(ngModel)]="files" name="files" style="visibility:hidden;">
+                <!-- <input type="file" id="bannedList" (change)="onFileChange($event);" #fileInput> -->
+              </label>
+            </div>
+          </div>
+          <div class="upload-table">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>{{ 'commun.name' | translate }}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="upload-name-style">
+                <tr *ngFor="let item of memo?.pieceJointes; let i=index">
+                  <td>{{ item.orignalName }}</td>
+                  <td>
+                    <i (click)="deleteFile(i)" style="color: red;font-size: 14px" class="ft-trash-2"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="reset" class="btn grey btn-light" data-dismiss="modal" [value]="'commun.close' | translate"
+            placement="top" ngbTooltip="{{'commun.close' | translate}}">
+          <input type="submit" (click)="saveDocAvoir()" class="btn btn-success btn-lg" data-dismiss="modal"
+            [value]="'commun.Add' | translate" placement="top" ngbTooltip="{{'commun.Add' | translate}}">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

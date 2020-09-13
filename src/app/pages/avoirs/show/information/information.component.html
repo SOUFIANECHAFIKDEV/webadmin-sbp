@@ -1,0 +1,270 @@
+<div class="content-body">
+  <section id="horizontal-form-layouts">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+
+          <div class="card-header">
+
+            <div class="heading-elements pdfView">
+              <a data-toggle="modal" data-target="#PdfView" class="btn btn-eye" (click)="generatePDFBase64(avoir?.id)"
+                style="color:white; margin-right: 1rem;" placement="bottom"
+                ngbTooltip="{{'labels.VisualiserPdf' | translate}}">
+                <span>{{'labels.VisualiserPdf' | translate}}</span>
+                <i class="ft-eye" style="color:white;  background-color:#268EA6;"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <!-- Information à saisir -->
+              <form class="form form-horizontal">
+                <div class="form-body">
+                  <!-- Information avoir-->
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i>{{ 'labels.infoAvoir' | translate }}
+                  </h4>
+
+                  <!-- Reference + Client -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput189">{{
+                            'labels.reference' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="avoir?.reference" id="projectinput189" class="form-control"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                            'labels.chantier' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" [value]="avoir?.idChantier | GetNameOfChantier"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput189">{{
+                              'labels.client' | translate
+                            }}</label>
+                        <div class="col-md-9" *ngIf="avoir?.idChantier  != null">
+                          <input type="text" [value]="client?.nom" id="projectinput189" class="form-control" disabled />
+                        </div>
+                        <div class="col-md-9" *ngIf="avoir?.idChantier  == null">
+                          <input type="text" [value]="avoir?.client?.nom" id="projectinput189" class="form-control"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                                'labels.adresseFacturation' | translate
+                            }}</label>
+                        <div class="col-md-9" *ngIf="avoir?.idChantier  != null">
+                          <input type="text" class="form-control" [value]="getAdresseDesignation(client?.adresses)"
+                            disabled />
+                        </div>
+                        <div class="col-md-9" *ngIf="avoir?.idChantier  == null">
+                          <input type="text" class="form-control"
+                            [value]="getAdresseDesignation(avoir?.client?.adresses)" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- date creation + date echeance -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput3">{{
+                            'labels.dateCreation' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="avoir?.dateCreation | date: 'dd/MM/yyyy'" id="projectinput175"
+                            class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput39">{{
+                            'labels.dateEcheance' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="avoir?.dateEcheance | date: 'dd/MM/yyyy'" id="projectinput178"
+                            class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Objet -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-1 label-control" for="projectinput19">{{
+                            'labels.objet' | translate
+                          }}</label>
+                        <div class="col-md-11">
+                          <input type="text" [value]="avoir?.object" id="projectinput19"
+                            class="form-control textarea-single-ligne" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 class="form-section">
+                  <i class="ft-shopping-cart"></i>{{ 'labels.articles' | translate }}
+                </h4>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <table-article [puc]="avoir?.puc" [delaiGarantie]="avoir?.delaiGarantie"
+                      [remiseGloabl]="avoir?.remise" [retenueGarantieValue]="avoir?.retenueGarantie"
+                      [typeRemiseGloabl]="avoir?.typeRemise" [partProrata]="avoir?.prorata"
+                      [tvaGlobal]="avoir?.tvaGlobal" [articles]="articles" [readOnly]="true">
+                    </table-article>
+                  </div>
+                </div>
+
+                <!-- Section d'autre -->
+                <h4 class="form-section">
+                  <i class="ft-message-circle"></i>{{ 'labels.autres' | translate }}
+                </h4>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="conditionRegelement">{{
+                          'labels.conditionRegelement' | translate
+                        }}</label>
+                      <div class="col-md-12">
+                        <!-- <textarea type="text" id="conditionRegelement" class="form-control"
+                          disabled>{{ avoir?.conditionRegelement }}</textarea> -->
+                        <angular-editor [config]="editorConfig" id="conditionRegelement"
+                          [ngModel]="avoir?.conditionRegelement" [ngModelOptions]="{standalone: true}"></angular-editor>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="note">{{
+                          'labels.note' | translate
+                        }}</label>
+                      <div class="col-md-12">
+                        <!-- <textarea type="text" id="note" class="form-control" disabled>{{
+                            avoir?.note
+                          }}</textarea> -->
+                        <angular-editor [config]="editorConfig" id="note" [ngModel]="avoir?.note"
+                          [ngModelOptions]="{standalone: true}"></angular-editor>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Document associé-->
+                <ng-container *ngIf="avoir?.facture!= null || avoir?.paiements.length >0 ">
+                  <h4 class="form-section"><i class="fa fa-files-o"></i>{{'labels.documentAssocie' | translate}}</h4>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>{{ 'labels.type' | translate }}</th>
+                          <th>{{ 'labels.reference' | translate }} / {{ 'labels.description' | translate }}</th>
+                          <th>{{ 'labels.dateCreation' | translate }} / {{ 'labels.datePaiement' | translate }}</th>
+                          <th>{{ 'labels.statut' | translate }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <!-- facture -->
+                        <tr *ngIf="avoir?.facture!= null ">
+                          <td> {{ 'labels.facture' | translate }} </td>
+                          <td><a
+                              [routerLink]="[ '/factures/detail', avoir?.facture?.id ]">{{ avoir?.facture?.reference }}</a>
+                          </td>
+                          <td> {{ avoir?.facture?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                          <td *ngIf="avoir?.facture?.status == statutFacture.Encours"><span
+                              class="badge badge-default badge-secondary">{{ 'labels.encours' | translate }}</span></td>
+                          <td *ngIf="avoir?.facture?.status == statutFacture.Cloture"><span
+                              class="badge badge-default badge-success">{{ 'labels.cloturee' | translate }}</span></td>
+                          <td *ngIf="avoir?.facture?.status == statutFacture.Enretard"><span
+                              class="badge badge-default badge-enretard">{{ 'labels.enretard' | translate }}</span></td>
+                          <td *ngIf="avoir?.facture?.status == statutFacture.Annule"><span
+                              class="badge badge-default badge-annuler">{{ 'labels.annulee' | translate }}</span></td>
+                        </tr>
+                        <tr *ngFor="let item of avoir?.paiements">
+                          <td> {{ 'labels.paiement' | translate }} </td>
+                          <td><a [routerLink]="[ '/paiements/detail', item?.id ]">{{ item?.description }}</a></td>
+                          <td> {{ item?.datePaiement | date:'dd/MM/yyyy' }} </td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-container>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<div class="modal fade text-left" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="PdfView">
+          <i class="ft-file-minus"></i>
+          {{ 'labels.VisualiserPdf' | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body download-Model">
+
+          <!-- <a class="btn btn-secondary" style="color:white;" (click)="generatePDF()" placement="bottom"
+              ngbTooltip="{{'labels.telecharger' | translate}}">
+              {{ 'labels.telecharger' | translate }} <i class="fa fa-download"></i>
+            </a> -->
+
+          <app-visualiser-pdf [base64]="base64"></app-visualiser-pdf>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary"
+          data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+        <button type="button" class="btn btn-success" (click)="generatePDF(avoir?.id)">
+          {{ 'labels.telecharger' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

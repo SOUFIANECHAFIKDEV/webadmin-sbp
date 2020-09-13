@@ -1,0 +1,106 @@
+<!-- Liste des produits -->
+<div class="modal fade text-left" id="selectProduits" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel9">
+
+          <i class="fa fa-list"></i> {{ 'labels.listArticle' | translate }}
+
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary" type="button"><i class="ft-search"></i></button>
+            </div>
+            <input type="text" [(ngModel)]="search" (input)="searchProduit()" class="form-control"
+              placeholder="{{ 'labels.search' | translate }}">
+          </div>
+          <div class="container-scroll">
+            <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+              [infiniteScrollContainer]="'.container-scroll'" [fromRoot]="true" (scrolled)="onScroll()">
+              <ul class="list-group list-group-flush">
+
+                <!-- Liste des articles sélectionnés -->
+                <li class="list-group-item" *ngFor="let tmp of produitsTmp;let i = index">
+                  <div class="form-inline">
+                    <div class="form-group col-md-7">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" (change)="removeTmpArticle(i)" class="custom-control-input"
+                          id="{{i+1000*22}}" checked>
+                        <label class="custom-control-label" for="{{i+1000*22}}">{{ tmp?.data?.reference}} -
+                          {{ tmp?.data?.nom }}</label>
+                      </div>
+                    </div>
+                    <div class="btn-group col-md-4">
+                      <button type="button" id="{{i+1000*21}}" class="btn btn-primary btn-md"
+                        (click)="changeQuantite(i,-1,null)"><i class="ft-minus"></i></button>
+                      <input type="number" id="{{i+1000*19}}" style="text-align: center" min="0" value="{{ tmp?.qte }}"
+                        appInputRemoveDefaultZero (input)="changeQuantite(i,null,$event.target.value)" />
+                      <button type="button" id="{{i+1000*18}}" class="btn btn-primary btn-md"
+                        (click)="changeQuantite(i,+1,null)"><i class="ft-plus"></i></button>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Liste des articles ne sont pas sélectionnés -->
+
+                <li class="list-group-item" *ngFor="let produit of produits;let i = index">
+                  <div class="form-inline">
+
+                    <div class="form-group col-md-7">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" (change)="addTmpArticle(i,null,null)" class="custom-control-input"
+                          id="{{i+2000*23}}">
+                        <label class="custom-control-label" for="{{i+2000*23}}">{{ produit?.reference}} -
+                          {{ produit?.nom }}</label>
+                      </div>
+                    </div>
+                    <div class="btn-group col-md-4">
+                      <!-- <button type="button" id="{{i+1000*24}}" class="btn btn-primary btn-md"><i class="ft-minus"></i></button>
+                      <input type="number" id="{{i+1000*25}}" style="text-align: center" min="0" value="0" (input)="addTmpArticle(i,$event.target.value)" />
+                      <button type="button" id="{{i+1000*26}}" class="btn btn-primary btn-md" (click)="addTmpArticle(i,null)"><i class="ft-plus"></i></button> -->
+                      <button type="button" id="{{i+1000*24}}" class="btn btn-primary btn-md"
+                        (click)="addTmpArticle(i,-1,null)"><i class="ft-minus"></i></button>
+                      <input type="number" id="{{i+1000*25}}" style="text-align: center" min="0"
+                        value="{{  qte(produit) }}" appInputRemoveDefaultZero
+                        (input)="addTmpArticle(i,null,$event.target.value)" />
+                      <button type="button" id="{{i+1000*26}}" class="btn btn-primary btn-md"
+                        (click)="addTmpArticle(i,+1,null)"><i class="ft-plus"></i></button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- <div *ngIf="produits?.length == 0">aucun produit pour ce fournisseur</div> -->
+
+            <div class="text-center" *ngIf="!loadingFinished">
+              Chargement en cours...
+            </div>
+            <div *ngIf="loadingFinished">
+              <div class="text-center msgnoproduit" *ngIf="produits?.length == 0">
+                aucun article pour ce fournisseur
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-light" data-dismiss="modal"
+          ngbTooltip="{{ 'labels.cancel'| translate }}">{{ 'labels.cancel' |translate }}
+        </button>
+        <button type="button" class="btn btn-success btn-lg" ngbTooltip="{{ 'labels.sauvegarder'| translate }}"
+          (click)="addProduits()">{{ 'labels.sauvegarder' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

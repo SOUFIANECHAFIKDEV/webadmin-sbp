@@ -1,0 +1,123 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12">
+    <h3 class="content-header-title mb-0">{{'list.title' | translate}}</h3>
+  </div>
+  <div class="content-header-right   col-12" style="margin-top:-35px; margin-bottom: 24px;">
+    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+
+      <button type="button" class="btn btn-primary" [routerLink]="['/gammemaintenanceequipements/ajouter']"
+        placement="bottom" ngbTooltip="{{ 'labels.nouveau' | translate }} {{ 'labels.equipement' | translate }}">
+        {{'labels.nouveau' | translate}} <i class="ft-plus"></i>
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toutes les equipement -->
+<div class="tab-pane" id="toutesequipement" aria-labelledby="aboutIcon11-tab1" role="tab" aria-selected="false">
+
+  <!-- Data table equipement -->
+  <section id="multi-column">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-content collapse show">
+            <div class="card-body init-card-body card-dashboard">
+
+              <!-- <show-hide-table-columns [columns]="tableColumns" [tableName]="'equipementTable'"
+                [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate" [showAll]=" 'list.montreTout'  | translate"
+                [showNone]=" 'list.montrerAucun'  | translate" [checkedColumns]="checkedColumns"
+                (selectColumn)="SetCheckedColmuns($event)">
+              </show-hide-table-columns> -->
+
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="table table-striped table-bordered" style="width:100%" id="equipementTable">
+
+                <thead>
+                  <tr>
+                    <!-- <ng-container *ngFor="let column of tableColumns;let index = index">
+                      <th> <span [innerHTML]="column"></span> </th>
+                    </ng-container> -->
+                    <ng-container *ngFor="let column of tableColumns;let index = index">
+                      <th *ngIf="tableColumns?.length-1 != index"> {{column}}</th>
+                    </ng-container>
+                    <th class="actions">
+                      {{tableColumns[tableColumns?.length-1]}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="gammeMaintenanceEquipements?.list?.length > 0">
+                  <tr *ngFor="let equipement of gammeMaintenanceEquipements?.list ;let i = index"
+                    (dblclick)="doubleClick(equipement?.id)">
+                    <td [hidden]="checkedColumns[0]">{{ equipement?.nom }}</td>
+
+
+
+                    <td class="actions" [hidden]="checkedColumns[4]">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary btn-md btn-actions"
+                          [routerLink]="['/gammemaintenanceequipements/detail',equipement?.id]" placement="bottom"
+                          ngbTooltip="{{'labels.voirDetails' | translate}}"><i class="ft-eye"></i></button>
+
+
+
+                        <button type="button" class="btn btn-warning btn-md btn-actions"
+                          [routerLink]="['/gammemaintenanceequipements/modifier',equipement?.id]" placement="bottom"
+                          ngbTooltip="{{'labels.modifier' | translate}}"><i class="ft-edit"></i></button>
+                        <button type="button" class="btn btn-danger btn-md btn-actions" (click)="delete(equipement?.id)"
+                          placement="bottom" ngbTooltip="{{'labels.supprimer' | translate}}"><i
+                            class="ft-trash-2"></i></button>
+
+
+                      </div>
+                    </td>
+
+
+
+                  </tr>
+                </tbody>
+
+                <tbody *ngIf="gammeMaintenanceEquipements?.list?.length == 0">
+                  <tr>
+                    <td colspan="14" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+
+                  </tr>
+                <tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- <div class="modal fade text-left" id="xSmall" tabindex="-1" role="dialog" aria-labelledby="xSmall" aria-modal="true">
+    <div class="modal-dialog modal-xs" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel20">Type de equipement</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+
+                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"
+                        (click)="navigateTo('add',{'type':'complet'})"> Saisir depuis l’application</button>
+                    <button type="button" class="btn btn-secondary btn-lg btn-block" data-dismiss="modal"
+                        (click)="navigateTo('add',{'type':'minimaliste'})">Importer depuis Excel</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div> -->
+
+<custom-loader [displayLoader]="processing"></custom-loader>

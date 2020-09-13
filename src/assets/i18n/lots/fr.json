@@ -1,0 +1,174 @@
+{
+    "title": "Lots",
+    "errors": {
+        "unique": "Cette valeur est déjà utilisée",
+        "required": "Ce champs est requis",
+        "minLength": "Ce champs doit être au moins de {{number}} caractères",
+        "pattern": "Ce champs est invalide",
+        "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider"
+    },
+    "labels": {
+        "id": "Id",
+        "nom": "Nom",
+        "action": "Action",
+        "reference": "Référence",
+        "nouveau": "Nouveau",
+        "add": "Ajouter",
+        "modifier": "Modifier",
+        "supprimer": "Supprimer",
+        "afficher": "Afficher",
+        "lot": "lot",
+        "designation": "Désignation",
+        "Prix": "Prix de vente",
+        "search": "Rechercher",
+        "btnCancel": "Annuler",
+        "btnSave": "Enregistrer",
+        "commentaire": "Commentaire",
+        "listeproduits": "liste des articles"
+    },
+    "list": {
+        "title": "Liste des lots",
+        "montreTout": "Montrer tout",
+        "montrerAucun": "Montrer aucun",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce lot ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulé",
+            "ImpossibleDeSuppression": "Impossible de supprimer ce lot car il est une référence"
+        }
+    },
+    "add": {
+        "title": "Ajouter lot",
+        "msg": "Ajouter avec succès"
+    },
+    "update": {
+        "title": "Modifier lot",
+        "msg": "Modifier avec succès"
+    },
+    "show": {
+        "title": "Détails lot",
+        "information": "INFORMATION",
+        "historique": "HISTORIQUE",
+        "memo": "MÉMOS",
+        "Tarification": "Tarification"
+    },
+    "noDataAvaible": "Aucune donnée disponible dans le tableau",
+    "commun": {
+        "name": "Nom fichier",
+        "AjouterUnCommentaire": "Ajouter un commentaire",
+        "Comment": "Commentaire",
+        "PieceJoint": "Pièce jointe",
+        "chooseFile": "Choisir le fichier",
+        "close": "Fermer",
+        "Add": "Ajouter",
+        "update": {
+            "success": "Modifier avec succès"
+        }
+    },
+    "Afficher_Masquées_Les_Colonnes": "Colonnes",
+    "selectProduit": {
+        "articles": "Articles",
+        "listArticle": "List des articles",
+        "listlots": "List des lots",
+        "addProduit": "Ajouter un article",
+        "nom": "Nom",
+        "qte": "Quantité",
+        "cout_materiel": "Coût du matériel (€)",
+        "cout_horaire": "Nombre d'heures (€)",
+        "tva": "TVA %",
+        "remise": "Remise",
+        "totalTTC": "Total TTC (€)",
+        "totalHT": "Total HT (€)",
+        "actions": "Actions",
+        "msgEmptyTable": "Vous n'avez pas encore ajouté d'articles.",
+        "search": "Rechercher",
+        "loading": "Chargement ...",
+        "cancel": "Annuler",
+        "sauvegarder": "Sauvegarder",
+        "listLots": "liste des lots",
+        "qteEtRemise": "Quantité & Remise",
+        "Categorie": "Catégorie",
+        "description": "Description",
+        "Unite": "Unité",
+        "reference": "Référence",
+        "designation": "Désignation",
+        "TotalHt": "Total HT (€)",
+        "prixTtc": "Prix TTC (€)",
+        "cout_vente": "coût vente (€)",
+        "nombre_heure": "Nombre d'heures (€)",
+        "Tva": "TVA %",
+        "add": "Ajouter un nouveau article",
+        "update": "modifier l'article",
+        "errors": {
+            "unique": "Ce champs existe déjà",
+            "required": "Ce champs est requis",
+            "minLength": "Ce champs doit être au moins de {{number}} caractères",
+            "pattern": "Ce champs est invalide",
+            "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider"
+        },
+        "info": "Information",
+        "article": "Article",
+        "remiseGlobalHT": "Remise globale HT",
+        "nouveauTotalHT": "Nouveau Total HT",
+        "margeBruteHt": "Marge brute HT",
+        "totalHt": "Total HT"
+    },
+    "PrixParFournisseur": {
+        "title": "Prix Fournisseurs",
+        "ajoutersuccess": "Ajouter avec succès",
+        "modifiersucces": "Modifier avec succès",
+        "labels": {
+            "Prix": "Prix d'achat",
+            "PrixEtDevise": "Prix d'achat (€)",
+            "Fournisseur": "Fournisseur",
+            "btn_add": "Ajouter un prix fournisseur",
+            "btn_Close" : "Fermer",
+            "model_add_title": "Ajouter un prix fournisseur",
+            "model_update_title": "Modifier le prix par fournisseur",
+            "ajouterPrixParFournisseur_btn": "Ajouter",
+            "modifierPrixParFournisseur_btn": "Modifier",
+            "default": "Fournisseur par défaut"
+        },
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer ce prix ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès"
+        },
+        "errors": {
+            "required": "Veuillez sélectionner au moins un fournisseur par défaut"
+        }
+    },
+    "dataTables": {
+        "processing": "Traitement en cours...",
+        "search": "Rechercher&nbsp;:",
+        "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+        "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "infoPostFix": "",
+        "loadingRecords": "Chargement en cours...",
+        "zeroRecords": "",
+        "emptyTable": "",
+        "paginate": {
+            "first": "Premier",
+            "previous": "Pr&eacute;c&eacute;dent",
+            "next": "Suivant",
+            "last": "Dernier"
+        },
+        "aria": {
+            "sortAscending": ": activer pour trier la colonne par ordre croissant",
+            "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        },
+        "searchPlaceholder": "Nom"
+    },
+    "lotFromValidationErrorMsg": {
+        "msg": "Veuillez corriger les erreurs indiquées sous les champs et sélectionner au moin un article avant de valider",
+        "title": "Lots"
+    }
+}

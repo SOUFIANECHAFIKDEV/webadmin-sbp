@@ -1,0 +1,113 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{'list.title' | translate}}</h3>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-primary btn-add" [routerLink]="['/produits/ajouter']"
+                placement="bottom" ngbTooltip="{{ 'labels.nouveau' | translate }} {{ 'labels.produit' | translate }}">
+                {{'add.title' | translate}} <i class="ft-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="content-body">
+
+    <div class="col-xl-12 col-lg-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-body init-card-body card-dashboard">
+                    <recherche-avancee>
+                        <div class="recherche-avancee-body">
+                            <div class="container-fuild">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control"
+                                            (keyup)="searchByQuery(searchQuery.value)" #searchQuery
+                                            [placeholder]="'dataTables.search' | translate" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <ng-select [items]="labelsList" [multiple]="true"
+                                                    [closeOnSelect]="false" [hideSelected]="true" bindLabel="name"
+                                                    [placeholder]="'labels.filtrerLabel' | translate"
+                                                    [(ngModel)]="selectedLables" (change)="filterParLabel()"
+                                                    class="tags-select">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </recherche-avancee>
+                    <div class="row">
+                        <ng-container *ngFor="let produit of Produits?.list;let index = index">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6" [class.pd-left]="((index +1) % 2) == 0"
+                                [class.pd-right]="((index +1) % 2) != 0" (dblclick)="doubleClick(produit?.id)">
+                                <div class="produit-card row" (mouseenter)="showAction = index;"
+                                    (mouseleave)="showAction = null;">
+                                    <div class="col-md-9 produit-description">
+                                        <h3 style="color: #065cb3;">
+                                            <span>{{ produit?.reference}}</span> - {{produit?.nom }}
+                                        </h3>
+                                        <p style="font-size: 0.9rem;">{{ produit?.designation | truncate : 100 }}</p>
+                                        <div style="white-space: nowrap;">
+                                            <span *ngFor="let label of produit.labels" class="tag">
+                                                {{ label }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 actions" style="margin: auto;">
+                                        <h4 class="prix" style="color: #00acfd; font-size: 1vw;">
+                                            {{prixTtc(produit) | RoudingNumber | ShowCurrency }} (TTC)
+                                        </h4>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <ng-container *ngIf="showAction == index">
+                                                <button type="button" class="btn btn-primary btn-md btn-actions"
+                                                    [routerLink]="['/produits/detail',produit?.id]" placement="bottom"
+                                                    ngbTooltip="{{ 'labels.afficher'|translate }} {{ 'labels.produit'|translate }}"><i
+                                                        class="ft-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-md btn-actions"
+                                                    [routerLink]="['/produits/modifier',produit?.id]" placement="bottom"
+                                                    ngbTooltip="{{ 'labels.modifier'|translate }} {{ 'labels.produit'|translate }}"><i
+                                                        class="ft-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-md btn-actions"
+                                                    (click)="delete(produit?.id)" placement="bottom"
+                                                    ngbTooltip="{{ 'labels.supprimer'|translate }} {{ 'labels.produit'|translate }}"
+                                                    [disabled]="produit?.lot == 1"><i class="ft-trash-2"></i>
+                                                </button>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+
+
+                    <ng-container *ngIf="Produits?.list?.length  == 0">
+                        <div class="no-data-available"> {{'noDataAvaible' | translate}}</div>
+                    </ng-container>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <paination [painationInfo]="Produits" (chagePageNamber)="chagePageNamber($event)"
+                                (changePageSize)="changePageSize($event)"></paination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- </ng-container> -->
+
+
+<custom-loader [displayLoader]="processing"></custom-loader>

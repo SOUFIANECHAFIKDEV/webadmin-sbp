@@ -1,0 +1,242 @@
+<!-- Header -->
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12">
+        <h3 class="content-header-title mb-0">{{ 'list.title' | translate }}</h3>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="float-md-right" style="padding-bottom: 10px;">
+            <a class=" btn btn-primary" style="color:white;" [routerLink]="['/ficheintervention/ajouter']"
+                placement="bottom"
+                ngbTooltip="{{ 'labels.Nouvelle' | translate }} {{ 'labels.intervention' | translate }}">
+                {{ 'labels.Nouvelle' | translate }}
+                {{ 'labels.intervention' | translate }}
+                <i class="ft-plus"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card collapse-icon accordion-icon-rotate">
+
+    <div class="card-content">
+        <div class="card-body">
+            <recherche-avancee>
+                <div class="recherche-avancee-body">
+                    <div class="ui-g ui-fluid" *ngIf="dateLang">
+                        <div class="ui-g-4 ui-md-4">
+                            <h6 style="font-weight: bold">{{'list.statut' | translate }}</h6>
+                            <ng-select [hideSelected]="true" bindLabel="name"
+                                notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="statut"
+                                (change)="rerender()">
+                                <ng-option *ngFor="let item of listStatus" [value]="item?.value">
+                                    {{ item?.name }}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="ui-g-4 ui-md-4">
+                            <h6 style="font-weight: bold">{{'list.chantier' | translate }}</h6>
+                            <ng-select [hideSelected]="true" bindLabel="name"
+                                notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="chantier"
+                                (change)="chantierChange()" (click)="getChantiers()" #selectChantiers>
+                                <ng-option *ngFor="let item of chantiersList" [value]="item">
+                                    {{ item?.nom }}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="ui-g-4 ui-md-4">
+                            <h6 style="font-weight: bold">{{'labels.client' | translate }}</h6>
+                            <ng-select [hideSelected]="true" bindLabel="client"
+                                notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="client"
+                                (change)="rerender()" (click)="getClients()" #selectClients>
+                                <ng-option *ngFor="let client of clientsList" [value]="client?.id">
+                                    {{ client?.nom }}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="ui-g ui-fluid" *ngIf="dateLang">
+                        <div class="ui-g-4 ui-md-4">
+                            <h6 style="font-weight: bold">{{'labels.techniciens' | translate }}</h6>
+                            <ng-select [hideSelected]="true" bindLabel="technicien"
+                                notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="technicien"
+                                (change)="rerender()" (click)="getTechniciens()" #selectTetechniciens>
+                                <ng-option *ngFor="let technicien of techniciensList" [value]="technicien?.id">
+                                    {{ technicien?.nom }} {{ technicien?.prenom }}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="ui-g-4 ui-md-4">
+                            <h6 style="font-weight: bold">{{ 'labels.dateDebut' | translate }}
+                            </h6>
+                            <p-calendar [(ngModel)]="dateMinimal" [inputStyle]="{'height':'33px'}" [locale]="dateLang"
+                                showButtonBar="true" dateFormat="dd/mm/yy" showIcon="true"
+                                (onSelect)="changeDateMinimal();" (onInput)="changeDateMinimal()"></p-calendar>
+                        </div>
+                        <div class="ui-g-4 ui-md-4">
+                            <h6 style="font-weight: bold">{{ 'labels.dateFin' | translate }}
+                            </h6>
+                            <p-calendar [(ngModel)]="dateMaximal" [inputStyle]="{'height':'33px'}" [locale]="dateLang"
+                                showButtonBar="true" dateFormat="dd/mm/yy" showIcon="true"
+                                (onSelect)="changeDateMaximal()" (onInput)="changeDateMaximal()"></p-calendar>
+                        </div>
+
+                    </div>
+
+                </div>
+            </recherche-avancee>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <!-- tab calendrier -->
+                    <a class="nav-link active tabparamf" id="calendar-tab" data-toggle="tab" aria-controls="tab1"
+                        href="#calendar" role="tab" aria-selected="true"><i
+                            class="fa fa-calendar"></i>{{'labels.calendar' | translate}}</a>
+                </li>
+                <li class="nav-item">
+                    <!-- tab list fiche intervention -->
+                    <a class="nav-link tabparamf" id="listficheintervention-tab" data-toggle="tab" aria-controls="tab2"
+                        href="#listficheintervention" role="tab" aria-selected="false"><i
+                            class="fa fa-list-alt"></i>{{'list.title' | translate}}</a>
+                </li>
+            </ul>
+            <div class="tab-content px-1 pt-1">
+
+                <!-- Calendrier -->
+                <div class="tab-pane active" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+                    <div class="calendar-container">
+                        <app-full-calendar [calendarEvents]=calendarEvents (navigateToClick)="navigateToClick($event)">
+                        </app-full-calendar>
+                    </div>
+                </div>
+                <!-- Toutes les fiche d'interventions -->
+                <div class="tab-pane" id="listficheintervention" role="tabpanel"
+                    aria-labelledby="listficheintervention-tab">
+                    <div role="group" style="margin-top: 1rem;">
+                        <div class="tab-pane" id="toutesFicheintervention" aria-labelledby="aboutIcon11-tab1" role="tab"
+                            aria-selected="false">
+                            <!-- Data table ficheintervention -->
+                            <section id="multi-column">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-content collapse show">
+                                                <div class="card-body init-card-body card-dashboard">
+                                                    <show-hide-table-columns [columns]="tableColumns"
+                                                        [tableName]="'interventionTable'"
+                                                        [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate"
+                                                        [showAll]=" 'list.montreTout'  | translate"
+                                                        [showNone]=" 'list.montrerAucun'  | translate"
+                                                        [checkedColumns]="checkedColumns"
+                                                        (selectColumn)="SetCheckedColmuns($event)">
+                                                    </show-hide-table-columns>
+                                                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                                        class="table table-striped table-bordered" style="width:100%"
+                                                        id="interventionTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <ng-container
+                                                                    *ngFor="let column of tableColumns;let index = index">
+                                                                    <th> <span [innerHTML]="column"></span> </th>
+                                                                </ng-container>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngIf="FicheInterventions?.list?.length > 0">
+                                                            <tr *ngFor="let ficheintervention of FicheInterventions?.list ; let i = index"
+                                                                (dblclick)="doubleClick(ficheintervention?.id)">
+                                                                <td [hidden]="checkedColumns[0]">
+                                                                    {{ ficheintervention?.reference }}</td>
+                                                                <!-- status de ficheintervention -->
+                                                                <td *ngIf="ficheintervention?.status == statutFicheIntervention.Brouillon"
+                                                                    [hidden]="checkedColumns[1]"><span
+                                                                        class="badge badge-default badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+                                                                </td>
+                                                                <td *ngIf="ficheintervention?.status == statutFicheIntervention.Planifiee"
+                                                                    [hidden]="checkedColumns[1]">
+                                                                    <span class="badge badge-default badge-planifiee">
+                                                                        {{ 'labels.planifiee' | translate }}
+                                                                    </span>
+                                                                    <i class="ft-alert-triangle"
+                                                                        style="font-weight: 600; font-size: 1.25rem; color: #FFC107; position: relative; top: 2px; left: 1rem;"
+                                                                        *ngIf="compareDate(ficheintervention?.dateFin)"></i>
+                                                                </td>
+                                                                <td *ngIf=" ficheintervention?.status==statutFicheIntervention.Annulee"
+                                                                    [hidden]="checkedColumns[1]"><span
+                                                                        class="badge badge-default badge-info badge-annuler">{{ 'labels.annulee' | translate }}</span>
+                                                                </td>
+                                                                <td *ngIf="ficheintervention?.status == statutFicheIntervention.Realisee"
+                                                                    [hidden]="checkedColumns[1]"><span
+                                                                        class="badge badge-default badge-info badge-success">{{ 'labels.realisee' | translate }}</span>
+                                                                </td>
+                                                                <td *ngIf="ficheintervention?.status == statutFicheIntervention.Facturee"
+                                                                    [hidden]="checkedColumns[1]"><span
+                                                                        class="badge badge-default  badge-facturee">{{ 'labels.facturee' | translate }}</span>
+                                                                </td>
+                                                                <!-- {{ facture?.dateCreation | date : 'dd/MM/yyyy' }} -->
+                                                                <td [hidden]="checkedColumns[2]">
+                                                                    {{ ficheintervention?.dateDebut | date : 'dd/MM/yyyy HH:mm:ss ' }}
+                                                                </td>
+                                                                <td [hidden]="checkedColumns[2]">
+                                                                    {{ ficheintervention?.dateFin | date : 'dd/MM/yyyy HH:mm:ss' }}
+                                                                </td>
+                                                                <td [hidden]="checkedColumns[3]">
+                                                                    {{ ficheintervention?.chantier?.nom }}
+                                                                </td>
+                                                                <td class="actions" [hidden]="checkedColumns[4]">
+                                                                    <div class="btn-group" role="group"
+                                                                        aria-label="Basic example">
+
+                                                                        <button type="button"
+                                                                            class="btn btn-primary btn-md btn-actions"
+                                                                            [routerLink]="['/ficheintervention/detail',ficheintervention?.id]"
+                                                                            placement="bottom"
+                                                                            ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                                                                class="ft-eye"></i></button>
+
+                                                                        <button
+                                                                            *ngIf="ficheintervention?.status != statutFicheIntervention.Realisee  && ficheintervention?.status != statutFicheIntervention.Facturee"
+                                                                            type="button"
+                                                                            class="btn btn-warning btn-md btn-actions"
+                                                                            [routerLink]="['/ficheintervention/modifier',ficheintervention?.id]"
+                                                                            placement="bottom"
+                                                                            ngbTooltip="{{'labels.modifier' | translate}}"><i
+                                                                                class="ft-edit"></i> </button>
+
+                                                                        <button
+                                                                            *ngIf="ficheintervention?.status != statutFicheIntervention.Realisee  && ficheintervention?.status != statutFicheIntervention.Facturee "
+                                                                            type="button"
+                                                                            class="btn btn-danger btn-md btn-actions"
+                                                                            (click)="delete(ficheintervention?.id)"
+                                                                            placement="bottom"
+                                                                            ngbTooltip="{{'labels.supprimer' | translate}}"><i
+                                                                                class="ft-trash-2"></i></button>
+                                                                        <button type="button"
+                                                                            class="btn btn-info btn-md btn-actions"
+                                                                            *ngIf="ficheintervention?.status == statutFicheIntervention.Realisee && ficheintervention?.idFacture == null"
+                                                                            (click)="createFacture(i)"
+                                                                            placement="bottom" [container]="'body'"
+                                                                            ngbTooltip="{{'labels.createFacture' | translate}}"><i
+                                                                                class="ft-log-in"></i></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody *ngIf="FicheInterventions?.list?.length == 0">
+                                                            <tr>
+                                                                <td colspan="14" class="no-data-available">
+                                                                    {{'noDataAvaible' | translate}}</td>
+                                                            </tr>
+                                                        <tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

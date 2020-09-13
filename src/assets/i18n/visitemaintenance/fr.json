@@ -1,0 +1,361 @@
+{
+  "title": "Visites de maintenance",
+  "add": {
+    "title": "Ajouter visite de maintenance",
+    "msg": "Ajouter avec succès"
+  },
+  "show": {
+    "titleContrat": "Visites de maintenance",
+    "title": "Détail Visite de maintenance",
+    "information": "INFORMATION",
+    "historique": "HISTORIQUE",
+    "notes": "NOTES",
+    "emailHistorique": "EMAILS",
+    "annuler": {
+      "title": "Confirmation",
+      "question": "Êtes-vous sûr de vouloir annuler cette visite de maintenance ?",
+      "cancel": "Annuler",
+      "confirm": "Valider",
+      "success": "Annulée avec succès"
+    }
+  },
+  "labels": {
+    "reference": "Référence",
+    "client": "Client",
+    "objet": "Objet",
+    "designation": "Désignation",
+    "actions": "Actions",
+    "search": "Rechercher (désignation ou référence)",
+    "description": "Description",
+    "msgEmptyTableGamme": "Vous n'avez pas encore ajouté une gamme maintenance d'équipement.",
+    "msgEmtyListVide": "Aucun élément pour sélectionné",
+    "msgEmtyListSelectedVide": "Aucun élément  sélectionné",
+    "loading": "Chargement...",
+    "cancel": "Annuler",
+    "nom": "Nom",
+    "sauvegarder": "Sauvegarder",
+    "infoContratEntretien": "Information visite de maintenance",
+    "noFoundItem": "Aucun élément trouvé",
+    "brouillon": "Brouillon",
+    "valider": "Valider",
+    "autres": "Autres",
+    "nouveau": "Nouvelle",
+    "visitemaintenance": "visite de maintenance",
+    "annulee": "Annulée",
+    "encours": "En cours",
+    "enattente": "En attente",
+    "termine": "Términée",
+    "enretard": "En retard",
+    "annuler": "Annuler",
+    "statut": "Statut",
+    "dateMaximale": "Date maximale",
+    "dateMinimale": "Date minimale",
+    "status": "Statut",
+    "date": "Date",
+    "action": "Action",
+    "utilisateur": "Utilisateur",
+    "ajouter": "Ajouter",
+    "modifier": "Modifier",
+    "details": "Détails",
+    "dupliquer": "Dupliquer",
+    "Attribute": "Attribut",
+    "After": "Valeur après",
+    "close": "Fermer",
+    "Before": "Valeur avant",
+    "Detailshistorique": "Détail d'historique",
+    "montant": "Montant",
+    "resPay": "Reste à payer",
+    "moyen": "Moyen",
+    "documentAssocie": "Documents associés",
+    "type": "Type",
+    "facturee": "Facturée",
+    "choisir": "Choisir",
+    "msgEmptyTablePaiement": "Vous n'avez pas encore ajouté des paiements",
+    "choixClient": "Choisir client",
+    "expire": "Expiré",
+    "utilise": "Utilisé",
+    "download": "Télécharger",
+    "print": "Imprimer",
+    "telecharger": "Télécharger",
+    "sendByMail": "Envoyer par email",
+    "revivalyMail": "Relance par email",
+    "send": "Envoyer",
+    "to": "À",
+    "contents": "Rediger votre message",
+    "emailRequired": "email est requis",
+    "objectRequired": "objet est requis",
+    "contentsRequired": "content est requis",
+    "info": "Information",
+    "infoProduit": "Information article",
+    "adresseFacturation": "Adresse Facturation",
+    "chantier": "Chantier",
+    "supprimer": "Supprimer",
+    "ficheInterventions": "Fiche Intervention",
+    "modification": "Modification",
+    "devis": "Devis",
+    "enAttente": "En attente",
+    "acceptee": "Accepté",
+    "nonacceptee": "Refusé",
+    "annuleed": "Annulé",
+    "supprimerPaiement": "Supprimer Paiement",
+    "dateDebut": "Date Début",
+    "dateFin": "Date Fin",
+    "site": "Site",
+    "PdfView": "Visualiser",
+    "VisualiserPdf": "Visualiser PDF",
+    "noFoundItemclient": "Aucun client n'est trouvé",
+    "choixChantier": "Choisir Chantier",
+    "exportExel": "Export Excel",
+    "equipement": "Gamme maintenance d'équipement",
+    "selectGammemaintenanceEquipement": "Sélectionner des gamme maintenance des équipements",
+    "changementstatus": "Changement du statut",
+    "removeEquipement": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr de retirer cette gamme de maintenance ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "failed": "Suppression annulé"
+    },
+    "aplanifier": "A Planifier",
+    "planifier": "Planifier",
+    "fait": "Fait",
+    "nonfait": "Non Fait",
+    "createfiche": "créate fiche intervention",
+    "annee": "Année",
+    "ficheintervention": "Référence FI",
+    "mois": "Mois"
+  },
+  "mois": {
+    "janvier": "Janvier",
+    "fevrier": "Février",
+    "mars": "Mars",
+    "avril": "Avril",
+    "mai": "Mai",
+    "juin": "Juin",
+    "juillet": "Juillet",
+    "aout": "Août",
+    "septembre": "Septembre",
+    "octobre": "Octobre",
+    "novembre": "Novembre",
+    "decembre": "Décembre"
+  },
+  "statutvisitemaintenance": {
+    "aplanifier": "A Planifier",
+    "planifier": "Planifier",
+    "fait": "Fait",
+    "nonfait": "Non Fait",
+    "annulee": "Annulée"
+  },
+  "errors": {
+    "unique": "Ce champs a déjà existé",
+    "required": "Ce champs est requis",
+    "minLength": "Ce champs doit être au moins de {{number}} caractères",
+    "pattern": "Ce champs est invalid",
+    "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider et ajouter au moins une gamme maintenance",
+    "invalid": "Montant invalide",
+    "errorServer": "Erreur serveur",
+    "serveur": "Erreur du serveur",
+    "articleRequired": "S'il vous plaît sélectionner au moins un article",
+    "equipement": {
+      "minLengthNom": "Le nom doit être au moins de 3 caractères",
+      "perationsRequired": "Veuillez ajouter au moin une operation",
+      "required": "Le nom est requis"
+    }
+  },
+  "referenceConfirmation": {
+    "title": "Confirmation de changement référence",
+    "question": "Cette référence déjà existe, nous proposons cette référence",
+    "cancel": "Annuler",
+    "confirm": "Oui",
+    "success": "Changer avec succès",
+    "error": "Erreur du serveur",
+    "failed": "Changement annulé"
+  },
+  "toolip": {
+    "detail": "Afficher visite de maintenance",
+    "edit": "Modifier visite de maintenance",
+    "delete": "Supprimer visite de maintenance"
+  },
+  "commun": {
+    "name": "Nom fichier",
+    "AjouterUnCommentaire": "Ajouter un commentaire",
+    "AjouterUneFicheTechnique": "Ajouter Une Fiche Technique",
+    "EditUneFicheTechnique": "Modifier Une Fiche Technique",
+    "Comment": "Commentaire",
+    "PieceJoint": "Pièce jointe",
+    "chooseFile": "Choisir le fichier",
+    "close": "Fermer",
+    "Add": "Ajouter",
+    "save": "Sauvegarder",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr de supprimer cette label ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "failed": "Suppression annulé"
+    },
+    "update": {
+      "success": "Modifier avec succès"
+    }
+  },
+  "datePicker": {
+    "firstDayOfWeek": 1,
+    "dayNames": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dayNamesShort": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dayNamesMin": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "monthNames": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "monthNamesShort": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "today": "Aujourd'hui",
+    "clear": "Valider"
+  },
+  "dataTables": {
+    "processing": "Traitement en cours...",
+    "search": "Rechercher&nbsp; ",
+    "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+    "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "infoPostFix": "",
+    "loadingRecords": "Chargement en cours...",
+    "zeroRecords": "",
+    "emptyTable": "",
+    "paginate": {
+      "first": "Premier",
+      "previous": "Pr&eacute;c&eacute;dent",
+      "next": "Suivant",
+      "last": "Dernier"
+    },
+    "aria": {
+      "sortAscending": ": activer pour trier la colonne par ordre croissant",
+      "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+    },
+    "searchPlaceholder": "Référence "
+  },
+  "noDataAvaible": "Aucune donnée disponible dans le tableau",
+  "Afficher_Masquées_Les_Colonnes": "Colonnes",
+  "sendMail": {
+    "responses": {
+      "serverConnectionError": "",
+      "argumentsError": "Les données envoyées ne sont pas correctes!",
+      "success": "Votre email a été envoyée avec succès.",
+      "internalError": "Erreur interne, veuillez réessayer!",
+      "serverHasNoConfig": "Erreur! Veuillez configurer Votre serveur de messagerie."
+    }
+  },
+  "list": {
+    "title": "Liste des visites de maintenance",
+    "montreTout": "Montrer tout",
+    "montrerAucun": "Montrer Aucun",
+    "statut": "Sélectionner un statut",
+    "client": "Sélectionner un client",
+    "mois": "Sélectionner un mois",
+    "annee": "Sélectionner une année",
+    "visitemaintenance": "Visite de maintenance ",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr supprimer cette visite de maintenance ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "error": "Erreur du serveur",
+      "failed": "Suppression annulé"
+    }
+  },
+  "changeStatutVisiteMaintenance": {
+    "planifier": {
+      "title": "Planifier la visite maintenance",
+      "question": "voulez-vous vraiment planifier cette visite maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, Planifier la visite maintenance",
+      "success": "Le statut de cette visite maintenance a été changé au statut en planifiée avec succès.",
+      "error": "Erreur du serveur."
+    },
+    "aplanifier": {
+      "title": "À Planifier le visite maintenance",
+      "question": "voulez-vous vraiment à planifier cette visite maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, À Planifier la visite maintenance",
+      "success": "Le statut de cette visite maintenance a été changé au statut en à planifiée avec succès.",
+      "error": "Erreur du serveur."
+    },
+    "annule": {
+      "title": "Annulation du visite maintenance",
+      "question": "voulez vous vraiment annuler cette visite maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, Annuler la visite maintenance",
+      "success": "Le statut de cette visite maintenance a été changé au statut annulée avec succès.",
+      "error": "Erreur du serveur."
+    }
+  },
+  "equipement": {
+    "errors": {
+      "minLengthNom": "Le nom doit être au moins de 3 caractères",
+      "minLengthLibelle": "Le libellé doit être au moins de 3 caractères",
+      "periodicite": "Veuillez sélectionner au moin une periode"
+    },
+    "deleteLibelle": {
+      "title": "Supprimer un libellé",
+      "question": "Est-ce qu vous voulez vraiment supprimer ce libellé",
+      "cancel": "annuler",
+      "confirm": "Supprimer"
+    },
+    "deleteOperation": {
+      "title": "Supprimer une operation",
+      "question": "Est-ce qu vous voulez vraiment supprimer cette operation",
+      "cancel": "annuler",
+      "confirm": "Supprimer"
+    }
+  }
+}

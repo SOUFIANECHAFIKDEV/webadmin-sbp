@@ -1,0 +1,49 @@
+<div class="modal fade text-left" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary white">
+
+                <h4 class="modal-title">
+
+                    {{'groupes.modifierGroupe' | translate }}
+
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <form class="form form-horizontal" [formGroup]="form" (ngSubmit)="update()">
+                    <div class="form-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">{{ 'groupes.Nom' | translate }}</label>
+                                    <div class="col-md-7">
+                                        <input type="text" formControlName="Nom" class="form-control"
+                                            placeholder="{{ 'groupes.Nom' | translate }}">
+                                        <small class="text-danger"
+                                            *ngIf="f?.Nom?.errors?.required">{{'errors.required'|translate }}</small>
+                                        <small class="text-danger"
+                                            *ngIf="f?.Nom?.hasError('checkUniqueNom')">{{'errors.unique' | translate }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-light" data-dismiss="modal" placement="bottom"
+                    ngbTooltip=" {{'labels.cancel' | translate}}"> {{'labels.cancel' | translate}} </button>
+                <button type="button" (click)="update()" class="btn btn-success btn-lg" [disabled]="!form.valid"
+                    placement="bottom" ngbTooltip="{{ 'labels.modifier' | translate }}">
+                    {{ 'labels.modifier' | translate }} </button>
+            </div>
+        </div>
+    </div>
+</div>

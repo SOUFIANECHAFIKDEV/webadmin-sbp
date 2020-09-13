@@ -1,0 +1,68 @@
+.card-body {
+  overflow: inherit !important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 38px !important;
+}
+
+.page-loading-active {
+  opacity: 1;
+  z-index: 1700 !important;
+}
+
+
+#toast-container > div {
+  opacity: 1;
+}
+.toast {
+  font-size: initial !important;
+  border: initial !important;
+  backdrop-filter: blur(0) !important;
+}
+.toast-success {
+  background-color: #51A351 !important;
+}
+.toast-error {
+  background-color: #BD362F !important;
+}
+.toast-info {
+  background-color: #2F96B4 !important;
+}
+.toast-warning {
+  background-color: #F89406 !important;
+}
+.container-scroll {
+  overflow: auto;
+  height: 15vw;
+  margin-top: 2vw;
+}
+
+.btn-round {
+  padding: 5px 10px 5px 10px;
+   margin-left: 10px;
+}
+.badge-brouillon {
+  background-color: #636e72 !important;
+  color: white;
+}
+
+.badge-annuler {
+  background-color: #fe0000 !important;
+  color: white;
+}
+
+.badge-enretard {
+  background-color: #ffa87d !important;
+  color: white;
+}
+
+.badge-planifiee {
+  background-color: #00d2d3 !important;
+  color: white;
+}
+
+.badge-success {
+  background-color: #2ecc71 !important;
+  color: white;
+}

@@ -1,0 +1,349 @@
+<ng-container *ngIf="show && displayJustTheForm">
+    <!-- displayJustList == true -->
+    <!-- <button class="btn btn-primary btn-sm" (click)="openModel(null)" placement="bottom"
+    ngbTooltip="{{'labels.addAddress' | translate}}" style="margin: 0.25rem 0;" *ngIf="displayJustList"> <i class="fa fa-plus"></i>
+    {{'labels.addAddress' | translate}} </button> -->
+    <!-- displayJustList == false-->
+    <button class="btn btn-primary btn-sm" style="width: 95.5%;float: right;" type="button" data-toggle="modal"
+        [attr.data-target]="createId(addModalId)" placement="bottom" ngbTooltip="{{'labels.addAddress' | translate}}">
+        <i class="fa fa-plus"></i>
+        {{'labels.addsite' | translate}} </button>
+
+</ng-container>
+
+
+
+<form class="form form-horizontal" *ngIf="!displayJustTheForm">
+    <h4 class="form-section"><i class="ft-map-pin"></i> {{ 'labels.adresses' | translate }}</h4>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let item of addresses;let i = index">
+            <div class="card">
+                <div class="card-header" *ngIf="show">
+                    <div class="custom">
+                        <ul class="list-inline">
+                            <li><a data-toggle="modal" [attr.data-target]="createId(editModalId)"
+                                    (click)="chargeAddress(i)"><i class="ft-edit-2 btn-edit"></i></a></li>
+                            <li><a (click)="removeAddress(i)"><i class=" btn-remove ft-x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collpase show">
+                    <div class="card-body" [ngClass]="{'card-body-custom': show}">
+                        <h5 style="font-weight: bold">{{ item?.designation }}</h5>
+                        <div class="card-text">
+                            <ng-container *ngIf="item?.complementAdresse != '' && item?.complementAdresse != null">
+                                {{ item?.adresse }} {{ item?.complementAdresse }} <br />
+                            </ng-container>
+                            <ng-container *ngIf="item?.codePostal != '' && item?.codePostal != null">
+                                {{item?.ville}} {{item?.codePostal}}<br />
+                            </ng-container>
+                            <ng-container *ngIf="item?.departement != '' && item?.departement != null">
+                                {{ item?.departement }} <br />
+                            </ng-container>
+                            <ng-container *ngIf="item?.pays?.nomFrFr != '' && item?.pays?.nomFrFr != null">
+                                {{ item?.pays.nomFrFr }}
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span *ngIf="item?.default" class="adresseFacturation">
+                        {{ 'labels.adresseFacturation' | translate }}<i
+                            style="color: #ffa502; font-size: 22px; float: right;" class="fa fa-star"></i>
+                    </span>
+                    <span class="float-right" *ngIf="!item?.default">
+                        <i style="color: #ffffff;font-size: 22px" class="fa fa-star"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="float: right;margin-right: 15px;">
+        <div class="row" *ngIf="show">
+            <button class="btn btn-success pull-right" data-toggle="modal" [attr.data-target]="createId(addModalId)"
+                placement="bottom" ngbTooltip="{{'labels.addAddress' | translate}}"> <i class="fa fa-plus"></i>
+                {{'labels.addAddress' | translate}} </button>
+        </div>
+    </div>
+    <br> <br>
+</form>
+<!-- Modal Add contact -->
+<div class="modal fade text-left" id="{{ addModalId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> {{'labels.addAddress' | translate}}</h3>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="add()">
+                <div class="modal-body">
+                    <div class="container">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="designation">{{'labels.designation' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="designation" class="form-control" name="designation"
+                                    placeholder="{{'labels.designation' | translate}}">
+                                <small class="text-danger" *ngIf="f?.designation?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="adresse">{{'labels.adresse' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="adresse" class="form-control" name="adresse"
+                                    placeholder="{{'labels.adresse' | translate}}">
+                                <small class="text-danger" *ngIf="f?.adresse?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="complementAdresse">{{'labels.complementAdresse' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" id="complementAdresse" formControlName="complementAdresse"
+                                    class="form-control" placeholder="{{'labels.complementAdresse' | translate}}">
+                                <small class="text-danger" *ngIf="f?.complementAdresse?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="ville">{{'labels.ville' | translate}}</label>
+                            <div class="col-md-9">
+                                <ng-select (click)="SearchVille('')" (search)="SearchVille($event)"
+                                    (change)="changeCodePostal($event)" labelForId=ville [addTag]="true"
+                                    placeholder="{{'labels.ville' | translate}}" [hideSelected]="true"
+                                    formControlName="ville" notFoundText="{{'labels.noFoundItem' | translate}}"
+                                    addTagText="{{'labels.add' | translate}}">
+                                    <ng-option *ngFor="let item of villes;let i = index" value="{{item?.villeNomReel}}">
+                                        {{item?.villeNomReel}}
+                                    </ng-option>
+                                </ng-select>
+                                <small class="text-danger" *ngIf="f?.ville?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="codePostal">{{'labels.codePostal' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" id="codePostal" formControlName="codePostal" class="form-control"
+                                    placeholder="{{'labels.codePostal' | translate}}">
+                                <small class="text-danger" *ngIf="f?.codePostal?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="departement">{{'labels.departement' | translate}}</label>
+                            <div class="col-md-9">
+                                <ng-select (click)="GetDepartements()" labelForId=departement [addTag]="true"
+                                    placeholder="{{'labels.departement' | translate}}" [hideSelected]="true"
+                                    formControlName="departement" notFoundText="{{'labels.noFoundItem' | translate}}"
+                                    addTagText="{{'labels.add' | translate}}">
+                                    <ng-option *ngFor="let item of departements;let i = index"
+                                        value="{{item?.departementNom}}">
+                                        {{item?.departementNom}}
+                                    </ng-option>
+                                </ng-select>
+                                <small class="text-danger" *ngIf="f?.departement?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="pays">{{'labels.pays' | translate}}</label>
+                            <div class="col-md-9">
+                                <select (click)="GetPays()" formControlName="pays" class="form-control">
+                                    <option value=""></option>
+                                    <option *ngFor="let item of pays" [value]="item?.id">{{item?.nomFrFr}}</option>
+                                </select>
+                                <small class="text-danger" *ngIf="f?.pays?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf="!displayJustTheForm">
+                            <label class="col-md-3 label-control" for="default"></label>
+                            <div class="col-md-9">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" formControlName="default" class="custom-control-input"
+                                        id="projectinput3">
+                                    <label class="custom-control-label"
+                                        for="projectinput3">{{ 'labels.defaultAddress' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn grey btn-light" (click)="modalDismiss()"
+                        ngbTooltip="{{ 'labels.close'| translate }}">
+                        {{ 'labels.close'
+          | translate }} </button>
+                    <button type="submit" class="btn btn-success btn-lg" placement="top"
+                        ngbTooltip="{{ 'labels.add' | translate }}"> <i class="fa fa-plus"></i>
+                        {{ 'labels.add' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edit contact -->
+<div class="modal fade text-left" id="{{ editModalId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    ria-hidden="true" *ngIf="editForm">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> {{'labels.editAddress' | translate}}</h3>
+            </div>
+            <form [formGroup]="editForm" (ngSubmit)="update()">
+                <div class="modal-body">
+
+
+                    <div class="container">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="designationn">{{'labels.designation' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="designation" class="form-control" name="designation"
+                                    placeholder="{{'labels.designation' | translate}}">
+                                <small class="text-danger" *ngIf="fEdit?.designation?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="adressee">{{'labels.adresse' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="adresse" class="form-control" name="adresse"
+                                    placeholder="{{'labels.adresse' | translate}}">
+                                <small class="text-danger" *ngIf="fEdit?.adresse?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="complementAdressea">{{'labels.complementAdresse' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" id="complementAdressea" formControlName="complementAdresse"
+                                    class="form-control" placeholder="{{'labels.complementAdresse' | translate}}">
+                                <small class="text-danger" *ngIf="fEdit?.complementAdresse?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="villeville">{{'labels.ville' | translate}}</label>
+                            <div class="col-md-9">
+                                <ng-select (click)="SearchVille('')" (search)="SearchVille($event)"
+                                    (change)="changeCodePostal($event)" labelForId=villeville [addTag]="true"
+                                    placeholder="{{'labels.ville' | translate}}" [hideSelected]="true"
+                                    formControlName="ville" notFoundText="{{'labels.noFoundItem' | translate}}"
+                                    addTagText="{{'labels.add' | translate}}">
+                                    <ng-option *ngFor="let item of villes;let i = index" value="{{item?.villeNomReel}}">
+                                        {{item?.villeNomReel}}
+                                    </ng-option>
+                                </ng-select>
+                                <small class="text-danger" *ngIf="fEdit?.ville?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="codePostalcodePostal">{{'labels.codePostal' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" id="codePostalcodePostal" formControlName="codePostal"
+                                    class="form-control" placeholder="{{'labels.codePostal' | translate}}">
+                                <small class="text-danger" *ngIf="fEdit?.codePostal?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"
+                                for="departementdepartement">{{'labels.departement' | translate}}</label>
+                            <div class="col-md-9">
+                                <ng-select (click)="GetDepartements()" labelForId=departementdepartement [addTag]="true"
+                                    placeholder="{{'labels.departement' | translate}}" [hideSelected]="true"
+                                    formControlName="departement" notFoundText="{{'labels.noFoundItem' | translate}}"
+                                    addTagText="{{'labels.add' | translate}}">
+                                    <ng-option *ngFor="let item of departements;let i = index"
+                                        value="{{item?.departementNom}}">
+                                        {{item?.departementNom}}
+                                    </ng-option>
+                                </ng-select>
+                                <small class="text-danger" *ngIf="fEdit?.departement?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="payspays">{{'labels.pays' | translate}}</label>
+                            <div class="col-md-9">
+                                <select (click)="GetPays()" formControlName="pays" class="form-control"
+                                    (change)="GetDepartements($event.target.value)">
+                                    <option value=""></option>
+                                    <option *ngFor="let item of pays" [value]="item?.id">{{item?.nomFrFr}}</option>
+                                </select>
+                                <small class="text-danger" *ngIf="fEdit?.pays?.errors?.required">
+                                    {{'errors.required' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control" for="projectinput44"></label>
+                            <div class="col-md-9">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" formControlName="default" class="custom-control-input"
+                                        id="projectinput44" />
+                                    <label class="custom-control-label"
+                                        for="projectinput44">{{ 'labels.defaultAddress' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn grey btn-light" placement="top" (click)="modalDismiss()"
+                        ngbTooltip=" {{ 'labels.close'| translate }}">
+                        {{ 'labels.close'| translate }} </button>
+                    <button type="submit" class="btn btn-success btn-lgy" placement="top"
+                        ngbTooltip="{{ 'labels.update' | translate }}">
+                        <i class="fa fa-edit"></i> {{ 'labels.update' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

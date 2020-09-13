@@ -1,0 +1,31 @@
+{
+    "errors": {
+        "pattern": "Ce champs est invalide"
+    },
+    "labels": {
+        "login": "S'identifier",
+        "recoverPassword": "Récupérer mot de passe",
+        "forgetPassword": "Mot de passe oublié?",
+        "password": "Mot de passe",
+        "username": "Nom d'utilisateur"
+    },
+    "recover": {
+        "msg": "Nous vous enverrons un mot de passe.",
+        "notExist": "Ce compte n'existe pas",
+        "email": "Votre adresse email",
+        "subject": "Récupérer mot de passe",
+        "body": "Le nouveau mot de passe sera {0}",
+        "error": "Erreur serveur"
+    },
+    "login": {
+        "incorrectLogin": "Nom de l'utilisateur ou mot de passe incorrect",
+        "accesnonautorise": "Accès non autorisé"
+    },
+    "changePassword": {
+        "msg": "Entrer un nouveau mot de passe",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmer le mote de passe",
+        "save": "Enregistrer",
+        "minLengthErrors": "utilisez 6 caractères ou plus pour votre mot de passe"
+    }
+}

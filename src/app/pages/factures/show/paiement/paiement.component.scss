@@ -1,0 +1,48 @@
+
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 38px !important;
+}
+
+.page-loading-active {
+  opacity: 1;
+  z-index: 1700 !important;
+}
+
+
+#toast-container > div {
+  opacity: 1;
+}
+.toast {
+  font-size: initial !important;
+  border: initial !important;
+  backdrop-filter: blur(0) !important;
+}
+.toast-success {
+  background-color: #51A351 !important;
+}
+.toast-error {
+  background-color: #BD362F !important;
+}
+.toast-info {
+  background-color: #2F96B4 !important;
+}
+.toast-warning {
+  background-color: #F89406 !important;
+}
+// .modal-body {
+//   overflow: auto;
+// }
+
+// .card-body {
+//   overflow: auto !important;
+// }
+.modal-body {
+  overflow: auto;
+}
+
+.modal-content {
+  overflow: auto !important; 
+
+width:550px !important; 
+}

@@ -1,0 +1,134 @@
+{{ group | json }}
+------------------------------------------------------------------------------------------------------------------------------------
+{{ selectedDate | json }}
+------------------------------------------------------------------------------------------------------------------------------------
+{{ eventSettings | json }}
+------------------------------------------------------------------------------------------------------------------------------------
+<div class="control-section">
+  <div class="drag-sample-wrapper">
+    <div class="schedule-container">
+      <div class="title-container">
+        <h1 class="title-text">Planifications</h1>
+      </div>
+      <ejs-schedule #scheduleObj cssClass='schedule-drag-drop' width='100%' height='650px' [group]="group"
+        (popupOpen)='onPopupOpen($event)' (popupClose)="onPopupClose($event)" [selectedDate]="selectedDate" [eventSettings]="eventSettings"
+        (actionBegin)="onActionBegin($event)" (drag)="onItemDrag($event)">
+
+        <e-resources>
+          <e-resource field='DepartmentID' title='Department' name='Departments' [dataSource]='techniciensDataSource'
+            textField='Text' idField='Id' colorField='Color'>
+          </e-resource>
+          <e-resource field='ConsultantID' title='Consultant' name='Consultants' [dataSource]='listeTechniciens'
+            [allowMultiple]='allowMultiple' textField='Text' idField='Id' groupIDField="GroupId" colorField='Color'>
+          </e-resource>
+        </e-resources>
+
+        <!-- ------------------------------------------- -->
+        <ng-template #editorTemplate>
+          <table class="custom-event-editor" width="100%" cellpadding="5">
+            <tbody>
+              <tr>
+                <td class="e-textlabel">Client</td>
+                <td colspan="4">
+                  <input id="Client" class="e-field e-input" type="text" value="" name="Client" style="width: 100%" />
+                </td>
+              </tr>
+              <tr>
+                <td class="e-textlabel">Site</td>
+                <td colspan="4">
+                  <input id="Site" class="e-field e-input" type="text" value="" name="Site" style="width: 100%" />
+                </td>
+              </tr>
+              <tr>
+                <td class="e-textlabel">Technicien  {{ IdTechnicien }}</td>
+                <td>
+                  <select name="Technicien" id="Technicien" class="form-control" [(ngModel)]="IdTechnicien">
+                    <option value=""></option>
+                    <option *ngFor="let techniciens of listeTechniciens" [value]="techniciens?.Id">
+                      {{techniciens?.Text}} -- {{ techniciens?.Id }}
+                    </option>
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="e-textlabel">Date début</td>
+                <td colspan="4">
+                  <input id="DateDebut" class="e-field" type="text" name="DateDebut" />
+                </td>
+              </tr>
+              <tr>
+                <td class="e-textlabel">Date fin</td>
+                <td colspan="4">
+                  <input id="DateFin" class="e-field" type="text" name="DateFin" />
+                </td>
+              </tr>
+
+              <tr>
+                <td class="e-textlabel">Object</td>
+                <td colspan="4">
+                  <textarea id="Object" class="e-field e-input" name="Object" rows="3" cols="50"
+                    style="width: 100%; height: 60px !important; resize: vertical"></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+        <!-- ------------------------------------------- -->
+
+
+        <e-views>
+          <e-view option='TimelineDay'></e-view>
+          <e-view option='TimelineMonth'></e-view>
+        </e-views>
+      </ejs-schedule>
+    </div>
+    <div class="treeview-container">
+      <div class="title-container">
+        <h1 class="title-text">List Visite Maintenance</h1>
+      </div>
+      <div class="visite-maintenanace-filter">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label class="col-md-4 label-control" for="client">Client</label>
+              <div class="col-md-8">
+                <select name="client" class="form-control" [(ngModel)]="visiteMaintenanaceFilter.listeClient"
+                  (change)="getVisiteMaintenance()">
+                  <option value=""></option>
+                  <option *ngFor="let client of visiteMaintenanaceFilter?.listeClient" [value]="client?.id">
+                    {{client?.nom}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 label-control" for="client">Année</label>
+              <div class="col-md-8">
+                <select name="client" class="form-control" [(ngModel)]="visiteMaintenanaceFilter.annee"
+                  (change)="getVisiteMaintenance()">
+                  <option value=""></option>
+                  <option *ngFor="let annee of visiteMaintenanaceFilter?.listeAnnee" [value]="annee">
+                    {{ annee }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ejs-treeview #treeObj [fields]='field' cssClass='treeview-external-drag' [allowDragAndDrop]='allowDragAndDrop'
+        (nodeDragStop)="onTreeDragStop($event)" (nodeDragging)="onItemDrag($event)">
+        <ng-template #nodeTemplate="" let-data="">
+          <div id="waiting">
+            <div id="waitdetails">
+              <div id="waitlist">{{data.client}}</div>
+              <div id="waitcategory">{{data.date}} - {{data.site?.designation}}</div>
+            </div>
+          </div>
+        </ng-template>
+      </ejs-treeview>
+
+    </div>
+  </div>
+</div>

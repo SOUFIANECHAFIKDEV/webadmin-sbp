@@ -1,0 +1,176 @@
+<!-- Header -->
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12">
+        <h3 class="content-header-title mb-0">{{ 'list.title' | translate }}</h3>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="float-md-right" style="padding-bottom: 10px;">
+            <a class=" btn btn-primary" style="color:white;" [routerLink]="['/avoirs/ajouter']" placement="bottom"
+                ngbTooltip=" {{ 'labels.nouveau' | translate }}">
+                {{ 'labels.nouveau' | translate }} <i class="ft-plus"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Body -->
+<section id="multi-column" *ngIf="avoirTableColumns">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body card-dashboard">
+                        <!-- Recherche -->
+                        <recherche-avancee>
+                            <div class="recherche-avancee-body">
+                                <div class="ui-g ui-fluid" *ngIf="dateLang">
+                                    <div class="ui-g-3 ui-md-3">
+                                        <h6 style="font-weight: bold">{{'list.statut' | translate }}</h6>
+                                        <ng-select [hideSelected]="true" bindLabel="name"
+                                            notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="statut"
+                                            (change)="rerender()">
+                                            <ng-option *ngFor="let item of listStatus" [value]="item?.value">
+                                                {{ item?.name }}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <div class="ui-g-3 ui-md-3">
+                                        <h6 style="font-weight: bold">{{'list.chantier' | translate }}</h6>
+                                        <ng-select [hideSelected]="true" bindLabel="name"
+                                            notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="chantier"
+                                            (change)="rerender()">
+                                            <ng-option *ngFor="let item of listChantiers" [value]="item?.id">
+                                                {{ item?.nom }}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <div class="ui-g-3 ui-md-3">
+                                        <h6 style="font-weight: bold">{{ 'labels.dateMinimale' | translate }}
+                                        </h6>
+                                        <p-calendar [(ngModel)]="dateMinimal" [inputStyle]="{'height':'33px'}"
+                                            [locale]="dateLang" showButtonBar="true" dateFormat="dd/mm/yy"
+                                            showIcon="true" (onSelect)="changeDateMinimal();"
+                                            (onInput)="changeDateMinimal()">
+                                        </p-calendar>
+                                    </div>
+                                    <div class="ui-g-3 ui-md-3">
+                                        <h6 style="font-weight: bold">{{ 'labels.dateMaximale' | translate }}
+                                        </h6>
+                                        <p-calendar [(ngModel)]="dateMaximal" [inputStyle]="{'height':'33px'}"
+                                            [locale]="dateLang" showButtonBar="true" dateFormat="dd/mm/yy"
+                                            showIcon="true" (onSelect)="changeDateMaximal()"
+                                            (onInput)="changeDateMaximal()">
+                                        </p-calendar>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </recherche-avancee>
+                        <show-hide-table-columns [columns]="avoirTableColumns" [tableName]="'avoirTable'"
+                            [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate"
+                            [showAll]=" 'list.montreTout'  | translate" [showNone]=" 'list.montrerAucun'  | translate"
+                            [checkedColumns]="checkedColumns" (selectColumn)="SetCheckedColmuns($event)">
+                        </show-hide-table-columns>
+
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                            class="table table-striped table-bordered" style="width:100%" id="avoirTable">
+                            <thead>
+                                <tr>
+                                    <!-- <ng-container *ngFor="let column of avoirTableColumns;let index = index">
+                                        <th *ngIf="avoirTableColumns.length-1 != index"> {{column}}</th>
+                                    </ng-container>
+
+                                    <th class="actions">
+                                        {{avoirTableColumns[avoirTableColumns.length-1]}}
+                                    </th> -->
+                                    <th>{{'labels.reference' | translate }}</th>
+                                    <th>{{'labels.statut' | translate }}</th>
+                                    <th>
+                                        {{'labels.client' | translate }}
+                                        <br>
+                                        {{'labels.chantier' | translate }}
+                                    </th>
+                                    <th>{{'labels.dateCreation' | translate }}</th>
+                                    <th>{{'labels.dateEcheance' | translate }}</th>
+                                    <th>{{'labels.totalTTC' | translate }}</th>
+                                    <th class="actions">{{'labels.actions' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="avoirs?.list?.length > 0">
+                                <tr *ngFor="let avoir of avoirs?.list" (dblclick)="doubleClick(avoir)">
+
+                                    <td [hidden]="checkedColumns[0]">
+                                        <i class="ft-lock" style="font-weight: 600;"
+                                            *ngIf="avoir?.comptabilise == statutComptabilise.Oui"></i>
+                                        {{ avoir?.reference }}
+                                    </td>
+
+                                    <!-- status de avoir -->
+                                    <td *ngIf="avoir?.status == statutAvoir.Brouillon" [hidden]="checkedColumns[1]">
+                                        <span
+                                            class="badge badge-default badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+                                    </td>
+                                    <td *ngIf="avoir?.status == statutAvoir.Encours" [hidden]="checkedColumns[1]"><span
+                                            class="badge badge-default badge-planifiee">{{ 'labels.encours' | translate }}</span>
+                                    </td>
+                                    <td *ngIf="avoir?.status == statutAvoir.Utilise" [hidden]="checkedColumns[1]"><span
+                                            class="badge badge-default badge-success">{{ 'labels.utilise' | translate }}</span>
+                                    </td>
+                                    <td *ngIf="avoir?.status == statutAvoir.Expire" [hidden]="checkedColumns[1]"><span
+                                            class="badge badge-default badge-annuler">{{ 'labels.expire' | translate }}</span>
+                                    </td>
+
+                                    <td [hidden]="checkedColumns[2]">
+                                        {{loadClient(avoir?.infoClient)}}
+
+                                        <p style="color: #1d7b85;"> {{ avoir?.chantier?.nom}}</p>
+                                    </td>
+
+
+                                    <td [hidden]="checkedColumns[3]">{{ avoir?.dateCreation | date : 'dd/MM/yyyy' }}
+                                    </td>
+
+                                    <td [hidden]="checkedColumns[4]">{{ avoir?.dateEcheance | date : 'dd/MM/yyyy' }}
+                                    </td>
+
+                                    <td [hidden]="checkedColumns[5]" class="text-right">
+                                        <span class="display-price">{{ avoir?.total | RoudingNumber | ShowCurrency }}
+                                        </span><br>
+                                    </td>
+
+                                    <td class="actions" [hidden]="checkedColumns[6]">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary btn-md btn-actions"
+                                                placement="bottom" [container]="'body'"
+                                                ngbTooltip="{{'toolip.detail' | translate}}"
+                                                [routerLink]="['/avoirs/detail',avoir?.id]"><i
+                                                    class="ft-eye"></i></button>
+                                            <ng-container *ngIf="avoir?.status == statutAvoir.Brouillon">
+                                                <button type="button" class="btn btn-success btn-md btn-actions"
+                                                    placement="bottom" [container]="'body'"
+                                                    ngbTooltip="{{'toolip.edit' | translate}}"
+                                                    [routerLink]="['/avoirs/modifier',avoir?.id]"><i
+                                                        class="ft-edit"></i></button>
+                                                <button type="button" class="btn btn-danger btn-md btn-actions"
+                                                    placement="bottom" [container]="'body'"
+                                                    ngbTooltip="{{'toolip.delete' | translate}}"
+                                                    (click)="delete(avoir?.id)"><i class="ft-trash-2"></i></button>
+                                            </ng-container>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="avoirs?.list?.length == 0">
+                                <tr>
+                                    <td colspan="7" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+                                </tr>
+                            <tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<custom-loader [displayLoader]="processing"></custom-loader>

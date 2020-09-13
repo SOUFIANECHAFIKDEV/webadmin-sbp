@@ -1,0 +1,180 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12" *ngIf="!CallFromOutside">
+        <h3 class="content-header-title mb-0">{{'list.title' | translate}}</h3>
+    </div>
+    <div class="content-header-right  col-12" [ngStyle]="{'margin-top':!CallFromOutside ? '-35px' : '-65px' }">
+        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+            <a class=" btn btn-primary" style="color:white;;margin-bottom: 10px" (click)="navigateTo('add',null)"
+                placement="bottom"
+                ngbTooltip="{{ 'labels.nouveau' | translate }} {{ 'labels.BonCommandeFournisseur' | translate }} ">{{ 'labels.nouveau' | translate }}
+                <i class="ft-plus"></i></a>
+
+        </div>
+    </div>
+</div>
+
+<!-- Toutes les bon des commande fournisser -->
+<div class="tab-pane" id="toutesBonCommandeFournisseur" aria-labelledby="aboutIcon11-tab1" role="tab"
+    aria-selected="false">
+
+    <!-- Data table bon commande fournisseur -->
+    <section id="multi-column">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content collapse show">
+                        <div class="card-body init-card-body card-dashboard">
+                            <recherche-avancee>
+                                <div class="recherche-avancee-body">
+                                    <div class="ui-g ui-fluid" *ngIf="dateLang">
+                                        <div class="ui-g-6 ui-md-4">
+                                            <h6 style="font-weight: bold">{{'labels.statut' | translate }}</h6>
+                                            <ng-select [hideSelected]="true" bindLabel="name"
+                                                placeholder="{{'labels.statut' | translate }}"
+                                                notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="statut"
+                                                (change)="rerender()">
+                                                <ng-option *ngFor="let item of listStatus" [value]="item?.value">
+                                                    {{ item?.name }}</ng-option>
+                                            </ng-select>
+                                        </div>
+                                        <div class="ui-g-6 ui-md-4" *ngIf="!CallFromOutside">
+                                            <h6 style="font-weight: bold">{{'list.chantier' | translate }}</h6>
+                                            <ng-select [hideSelected]="true" bindLabel="name"
+                                                placeholder="{{'list.chantier' | translate }}"
+                                                notFoundText="{{'labels.noFoundItem' | translate}}"
+                                                [(ngModel)]="idChantier" (change)="rerender()" (click)="getChantiers()"
+                                                #selecteChantiers>
+                                                <ng-option *ngFor="let item of listChantiers" [value]="item?.id">
+                                                    {{ item?.nom }}</ng-option>
+                                            </ng-select>
+                                        </div>
+
+                                        <div class="ui-g-6 ui-md-4">
+                                            <h6 style="font-weight: bold">{{'list.fournisseur' | translate }}</h6>
+                                            <ng-select [hideSelected]="true" bindLabel="name"
+                                                placeholder="{{'list.fournisseur' | translate }}"
+                                                notFoundText="{{'labels.noFoundItem' | translate}}"
+                                                [(ngModel)]="idFournisseur" (change)="rerender()"
+                                                (click)="getFournisseurs()" #selecteFournisseurs>
+                                                <ng-option *ngFor="let item of listFournisseurs" [value]="item?.id">
+                                                    {{ item?.nom }}</ng-option>
+                                            </ng-select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </recherche-avancee>
+                            <show-hide-table-columns [columns]="BonCommandeFournisseurTableColumns"
+                                [tableName]="'fournisseurTable'"
+                                [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate"
+                                [showAll]=" 'list.montreTout'  | translate"
+                                [showNone]=" 'list.montrerAucun'  | translate" [checkedColumns]="checkedColumns"
+                                (selectColumn)="SetCheckedColmuns($event)">
+                            </show-hide-table-columns>
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="table table-striped table-bordered" style="width:100%" id="fournisseurTable">
+
+                                <thead>
+                                    <tr>
+                                        <ng-container
+                                            *ngFor="let column of BonCommandeFournisseurTableColumns;let index = index">
+                                            <th *ngIf="BonCommandeFournisseurTableColumns.length-1 != index"> {{column}}
+                                            </th>
+                                        </ng-container>
+                                        <th class="actions">
+                                            {{BonCommandeFournisseurTableColumns[BonCommandeFournisseurTableColumns.length-1]}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="BonCommandeFournisseur?.list?.length > 0">
+                                    <tr *ngFor="let bonCommandeFournisseur of BonCommandeFournisseur?.list ;let i = index"
+                                        (dblclick)="doubleClick(bonCommandeFournisseur)">
+                                        <td [hidden]="checkedColumns[0]">{{ bonCommandeFournisseur?.reference }}</td>
+
+                                        <!-- status de bon commande fournisseur-->
+                                        <td *ngIf="bonCommandeFournisseur?.status == statutBCFournisseur.Brouillon"
+                                            [hidden]="checkedColumns[1]">
+                                            <span
+                                                class="badge badge-default badge-brouillon">{{'labels.brouillon' | translate}}</span>
+                                        </td>
+                                        <td *ngIf="bonCommandeFournisseur?.status == statutBCFournisseur.Encours"
+                                            [hidden]="checkedColumns[1]">
+                                            <span
+                                                class="badge badge-default badge-planifiee">{{'labels.encours' | translate}}</span>
+                                        </td>
+                                        <td *ngIf="bonCommandeFournisseur?.status == statutBCFournisseur.Facturee"
+                                            [hidden]="checkedColumns[1]">
+                                            <span
+                                                class="badge badge-default badge-success">{{'labels.facture' | translate}}</span>
+                                        </td>
+                                        <td *ngIf="bonCommandeFournisseur?.status == statutBCFournisseur.Annule"
+                                            [hidden]="checkedColumns[1]">
+                                            <span
+                                                class="badge badge-default badge-annuler">{{'labels.annule' | translate}}</span>
+                                        </td>
+
+                                        <td [hidden]="checkedColumns[2]">
+                                            {{ bonCommandeFournisseur?.dateCreation | date: 'dd/MM/yyyy' }}
+                                        </td>
+
+                                        <td [hidden]="checkedColumns[3]">
+                                            {{ bonCommandeFournisseur?.dateExpiration | date: 'dd/MM/yyyy' }}
+                                        </td>
+
+
+
+                                        <td [hidden]="checkedColumns[4]">
+                                            {{ bonCommandeFournisseur?.chantier?.nom }}</td>
+                                        <td [hidden]="checkedColumns[5]">
+                                            {{ bonCommandeFournisseur?.fournisseur?.nom }}</td>
+
+                                        <td [hidden]="checkedColumns[6]">
+                                            {{ bonCommandeFournisseur?.total | RoudingNumber }} €</td>
+
+
+                                        <td class="actions" [hidden]="checkedColumns[7]">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-primary btn-md btn-actions"
+                                                    (click)="navigateTo('detail',{'idBCFournisseur':bonCommandeFournisseur?.id})"
+                                                    placement="bottom"
+                                                    ngbTooltip="{{ 'labels.afficher' | translate }} {{ 'labels.BonCommandeFournisseur' | translate }} "><i
+                                                        class="ft-eye"></i></button>
+                                                <button type="button" class="btn btn-success btn-md btn-actions"
+                                                    *ngIf="bonCommandeFournisseur?.status != statutBCFournisseur.Facturee"
+                                                    (click)="navigateTo('edit',{'idBCFournisseur':bonCommandeFournisseur?.id})"
+                                                    placement="bottom"
+                                                    ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.BonCommandeFournisseur' | translate }} "><i
+                                                        class="ft-edit"></i></button>
+
+                                                <button type="button" class="btn btn-danger btn-md btn-actions"
+                                                    *ngIf="bonCommandeFournisseur?.status != statutBCFournisseur.Facturee"
+                                                    (click)="delete(bonCommandeFournisseur?.id)" placement="bottom"
+                                                    ngbTooltip="{{ 'labels.supprimer' | translate }} {{ 'labels.BonCommandeFournisseur' | translate }} "><i
+                                                        class="ft-trash-2"></i></button>
+                                            </div>
+                                        </td>
+
+
+
+                                    </tr>
+                                </tbody>
+
+                                <tbody *ngIf="BonCommandeFournisseur?.list?.length == 0">
+                                    <tr>
+                                        <td colspan="14" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+
+                                    </tr>
+                                <tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- <custom-loader [displayLoader]="processing"></custom-loader> -->

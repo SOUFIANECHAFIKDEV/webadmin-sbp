@@ -1,0 +1,188 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="zoom: 1;">
+      <div class="card-content collpase show">
+        <div class="card-body">
+          <form class="form form-horizontal">
+            <div class="form-body">
+              <h4 class="form-section"><i class="ft-user"></i> {{'labels.infoProduit' | translate}}</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="projectinput1">{{'labels.reference' | translate}}</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{produit?.reference}}" id="projectinput1" class="form-control"
+                        disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="projectinput2">{{ 'labels.nom' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{produit?.nom}}" id="projectinput2" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-2 label-control">{{'labels.designation' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                      <input type="text" value="{{produit?.designation}}" id="designation" class="form-control"
+                        disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="Categorie">{{ 'labels.Categorie' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{produit?.categorie}}" id="Categorie" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="Unite">{{ 'labels.Unite' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{produit?.unite}}" id="Unite" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+                <!-- nombre d'heure -->
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control"
+                      for="nombreHeure">{{ 'labels.nombre_heure' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" id="nombreHeure" class="form-control currency-input"
+                        value="{{produit?.nomber_heure | RoudingNumber}}" disabled style="    text-align: right;">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- cout horaire -->
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control"
+                      for="coutHoraire">{{ 'labels.cout_horaire' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" disabled id="coutHoraire" class="form-control currency-input"
+                        value="{{calculate_cout_horaire() | RoudingNumber | ShowCurrency}}" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- cout materiel -->
+                <div class="col-md-6 offset-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control"
+                      for="cout_materiel">{{ 'labels.cout_materiel' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" id="cout_materiel" class="form-control currency-input"
+                        value="{{produit?.cout_materiel | RoudingNumber | ShowCurrency}}" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- cout de vente -->
+                <!-- <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="Prix">{{ 'labels.cout_vente' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" id="Prix" class="form-control currency-input"
+                        value="{{produit?.cout_vente | RoudingNumber | ShowCurrency}}" disabled>
+                    </div>
+                  </div>
+                </div> -->
+
+
+
+                <!-- Tva -->
+                <div class="col-md-6 offset-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="Tva">{{ 'labels.Tva' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{produit?.tva +'%'}}" id="Tva" class="form-control currency-input"
+                        disabled>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <!-- Total Ht -->
+                <div class="col-md-6 offset-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="TotalHt">{{ 'labels.TotalHt' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" id="TotalHt" class="form-control currency-input"
+                        value=" {{ TotalHt()| RoudingNumber | ShowCurrency }} " disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- prix TTC -->
+                <div class="col-md-6 offset-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="prixTTC">{{ 'labels.prixTTC' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" id="prixTTC" class="form-control currency-input"
+                        value="{{ prixTtc(produit?.cout_materiel ,produit?.tva)| RoudingNumber | ShowCurrency }}"
+                        disabled max="100" min="0">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-2 label-control">{{'labels.description' | translate}}
+                    </label>
+                    <div class="col-md-10">
+                      <div class="richTextArea" [innerHTML]="produit?.description">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <ng-container *ngIf="produit?.prixParFournisseur?.length > 0">
+            <h4 class="form-section"><i>$</i> {{ 'PrixParFournisseur.title' | translate }}</h4>
+            <prix-par-fournisseur 
+              [PrixParFournisseur]="produit?.prixParFournisseur" 
+              [readOnly]="true">
+            </prix-par-fournisseur>
+          </ng-container>
+          <ng-container *ngIf="allTagsList?.length > 0">
+            <h4 class="form-section" style="margin-top: 2.5em;"><i class="ft-tag"></i> {{ 'tags.title' | translate }}
+            </h4>
+
+            <div class="row">
+              <div class="col-md-12">
+                <ino-tags [newTags]="allTagsList" [readOnly]="false" [load]="[]"></ino-tags>
+
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

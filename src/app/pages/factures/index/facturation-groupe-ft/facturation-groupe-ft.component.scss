@@ -1,0 +1,13 @@
+.card-body{
+    overflow: inherit;
+}
+
+ol li, ul li, dl li {
+    line-height: 1.4 !important;
+}
+
+.container-scroll {
+    height: 350px;
+    width: 100%;
+    overflow-y: scroll;
+}

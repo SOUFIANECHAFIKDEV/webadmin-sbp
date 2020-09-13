@@ -1,0 +1,111 @@
+<!-- Afficher les informations de user -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="zoom: 1;">
+
+      <div class="card-content collpase show">
+        <div class="card-body">
+          <div class="form-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput1">{{'labels.nom' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.nom" id="projectinput1" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput2">{{'labels.prenom' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.prenom" id="projectinput2" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput2">{{'labels.matricule' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.matricule" id="projectinput2" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control paddingTop"
+                    for="projectinput3">{{'labels.Actif' | translate}}</label>
+                  <div class="col-md-9">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" [checked]="user?.actif" class="custom-control-input" id="projectinput3"
+                        disabled>
+                      <label class="custom-control-label" for="projectinput3">{{'labels.Actif' | translate}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.Username' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.username" id="projectinput3" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.Profile' | translate }}</label>
+                  <div class="col-md-9">
+                    <!-- <ng-container *ngIf="user?.idProfile == "></ng-container> -->
+                    <input type="text" [value]="user?.idProfile | GetUserProfileLibelle" id="projectinput3"
+                      class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.email' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.email" id="projectinput3" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.telephone' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.phonenumber" id="projectinput3" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput4">{{'labels.dernierConnect' | translate }}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="user?.dernierecon | date : 'dd/MM/yyyy HH:mm'" id="projectinput3"
+                      class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

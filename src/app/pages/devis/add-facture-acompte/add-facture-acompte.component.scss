@@ -1,0 +1,41 @@
+.btn-input {
+  float: right;
+  top: -40px;
+  position: relative;
+  border-left: 1px red solid;
+  border-radius: 0px 3px 3px 0px;
+
+  input{
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+  }
+
+  .input-btn-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+span.pourcentage-signd {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background:#ebebeb;
+  padding: 10px;
+  border-radius: 0 0.25rem 0.25rem 0;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  border: 1px solid #ccd6e6;
+  color: #3f587e;
+  border-left: none;
+  height: 40px;
+}
+
+
+.textarea-single-ligne {
+  width: 95.5%;
+  float: right;
+}

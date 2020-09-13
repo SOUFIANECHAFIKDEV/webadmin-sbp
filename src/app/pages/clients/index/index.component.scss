@@ -1,0 +1,48 @@
+.no-data-available {
+    text-align: center;
+}
+
+/*
+    src/styles.css (i.e. your global style)
+*/
+.dataTables_empty {
+    display: none;
+}
+
+@media only screen and (min-width: 1300px) {
+    show-hide-table-columns {
+     position: relative !important;
+     float: right !important;
+     } 
+ }
+ 
+ @media only screen and (max-width: 1300px) {
+     show-hide-table-columns {
+         position: relative !important;
+         margin-bottom: 5rem !important;
+         top: -2rem !important;
+     }
+ }
+
+ .select-type-client{
+    // position: absolute;
+    // left: 0;
+    width: 70%;
+    margin-left: 1vw;
+    box-sizing: content-box;
+    background: none;
+    border: 1px #babfc7 solid;
+    box-shadow: none;
+    outline: 0;
+    cursor: default;
+    height: 2rem;
+ }
+
+  
+  label {
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    line-height: 2 !important;
+  }
+  
+ 

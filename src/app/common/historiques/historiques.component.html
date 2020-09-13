@@ -1,0 +1,83 @@
+<table class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>{{'labels.date' | translate}} {{'labels.action' | translate}}</th>
+            <th>{{'labels.utilisateur' | translate}}</th>
+            <th>{{'labels.action' | translate}}</th>
+            <th class="table-header">Détails</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="historique?.length > 0">
+        <tr *ngFor="let h of historique;let index = index">
+            <td style="width: 15%;">{{ h?.date | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+                <!-- <a [routerLink]="['../../../utilisateurs/detail', h?.IdUser]">{{ h?.IdUser | GetNameOfUserById }}</a> -->
+                {{ h?.IdUser | GetNameOfUserById }}
+            </td>
+            <td>
+                <ng-container *ngIf="h?.action == actionHistorique.Added">
+                    {{'labels.ajouter' | translate}}
+                </ng-container>
+                <ng-container *ngIf="h?.action == actionHistorique.Updated">
+                    {{'labels.modification' | translate}}
+                </ng-container>
+                <ng-container *ngIf="h?.action == actionHistorique.Deleted">
+                    {{'labels.supprimer' | translate}}
+                </ng-container>
+            </td>
+            <td class="eye-icone" (click)="showInConsole(h?.champs)">
+                <i class="fa fa-eye" data-toggle="modal" data-target="#defaultHistorique"
+                    *ngIf="h?.action != actionHistorique.Added"></i>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="historique?.length == 0">
+        <tr>
+            <td colspan="5" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+        </tr>
+    <tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade text-left" id="defaultHistorique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> {{'labels.Detailshistorique' | translate}}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <th>{{'labels.Attribute' | translate}}</th>
+                        <th>{{'labels.Before' | translate}}</th>
+                        <th>{{'labels.After' | translate}}</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let champ of details;let i = index">
+                            <ng-container *ngIf="champ.Attribute != 'IdSociete'">
+                                <td> {{ champ.Attribute | translate }}</td>
+                                <ng-container *ngIf="champ.Attribute == 'IdPays'">
+                                    <td>{{ champ.Before }}</td>
+                                    <td>{{ champ.After }}</td>
+                                </ng-container>
+                                <ng-container *ngIf="champ.Attribute != 'IdPays'">
+                                    <td [innerHtml]="champ.Before"></td>
+                                    <td [innerHtml]="champ.After"></td>
+                                </ng-container>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="reset" class="btn grey btn-light" data-dismiss="modal" placement="top"
+                    [ngbTooltip]="'labels.close' | translate" [value]="'labels.close' | translate">
+            </div>
+        </div>
+    </div>
+</div>

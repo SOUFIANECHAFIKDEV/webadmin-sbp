@@ -1,0 +1,47 @@
+@import "../../../assets/app-assets/css/pages/timeline.css";
+@import "../../../assets/app-assets/vendors/css/file-uploaders/dropzone.min.css";
+
+.bg-white{
+    background: white;
+    padding: 0.5em;
+}
+.hidden{
+    visibility: hidden;
+}
+.piecesJointe{
+    background-color: #f5f7fa63;
+    margin-top: 2em;
+    p{
+        margin: 0;
+        padding: 0.2em 0em 1em 1em;
+        font-size: 1rem;
+    }
+}
+
+.dropzone { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    font-weight: 200;
+    height: 300px;
+    border: 2px dashed #e12382;
+    border-radius: 5px;
+    background: white;
+    margin: 10px 0;
+
+    &.hovering {
+        border: 2px solid #f16624;
+        color: #dadada !important;
+    }
+
+    .file-label {
+        font-size: 1.2em;
+    }
+
+  
+}
+.timeline-item > .timeline-card > .card-header {
+    background-color:white !important;
+    border-bottom: 1px solid white !important;
+}

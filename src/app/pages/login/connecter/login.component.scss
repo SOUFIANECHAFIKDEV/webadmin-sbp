@@ -1,0 +1,82 @@
+.form-simple input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-simple input[type="mail"] {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+.form-simple input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.help-block ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.help-block ul li {
+  list-style: none;
+}
+
+html body.fixed-navbar {
+  padding-top: 0rem !important;
+}
+
+.card {
+  box-shadow: none !important;
+  background: transparent;
+}
+
+img {
+  width: 50%;
+}
+
+.golbal-container {
+  width: 100%;
+  background: linear-gradient(#065cb3, #069ae0 45%, #065cb3);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 0 !important;
+  right: 0;
+}
+
+.card-footer.border-0 {
+  height: 0px;
+  padding-bottom: 6%;
+}
+
+@media (max-width: 980px) {
+  .card-footer.border-0 {
+    height: 0px;
+    padding-bottom: 12%;
+  }
+}
+
+@media (max-width: 780px) {
+  .card-footer.border-0 {
+    height: 0px;
+    padding-bottom: 6%;
+  }
+}
+
+@media (max-width: 500px) {
+  .card-footer.border-0 {
+    height: 0px;
+    padding-bottom: 10%;
+  }
+}
+
+.card-header{
+  background: transparent;
+}
+.card-footer {
+  background: transparent;
+}
+a.card-link {
+  color: #fff !important;
+  float: right;
+}

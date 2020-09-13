@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="zoom: 1;">
+      <div class="card-content collpase show">
+        <div class="card-body">
+          <form class="form form-horizontal">
+            <div class="form-body">
+              <h4 class="form-section"><i class="ft-user"></i> {{'labels.infogammemaintenanceequipement' | translate}}
+              </h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-4 label-control" for="nom">{{'labels.nom' | translate}}</label>
+                    <div class="col-md-8">
+                      <input type="text" value="{{gammeMaintenanceEquipement?.nom}}" id="nom" class="form-control"
+                        disabled>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <h4 class="form-section">
+                <i class="ft-file-text"></i>{{'labels.operations' | translate}}</h4>
+              <div class="row">
+                <div class="col-12">
+                  <gamme-maintenance-equipement [readOnly]="true" [libelles]="operations">
+                  </gamme-maintenance-equipement>
+                  <!-- <gamme-maintenance-equipement [load]="emitter" [readOnly]="true" [libelles]="operations"></gamme-maintenance-equipement> -->
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

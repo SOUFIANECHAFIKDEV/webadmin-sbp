@@ -1,0 +1,7 @@
+<full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="calendarEvents" [locale]="locale"
+  [locales]="locales" [dayPopoverFormat]="{ month: 'long', day: 'numeric', year: 'numeric' }"
+  [columnHeaderFormat]="{ weekday: 'long' }" [header]="header" [eventColor]="'#001fff'"
+  [eventBackgroundColor]="'#001fff'" [eventBorderColor]="'#001fff'" [eventTextColor]="'#001fff'"
+  [listDayFormat]="{month: 'long', year: 'numeric', day: 'numeric', weekday: 'long'}" [defaultView]="defaultView"
+  (eventClick)="eventClick($event)"></full-calendar>
+<!-- [header] = "{ left: 'title', center: '', right: 'today year,next' }" -->

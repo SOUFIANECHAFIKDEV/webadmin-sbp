@@ -1,0 +1,64 @@
+.erreurMsg {
+    width: 100%;
+    text-align: center;
+    margin: 1em;
+    color: #FF7588 !important;
+    font-size: 80%;
+    font-weight: 400;
+}
+
+// span {
+//     position: relative;
+//     right: 0.55em;
+// }
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+.card-container{
+    border: 1px solid;
+    padding: 0.5em 1em;
+    box-shadow: 4px 4px #404e67d1 !important;
+    margin: 0rem 0rem 3rem 2rem;
+    .header{
+        text-align: right;
+        margin-bottom: 2%;
+        button{
+            background: transparent;
+            border: navajowhite;
+            font-size: 1.5rem;
+            padding: 0;
+            margin-left: 0.5rem;
+        }
+        .ft-edit-2{
+            color: green;
+        }
+        .ft-x{
+            color: red;
+        }
+    }
+    .body{
+        font-size: 14.5px;
+        span{
+            padding-left: 0.5rem;
+        }
+    }
+}
+
+.card-footer {
+    padding: 0.6rem 1rem !important;
+}
+
+.fournisseur-length-zero-msg{
+    color: red;
+    font-size: 1rem;
+}
+
+.custom-checkbox {
+    margin-left: 10rem;
+}
+
+
+.input-number {
+    text-align: right !important;
+}

@@ -1,0 +1,281 @@
+<!-- Liste des produits -->
+<div class="modal fade text-left" id="produitForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel9">
+
+                    <i class="fa fa-list"></i> {{ 'labels.article' | translate }}
+
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <!-- ============================   form  ================================ -->
+                    <form class="form form-horizontal" [formGroup]="form">
+                        <div class="form-body">
+                            <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="reference">{{ 'labels.reference' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <input type="text" formControlName="reference" id="reference"
+                                                class="form-control" placeholder="{{ 'labels.reference' | translate }}">
+                                            <small class="text-danger"
+                                                *ngIf="f?.reference?.hasError('CheckUniqueReference')">
+                                                {{'errors.unique' | translate }}
+                                            </small>
+                                            <small class="text-danger" *ngIf="f?.reference?.errors?.required">
+                                                {{'errors.required' |translate }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!------------------->
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="projectinput2">{{ 'labels.nom' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <input type="text" formControlName="nom" id="projectinput2"
+                                                class="form-control" placeholder="{{ 'labels.nom' | translate }}">
+                                            <small class="text-danger" *ngIf="f?.nom?.errors?.required">
+                                                {{'errors.required' | translate}}
+                                            </small>
+                                            <small class="text-danger" *ngIf="f?.nom?.errors?.minlength">
+                                                {{'errors.minLength' | translate:{number:2} }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!------------------->
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="designation">{{ 'labels.designation' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <input type="text" formControlName="designation" id="designation"
+                                                class="form-control"
+                                                placeholder="{{ 'labels.designation' | translate }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!------------------->
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="projectinput2">{{ 'labels.Categorie' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <select (mouseenter)="getListeCategorie()" name="IdCategorie"
+                                                formControlName="categorie" class="form-control">
+                                                <option value=""></option>
+                                                <option *ngFor="let categorie of ListeCategorie"
+                                                    [value]="categorie?.nom">{{categorie?.nom}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!------------------->
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="prixTTC">{{ 'labels.qte' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <input type="number" id="qte" class="form-control currency-input"
+                                                placeholder="{{ 'labels.qte' | translate }}" formControlName="qte"
+                                                style="text-align: right;" appInputRemoveDefaultZero>
+                                            <small class="text-danger"
+                                                *ngIf="f?.qte?.errors?.required">{{'errors.required' | translate }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!------------------->
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="projectinput2">{{ 'labels.Unite' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <select (mouseenter)="getListeUnite()" name="IdUnite"
+                                                formControlName="unite" class="form-control">
+                                                <option value=""></option>
+                                                <option *ngFor="let unite of ListeUnite" [value]="unite?.nomComplet">
+                                                    {{unite?.nomComplet}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!------------------->
+                                <!-- nombre d'heure -->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="nombreHeure">{{ 'labels.nombre_heure' | translate }}</label>
+                                        <div class="col-md-8">
+                                            <input type="number" formControlName="nomber_heure" id="nombreHeure"
+                                                class="form-control currency-input  input-number"
+                                                placeholder="{{ 'labels.nombre_heure' | translate }}"
+                                                (click)="getCouteVenteFromParamerage()" appInputRemoveDefaultZero>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- cout horaire -->
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 label-control"
+                                            for="coutHoraire">{{ 'labels.cout_horaire' | translate }}
+                                            <i class="ft-info" placement="bottom"
+                                                ngbTooltip="{{ f?.nomber_heure?.value }}  ({{ 'labels.nombre_heure' | translate }}) × {{ f?.cout_vente?.value }} ({{ 'labels.cout_vente' | translate }})"></i>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input type="number" disabled id="coutHoraire"
+                                                class="form-control currency-input  input-number"
+                                                placeholder="{{ 'labels.cout_horaire' | translate }}"
+                                                [value]="calculate_cout_horaire()" appInputRemoveDefaultZero>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <!-- cout materiel -->
+
+                                        <div class="col-md-6 offset-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 label-control" for="Prix">
+                                                    {{ 'labels.cout_materiel' | translate }}
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="number" formControlName="cout_materiel" id="Prix"
+                                                        class="form-control currency-input  input-number"
+                                                        placeholder="{{ 'labels.cout_materiel' | translate }}"
+                                                        appInputRemoveDefaultZero>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Tva -->
+
+                                        <div class="col-md-6 offset-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 label-control"
+                                                    for="Tva">{{ 'labels.Tva' | translate }}</label>
+                                                <div class="col-md-8">
+                                                    <input type="number" formControlName="tva" id="tva"
+                                                        class="form-control input-number"
+                                                        placeholder="{{ 'labels.Tva' | translate }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 offset-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 label-control"
+                                                for="remise">{{ 'labels.remise' | translate }}</label>
+                                            <div class="col-md-5">
+                                                <input type="number" formControlName="remise" id="remise"
+                                                    class="form-control input-number"
+                                                    placeholder="{{ 'labels.remise' | translate }}"
+                                                    appInputRemoveDefaultZero>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select [(ngModel)]="typeRemiseGloabl"
+                                                    [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    <option value="€">€</option>
+                                                    <option value="%">%</option>
+                                                </select>
+                                                <small class="text-danger"
+                                                    *ngIf="f?.remise?.errors?.required">{{'errors.required' | translate }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Total Ht -->
+
+                                    <div class="col-md-6 offset-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 label-control"
+                                                for="TotalHt">{{ 'labels.TotalHt' | translate }}</label>
+                                            <div class="col-md-8">
+                                                <input type="text" id="TotalHt"
+                                                    class="form-control currency-input  input-number"
+                                                    placeholder="{{ 'labels.TotalHt' | translate }}"
+                                                    value=" {{ TotalHt()  | RoudingNumber | ShowCurrency  }} " disabled
+                                                    appInputRemoveDefaultZero>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- prix TTC -->
+
+                                    <div class="col-md-6 offset-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 label-control"
+                                                for="prixTTC">{{ 'labels.prixTTC' | translate }} (€)</label>
+                                            <div class="col-md-8">
+                                                <input type="text" id="prixTTC"
+                                                    class="form-control currency-input  input-number"
+                                                    placeholder="{{ 'labels.prixTTC' | translate }}"
+                                                    value="{{ prixTtc() | RoudingNumber | ShowCurrency }}" disabled
+                                                    max="100" min="0" appInputRemoveDefaultZero>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 label-control"
+                                            for="projectinput1">{{ 'labels.description' | translate}}</label>
+                                        <div class="col-md-10">
+                                            <angular-editor formControlName="description" [config]="editorConfig">
+                                            </angular-editor>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- ============================   end form  ================================ -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <!-- <div class="custom-control custom-checkbox" style="width: 100%;">
+                    <input type="checkbox" [(ngModel)]="addInDb" class="custom-control-input" id="projectinput8">
+                    <label class="custom-control-label" for="projectinput8">Ajouter à la Bibliothèque</label>
+                </div> -->
+
+                <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal"
+                    ngbTooltip="{{ 'labels.sauvegarder'| translate }}">{{'labels.cancel' | translate}}</button>
+
+                <button type="button" class="btn btn-success btn-lg" ngbTooltip="{{ 'labels.sauvegarder'| translate }}"
+                    (click)="save()">{{ 'labels.sauvegarder' | translate }}</button>
+
+            </div>
+        </div>
+    </div>
+</div>

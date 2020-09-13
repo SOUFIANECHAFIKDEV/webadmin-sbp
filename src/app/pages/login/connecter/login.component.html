@@ -1,0 +1,53 @@
+<div class="row golbal-container">
+    <div class="offset-md-4 col-md-4 offset-sm-2 col-sm-8 offset-xs-1 col-xs-10">
+        <div class="card border-grey border-lighten-3 m-0">
+            <div class="card-header border-0">
+                <div class="card-title text-center">
+                    <div class="p-1">
+                        <img src="assets/app/imgs/sbp.png" alt="branding logo">
+                        <h2 class="brand-text" style="color: white;">SARL BLANCHET PROVOST</h2>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+
+                    <fieldset class="form-group position-relative has-icon-left mb-0 validate">
+                        <input type="text" class="form-control form-control-lg" id="user-name"
+                            placeholder="{{ 'labels.username' | translate }}" required="" aria-invalid="false"
+                            #UserName />
+                        <div class="form-control-position">
+
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="form-group position-relative has-icon-left">
+                        <input type="password" class="form-control form-control-lg" id="user-password"
+                            placeholder="{{ 'labels.password' | translate }}" required="" #Password />
+                        <div class="form-control-position">
+
+                        </div>
+                    </fieldset>
+
+                    <button class="btn btn-primary btn-lg btn-block" (click)="login(UserName,Password)">
+                        {{ 'labels.login' | translate }}
+                    </button>
+
+
+                    <!-- </form> -->
+                </div>
+
+                <div class="card-footer border-0">
+                    <div class="form-group row">
+                        <p class="col-12 text-center"><a [routerLink]="[ '/login/recover-password']" class="card-link">{{'labels.forgetPassword'
+                | translate }}</a></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<!-- <p>
+  retenue-garantie works!
+  {{listRetenueGaranties | json}}
+</p> -->
+<div class="tab-pane" id="toutesDevis" aria-labelledby="aboutIcon11-tab1" role="tab" aria-selected="false">
+
+  <section id="multi-column">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <!-- <div class="card-header">
+              <h4 class="card-title">
+                <i class="fa fa-list-alt"></i> {{'rubrique.title' | translate}}</h4>
+            </div> -->
+          <div class="card-content collapse show">
+            <div class="card-body init-card-body card-dashboard">
+              <div>
+                <div>
+
+
+                  <table style="overflow: hidden;">
+                    <thead>
+                      <tr>
+                        <th class="text-center"> {{'labels.reference' | translate}}</th>
+                        <th class="text-center"> {{'labels.retenuegarantie' | translate}}</th>
+                        <th class="text-center"> {{'labels.montant' | translate}}</th>
+                        <th class="text-center"> {{'labels.dateEcheance' | translate}}</th>
+                        <th class="text-center"> {{'labels.statusRetenuegarantie' | translate}}</th>
+                        <th class="text-center"> {{'labels.actions' | translate}}</th>
+
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container
+                        *ngFor="let retenueGarantie of listRetenueGaranties ;let i of listRetenueGaranties.length">
+
+                        <tr>
+                          <td class="text-center">
+                            {{retenueGarantie?.reference}}</td>
+                          <td class="text-center">
+                            {{retenueGarantie?.valeurRetenue}} %
+                          </td>
+                          <td class="text-center currency-input">
+                            {{retenueGarantie?.htRetenus | RoudingNumber| ShowCurrency }}
+                          </td>
+                          <td class="text-center">
+                            {{retenueGarantie?.dateEcheanceRetenue | date:'dd/MM/yyyy'}}
+                          </td>
+                          <td class="text-center">
+                            <span *ngIf="retenueGarantie?.statutRetenue == statutRetenueGarantie.nonrecuperer"
+                              class="badge badge-default badge-info nonaccepter">{{ 'labels.nonrecuperer' | translate }}</span>
+                            <span *ngIf="retenueGarantie?.statutRetenue == statutRetenueGarantie.recuperer"
+                              class="badge badge-default badge-info statut-recupere">{{ 'labels.recuperer' | translate }}</span>
+                            <span *ngIf="retenueGarantie?.statutRetenue == statutRetenueGarantie.encours"
+                              class="badge badge-default badge-info statut-encours">{{ 'labels.encours' | translate }}</span>
+                            <span *ngIf="retenueGarantie?.statutRetenue == statutRetenueGarantie.enretard"
+                              class="badge badge-default badge-info statut-enretard">{{ 'labels.enretard' | translate }}</span>
+                          </td>
+
+
+                          <td class="actions" style="text-align: center !important;">
+                            <div class="">
+
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                changer Statut
+                                <!-- <i class="ft-chevron-down"></i> -->
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                x-placement="bottom-start">
+                                <p class="dropdown-item"
+                                  *ngIf="retenueGarantie?.statutRetenue != statutRetenueGarantie.nonrecuperer"
+                                  (click)="changerStatut(retenueGarantie?.idFacture,statutRetenueGarantie.nonrecuperer)">
+                                  {{'labels.nonrecuperer' | translate}}
+                                </p>
+
+                                <p class="dropdown-item"
+                                  *ngIf="retenueGarantie?.statutRetenue != statutRetenueGarantie.recuperer"
+                                  (click)="changerStatut(retenueGarantie?.idFacture,statutRetenueGarantie.recuperer)">
+
+                                  {{'labels.recuperer' | translate}}
+                                </p>
+                                <ng-container
+                                  *ngIf="retenueGarantie?.statutRetenue != statutRetenueGarantie.nonrecuperer">
+                                  <p class="dropdown-item"
+                                    *ngIf="retenueGarantie?.statutRetenue != statutRetenueGarantie.encours && getStatutRetenue(retenueGarantie?.dateEcheanceRetenue)==statutRetenueGarantie.encours"
+                                    (click)="changerStatut(retenueGarantie?.idFacture,statutRetenueGarantie.encours)">
+
+                                    {{'labels.encours' | translate}}
+                                  </p>
+                                  <p class="dropdown-item"
+                                    *ngIf="retenueGarantie?.statutRetenue != statutRetenueGarantie.enretard && getStatutRetenue(retenueGarantie?.dateEcheanceRetenue)==statutRetenueGarantie.enretard"
+                                    (click)="changerStatut(retenueGarantie?.idFacture,statutRetenueGarantie.enretard)">
+                                    {{'labels.enretard' | translate}}
+                                  </p>
+                                </ng-container>
+
+                              </div>
+                            </div>
+                          </td>
+
+
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <div class="col-12" *ngIf="listRetenueGaranties.length == 0">
+                <p class="no-data-available">{{ 'noDataAvaible' | translate }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>

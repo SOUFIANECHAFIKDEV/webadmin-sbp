@@ -1,0 +1,255 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{ 'factureAcompte.title' | translate}}</h3>
+        <div class="row breadcrumbs-top">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <!-- <a [routerLink]="['/factures']">{{'title' | translate}}</a> -->
+                        <a (click)="navigateToDevisList()">{{'labels.devis' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ 'factureAcompte.title' | translate}}
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group">
+
+            <button type="button" [routerLink]="['/factures']" class="btn btn-warning mr-1">
+                <i class="ft-x"></i> {{'labels.cancel' | translate}}
+            </button>
+
+
+            <button type="submit" (click)="add(statutFacture.Encours)" class="btn btn-success">
+                <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+            </button>
+
+            <button type="submit" (click)="add(statutFacture.Cloture)" class="btn btn-secondary">
+                <i class="fa ft-check"></i> {{ 'labels.cloturer' | translate }}
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<div class="content-body">
+
+    <section id="horizontal-form-layouts">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="zoom: 1;">
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+
+                            <!-- Information à saisir -->
+                            <form class="form form-horizontal" [formGroup]="creationForm">
+                                <div class="form-body">
+
+                                    <!-- Information facture-->
+                                    <h4 class="form-section">
+                                        <i class="ft-file-text"></i>{{'labels.infoFacture' | translate}}</h4>
+
+                                    <!-- Reference + Client -->
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="projectinput189">{{ 'labels.reference' | translate }}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" formControlName="reference" id="projectinput189"
+                                                        class="form-control" disabled>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.reference?.errors?.required">{{'errors.required'| translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="pourcentage">{{ 'labels.pourcentage' | translate }}</label>
+                                                <div class="col-md-9 input-btn-container"
+                                                    style="position: relative; display: flex; flex-wrap: wrap; align-items: stretch; width: 100%;max-height: 40px !important; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                                    <input type="number" formControlName="pourcentage" id="pourcentage"
+                                                        min="0" class="form-control ng-untouched ng-pristine ng-valid"
+                                                        style="position: relative; flex: 1 1 auto; width: 1%; margin-bottom: 0;max-height: 40px !important;text-align: right;" />
+                                                    <div class="input-group-append">
+                                                        <span class="pourcentage-signd"
+                                                            style=" border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                                            %
+                                                        </span>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <small class="text-danger"
+                                                            *ngIf="f?.pourcentage?.errors?.required">{{'errors.required'| translate }}</small>
+                                                        <small class="text-danger"
+                                                            *ngIf="f?.pourcentage?.errors?.min">{{'errors.pourcentageMinValue'| translate }}</small>
+                                                        <small class="text-danger"
+                                                            *ngIf="f?.pourcentage?.errors?.max">{{'errors.pourcentageMaxValue'| translate }}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- chantier -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="chantier">{{'labels.chantier' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" disabled [value]="devisInfos?.chantier?.nom"
+                                                        id="chantier" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- client -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="client">{{'labels.client' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" disabled
+                                                        [value]="devisInfos?.chantier?.client?.nom" id="client"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <!-- adresse Facturation -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="projectinput4">{{'labels.adresseFacturation' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" disabled
+                                                        [value]="adresseFacturation?.designation" id="client"
+                                                        class="form-control"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- date creation + date echeance -->
+                                    <div class="row" *ngIf="dateLang">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="projectinput3">{{ 'labels.dateCreation' | translate }}</label>
+                                                <div class="col-md-9">
+                                                    <p-calendar formControlName="dateCreation" [readonlyInput]="true"
+                                                        dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                                                        [inputStyle]="{'width':'100%'}" [locale]="dateLang"
+                                                        showButtonBar="true"></p-calendar>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.dateCreation?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="projectinput39">{{ 'labels.dateEcheance' | translate }}</label>
+                                                <div class="col-md-9">
+                                                    <p-calendar formControlName="dateEcheance" dateFormat="dd/mm/yy"
+                                                        [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        [locale]="dateLang" showButtonBar="true"></p-calendar>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.dateEcheance?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-1 label-control"
+                                                    for="projectinput4">{{'labels.objet' | translate}}</label>
+                                                <div class="col-md-11 textarea-single-ligne ">
+                                                    <textarea formControlName="object"
+                                                        placeholder="{{'labels.objet' | translate}}" id="projectinput4"
+                                                        class="form-control textarea-single-ligne"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4 class="form-section">
+                                    <i class="ft-shopping-cart"></i>
+                                    {{'labels.articles' | translate}}
+                                </h4>
+                                <table-article-situation [retenueGarantieValue]="devisInfos?.retenueGarantie"
+                                    [delaiGarantie]="devisInfos?.delaiGarantie" [devis]="devisInfos"
+                                    [pourcentage]="f?.pourcentage?.value" [load]="emitter" [userForAcompt]="true">
+                                </table-article-situation>
+
+                                <!-- Section d'autre -->
+                                <h4 class="form-section"><i
+                                        class="ft-message-circle"></i>{{'labels.autres' | translate}}</h4>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-12 label-control"
+                                                for="conditionRegelement">{{ 'labels.conditionRegelement' | translate }}</label>
+                                            <div class="col-md-12">
+                                                <angular-editor id="unique1" [config]="editorConfig"
+                                                    formControlName="conditionRegelement">
+                                                </angular-editor>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-12 label-control"
+                                                for="note">{{ 'labels.note' | translate }}</label>
+                                            <div class="col-md-12">
+                                                <angular-editor id="unique2" [config]="editorConfig"
+                                                    formControlName="note">
+                                                </angular-editor>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Button de validation facture -->
+<div class="row" style="margin-bottom: 1rem;">
+    <div class="col-md-12" style="zoom: 1;">
+        <div class="btn-group float-md-left" role="group">
+
+            <button type="button" [routerLink]="['/factures']" class="btn btn-warning mr-1">
+                <i class="ft-x"></i> {{'labels.cancel' | translate}}
+            </button>
+
+
+            <button type="submit" (click)="add(statutFacture.Encours)" class="btn btn-success">
+                <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+            </button>
+            <button type="submit" (click)="add(statutFacture.Cloture)" class="btn btn-secondary">
+                <i class="fa ft-check"></i> {{ 'labels.cloturer' | translate }}
+            </button>
+
+        </div>
+    </div>
+</div>
+<custom-loader [displayLoader]="processing"></custom-loader>

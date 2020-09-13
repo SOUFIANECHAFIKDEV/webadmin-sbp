@@ -1,0 +1,293 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown"
+    style="margin-top: 1rem;">
+
+    <!-- <ng-container *ngIf="devis?.devisExel == null">
+      <a *ngIf="devis" data-toggle="modal" data-target="#PdfView" class="btn btn-secondary btn-success"
+        (click)="generatePDFBase64(devis?.id)" style="color:white; margin-right: 1rem;" placement="bottom"
+        ngbTooltip="{{'labels.PdfView' | translate}}">
+        {{ 'labels.PdfView' | translate }}
+        <i class="ft-eye"></i>
+      </a>
+    </ng-container> -->
+    <ng-container *ngIf="devis?.devisExel == null">
+
+    </ng-container>
+
+    <button type="button" *ngIf="devis" class="btn btn-primary" (click)="navigateToEditComponenet()">
+      {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+    </button>
+    <span style="width:12px"></span>
+    <p-splitButton label="{{ 'labels.actions' | translate }}" [model]="items" styleClass="ui-button-primary">
+    </p-splitButton>
+
+  </div>
+</div>
+<div class="content-header row">
+  <div class="content-header-left col-12 mb-1">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title ">{{'showDevis.title' | translate}} {{ devis?.reference }} </h3>
+
+      </div>
+      <div>
+
+        <button type="button" class="btn btn-round dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" [ngClass]="{
+          'statut-EnAttente': devis?.status == statutDevis.EnAttente,
+          'statut-Accepte': devis?.status == statutDevis.Acceptee,
+          'statut-Annule': devis?.status == statutDevis.Annulee,
+          'statut-NonAccepte': devis?.status == statutDevis.NonAcceptee,
+          'statut-Facture': devis?.status == statutDevis.Facture
+        }">
+          {{ getLabelleByStatut(devis?.status) }}
+        </button>
+        <div class="dropdown-menu" x-placement="bottom-start"
+          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 41px, 0px);">
+          <p class="dropdown-item title">{{'labels.ChangementStatut' | translate}}</p>
+
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.Acceptee)"
+            *ngIf="devis?.status == statutDevis.EnAttente">
+            Accepter ce devis
+          </p>
+          <!-- <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.NonAcceptee)"
+          *ngIf="devis?.status != statutDevis.Annulee">Refuser ce devis
+        </p> -->
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.NonAcceptee)"
+            *ngIf="devis?.status == statutDevis.Acceptee">
+            Refuser ce devis
+          </p>
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.NonAcceptee)"
+            *ngIf="devis?.status == statutDevis.EnAttente">
+            Refuser ce devis
+          </p>
+
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.Annulee)"
+            *ngIf="devis?.status == statutDevis.NonAcceptee">
+            Annuler ce devis
+          </p>
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.Annulee)"
+            *ngIf="devis?.status == statutDevis.Acceptee">
+            Annuler ce devis
+          </p>
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.Annulee)"
+            *ngIf="devis?.status == statutDevis.EnAttente">
+            Annuler ce devis
+          </p>
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.EnAttente)"
+            *ngIf="devis?.status == statutDevis.NonAcceptee">
+            Retour au statut en attente
+          </p>
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.EnAttente)"
+            *ngIf="devis?.status == statutDevis.Acceptee">
+            Retour au statut en attente
+          </p>
+          <p class="dropdown-item" (click)="changeStatutDevis(statutDevis.EnAttente)"
+            *ngIf="devis?.status == statutDevis.Annulee">
+            Retour au statut en attente
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a (click)="navigateToDevisList()">{{'labels.devis' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'showDevis.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link " [class.active]="section == null" id="client-tab" placement="bottom"
+                ngbTooltip="{{ 'showDevis.information' | translate}}" data-toggle="pill" href="#client"
+                aria-expanded="false">{{'showDevis.information' | translate }}</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="section == 'factureAcompte'" id="factureSituation-tab"
+                placement="bottom" ngbTooltip="{{ 'showDevis.factureAcompte' | translate}}" data-toggle="pill"
+                href="#factureAcompte" aria-expanded="true">
+                {{ 'showDevis.factureAcompte' | translate }}</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="section == 'factureSituation'" id="factureSituation-tab"
+                placement="bottom" ngbTooltip="{{ 'showDevis.factureSituation' | translate}}" data-toggle="pill"
+                href="#factureSituation" aria-expanded="false">
+                {{ 'showDevis.factureSituation' | translate }}</a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" id="emailHistorique-tab" data-toggle="pill" href="#emailHistorique"
+                aria-expanded="false" placement="bottom" ngbTooltip="{{ 'showDevis.emailHistorique' | translate }}">
+                {{ 'showDevis.emailHistorique' | translate }} <span class="memo-badge"></span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" placement="bottom"
+                ngbTooltip="{{ 'showDevis.historique' | translate}}" data-toggle="pill" href="#historique"
+                aria-expanded="false">
+                {{ 'showDevis.historique' | translate }}</a>
+            </li>
+
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" [class.active]="section == null" class="tab-pane" id="client"
+              aria-labelledby="client-tab" aria-expanded="true">
+              <devis-informations [devis]="devis" [articles]="articles" [addType]="addType"
+                [articlesInfo]="articlesInfo" (ChangeStatus)="changeStatus($event)"
+                (ONChangeStatutDevis)="changeStatutDevis($event)"></devis-informations>
+            </div>
+
+            <div class="tab-pane" [class.active]="section == 'factureAcompte'" id="factureAcompte" role="tabpanel"
+              aria-labelledby="factureAcompte-tab">
+              <app-facture-acompte [devis]="devis"></app-facture-acompte>
+            </div>
+
+            <div class="tab-pane" [class.active]="section == 'factureSituation'" id="factureSituation" role="tabpanel"
+              aria-labelledby="factureSituation-tab">
+              <app-facture-situtaion [devis]="devis"></app-facture-situtaion>
+            </div>
+
+            <div class="tab-pane" id="emailHistorique" role="tabpanel" aria-labelledby="emailHistorique-tab">
+              <historique-emails [emails]="emails"></historique-emails>
+            </div>
+
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade text-left" id="sendByMail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel98"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h4 class="modal-title" id="myModalLabel98">
+            <i class="ft-file-minus"></i>
+            {{ 'labels.sendByMail' | translate }}
+          </h4>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <form [formGroup]="formSendEmail">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="to">{{ 'labels.to' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" id="to" class="form-control" formControlName="emailTo">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9 validationMsg"
+                      *ngIf="formSendEmail?.touched && formSendEmail?.controls?.emailTo?.errors?.required">
+                      {{ 'labels.emailRequired' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="objet">{{ 'labels.objet' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" id="objet" class="form-control" formControlName="object">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9 validationMsg"
+                      *ngIf="formSendEmail?.touched && formSendEmail?.controls?.object?.errors?.required">
+                      {{ 'labels.objectRequired' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="contents">{{ 'labels.contents' | translate }}</label>
+                    <div class="col-md-9">
+                      <textarea class="form-control" id="contents" formControlName="contents"
+                        style="width: 100%; border: 1px #ccd6e6 solid;padding: 1rem;min-height: 10rem;border-radius: 5px;"></textarea>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9 validationMsg"
+                      *ngIf="formSendEmail?.touched && formSendEmail?.controls?.contents?.errors?.required">
+                      {{ 'labels.contentsRequired' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn grey btn-secondary"
+            data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+          <button type="button" class="btn btn-success" (click)="envoyer()">{{ 'labels.send' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade text-left" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h4 class="modal-title" id="PdfView">
+            <i class="ft-file-minus"></i>
+            {{ 'labels.VisualiserPdf' | translate }}
+          </h4>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <div class="card-body download-Model">
+
+            <!-- <a class="btn btn-secondary" style="color:white;" (click)="generatePDF()" placement="bottom"
+              ngbTooltip="{{'labels.telecharger' | translate}}">
+              {{ 'labels.telecharger' | translate }} <i class="fa fa-download"></i>
+            </a> -->
+
+            <app-visualiser-pdf [base64]="base64"></app-visualiser-pdf>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn grey btn-secondary"
+            data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+          <button type="button" class="btn btn-success" (click)="generatePDF()">
+            {{ 'labels.telecharger' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <custom-loader [displayLoader]="processing"></custom-loader>

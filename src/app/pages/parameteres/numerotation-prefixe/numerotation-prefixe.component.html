@@ -1,0 +1,163 @@
+<div class="content-header row">
+    <div class="content-header-left col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{ 'numerotationPrefixe.title' | translate }} </h3>
+    </div>
+</div>
+<section id="multi-column">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="card box-shadow-0 border-primary">
+                <div class="card-header card-head-inverse bg-primary">
+                    <h4 class="card-title"> <i class="ft-clipboard"></i>
+                        {{ 'numerotationPrefixe.clientFournisseurTitle' | translate }}</h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <table class="table table-striped text-center">
+                            <tr *ngFor="let item of numPrefixClientFournisseur; let i=index" class="row">
+                                <td class="col-md-4">{{ item.name }}</td>
+                                <td class="col-md-4">{{ item.code }}</td>
+                                <td class="col-md-4">
+                                    <button type="button" class="btn btn-primary btn-md"
+                                        (click)="selectNumerotationtoUpdate(i, item.type)" placement="bottom"
+                                        ngbTooltip="{{ 'labels.modifier' | translate }} " data-toggle="modal"
+                                        data-target="#updateParamter"><i class="ft-edit"></i></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="multi-column">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="card box-shadow-0 border-primary">
+                <div class="card-header card-head-inverse bg-primary">
+                    <h4 class="card-title"> <i class="ft-clipboard"></i>
+                        {{ 'numerotationPrefixe.documentTitle' | translate }}</h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <table class="table table-striped text-center">
+                            <tr *ngFor="let item of numPrefixDocument; let i=index" class="row">
+                                <td class="col-md-4">{{ item.name }}</td>
+                                <td class="col-md-4">{{ item.code }}</td>
+                                <td class="col-md-4">
+                                    <button type="button" class="btn btn-primary btn-md"
+                                        (click)="selectNumerotationtoUpdate(i, item.type)" placement="bottom"
+                                        ngbTooltip="{{ 'labels.modifier' | translate }} " data-toggle="modal"
+                                        data-target="#updateParamter"><i class="ft-edit"></i></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<ng-container *ngIf="form">
+    <div class="modal fade text-left" id="updateParamter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel35">{{ modelName }}</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form [formGroup]="form" (ngSubmit)="update()">
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="form-group row">
+                                <label class="col-md-4 label-control" for="racine">{{'labels.racine' | translate}} :
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" formControlName="racine" id="racine" class="form-control"
+                                        placeholder="{{'labels.racine' | translate}}">
+                                    <div *ngIf="form.touched && form.invalid">
+                                        <small class="text-danger" *ngIf="form.hasError('required', 'racine')">
+                                            {{'errors.required'|translate}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row"
+                                *ngIf="numerotationSelected && numerotationSelected?.Type != typeNumerotation?.client && numerotationSelected?.Type != typeNumerotation?.fournisseur && numerotationSelected?.Type != typeNumerotation?.agent && numerotationSelected?.Type != typeNumerotation?.devis && numerotationSelected?.Type !=typeNumerotation?.fiche_intervention && numerotationSelected?.Type !=typeNumerotation?.facture && numerotationSelected?.Type !=typeNumerotation?.avoir && numerotationSelected?.Type !=typeNumerotation?.boncommande_fournisseur && numerotationSelected.Type != typeNumerotation?.fiche_interventionMaintenance">
+                                <label class="col-md-4 label-control"
+                                    for="formatDate">{{'labels.formatDate' | translate}} : </label>
+                                <div class="col-md-8">
+                                    <select class="form-control" formControlName="formatDate" id="formatDate">
+                                        <option [value]="formatDateParametrage?.PasDate">
+                                            {{'labels.pasDate' | translate}}</option>
+                                        <option [value]="formatDateParametrage?.Annee">{{'labels.annee' | translate}}
+                                        </option>
+                                        <option [value]="formatDateParametrage?.AnneeMois">
+                                            {{'labels.anneeMois' | translate}}</option>
+                                    </select>
+                                    <div *ngIf="form.touched && form.invalid">
+                                        <small class="text-danger" *ngIf="form.hasError('required', 'formatDate')">
+                                            {{'errors.required'|translate}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 label-control" for="compteur">{{'labels.compteur' | translate}} :
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="number" appInputRemoveDefaultZero formControlName="compteur"
+                                        id="compteur" class="form-control"
+                                        placeholder="{{'labels.compteur' | translate}}">
+                                    <div *ngIf="form.touched && form.invalid">
+                                        <small class="text-danger" *ngIf="form.hasError('required', 'compteur')">
+                                            {{'errors.required'|translate}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 label-control"
+                                    for="longeurCompteur">{{'labels.longeurCompteur' | translate}} :
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="number" appInputRemoveDefaultZero formControlName="longeurCompteur"
+                                        id="longeurCompteur" class="form-control"
+                                        placeholder="{{'labels.longeurCompteur' | translate}}">
+                                    <div *ngIf="form.touched && form.invalid">
+                                        <small class="text-danger" *ngIf="form.hasError('required', 'longeurCompteur')">
+                                            {{'errors.required'|translate}} </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 label-control"
+                                    for="GenerateExampleCode">{{'labels.showResult' | translate}} :
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" value="{{GenerateExampleCode()}}" id="GenerateExampleCode"
+                                        class="form-control" disabled>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn grey btn-light" data-dismiss="modal"
+                            [value]="'labels.close' | translate" placement="bottom"
+                            ngbTooltip="{{'labels.close' | translate}}">
+                        <input type="submit" class="btn btn-success btn-lg" [value]="'labels.edit' | translate"
+                            placement="bottom" ngbTooltip="{{'labels.edit' | translate}}" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>

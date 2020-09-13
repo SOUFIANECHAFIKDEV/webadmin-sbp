@@ -1,0 +1,501 @@
+<!-- Table des articles -->
+<div class="row">
+    <div class="col-sm-12">
+
+        <!-- les action -->
+        <div style="margin-bottom: 10px">
+            <div class="row">
+                <ng-container *ngIf="isIntervention">
+                    <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+                        <button type="button" data-backdrop="false" class="btn btn-info square btn-block"
+                            (click)="LoadListProduit()" data-toggle="modal" data-target="#selectProduits"
+                            placement="bottom" ngbTooltip="{{'labels.selectPrestations' | translate}}">
+                            <i class="ft-list"></i>
+                            {{ 'labels.selectPrestations' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+                        <button type="button" data-backdrop="false" class="btn btn-success square btn-block"
+                            (click)="reloadPrixParFournisseur();createProduitForm(article);lastUpdatedProduit = null;idLotUsedForAddProduit = null;"
+                            data-toggle="modal" data-target="#produitForm" placement="bottom" style="float: right;"
+                            ngbTooltip="{{'labels.addPrestations' | translate}}"> <i class="ft-add"></i>
+                            <i class="ft-plus"></i>
+                            {{ 'labels.addPrestations' | translate }}
+                        </button>
+                    </div>
+                </ng-container>
+
+                <!-- ---------------------------------------------------- -->
+                <ng-container *ngIf="!isIntervention">
+                    <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+
+                        <button type="button" data-backdrop="false" class="btn btn-info square btn-block"
+                            (click)="LoadListProduit()" data-toggle="modal" data-target="#selectProduits"
+                            placement="bottom" ngbTooltip="{{'labels.selectArticle' | translate}}">
+                            <i class="ft-list"></i>
+                            {{ 'labels.selectArticle' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+                        <button type="button" data-backdrop="false" class="btn btn-info square btn-block"
+                            (click)="LoadListLots()" data-toggle="modal" data-target="#selectLots" placement="bottom"
+                            ngbTooltip="{{'labels.selectLots' | translate}}">
+                            <i class="ft-list"></i>
+                            {{ 'labels.selectLots' | translate }}
+                        </button>
+                    </div>
+                    <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+                        <ng-container> <button type="button" data-backdrop="false"
+                                class="btn btn-success square btn-block"
+                                (click)="reloadPrixParFournisseur();createProduitForm(article);lastUpdatedProduit = null;idLotUsedForAddProduit = null;"
+                                data-toggle="modal" data-target="#produitForm" placement="bottom" style="float: right;"
+                                ngbTooltip="{{'labels.addProduit' | translate}}"> <i class="ft-add"></i>
+                                <i class="ft-plus"></i>
+                                {{ 'labels.addProduit' | translate }}
+                            </button>
+                        </ng-container>
+
+                    </div>
+                    <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+                        <button type="button" data-backdrop="false" class="btn btn-success square btn-block"
+                            data-toggle="modal" data-target="#addLot" placement="bottom" (click)="newLots=''"
+                            style="float: right;" ngbTooltip="{{'labels.addLot' | translate}}"> <i class="ft-add"></i>
+                            <i class="ft-plus"></i> {{ 'labels.addLot' | translate }}
+                        </button>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row" style="margin: 1rem 0;" *ngIf="!readOnly && showPrices">
+                <div class="col-md-3 offset-md-6 col-12 col-sm-9">
+                    <button type="button" data-backdrop="false" class="btn btn-danger square btn-block  btn-cancel"
+                        *ngIf="tvaGlobal != null" (click)="annulerTVAGlobal()"
+                        ngbTooltip=" {{'labels.cancel' | translate}} {{'labels.Tvaglobal' |translate}}">
+                        {{ 'labels.cancel' | translate}}<i class="ft-x"></i>
+                    </button>
+                </div>
+
+                <div class="col-md-3 col-12 col-sm-3" *ngIf="!readOnly && showPrices">
+                    <input type="number" id="projectinput4" class="form-control text-right" min="0"
+                        [(ngModel)]="tvaGlobal" appInputRemoveDefaultZero [ngModelOptions]="{standalone: true}"
+                        placeholder="{{ 'labels.Tvaglobal' | translate }}" [disabled]="readOnly">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-acrticles">
+                    <thead>
+                        <tr class="text-center">
+                            <th colspan="2" style="width: 15rem;">
+                                <i class="ft-chevron-right" *ngIf="AllCollapsesIsClosed"
+                                    (click)="setAllCollapsesClosed()" style="float: left;"></i>
+                                <i class="ft-chevron-down" *ngIf="!AllCollapsesIsClosed"
+                                    (click)="AllCollapsesIsClosed = true;collapseClosed = []" style="float: left;"></i>
+                                {{ 'labels.nom' | translate }}</th>
+                            <th>{{ 'labels.qte' | translate }}</th>
+                            <th *ngIf="showPrices">{{ 'labels.cout_materiel' | translate }}</th>
+                            <th *ngIf="showPrices">{{ 'labels.cout_horaire' | translate }}</th>
+                            <th *ngIf="showPrices">{{ 'labels.tva' | translate }}</th>
+                            <th *ngIf="showPrices">{{ 'labels.remise' | translate }}</th>
+                            <th *ngIf="showPrices">Total HT</th>
+                            <th *ngIf="showPrices">Total TTC</th>
+                            <th *ngIf="!readOnly">{{ 'labels.actions' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <ng-container *ngFor="let article of articles;let i= index">
+                            <ng-container *ngIf="article.type ==  articleType.produit">
+
+                                <tr>
+                                    <td colspan="2">{{article.data.nom}}</td>
+                                    <td>{{article?.qte}}</td>
+                                    <td class="display-price" *ngIf="showPrices">
+                                        {{article.data.cout_materiel | RoudingNumber | ShowCurrency}}
+                                    </td>
+                                    <td class="display-price" *ngIf="showPrices">
+                                        {{ cout_horaire(article.data.nomber_heure ,article.data.cout_vente) | RoudingNumber | ShowCurrency}}
+                                    </td>
+
+                                    <td *ngIf="tvaGlobal == null && showPrices">{{ article.data.tva | RoudingNumber}}
+                                    </td>
+                                    <td *ngIf="tvaGlobal != null && showPrices">{{ tvaGlobal | RoudingNumber}}</td>
+                                    <td *ngIf="showPrices"> {{ article.remise }} </td>
+                                    <td class="display-price" *ngIf="showPrices">
+                                        {{ TotalHt(article.data.prixHt,article.data.qte)   | RoudingNumber | ShowCurrency }}
+                                    </td>
+                                    <td class="display-price" *ngIf="tvaGlobal == null && showPrices">
+                                        {{ prixTtc(article.data.prixHt, article.data.qte, article.data.tva) | RoudingNumber | ShowCurrency}}
+                                    </td>
+                                    <td class="display-price" *ngIf="tvaGlobal != null && showPrices">
+                                        {{ prixTtc(article.data.prixHt, article.data.qte, tvaGlobal) | RoudingNumber | ShowCurrency}}
+                                    </td>
+                                    <td *ngIf="!readOnly">
+                                        <button type="button" data-toggle="modal" data-target="#produitForm"
+                                            class="btn btn-primary btn-md btn-actions"
+                                            (click)="reloadPrixParFournisseur();createProduitForm(article);lastUpdatedProduit = i;idLotUsedForAddProduit = null "
+                                            ngbTooltip="{{'labels.modifier' | translate}}">
+
+                                            <i class=" ft-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-md btn-actions"
+                                            (click)="removeArticle(i,null)"
+                                            ngbTooltip="{{'labels.supprimer' | translate}}">
+                                            <i class="ft-trash-2"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+                            <ng-container *ngIf="article.type ==  articleType.lot">
+                                <tr class="name-lot">
+                                    <td [attr.colspan]="showPrices ? 7:3" style="border-right: none;">
+
+                                        <div class="nomlot">
+
+                                            <i class="ft-chevron-right" *ngIf="checkCollapseClosed(article.data.id)"
+                                                (click)="setInCollapseClosed(i)" style="margin-right: 5rem;"></i>
+                                            <i class="ft-chevron-down" *ngIf="!checkCollapseClosed(article.data.id)"
+                                                (click)="setInCollapseClosed(i)" style="margin-right: 5rem;"></i>
+                                            {{article.data.nom}}
+
+                                        </div>
+
+
+                                    </td>
+                                    <td *ngIf="displaysGeneralCalculation" class="total-lot">Sous Total Ht :
+                                        {{CalculTotalHTLOT(article.data.lotProduits) | RoudingNumber | ShowCurrency}}
+                                    </td>
+                                    <td *ngIf="displaysGeneralCalculation" class="total-lot"> Sous Total TTC :
+                                        {{CalculTotalTtcLOT(article.data.lotProduits) | RoudingNumber | ShowCurrency }}
+                                    </td>
+
+                                    <td style="border-left: none;" *ngIf="!readOnly">
+                                        <button type="button" data-toggle="modal" data-target="#produitForm"
+                                            class="btn btn-primary btn-md btn-actions"
+                                            (click)="reloadPrixParFournisseur();idLotUsedForAddProduit = article?.data?.id;lastUpdatedProduit = null;createProduitForm(null)"
+                                            ngbTooltip="{{'labels.ajouter' | translate}}  {{'labels.article' | translate}}">
+                                            <i class="ft-plus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-md btn-actions"
+                                            (click)="removeArticle(i,null)"
+                                            ngbTooltip="{{'labels.supprimer' | translate}}  {{'labels.lot' | translate}}">
+                                            <i class="ft-trash-2"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <ng-container *ngIf="checkCollapseClosed(i)">
+                                    <tr *ngFor="let produit of article.data.lotProduits;let ii= index">
+                                        <td style="border:none;width: 4rem;"></td>
+                                        <td>{{ produit.idProduitNavigation.nom}}</td>
+                                        <td>{{ produit?.qte}}</td>
+                                        <td *ngIf="showPrices">
+                                            {{ produit.idProduitNavigation.cout_materiel | RoudingNumber | ShowCurrency}}
+                                        </td>
+                                        <td *ngIf="showPrices">
+                                            {{ cout_horaire(produit.idProduitNavigation.nomber_heure ,produit.idProduitNavigation.cout_vente) | RoudingNumber | ShowCurrency}}
+                                        </td>
+
+                                        <ng-container *ngIf="showPrices">
+                                            <td *ngIf="tvaGlobal == null">
+                                                {{ produit.idProduitNavigation.tva | RoudingNumber}} </td>
+                                            <td *ngIf="tvaGlobal != null ">{{ tvaGlobal| RoudingNumber}} </td>
+                                        </ng-container>
+
+                                        <td *ngIf="showPrices && showAdditionalInfos"> {{ produit?.remise }} </td>
+                                        <!-- <td>{{ produit.idProduitNavigation.prixHt}}</td> -->
+                                        <td *ngIf="showPrices">
+                                            {{ TotalHt(produit.idProduitNavigation.prixHt, produit?.qte)  | RoudingNumber | ShowCurrency}}
+                                        </td>
+                                        <td *ngIf="tvaGlobal == null && showPrices">
+                                            {{ prixTtc(produit.idProduitNavigation.prixHt, produit?.qte, produit.idProduitNavigation?.tva ) | RoudingNumber | ShowCurrency}}
+                                        </td>
+                                        <td *ngIf="tvaGlobal != null && showPrices">
+                                            {{ prixTtc(produit.idProduitNavigation.prixHt, produit?.qte,tvaGlobal ) | RoudingNumber | ShowCurrency}}
+                                        </td>
+                                        <td *ngIf="!readOnly">
+                                            <button type="button" data-toggle="modal" data-target="#produitForm"
+                                                class="btn btn-primary btn-md btn-actions"
+                                                (click)="reloadPrixParFournisseur();createProduitForm(article);lastUpdatedProduit = i;idLotUsedForAddProduit = null "
+                                                ngbTooltip="{{'labels.modifier' | translate}}  {{'labels.article' | translate}}">
+                                                <i class="ft-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-md btn-actions"
+                                                (click)="removeArticle(i,ii)"
+                                                ngbTooltip="{{'labels.supprimer' | translate}}  {{'labels.article' | translate}}">
+                                                <i class="ft-trash-2"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+
+                        <tr *ngIf="articles?.length == 0" class="text-center">
+                            <ng-container *ngIf="!isIntervention">
+                                <td colspan="10"> {{ 'labels.msgEmptyTable' | translate }} </td>
+                            </ng-container>
+                            <ng-container *ngIf="isIntervention">
+                                <td colspan="10"> {{ 'labels.msgEmptyTablePrestations' | translate }} </td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" *ngIf="displaysGeneralCalculation">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    TOTAL GENERAL HT :
+                                    <i class="ft-info" placement="bottom" ngbTooltip="Prorata {{prorata}}% inclus"></i>
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ clalcTotalGeneral() | RoudingNumber | ShowCurrency}}
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+
+
+                    <tr *ngIf="showAdditionalInfos">
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ 'labels.remiseGlobalHT' | translate}}
+                                </div>
+                                <div class="col-6 text-right">
+                                    <div style="float: right;" class="form-inline" *ngIf="!readOnly">
+                                        <input type="number" min="0" [(ngModel)]="remiseGloabl"
+                                            class="form-control text-right" appInputRemoveDefaultZero
+                                            [ngModelOptions]="{standalone: true}" [disabled]="readOnly" />
+                                        <select [(ngModel)]="typeRemiseGloabl" [ngModelOptions]="{standalone: true}"
+                                            class="form-control" [disabled]="readOnly">
+                                            <option value="€">€</option>
+                                            <option value="%">%</option>
+                                        </select>
+                                    </div>
+                                    <span *ngIf="readOnly">
+                                        {{ remiseGloabl }} {{ typeRemiseGloabl }}
+                                    </span>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+
+                    <tr *ngIf="remiseGloabl != 0 && showAdditionalInfos">
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    Nouveau TOTAL GENERAL HT (prorata {{prorata}}% inclus ):
+                                    <i class="ft-info" placement="bottom"
+                                        ngbTooltip="Total général HT - le remise global"></i>
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ clalcNouveauTotalGeneral() | RoudingNumber | ShowCurrency}}
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+
+                    <tr *ngIf="showAdditionalInfos">
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    Montant H.T :
+                                    <i class="ft-info" placement="bottom"
+                                        ngbTooltip="Total général HT - prorata inclus"></i>
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ clalcMontantHt() | RoudingNumber | ShowCurrency}}
+                                </div>
+                            </div>
+                        </th>
+
+                    </tr>
+                    <tr *ngIf="showAdditionalInfos">
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    Part Prorata <span *ngIf="readOnly">{{prorata}}</span> :
+                                    <input type="number" min="0" class="form-control text-right input-calc"
+                                        [(ngModel)]="prorata" appInputRemoveDefaultZero *ngIf="!readOnly" />
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ clalcPartProrata() | RoudingNumber | ShowCurrency}}
+                                </div>
+                            </div>
+                        </th>
+                        <!-- <td class="text-right"></td> -->
+                    </tr>
+                    <tr *ngFor="let T of groupTVA()">
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    TVA {{ T.tva | RoudingNumber }} % :
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ T.totalTVA | RoudingNumber }}
+                                </div>
+                            </div>
+
+                        </th>
+                    </tr>
+                    <tr *ngIf="showAdditionalInfos">
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    PARTICIPATION PUC <span *ngIf="readOnly">{{puc}} %</span>
+                                    <i class="ft-info" placement="bottom"
+                                        ngbTooltip="{{ puc }} % calculé sur H.T  ( Prorata non compris ) ( H.T - {{prorata}}%  * {{ puc/100 }} )"></i>
+                                    <input type="number" min="0" class="form-control text-right input-calc"
+                                        [(ngModel)]="puc" *ngIf="!readOnly" appInputRemoveDefaultZero />
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ calcParticipationPuc() | RoudingNumber | ShowCurrency }}
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-5 Retenue-garantie">Retenue de garantie
+                                    <!-- {{retenueGarantieValue}} % -->
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control text-right" appInputRemoveDefaultZero
+                                            [(ngModel)]="retenueGarantieValue" placeholder="retenueGarantie"
+                                            [disabled]="readOnly" *ngIf="retenueGarantie == 1" max="100" min="0">
+                                        <div class="input-group-prepend" *ngIf="retenueGarantie == 1">
+                                            <div class="input-group-text">%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <select style="min-height: 40px; min-width: 210px;" [(ngModel)]="delaiGarantie"
+                                            [disabled]="readOnly" *ngIf="retenueGarantie == 1">
+                                            <option [value]="null">{{ 'delai_garantie.question' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.TroisMois">
+                                                {{ 'delai_garantie.troisMois' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.SixMois">
+                                                {{ 'delai_garantie.sixMois' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.UnAns">
+                                                {{ 'delai_garantie.unAns' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.DeuxAns">
+                                                {{ 'delai_garantie.deuxAns' | translate }}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-1">
+                                    <ng-container *ngIf="!readOnly">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="retenueGarantie"
+                                                class="custom-control-input" id="projectinput3">
+                                            <label *ngIf="retenueGarantie == 1" class="custom-control-label"
+                                                for="projectinput3">Oui</label>
+                                            <label *ngIf="retenueGarantie == 0" class="custom-control-label"
+                                                for="projectinput3">Non</label>
+                                        </div>
+                                    </ng-container>
+                                </div>
+
+                                <div class="col-2 text-right" *ngIf="retenueGarantie == 1 && retenueGarantie ==true">
+                                    {{ clalcMontantHt() * (retenueGarantieValue/100) | RoudingNumber | ShowCurrency }}
+                                </div>
+                                <ng-container *ngIf="readOnly">
+                                    <div class="col-2 text-right" *ngIf="retenueGarantie == 0">
+                                        Non
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-6">
+                                    TOTAL GENERAL TTC
+                                    <i class="ft-info" placement="bottom"
+                                        ngbTooltip="Non comptabilisée déduction PUC effectuée  Phase DGD"></i>
+                                </div>
+                                <div class="col-6 text-right">
+                                    {{ calcTotalGeneralTtc() | RoudingNumber | ShowCurrency }}
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- 
+
+    <select-produit [reload]="emitter" (ONAdd)="addProduits($event)" [isAvoir]="isAvoir"
+        [isIntervention]=isIntervention></select-produit> -->
+    <form-produit [reload]="emitter" (OnSave)="insertNewProduit($event)" [isIntervention]=isIntervention>
+    </form-produit>
+
+
+
+    <!-- Liste des Lots -->
+    <!-- <div class="modal fade text-left" id="addLot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="myModalLabel9">
+
+                        <i class="fa fa-list"></i> {{ 'labels.newLots' | translate }}
+
+                    </h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-md-4 label-control"
+                                    for="prixTTC">{{ 'labels.nom' | translate }}</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="addLot" class="form-control currency-input"
+                                        placeholder="{{ 'labels.nom' | translate }}" [(ngModel)]="newLots"
+                                        [disabled]="readOnly">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn grey btn-light" data-dismiss="modal"
+                        ngbTooltip="{{ 'labels.cancel'| translate }}">{{ 'labels.cancel' |translate }}
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg" (click)="addNewLots();newLots=''"
+                        ngbTooltip="{{ 'labels.sauvegarder'| translate }}"
+                        [disabled]="newLots.length < 0">{{ 'labels.sauvegarder' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div> -->

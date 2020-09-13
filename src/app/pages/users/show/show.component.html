@@ -1,0 +1,50 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown" style="margin-top: 1rem;">
+    <a *ngIf="user" class="btn btn-primary" [routerLink]="['/utilisateurs/modifier',user.id]"  placement="bottom" ngbTooltip="{{'labels.modifier' | translate}} {{'labels.utilisateur' | translate}}">
+      {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+    </a>
+    <a *ngIf="!user" class="btn btn-primary">
+        {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+    </a>
+  </div>
+</div>
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{'show.title' | translate}} {{ user?.matricule }} </h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/utilisateurs']">{{'title' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'show.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pill-bordered">
+              <li class="nav-item">
+                <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client" aria-expanded="true"  placement="bottom" ngbTooltip="{{'show.information'|translate}}">{{'show.information'|translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique" aria-expanded="false" placement="bottom" ngbTooltip="{{'show.historique'|translate}}">{{'show.historique'|translate}}</a>
+              </li>
+            </ul>
+            <div class="tab-content px-1 pt-1">
+              <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+                <user-information [user]="user"></user-information>
+              </div>
+              <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab" aria-expanded="false">
+                <common-historiques [historique]="historique"></common-historiques>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>

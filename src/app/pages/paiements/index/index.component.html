@@ -1,0 +1,136 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{'list.title' | translate}}</h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+      <a class="btn btn-primary text-white" data-toggle="modal" data-target="#ajouterPaiement" placement="bottom"
+        [container]="'body'" ngbTooltip="{{'labels.paiementGroupe' | translate}}">
+        <i class="ft-credit-card"></i> {{'labels.paiementGroupe' | translate}}
+      </a>
+      <a class="btn btn-secondary text-white" data-toggle="modal" data-target="#mouvementCompte" placement="bottom"
+        [container]="'body'" ngbTooltip="{{'labels.mouvementCompte' | translate}}">
+        <i class="ft-edit"></i>
+        {{'labels.mouvementCompte' | translate}}
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="card offset-md-9 col-md-3">
+  <div class="card-body">
+    <div class="media-body media-right text-right">
+      <h3>{{ totalPeriode | RoudingNumber | ShowCurrency}}</h3>
+      <span class="text-muted">{{ 'labels.soldeCourant' | translate }}</span>
+    </div>
+  </div>
+</div>
+
+
+
+<section id="multi-column" *ngIf="paiementTableColumns">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-content collapse show">
+          <div class="card-body init-card-body card-dashboard">
+            <recherche-avancee>
+              <div class="recherche-avancee-body">
+                <div class="ui-g ui-fluid" *ngIf="dateLang">
+                  <div class="ui-g-6 ui-md-4">
+                    <h6 style="font-weight: bold">{{ 'labels.dateMinimale' | translate }}</h6>
+                    <p-calendar [(ngModel)]="dateMinimal" [inputStyle]="{'height':'33px'}" [locale]="dateLang"
+                      showButtonBar="true" dateFormat="dd/mm/yy" showIcon="true" (onSelect)="changeDateMinimal();"
+                      (onInput)="changeDateMinimal()">
+                    </p-calendar>
+                  </div>
+                  <div class="ui-g-6 ui-md-4">
+                    <h6 style="font-weight: bold">{{ 'labels.dateMaximale' | translate }}</h6>
+                    <p-calendar [(ngModel)]="dateMaximal" [inputStyle]="{'height':'33px'}" [locale]="dateLang"
+                      showButtonBar="true" dateFormat="dd/mm/yy" showIcon="true" (onSelect)="changeDateMaximal()"
+                      (onInput)="changeDateMaximal()">
+                    </p-calendar>
+                  </div>
+                  <div class="ui-g-6 ui-md-4">
+                    <h6 style="font-weight: bold">{{'labels.compteAfficher' | translate }}</h6>
+                    <ng-select [hideSelected]="true" bindLabel="name" (click)="GetCompte('')"
+                      notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="idCompte" (change)="rerender()">
+                      <ng-option *ngFor="let item of comptes" [value]="item?.id">{{ item?.nom }}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+              </div>
+            </recherche-avancee>
+
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered"
+              style="width:100%" id="paiementTable">
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of paiementTableColumns;let index = index">
+                    <th *ngIf="paiementTableColumns.length-1 != index"> {{column}}</th>
+                  </ng-container>
+                  <th class="actions">
+                    {{paiementTableColumns[paiementTableColumns.length-1]}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngIf="paiments?.list?.length > 0">
+                <tr *ngFor="let paiement of paiments?.list; let i =index" (dblclick)="doubleClick(paiement?.id)">
+                  <td [hidden]="checkedColumns[0]">
+                    <i class="ft-lock" style="font-weight: 600;"
+                      *ngIf="paiement?.comptabilise == statutComptabilise.Oui"></i>
+                    {{ paiement?.description }}
+                  </td>
+
+                  <td [hidden]="checkedColumns[1]">{{ paiement?.parametrageCompte?.nom }}</td>
+
+                  <td [hidden]="checkedColumns[2]" *ngIf="paiement.type == typePaiement.PAYER">
+                    {{ 'labels.paiement' | translate }}</td>
+                  <td [hidden]="checkedColumns[2]" *ngIf="paiement.type == typePaiement.PAYER_GROUPE">
+                    {{ 'labels.paiementGroupe' | translate }}</td>
+                  <td [hidden]="checkedColumns[2]" *ngIf="paiement.type == typePaiement.VIREMENT_DEPUIS">
+                    {{ 'labels.virement' | translate }}</td>
+                  <td [hidden]="checkedColumns[2]" *ngIf="paiement.type == typePaiement.VIREMENT_A">
+                    {{ 'labels.recevoir' | translate }}</td>
+                  <td [hidden]="checkedColumns[2]" *ngIf="paiement.type == typePaiement.PAR_AVOIR">
+                    {{ 'labels.parAvoir' | translate }}</td>
+
+                  <td [hidden]="checkedColumns[3]">{{ paiement?.datePaiement | date : 'dd/MM/yyyy' }}</td>
+                  <td [hidden]="checkedColumns[4]" *ngIf="paiement?.idDepense!=null"><span
+                      class="display-price text-red">{{ paiement?.montant | RoudingNumber | ShowCurrency }}</span></td>
+                  <td [hidden]="checkedColumns[4]" *ngIf="paiement?.idDepense==null"><span
+                      class="display-price text-green">{{ paiement?.montant | RoudingNumber | ShowCurrency }}</span>
+                  </td>
+
+                  <td class="actions" [hidden]="checkedColumns[5]">
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-primary btn-md btn-actions" placement="bottom"
+                        [container]="'body'" ngbTooltip="{{'toolip.detail' | translate}}"
+                        [routerLink]="['/paiements/detail',paiement?.id]"><i class="ft-eye"></i></button>
+                      <ng-container *ngIf="paiement?.comptabilise != statutComptabilise.Oui">
+                        <button type="button" class="btn btn-danger btn-md btn-actions" placement="bottom"
+                          [container]="'body'" ngbTooltip="{{'toolip.delete' | translate}}" (click)="delete(i)"><i
+                            class="ft-trash-2"></i></button>
+                      </ng-container>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tbody *ngIf="paiments?.list?.length == 0">
+                <tr>
+                  <td colspan="6" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+                </tr>
+              <tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<paiement-groupe (refresh)="rerender()"></paiement-groupe>
+
+<mouvement-compte (refresh)="rerender()"></mouvement-compte>

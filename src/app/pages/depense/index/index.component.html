@@ -1,0 +1,174 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{'labels.listDepense' | translate}}</h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+      <a class="btn btn-success text-white" data-toggle="modal" data-target="#choixChantier" placement="bottom"
+        (click)="getChantiers(false)" (click)="getFournisseurs(false)"
+        ngbTooltip=" {{ 'labels.depenseGroupee' | translate }}">
+        <i class="ft-server"></i> {{ 'labels.depenseGroupee' | translate }}
+      </a>
+      <span style="width:12px"></span>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#xSmall"
+        [routerLink]="['/depense/ajouter']" placement="bottom"
+        ngbTooltip="{{ 'labels.ajouter' | translate }} {{ 'labels.depense' | translate }}">
+        {{'labels.ajouter' | translate}} <i class="ft-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toutes les depenses -->
+<div class="tab-pane" id="toutesDepenses" aria-labelledby="aboutIcon11-tab1" role="tab" aria-selected="false">
+
+  <!-- Data table Depense -->
+  <section id="multi-column">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-content collapse show">
+            <div class="card-body init-card-body card-dashboard">
+              <recherche-avancee>
+                <div class="recherche-avancee-body">
+                  <div class="ui-g ui-fluid" *ngIf="dateLang">
+                    <div class="ui-g-6 ui-md-4">
+                      <h6 style="font-weight: bold">{{'labels.statut' | translate }}</h6>
+                      <ng-select [hideSelected]="true" bindLabel="name" placeholder="{{'labels.statut' | translate }}"
+                        notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="statut" (change)="rerender()">
+                        <ng-option *ngFor="let item of listStatus" [value]="item?.value">
+                          {{ item?.name }}</ng-option>
+                      </ng-select>
+                    </div>
+                    <div class="ui-g-6 ui-md-4">
+                      <h6 style="font-weight: bold">{{'list.chantier' | translate }}</h6>
+                      <ng-select [hideSelected]="true" bindLabel="name" placeholder="{{'list.chantier' | translate }}"
+                        notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="idChantier"
+                        (change)="rerender()" #selecteChantier (click)="getChantiers(true)">
+                        <ng-option *ngFor="let item of listChantiers" [value]="item?.id">
+                          {{ item?.nom }}</ng-option>
+                      </ng-select>
+                    </div>
+
+                    <div class="ui-g-6 ui-md-4">
+                      <h6 style="font-weight: bold">{{'list.fournisseur' | translate }}</h6>
+                      <ng-select [hideSelected]="true" bindLabel="name"
+                        placeholder="{{'list.fournisseur' | translate }}"
+                        notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="idFournisseur"
+                        (change)="rerender()" (click)="getFournisseurs(true)" #selecteFournisseurs>
+                        <ng-option *ngFor="let item of listFournisseurs" [value]="item?.id">
+                          {{ item?.nom }}</ng-option>
+                      </ng-select>
+                    </div>
+
+                  </div>
+                </div>
+              </recherche-avancee>
+              <show-hide-table-columns [columns]="tableColumns" [tableName]="'depenseTable'"
+                [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate" [showAll]=" 'list.montreTout'  | translate"
+                [showNone]=" 'list.montrerAucun'  | translate" [checkedColumns]="checkedColumns"
+                (selectColumn)="SetCheckedColmuns($event)">
+              </show-hide-table-columns>
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="table table-striped table-bordered" style="width:100%" id="depenseTable">
+
+                <thead>
+                  <tr>
+                    <ng-container *ngFor="let column of tableColumns;let index = index">
+                      <th> <span [innerHTML]="column"></span> </th>
+                    </ng-container>
+                  </tr>
+                </thead>
+                <tbody *ngIf="Depenses?.list?.length > 0">
+                  <tr *ngFor="let depense of Depenses?.list ;let i = index" (dblclick)="doubleClick(depense)">
+
+
+                    <td [hidden]="checkedColumns[0]"> <i class="ft-lock" style="font-weight: 600;"
+                        *ngIf="depense?.comptabilise == statutComptabilise.Oui"></i> {{ depense?.reference }}</td>
+
+                    <!-- status de depense-->
+                    <td *ngIf="depense?.status == statutDepense.Brouillon" [hidden]="checkedColumns[1]">
+                      <span class="badge badge-default badge-brouillon">{{'labels.brouillon' | translate}}</span>
+                    </td>
+                    <td *ngIf="depense?.status == statutDepense.Encours" [hidden]="checkedColumns[1]">
+                      <span class="badge badge-default badge-planifiee">{{'labels.encours' | translate}}</span>
+                    </td>
+                    <td *ngIf="depense?.status == statutDepense.Cloture" [hidden]="checkedColumns[1]">
+                      <span class="badge badge-default badge-success">{{'labels.cloturee' | translate}}</span>
+                    </td>
+                    <td *ngIf="depense?.status == statutDepense.Enretard" [hidden]="checkedColumns[1]">
+                      <span class="badge badge-default badge-enretard">{{'labels.enretard' | translate}}</span>
+                    </td>
+                    <td *ngIf="depense?.status == statutDepense.Annule" [hidden]="checkedColumns[1]">
+                      <span class="badge badge-default badge-annuler">{{'labels.annulee' | translate}}</span>
+                    </td>
+
+                    <td [hidden]="checkedColumns[2]">
+                      {{ depense?.dateCreation | date: 'dd/MM/yyyy' }}
+                    </td>
+
+                    <td [hidden]="checkedColumns[3]">
+                      {{ depense?.dateExpiration | date: 'dd/MM/yyyy' }}
+                    </td>
+
+
+
+                    <td [hidden]="checkedColumns[4]">
+                      {{ depense?.chantier?.nom }}</td>
+                    <td [hidden]="checkedColumns[5]">
+                      {{ depense?.fournisseur?.nom }}</td>
+
+                    <td [hidden]="checkedColumns[6]">{{ depense?.total | RoudingNumber }} €</td>
+                    <td *ngIf="depense?.categorie == categorieDepense.Achat" [hidden]="checkedColumns[7]">
+                      <span>{{'labels.achat' | translate}}</span>
+                    </td>
+                    <td *ngIf="depense?.categorie == categorieDepense.SousTraitant" [hidden]="checkedColumns[7]">
+                      <span>{{'labels.sousTraitant' | translate}}</span>
+                    </td>
+
+                    <td class="actions" [hidden]="checkedColumns[8]">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary btn-md btn-actions" placement="bottom"
+                          ngbTooltip="{{'labels.voirDetails' | translate}}"
+                          [routerLink]="['/depense/detail',depense?.id]"><i class="ft-eye"></i></button>
+
+
+
+                        <button type="button" class="btn btn-warning btn-md btn-actions"
+                          *ngIf="depense?.status != statutDepense.Cloture"
+                          [routerLink]="['/depense/modifier',depense?.id]" placement="bottom"
+                          ngbTooltip="{{'labels.modifier' | translate}}"><i class="ft-edit"></i></button>
+
+                        <button type="button" class="btn btn-danger btn-md btn-actions"
+                          *ngIf="depense?.status != statutDepense.Cloture" placement="bottom"
+                          ngbTooltip="{{'labels.supprimer' | translate}}" (click)="delete(depense?.id)"><i
+                            class="ft-trash-2"></i></button>
+
+                      </div>
+                    </td>
+
+
+
+                  </tr>
+                </tbody>
+
+                <tbody *ngIf="Depenses?.list?.length == 0">
+                  <tr>
+                    <td colspan="14" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+
+                  </tr>
+                <tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<app-depense-groupe-bcf [chantiers]="listChantiers" [fournisseurs]="listFournisseurs"></app-depense-groupe-bcf>
+<!-- <custom-loader [displayLoader]="processing"></custom-loader> -->

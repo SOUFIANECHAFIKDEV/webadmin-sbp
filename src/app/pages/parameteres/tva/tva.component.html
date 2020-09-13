@@ -1,0 +1,39 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{ 'parametrageTva.title' | translate }} </h3>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group">
+            <button (click)="update()" type="submit" class="btn btn-success" placement="bottom"
+                ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'parametrageTva.tvaDefaut' | translate }}">
+                <i class="fa fa-check-square-o"></i> {{ 'labels.modifier' | translate }}
+            </button>
+        </div>
+    </div>
+</div><br>
+
+<form class="form form-horizontal" [formGroup]="form">
+    <div class="card collapse-icon accordion-icon-rotate">
+        <div class="card-content">
+            <div class="card-body">
+
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-md-2 label-control"
+                            for="tvaDefaut">{{ 'parametrageTva.tvaDefaut' | translate }}</label>
+                        <div class="col-md-4">
+                            <input type="number" id="tvaDefaut" class="form-control" formControlName="tvaDefaut"
+                                placeholder="{{ 'parametrageTva.tvaDefaut' | translate }}">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+    <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div>

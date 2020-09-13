@@ -1,0 +1,160 @@
+.statut-EnEtude {
+  background-color: #ffa87d !important;
+  color: #fff;
+}
+
+.statut-Accepte {
+  background-color: #16d39a !important;
+  color: #fff;
+}
+
+.statut-Termine {
+  background-color: #2dcee3 !important;
+  color: #fff;
+}
+
+.statut-NonAccepte {
+  background-color: #ff7588 !important;
+  color: #fff;
+  border-radius: 0rem !important;
+}
+
+.btn-enEtude {
+  background-color: #ffa87d !important;
+  color: #fff;
+  border-color: #ffa87d !important;
+  border-radius: 0rem !important;
+}
+.btn-accepte {
+  background-color: #16d39a !important;
+  color: #fff;
+  border-color: #16d39a !important;
+  border-radius: 0rem !important;
+}
+.btn-termine {
+  background-color: #2dcee3 !important;
+  color: #fff;
+  border-color: #2dcee3 !important;
+  border-radius: 0rem !important;
+}
+.btn-nonAccepte {
+  background-color: #ff7588 !important;
+  color: #fff;
+  border-color: #ff7588 !important;
+  border-radius: 0rem !important;
+}
+p.dropdown-item {
+  margin: 0;
+}
+
+.custom-loader {
+  background-color: #065cb3 !important;
+  color: #fff !important;
+  width: 25em !important;
+  padding: 3rem 0rem !important;
+  opacity: 0.95 !important;
+  text-align: center;
+  position: absolute;
+  left: 45%;
+  z-index: 1050;
+  bottom: 30em;
+}
+
+.custom-loader-container {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (min-width: 1190px) {
+  .btn-statut-select {
+    display: none;
+  }
+  .btn-group-select {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 1190px) {
+  .btn-statut-select {
+    display: block;
+  }
+
+  .btn-group-select {
+    display: none;
+  }
+}
+
+button.btn.btn-primary {
+  max-height: 40px;
+}
+
+.btn-nonAccepte {
+  border-radius: 5px 0px 0px 5px !important;
+}
+
+.btn-enEtude {
+  border-radius: 0 !important;
+}
+
+.btn-termine {
+  border-radius: 0 5px 5px 0 !important;
+}
+
+.statut-Annulee {
+  background-color: #fe0000 !important;
+  color: #eceff1;
+}
+
+.statut-Realise {
+  background-color: #2ecc71 !important;
+  color: #eceff1;
+}
+
+.statut-Planifiee {
+  background-color: #00d2d3 !important;
+  color: #eceff1;
+}
+
+.statut-Brouillon {
+  background-color: #ffa87d !important;
+  color: #eceff1;
+}
+
+.statut-Facturee {
+  background-color: #3498db !important;
+  color: #eceff1;
+}
+
+button.btn-round {
+  padding: 5px 10px 5px 10px;
+  //position: relative;
+
+  margin-left: 5px;
+}
+
+
+.dropdown-menu {
+  padding-top: 0;
+}
+
+p.dropdown-item {
+  cursor: pointer;
+  text-transform: none;
+}
+
+p.dropdown-item.title {
+  padding: 10px 5px 5px 5px !important;
+  background: #f5f5f5;
+  color: #000000;
+  margin-bottom: 5px;
+  font-size: 10px;
+  text-align: center;
+  border-bottom: 1px #d9d9d9 solid;
+  cursor: help;
+}

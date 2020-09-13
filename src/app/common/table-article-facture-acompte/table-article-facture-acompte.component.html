@@ -1,0 +1,177 @@
+<div class="container-fuild">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-bordered table-acrticles">
+          <thead>
+            <tr class="text-center">
+
+
+              <th>{{ 'labels.description' | translate }}</th>
+              <th>{{ 'labels.qte' | translate }}</th>
+              <th>{{ 'labels.prixHT' | translate }}</th>
+              <th>{{ 'labels.prixTTC' | translate }}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+
+              <ng-container *ngFor="let article of articles">
+                <!-- <td>{{1}}</td> -->
+                <td>{{article?.data.description}}</td>
+                <td>{{article?.qte}}</td>
+                <td>{{article?.data.prixHt | RoudingNumber | ShowCurrency}}</td>
+                <td>{{article?.data.totalTTC | RoudingNumber | ShowCurrency}}</td>
+              </ng-container>
+            </tr>
+
+            <tr *ngIf="articles?.length == 0" class="text-center">
+              <td colspan="10"> {{ 'labels.msgEmptyTable' | translate }} </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-bordered">
+          <tr>
+            <th>TOTAL GENERAL HT :
+              <i class="ft-info" placement="bottom" ngbTooltip="Prorata {{prorata}}% inclus"></i>
+            </th>
+            <td class="text-right">{{ clalcTotalGeneral() | RoudingNumber | ShowCurrency}}</td>
+
+          </tr>
+          <tr>
+            <th>
+              Montant H.T :
+              <i class="ft-info" placement="bottom" ngbTooltip="Total général HT - prorata inclus"></i>
+            </th>
+            <td class="text-right">{{ clalcMontantHt() | RoudingNumber | ShowCurrency}}</td>
+
+          </tr>
+          <tr>
+            <th>Part Prorata <span *ngIf="readOnly">{{prorata}}</span> :
+              <input type="number" min="0" class="form-control text-right input-calc" [(ngModel)]="prorata"
+                appInputRemoveDefaultZero *ngIf="!readOnly" />
+            </th>
+            <td class="text-right">
+              {{ clalcPartProrata() | RoudingNumber | ShowCurrency}}
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let T of groupTVA()">
+            <th>TVA {{ T.tva | RoudingNumber }} % :
+            </th>
+            <td class="text-right">
+              {{ T.totalTVA | RoudingNumber }}
+            </td>
+          </tr>
+          <tr>
+            <th> PARTICIPATION PUC <span *ngIf="readOnly">{{puc}} %</span>
+              <i class="ft-info" placement="bottom"
+                ngbTooltip="{{ puc }} % calculé sur H.T  ( Prorata non compris ) ( H.T - {{prorata}}%  * {{ puc/100 }} )"></i>
+              <input type="number" min="0" class="form-control text-right input-calc" [(ngModel)]="puc"
+                *ngIf="!readOnly" appInputRemoveDefaultZero />
+            </th>
+            <td class="text-right">
+              {{ calcParticipationPuc() | RoudingNumber | ShowCurrency }}
+
+            </td>
+          </tr>
+          <!-- <tr>
+
+            <td class="text-right">
+              <div class="row">
+                <div class="col-6 Retenue-garantie">
+                  Retenue de garantie {{ retenueGarantie }} %
+                </div>
+                <div class="col-6">
+                  <div class="custom-control custom-checkbox" *ngIf="!readOnly">
+                    <input type="checkbox" [(ngModel)]="retenueGarantie" class="custom-control-input"
+                      id="projectinput3">
+                    <label *ngIf="retenueGarantie == 1" class="custom-control-label" for="projectinput3">Oui</label>
+                    <label *ngIf="retenueGarantie == 0" class="custom-control-label" for="projectinput3">Non</label>
+                  </div>
+                  <ng-container *ngIf="readOnly">
+                    <label *ngIf="retenueGarantie == 1" for="projectinput3">Oui</label>
+                    <label *ngIf="retenueGarantie == 0" for="projectinput3">Non</label>
+                  </ng-container>
+                </div>
+              </div>
+            </td>
+          </tr> -->
+          <tr>
+            <th>
+              <div class="row">
+                <div class="col-5 Retenue-garantie">Retenue de garantie
+                  <!-- {{retenueGarantieValue}} % -->
+                </div>
+
+                <div class="col-2">
+                  <div class="input-group">
+                    <input type="number" class="form-control text-right" appInputRemoveDefaultZero
+                      [(ngModel)]="retenueGarantieValue" placeholder="retenueGarantie" [disabled]="readOnly"
+                      *ngIf="retenueGarantie == 1" max="100" min="0">
+                    <div class="input-group-prepend" *ngIf="retenueGarantie == 1">
+                      <div class="input-group-text">%</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="form-group">
+                    <select style="min-height: 40px; min-width: 210px;" [(ngModel)]="delaiGarantie"
+                      [disabled]="readOnly" *ngIf="retenueGarantie == 1">
+                      <option [value]="null">{{ 'delai_garantie.question' | translate }}</option>
+                      <option [value]="delaiGarantiesEnum.TroisMois">
+                        {{ 'delai_garantie.troisMois' | translate }}</option>
+                      <option [value]="delaiGarantiesEnum.SixMois">
+                        {{ 'delai_garantie.sixMois' | translate }}</option>
+                      <option [value]="delaiGarantiesEnum.UnAns">
+                        {{ 'delai_garantie.unAns' | translate }}</option>
+                      <option [value]="delaiGarantiesEnum.DeuxAns">
+                        {{ 'delai_garantie.deuxAns' | translate }}</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="col-1">
+                  <ng-container *ngIf="!readOnly">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" [(ngModel)]="retenueGarantie" class="custom-control-input"
+                        id="projectinput3">
+                      <label *ngIf="retenueGarantie == 1" class="custom-control-label" for="projectinput3">Oui</label>
+                      <label *ngIf="retenueGarantie == 0" class="custom-control-label" for="projectinput3">Non</label>
+                    </div>
+                  </ng-container>
+                </div>
+
+                <ng-container *ngIf="readOnly">
+                  <div class="col-2 text-right" *ngIf="retenueGarantie == 0">
+                    Non
+                  </div>
+                </ng-container>
+
+              </div>
+            </th>
+            <td>
+              <div class="text-right" *ngIf="retenueGarantie == 1">
+                {{ clalcMontantHt()  * (retenueGarantieValue/100) | RoudingNumber | ShowCurrency }}
+              </div>
+            </td>
+
+          </tr>
+          <tr>
+            <th>TOTAL GENERAL TTC
+              <i class="ft-info" placement="bottom"
+                ngbTooltip="Non comptabilisée déduction PUC effectuée  Phase DGD"></i>
+            </th>
+            <td class="text-right">{{ calcTotalGeneralTtc() | RoudingNumber | ShowCurrency }}</td>
+
+          </tr>
+
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

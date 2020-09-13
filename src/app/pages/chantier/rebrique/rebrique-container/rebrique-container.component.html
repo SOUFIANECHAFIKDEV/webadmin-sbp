@@ -1,0 +1,46 @@
+<div class="content-header-left col-md-6 col-12 mb-2" style="z-index: 1;">
+    <h3 class="content-header-title mb-0">{{ 'labels.chantier' | translate }}</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <!-- <li class="breadcrumb-item" *ngIf="chantiers != null"> -->
+                <li class="breadcrumb-item">
+
+                    <a (click)="navigateToListChantiers()">
+                        {{'title' | translate}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a (click)="navigateToChantier()">
+                        {{ idChantier  | GetNameOfChantier}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">
+                    {{moduleNameFromTransaltion}}
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="idChantier != null">
+    <ng-container [ngSwitch]="moduleName">
+        <ng-container *ngSwitchCase="'devis'">
+            <app-devis-index [idChantier]="idChantier" [CallFromOutside]="true"></app-devis-index>
+        </ng-container>
+        <ng-container *ngSwitchCase="'facturation'">
+            <app-facture-index [idChantier]="idChantier" [CallFromOutside]="true"></app-facture-index>
+        </ng-container>
+        <ng-container *ngSwitchCase="'commandes_devis'">
+            <app-boncommane-index [idChantier]="idChantier" [CallFromOutside]="true"></app-boncommane-index>
+        </ng-container>
+
+
+        <!-- <ng-container *ngSwitchDefault>
+            OtherWaseer
+        </ng-container> -->
+    </ng-container>
+</div>
+
+
+<app-rebrique-document></app-rebrique-document>

@@ -1,0 +1,1106 @@
+{
+    "title": "chantiers",
+    "errors": {
+        "unique": "Cette valeur est déjà utilisée",
+        "required": "Ce champs est requis",
+        "minLength": "Ce champs doit être au moins de {{number}} caractères",
+        "pattern": "Ce champs est invalide",
+        "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider",
+        "fillAlldevis": "Veuillez corriger les erreurs indiquées sous les champs avant de valider et ajouter au moins un article",
+        "CheckUniqueName": "Cette valeur est déjà utilisée",
+        "server": "Serveur",
+        "articleRequired": "S'il vous plaît sélectionner au moins un article",
+        "fournisseurRequired": "s'il vous plaît sélectionner un fournisseur",
+        "adresseRequired": "s'il vous plaît sélectionner une adresse",
+        "adresseDefaultRequired": "s'il vous plaît sélectionner une adresse par défaut",
+        "fichierexel": "seulement le fichier de type excel est acceptable",
+        "fichierAcceptable": "Fichier non acceptable",
+        "fillAllPaiement": "Veuillez corriger les erreurs indiquées sous les champs avant de valider",
+        "invalid": "Montant invalide",
+        "serveur": "Erreur du serveur",
+        "factureSituationTotalHt": "S'il vous plaît augmenter le pourcentage du situation"
+    },
+    "labels": {
+        "id": "Id",
+        "prixHT": "Prix HT",
+        "nom": "Nom",
+        "description": "Description",
+        "commentaire": "Commentaire",
+        "statut": "Statut",
+        "date_creation": "Date du création",
+        "action": "Action",
+        "reference": "Référence",
+        "nouveau": "Nouveau",
+        "add": "Ajouter",
+        "addChantier": "Ajouter",
+        "ajouter": "Ajouter",
+        "modifier": "Modifier",
+        "supprimer": "Supprimer",
+        "afficher": "Afficher",
+        "designation": "Désignation",
+        "adresse": " Adresse",
+        "complementAdresse": "Complement Adresse",
+        "codePostal": "codePostal",
+        "ville": "ville",
+        "Prix": "Prix de vente",
+        "btnCancel": "Annuler",
+        "btnSave": "Enregistrer",
+        "AccepterChantier": "Accepter le chantier",
+        "chantier": "Chantier",
+        "TerminerChantier": "Terminer le chantier",
+        "retourAuEnEtude": "En cours d'étude",
+        "NoAccepterChantier": "Refuser le chantier",
+        "search": "Chercher par nom",
+        "noFoundItemclient": "Aucun client n'est trouvé",
+        "noFoundItem": "Aucun élément trouvé",
+        "utilisateur": "Utilisateur",
+        "date": "Date",
+        "ChangementStatut": "Changement du statut",
+        "modification": "Modification",
+        "Attribute": "Attribut",
+        "After": "Valeur après modification",
+        "Before": "Valeur avant modification",
+        "Detailshistorique": "Détails d'historique",
+        "adressetravaux": "Adresse Travaux",
+        "client": "Client",
+        "infoChantier": "Information Chantier",
+        "adresses": "Adresses",
+        "addadresse": "Ajouter Adresse",
+        "addAddress": "Ajouter un site",
+        "close": "Fermer",
+        "server": "Serveur",
+        "documentations": "Documentations",
+        "loadingRecords": "Chargement en cours...",
+        "titre": "titre",
+        "lastupdate": "dernière modifications",
+        "document": "Document",
+        "type": "Type",
+        "departement": "Département",
+        "listdocumentations": "Liste Documentations",
+        "codeclient": " Code Client",
+        "infoDevis": "Information Devis",
+        "adresseIntervention": "Adresse d'intervention",
+        "qte": "Qté",
+        "cout_materiel": "Coût du matériel (€)",
+        "cout_horaire": "Coût horaire (€)",
+        "tvaIntraCommunautaire": "TVA Intra-Communautaire",
+        "remise": "Remise",
+        "totalHT": "Total HT",
+        "actions": "Actions",
+        "selectArticle": "Sélectionner des articles",
+        "selectLots": "sélectionner des lots",
+        "addProduit": "Ajouter un article",
+        "addLot": "Ajouter un lot",
+        "articles": "Articles",
+        "adresseFacturation": "Adresse de facturation",
+        "note": "Note",
+        "conditions": "Conditions",
+        "valider": "Valider",
+        "cancel": "Annuler",
+        "status": "Statut",
+        "total": "Total",
+        "voirDetails": "Voir Détails",
+        "enAttente": "En Attente",
+        "enattente": "En Attente",
+        "acceptee": "Accepté",
+        "nonacceptee": "Refusé",
+        "accepte": "Accepté",
+        "nonaccepte": "Refusé",
+        "dupliquer": "Dupliquer",
+        "annulation": "Annulation",
+        "telecharger": "Télécharger",
+        "validee": "Validée",
+        "annulee": "Annulé",
+        "realisee": "Réalisée",
+        "replanifier": "Replanifier",
+        "annuler": "Annuler",
+        "accepter": "Accepter",
+        "nonaccepter": "Refuser",
+        "devis": "Devis",
+        "infoClient": "Information client",
+        "info": "Information",
+        "defaultAgent": "Agent par défaut",
+        "groupes": "Groupes",
+        "groupe": "Groupe",
+        "raisonSociale": "Raison Sociale",
+        "telephone": "Téléphone",
+        "fax": "Fax",
+        "email": "Email",
+        "siteWeb": "Site Web",
+        "siret": "Siret",
+        "codeComptable": "Code Comptable",
+        "typeClient": "Type Client",
+        "memos": "Memos",
+        "contacts": "Contacts",
+        "historique": "Historique",
+        "pays": "Pays",
+        "autreVille": "Autre Ville",
+        "contact": "Contact",
+        "civilite": "Civilité",
+        "prenom": "Prénom",
+        "mobile": "Mobile",
+        "fixe": "Fixe",
+        "fonction": "Fonction",
+        "sauvegarder": "Sauvegarder",
+        "update": "Mettre à jour",
+        "monsieur": "Monsieur",
+        "madame": "Madame",
+        "mademoiselle": "Mademoiselle",
+        "selectionner": "-- Sélectionner une valeur --",
+        "addContact": "Ajouter Contact",
+        "editContact": "Modifier Contact",
+        "editAddress": "Modifier Adresse",
+        "defaultAddress": "Marquer comme adresse de facturation",
+        "default": "Marquer comme adresse de facturation",
+        "article": "Article",
+        "listArticle": "Liste des articles",
+        "listLots": "Liste des lots",
+        "Unite": "Unité",
+        "Categorie": "Catégorie",
+        "TypePrix": "Prix HT ou TTC",
+        "PrixParTranche": "Prix par quantité",
+        "nombreMaximum": "Quantité maximum",
+        "numberMinimum": "Quantité minimum",
+        "PrixHt": "Prix de vente HT",
+        "PrixTtc": "Prix de vente TTC",
+        "produit": "Article",
+        "labels": "Labels",
+        "label": "Sélectionner un label",
+        "TotalHt": "Total HT (€)",
+        "cout_vente": "coût vente (€)",
+        "nombre_heure": "Nombre d'heures",
+        "prixU": "Prix U",
+        "tva": "TVA",
+        "Tva": "TVA",
+        "detailsArticle": "Détails article",
+        "autres": "Autres",
+        "unite": "Unité",
+        "categorie": "Catégorie",
+        "totalTTC": "Total TTC",
+        "totalHt": "Total HT",
+        "margeBruteHt": "Marge brute HT",
+        "remiseGlobalHT": "Remise globale HT",
+        "nouveauTotalHT": "Nouveau Total HT",
+        "prixTTC": "Prix TTC",
+        "objet": "Objet",
+        "prorata": "Prorata",
+        "puc": "PUC",
+        "chooseFile": "Choisir le fichier",
+        "dateInsertion": "Date Insertion",
+        "newLots": "Ajouter un nouveau lot",
+        "msgEmptyTable": "Vous n'avez pas encore ajouté d'articles.",
+        "adddevis": "Ajouter Devis",
+        "updatedevis": "Modifier Devis",
+        "listdevis": "LISTE DES DEVIS AJOUTÉ",
+        "minimaliste": "Minimaliste",
+        "choisirtypedevis": "Choisir le type de devis",
+        "complet": "Complet",
+        "sendByMail": "Envoyer par email",
+        "revivalyMail": "Relance par email",
+        "send": "Envoyer",
+        "to": "À",
+        "contents": "Rediger votre message",
+        "emailRequired": "email est requis",
+        "objectRequired": "objet est requis",
+        "lot": "Lot",
+        "addsite": "Site",
+        "addclient": "Ajouter un nouveau client",
+        "Tvaglobal": "TVA Global",
+        "enEtude": "En Etude",
+        "nonAccepte": "Refusé",
+        "termine": "Terminé",
+        "dateCreation": "Date création ",
+        "attacherPieceJointe": "Attacher Pièce Jointe",
+        "contentsRequired": "content est requis",
+        "rubrique": "Rubrique",
+        "nbrDocument": "Nombre des documents attachés",
+        "derniermodificationt": "Dernière modification",
+        "listDocumentAttacher": "Liste des documents attachés",
+        "labelDocument": "Labels",
+        "user": "Utilisateur",
+        "goToDetails": "Accédez à la page de détails",
+        "filtrerLabel": "Filtrer par label",
+        "listDevis": "Liste des devis",
+        "addDevis": "Ajouter devis",
+        "attacher": "Attacher",
+        "facture": "Facturé",
+        "encours": "En cours",
+        "cloture": "Clôturée",
+        "cloturee": "Clôturée",
+        "enretard": "En retard",
+        "documentAssocie": "Documents associés",
+        "restePayer": "Reste à payer",
+        "factureAcompte": "Facture Acompte",
+        "factureGenerale": "Facture Générale",
+        "montant": "Montant",
+        "moyen": "Moyen",
+        "pourcentage": "Pourcentage",
+        "ajouterAcompte": "Ajouter Acompte",
+        "dateEcheance": "Date d'échéance",
+        "brouillon": "Brouillon",
+        "resPay": "Reste à payer",
+        "ajouterPaiement": "Ajouter paiement",
+        "modifierPaiement": "Modifier paiement",
+        "compteCredit": "Compte à créditer",
+        "moyenPaiement": "Moyen de paiement",
+        "choisir": "Choisir",
+        "msgEmptyTablePaiement": "Vous n'avez pas encore ajouté des paiements",
+        "choixClient": "Choisir client",
+        "avoir": "Avoir",
+        "expire": "Expiré",
+        "utilise": "Utilisé",
+        "download": "Télécharger",
+        "print": "Imprimer",
+        "paiementParAvoir": "Paiement par avoir",
+        "selectAvoir": "Sélectionner un avoir",
+        "emptySelectAvoir": "Aucun avoir à sélectionner",
+        "conditionRegelement": "Conditions de règlement",
+        "infoBonCommandeFournisseur": "Information Bon Commande Fournisseur",
+        "createdepense": "Créer dépense",
+        "listProduit": "Liste des articles",
+        "nomProduit": "Nom d'article",
+        "fournisseur": "Fournisseur",
+        "prixparfournisseur": "Prix Fournisseur",
+        "dateExpiration": "Date d'expiration",
+        "BonCommandeFournisseur": "Bon Commande Fournisseur",
+        "dateMaximale": "Date maximale",
+        "dateMinimale": "Date minimale",
+        "PdfView": "Visualiser",
+        "VisualiserPdf": "Visualiser PDF",
+        "createFacture": "Créer une facture",
+        "createFactureAcompte": "Créer une facture acompte",
+        "createFactureSituation": "Créer une facture situation",
+        "ajouterBC": "Ajouter Bon de Commande Fournisseur avec succès",
+        "createBC": "Créer Bon Commande Fournisseur",
+        "infoFacture": "Information facture",
+        "factureSituation": "Facture situation",
+        "annuleef": "annulée",
+        "bonCommandFournisseur": "bon de Commande Fournisseur",
+        "cloturer": "clôturer",
+        "nouveaufacture": "Nouveau Facture",
+        "supprimerPaiement": "Supprimer Paiement",
+        "nombrHeure": "Nombre d'heures",
+        "sousTraitance": "Sous Traitance",
+        "recapitulatifFinancier": "RÉCAPITULATIF FINANCIER",
+        "previsionnel": "Prévisionnel",
+        "previsionnelInfo": "Calculé sur la base des devis.",
+        "facturationtresorie": "Facturation et trésorerie",
+        "facturationtresorieInfo": "Calculé sur la base des factures clients, factures fournisseurs et interventions.",
+        "tresorieChantier": "TRÉSORERIE DU CHANTIER",
+        "total_devis": "Total des devis",
+        "depensee_Aprevoir": "Dépenses à prévoir",
+        "marge_Previsionnel": "Prévisine Marge",
+        "vente_materiel": "Vente Matériel",
+        "venteMateriel": "Vente Matériel",
+        "vente_main_oveure": "Vente Main d'oeuvre",
+        "caFacture": "CA Facture",
+        "depenseeEngagees": "Dépenses engagées",
+        "margeReele": "Marge réelle",
+        "achat_materiel": "Achats Matériels",
+        "achat_main_oveure": "Achat Main d'oeuvre",
+        "sous_traitance": "Sous-traitance",
+        "retenueGarantier": "Retenue de garantie",
+        "margeMateriel": "Marge sur matériel",
+        "margeMainOeuvre": "Marge sur main d'oeuvre",
+        "EnCaisse": "Encaissé",
+        "payes": "Payés",
+        "enAttentepaiement": "En attente de paiement",
+        "achatsMateriels": "Achats Matériels",
+        "interventions": "Interventions",
+        "tauxAvancement": "Taux d'avancement",
+        "confirmModification": "Valider la modification",
+        "retenuegarantie": "Retenue de garantie",
+        "statusRetenuegarantie": "Statut",
+        "changementstatus": "Changement du statut",
+        "recuperer": "Récupéré",
+        "nonrecuperer": "Non récupéré",
+        "marquerrecuperer": "Marquer récupéré",
+        "marquernonrecuperer": "Marquer non récupéré",
+        "annule": "annulé",
+        "nbDeplacement": "Nombre de déplacements",
+        "montantTotal": "Montant total",
+        "achat_materield": "Achats matériels (€)",
+        "nbPanier": "Nombre de paniers"
+    },
+    "rubrique": {
+        "title": "Rubrique Documents",
+        "appeloffre": "Appel d'Offre",
+        "commandes": "Commandes",
+        "devis": "Devis",
+        "DOE": "DOE",
+        "facturation": "Facturation",
+        "photos": "Photos",
+        "planning": "Planning",
+        "suiviChantier": "Suivi de chantier",
+        "documentation": "Documentation",
+        "appel_offre": "Appel d'Offre",
+        "commandes_devis": "Commandes",
+        "doe": "DOE",
+        "suivi_chantier": "Suivi de chantier",
+        "msgEmtyListVide": "Aucun élément pour sélectionné",
+        "msgEmtyListSelectedVide": "Aucun élément  sélectionné",
+        "document": "Documentation"
+    },
+    "tags": {
+        "title": "Labels Document",
+        "addInputPlaceHolder": "Ajouter un label et appuyez sur entrer"
+    },
+    "sendMail": {
+        "responses": {
+            "serverConnectionError": "",
+            "argumentsError": "Les données envoyées ne sont pas correctes!",
+            "success": "Votre email a été envoyée avec succès.",
+            "internalError": "Erreur interne, veuillez réessayer!",
+            "serverHasNoConfig": "Erreur! Veuillez configurer Votre serveur de messagerie."
+        }
+    },
+    "addClient": {
+        "title": "Ajouter client",
+        "msg": "Ajouter avec succès"
+    },
+    "dataTables": {
+        "processing": "Traitement en cours...",
+        "search": "Rechercher",
+        "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+        "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "infoPostFix": "",
+        "loadingRecords": "Chargement en cours...",
+        "zeroRecords": "",
+        "emptyTable": "",
+        "paginate": {
+            "first": "Premier",
+            "previous": "Pr&eacute;c&eacute;dent",
+            "next": "Suivant",
+            "last": "Dernier"
+        },
+        "aria": {
+            "sortAscending": ": activer pour trier la colonne par ordre croissant",
+            "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        },
+        "searchPlaceholder": "Désignation ou commentaire"
+    },
+    "dataTablesFactures": {
+        "processing": "Traitement en cours...",
+        "search": "Rechercher&nbsp; ",
+        "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+        "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "infoPostFix": "",
+        "loadingRecords": "Chargement en cours...",
+        "zeroRecords": "",
+        "emptyTable": "",
+        "paginate": {
+            "first": "Premier",
+            "previous": "Pr&eacute;c&eacute;dent",
+            "next": "Suivant",
+            "last": "Dernier"
+        },
+        "aria": {
+            "sortAscending": ": activer pour trier la colonne par ordre croissant",
+            "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        },
+        "searchPlaceholder": "Référence "
+    },
+    "dataTablesBonCommandeFournisseur": {
+        "processing": "Traitement en cours...",
+        "search": "Rechercher",
+        "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+        "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "infoPostFix": "",
+        "loadingRecords": "Chargement en cours...",
+        "zeroRecords": "",
+        "emptyTable": "",
+        "paginate": {
+            "first": "Premier",
+            "previous": "Pr&eacute;c&eacute;dent",
+            "next": "Suivant",
+            "last": "Dernier"
+        },
+        "aria": {
+            "sortAscending": ": activer pour trier la colonne par ordre croissant",
+            "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        },
+        "searchPlaceholder": "Référence"
+    },
+    "addproduit": {
+        "title": "Ajouter article",
+        "msg": "Ajouter avec succès"
+    },
+    "adddevis": {
+        "title": "Ajouter devis",
+        "msg": "Ajouter avec succès",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cet article ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-la!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulée"
+        }
+    },
+    "updatedevis": {
+        "title": "Modifier devis",
+        "msg": "Modifier avec succès"
+    },
+    "updateDocumentAttache": {
+        "title": "Modifier document attaché",
+        "msg": "Modifier avec succès"
+    },
+    "showDevis": {
+        "title": "Détails devis",
+        "information": "INFORMATION",
+        "historique": "HISTORIQUE",
+        "factureacompte": "FACTURES ACOMPTES",
+        "listAcompte": "list Acompte",
+        "emailHistorique": "EMAILS",
+        "factureSituation": "FACTURES SITUATIONS",
+        "factureAcompte": "FACTURES ACOMPTE"
+    },
+    "showFacture": {
+        "titleFactures": "Factures",
+        "title": "Détail facture",
+        "information": "INFORMATION",
+        "historique": "HISTORIQUE",
+        "notes": "NOTES",
+        "paiement": "PAIEMENT",
+        "listPaiement": "Liste des paiements",
+        "emailHistorique": "EMAILS",
+        "annuler": {
+            "title": "Confirmation",
+            "question": "Êtes-vous sûr de vouloir annuler cette facture ?",
+            "cancel": "Annuler",
+            "confirm": "Valider",
+            "success": "Annulée avec succès",
+            "failed": "Vous avez saisi des paiements sur cette facture. Supprimer d'abord ces paiements pour pouvoir annuler la facture.",
+            "failedAnnuler": "Vous avez saisi des paiements sur cette facture. Supprimer d'abord ces paiements pour pouvoir annuler la facture."
+        }
+    },
+    "paiement": {
+        "success": "Ajouter avec succès",
+        "modifierSuccess": "Modifier avec succès",
+        "createAvoir": "Créer avoir associé au paiement",
+        "avoirCreated": "Un avoir avec référence :",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer ce paiement ?",
+            "questionGroupe": "Attention ! Êtes-vous sûr de supprimer ce paiement groupé ?",
+            "questionAvoir": "Attention ! Êtes-vous sûr de supprimer ce paiement qui associé à un avoir ?",
+            "questionAvoirDelete": "Attention ! le paiement sera supprimé et l'avoir ne sera pas supprimé avec un changement de son statut à encours",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulée"
+        }
+    },
+    "showBonCommandeFournisseur": {
+        "titleBC": "Bons Commandes Fournisseur",
+        "title": "Détail bon commande fournisseur",
+        "information": "INFORMATION",
+        "historique": "HISTORIQUE",
+        "notes": "NOTES",
+        "annuler": {
+            "title": "Confirmation",
+            "question": "Êtes-vous sûr de vouloir annuler ce bon commande fournisseur ?",
+            "cancel": "Annuler",
+            "confirm": "Valider",
+            "success": "Annulée avec succès"
+        }
+    },
+    "updateBonCommande": {
+        "title": "Modifier bon commande fournisseur",
+        "msg": "Modifier avec succès"
+    },
+    "produitGroupe": {
+        "empty": "Aucun article  pour ce bon de commande fournisseur"
+    },
+    "updateFacture": {
+        "title": "Modifier facture",
+        "msg": "Modifier avec succès"
+    },
+    "list": {
+        "title": "Liste des chantiers",
+        "montreTout": "Montrer tout",
+        "montrerAucun": "Montrer aucun",
+        "statut": "Sélectionner un statut",
+        "fournisseur": "Fournisseur",
+        "chantier": "Sélectionner un chantier",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce chantier ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulé",
+            "ImpossibleDeSuppression": "Impossible de supprimer ce chantier car il est une référence",
+            "documentation": "List des documents"
+        },
+        "deletefacture": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer cette Facture ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulé"
+        },
+        "deletebonCommande": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce bon de commande fournisseur ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulé"
+        },
+        "deletedoc": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce document ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulé",
+            "ImpossibleDeSuppression": "Impossible de supprimer ce chantier car il est une référence",
+            "documentation": "List des documents"
+        },
+        "deleteDevis": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce devis ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "ImpossibleDeSuppression": "Impossible de supprimer ce devis car il est une référence",
+            "failed": "Suppression annulé"
+        }
+    },
+    "PrixParFournisseur": {
+        "title": "Prix Fournisseurs",
+        "ajoutersuccess": "Ajouter avec succès",
+        "modifiersucces": "Modifier avec succès",
+        "labels": {
+            "Prix": "Prix d'achat",
+            "PrixEtDevise": "Prix d'achat (€)",
+            "Fournisseur": "Fournisseur",
+            "btn_add": "Ajouter un prix fournisseur",
+            "btn_Close": "Fermer",
+            "model_add_title": "Ajouter un prix fournisseur",
+            "model_update_title": "Modifier le prix par fournisseur",
+            "ajouterPrixParFournisseur_btn": "Ajouter",
+            "modifierPrixParFournisseur_btn": "Modifier",
+            "default": "Fournisseur par défaut"
+        },
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer ce prix ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès"
+        },
+        "update": {
+            "success": "Modifier avec succès"
+        },
+        "errors": {
+            "required": "Veuillez sélectionner au moins un fournisseur par défaut"
+        }
+    },
+    "addchantier": {
+        "title": "Ajouter chantier",
+        "msg": "Ajouter avec succès"
+    },
+    "updatechantier": {
+        "title": "Modifier chantier",
+        "msg": "Modifier avec succès"
+    },
+    "add": {
+        "title": "Ajouter chantier",
+        "msg": "Ajouter avec succès"
+    },
+    "adddoc": {
+        "title": "Ajouter document",
+        "msg": "Ajouter avec succès"
+    },
+    "addFacture": {
+        "titleFactures": "Factures",
+        "title": "Ajouter facture",
+        "msg": "Ajouter avec succès",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cet article ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-la!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulée"
+        }
+    },
+    "updatedoc": {
+        "title": "Modifier document",
+        "msg": "Modifier avec succès"
+    },
+    "update": {
+        "title": "Modifier chantier",
+        "msg": "Modifier avec succès"
+    },
+    "show": {
+        "title": "Détails chantier",
+        "information": "INFORMATION",
+        "historique": "HISTORIQUE",
+        "memo": "MÉMOS",
+        "Tarification": "Tarification",
+        "portes": "PORTES",
+        "notes": "NOTES",
+        "recaptulatiffinancier": "RÉCAPITULATIF FINANCIER",
+        "retenuegarantie": "SITUATION DES RETENUES DE GARANTIES",
+        "documents": "DOCUMENTS"
+    },
+    "noDataAvaible": "Aucune donnée disponible",
+    "commun": {
+        "name": "Nom fichier",
+        "AjouterUnCommentaire": "Ajouter un commentaire",
+        "AjouterUneFicheTechnique": "Ajouter Une Fiche Technique",
+        "EditUneFicheTechnique": "Modifier Une Fiche Technique",
+        "Comment": "Commentaire",
+        "PieceJoint": "Pièce jointe",
+        "chooseFile": "Choisir le fichier",
+        "close": "Fermer",
+        "Add": "Ajouter",
+        "save": "Sauvegarder",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cette label ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulé"
+        },
+        "update": {
+            "success": "Modifier avec succès"
+        }
+    },
+    "Afficher_Masquées_Les_Colonnes": "Colonnes",
+    "statuts": [
+        {
+            "id": 1,
+            "label": "En Etude",
+            "color": "#ffa87d"
+        },
+        {
+            "id": 2,
+            "label": "Accepté",
+            "color": "#16D39A"
+        },
+        {
+            "id": 3,
+            "label": "Terminé",
+            "color": "#2dcee3"
+        },
+        {
+            "id": 4,
+            "label": "Refusé",
+            "color": "#ff7588"
+        }
+    ],
+    "statutsRetenue": [
+        {
+            "id": 1,
+            "label": "Non récuperé",
+            "color": "#ff7588"
+        },
+        {
+            "id": 2,
+            "label": "Récuperé",
+            "color": "#16D39A"
+        },
+        {
+            "id": 3,
+            "label": "En cours",
+            "color": "#2dcee3"
+        },
+        {
+            "id": 4,
+            "label": "En retard",
+            "color": " #ffa87d"
+        }
+    ],
+    "changeStatutdevis": {
+        "acceptee": {
+            "title": "Acceptation du devis",
+            "question": "voulez vous vraiment accepter ce devis?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Accepter le devis",
+            "success": "Le statut de ce devis a été changé au statut accepté avec succès.",
+            "error": "Erreur du serveur."
+        },
+        "annulee": {
+            "title": "Annulation du devis",
+            "question": "voulez vous vraiment annuler ce devis?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Annuler le devis",
+            "success": "Le statut de ce devis a été changé au statut annulé avec succès.",
+            "error": "Erreur du serveur."
+        },
+        "enattente": {
+            "title": "Retournement de statut du devis",
+            "question": "voulez-vous vraiment retourner au statut en attente pour ce devis?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Retourner au statut",
+            "success": "Le statut de ce devis a été changé au statut en attente avec succès.",
+            "error": "Erreur du serveur."
+        },
+        "nonacceptee": {
+            "title": "Refuser le devis",
+            "question": "Voulez-vous vraiment Refuser  ce devis?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Refuser le devis",
+            "success": "Le statut de ce devis a été changé au statut refusé avec succès.",
+            "error": "Erreur du serveur."
+        }
+    },
+    "file": {
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr retirer ce fichier ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, retirer-le!",
+            "success": "Retirer avec succès"
+        }
+    },
+    "statutsdevis": [
+        {
+            "id": 1,
+            "label": "En Attente",
+            "color": "#ff7588"
+        },
+        {
+            "id": 2,
+            "label": "Accepté",
+            "color": "#16d39a"
+        },
+        {
+            "id": 3,
+            "label": "Annulé",
+            "color": "#2dcee3"
+        },
+        {
+            "id": 4,
+            "label": "Refusé",
+            "color": "#404e67"
+        }
+    ],
+    "annulation": {
+        "title": "Annulation",
+        "question": "Êtes-vous sûr annuler ce devis ?",
+        "cancel": "Annuler",
+        "confirm": "Oui",
+        "success": "Annuler avec succès",
+        "error": "Erreur du serveur",
+        "failed": "Annulation annulé"
+    },
+    "dupliquer": {
+        "title": "Dubliquer devis",
+        "msg": "Dupliquer  avec succès",
+        "question": "Êtes-vous sûr dupliquer ce devis ?",
+        "cancel": "Annuler",
+        "confirm": "Oui",
+        "success": "Annuler avec succès",
+        "error": "Erreur du serveur",
+        "failed": "Duplication annulé"
+    },
+    "popupConfirmation": {
+        "title": "Confirmation",
+        "question": "Êtes-vous sûr supprimer d'effectuez ce technicien 2 semaines d'affilées ?",
+        "cancel": "Annuler",
+        "confirm": "Oui"
+    },
+    "Poid": "Poid lourd",
+    "devis": {
+        "title": "DEVIS",
+        "show": {
+            "title": "Détails devis",
+            "information": "INFORMATION",
+            "historique": "HISTORIQUE"
+        },
+        "update": {
+            "title": "Modifier devis",
+            "msg": "Modifier avec succès"
+        },
+        "add": {
+            "title": "Ajouter devis",
+            "msg": "Ajouter avec succès"
+        }
+    },
+    "produit": {
+        "add": {
+            "title": "Ajouter article",
+            "msg": "Ajouter avec succès"
+        }
+    },
+    "dataTablesDevis": {
+        "processing": "Traitement en cours...",
+        "search": "Rechercher&nbsp; ",
+        "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+        "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "infoPostFix": "",
+        "loadingRecords": "Chargement en cours...",
+        "zeroRecords": "",
+        "emptyTable": "",
+        "paginate": {
+            "first": "Premier",
+            "previous": "Pr&eacute;c&eacute;dent",
+            "next": "Suivant",
+            "last": "Dernier"
+        },
+        "aria": {
+            "sortAscending": ": activer pour trier la colonne par ordre croissant",
+            "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        },
+        "searchPlaceholder": "Référence ou objet"
+    },
+    "addDevis": {
+        "title": "Ajouter devis",
+        "msg": "Ajouter avec succès",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cet article ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-la!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulée"
+        }
+    },
+    "addBonCommandeFournisseur": {
+        "titleBonCommand": "Bon Commande Fournisseur",
+        "title": "Ajouter bon commande fournisseur",
+        "msg": "Ajouter avec succès",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cet article ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-la!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulée"
+        }
+    },
+    "updateDevis": {
+        "title": "Modifier devis",
+        "msg": "Modifier avec succès"
+    },
+    "datePicker": {
+        "firstDayOfWeek": 1,
+        "dayNames": [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi"
+        ],
+        "dayNamesShort": [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi"
+        ],
+        "dayNamesMin": [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "monthNamesShort": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "today": "Aujourd'hui",
+        "clear": "Valider"
+    },
+    "factureSituation": {
+        "title": "Ajouter facture de situation",
+        "msg": "Ajouter avec succès",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cet article ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-la!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulée"
+        }
+    },
+    "toolip": {
+        "detail": "Afficher facture",
+        "edit": "Modifier facture",
+        "delete": "Supprimer facture"
+    },
+    "toolipFacture": {
+        "detail": "Afficher facture",
+        "edit": "Modifier facture",
+        "delete": "Supprimer facture"
+    },
+    "toolipBonCommandFournisseur": {
+        "detail": "Afficher bon commande fournisseur",
+        "edit": "Modifier bon commande fournisseur",
+        "delete": "Supprimer bon commande fournisseur"
+    },
+    "changeStatutRetenueGarantie": {
+        "recuperer": {
+            "title": "Changement de statut",
+            "question": "voulez vous vraiment changer le statut de ce retenue de garantie à récupéré?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Changer le statut ",
+            "success": "Le statut de ce retenue de garantie a été changé  au statut  récupéré avec succès.",
+            "failed": "Changement annulée",
+            "ImpossibleDeChangerStatut": "Impossible de changer statut de retenue de garantie ",
+            "error": "Erreur du serveur."
+        },
+        "nonrecuperer": {
+            "title": "Changement de statut",
+            "question": "voulez vous vraiment changer le statut de ce retenue de garantie  à non récéperé?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Changer le statut ",
+            "success": "Le statut de ce retenue de garantie a été changé au statut non récupéré avec succès.",
+            "failed": "Changement annulée",
+            "error": "Erreur du serveur."
+        },
+        "encours": {
+            "title": "Changement de statut",
+            "question": "voulez vous vraiment changer le statut de ce retenue de garantie  à en cours?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Changer le statut ",
+            "success": "Le statut de ce retenue de garantie a été changé au statut en cours avec succès.",
+            "failed": "Changement annulée",
+            "error": "Erreur du serveur."
+        },
+        "enretard": {
+            "title": "Changement de statut",
+            "question": "voulez vous vraiment changer le statut de ce retenue de garantie  à en retard?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Changer le statut ",
+            "success": "Le statut de ce retenue de garantie a été changé au statut en retard avec succès.",
+            "failed": "Changement annulée",
+            "error": "Erreur du serveur."
+        }
+    },
+    "changeStatut": {
+        "accepte": {
+            "title": "Acceptation du chantier",
+            "question": "voulez vous vraiment accepter ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Accepter le chantier",
+            "success": "Le statut de ce chantier a été changé au statut accepté avec succès.",
+            "error": "Erreur du serveur.",
+            "hasBillsNotPaid": "Vous ne pouvez pas terminer ce chantier car il a des factures pas encore payée."
+        },
+        "acceptee": {
+            "title": "Acceptation du chantier",
+            "question": "voulez vous vraiment accepter ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Accepter le chantier",
+            "success": "Le statut de ce chantier a été changé au statut accepté avec succès.",
+            "error": "Erreur du serveur.",
+            "hasBillsNotPaid": "Vous ne pouvez pas terminer ce chantier car il a des factures pas encore payée."
+        },
+        "annulee": {
+            "title": "Annulation du chantier",
+            "question": "voulez vous vraiment annuler ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Annuler le chantier",
+            "success": "Le statut de ce chantier a été changé au statut annulé avec succès.",
+            "hasBillsNotPaid": "Vous ne pouvez pas terminer ce chantier car il a des factures pas encore payée.",
+            "error": "Erreur du serveur."
+        },
+        "termine": {
+            "title": "Terminaison du chantier",
+            "question": "voulez vous vraiment terminer ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Terminer le chantier",
+            "success": "Le statut de ce chantier a été changé au statut terminé avec succès.",
+            "error": "Erreur du serveur.",
+            "hasBillsNotPaid": "Vous ne pouvez pas terminer ce chantier car il a des factures pas encore payée."
+        },
+        "enetude": {
+            "title": "Retournement de statut du chantier",
+            "question": "voulez-vous vraiment retourner au statut en étude pour ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Retourner au statut",
+            "success": "Le statut de ce chantier a été changé au statut en étude avec succès.",
+            "error": "Erreur du serveur.",
+            "hasBillsNotPaid": "Vous ne pouvez pas terminer ce chantier car il a des factures pas encore payée."
+        },
+        "enattente": {
+            "title": "Retournement de statut du chantier",
+            "question": "voulez-vous vraiment retourner au statut en attente pour ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Retourner au statut",
+            "success": "Le statut de ce devis a été changé au statut en attente avec succès.",
+            "error": "Erreur du serveur."
+        },
+        "nonacceptee": {
+            "title": "Refuser le chantier",
+            "question": "Voulez-vous vraiment Refuser ce chantier?",
+            "cancel": "Annuler",
+            "confirm": "Oui, Refuser le chantier",
+            "success": "Le statut de ce chantier a été changé au statut refusé avec succès.",
+            "error": "Erreur du serveur.",
+            "hasBillsNotPaid": "Vous ne pouvez pas terminer ce chantier car il a des factures pas encore payée."
+        }
+    },
+    "factureAcompte": {
+        "title": "Ajouter facture d'acompte",
+        "msg": "Ajouter avec succès",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr de supprimer cet article ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-la!",
+            "success": "Supprimer avec succès",
+            "failed": "Suppression annulée"
+        }
+    },
+    "delai_garantie": {
+        "question": "Choisir un délai de garantie",
+        "troisMois": "3 Mois",
+        "sixMois": "6 Mois",
+        "unAns": "1 Ans",
+        "deuxAns": "2 Ans"
+    }
+}

@@ -1,0 +1,178 @@
+<div class="content-body">
+
+  <section id="horizontal-form-layouts">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+
+              <form class="form form-horizontal">
+                <div class="form-body">
+
+                  <!-- Information facture-->
+                  <h4 class="form-section"><i class="ft-credit-card"></i>{{'labels.infoPaiement' | translate}}</h4>
+
+                  <!-- Compte à créditer + Date -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput189">{{ 'labels.compteCredit' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="paiement?.parametrageCompte?.nom" id="projectinput189"
+                            class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput1874">{{ 'labels.date' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="paiement?.datePaiement | date:'dd/MM/yyyy' " id="projectinput1874"
+                            class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- Moyen de paiement + Montant  -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput1d89">{{ 'labels.moyenPaiement' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="paiement?.modeReglement?.nom" id="projectinput1d89"
+                            class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput18d74">{{ 'labels.montant' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" style="text-align: right"
+                            [value]="paiement?.montant | RoudingNumber | ShowCurrency" id="projectinput18d74"
+                            class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- Description -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput1d8d9">{{ 'labels.type' | translate }}</label>
+                        <div class="col-md-9">
+                          <input class="form-control" id="projectinput1d8d9" disabled
+                            value="{{ 'labels.paiement' | translate }}" *ngIf="paiement?.type == typePaiement.PAYER" />
+                          <input class="form-control" id="projectinput1d8d9" disabled
+                            value="{{ 'labels.paiementGroupe' | translate }}"
+                            *ngIf="paiement?.type == typePaiement.PAYER_GROUPE" />
+                          <input class="form-control" id="projectinput1d8d9" disabled
+                            value="{{ 'labels.virement' | translate }}"
+                            *ngIf="paiement?.type == typePaiement.VIREMENT_DEPUIS" />
+                          <input class="form-control" id="projectinput1d8d9" disabled
+                            value="{{ 'labels.recevoir' | translate }}"
+                            *ngIf="paiement?.type == typePaiement.VIREMENT_A" />
+                          <input class="form-control" id="projectinput1d8d9" disabled
+                            value="{{ 'labels.parAvoir' | translate }}"
+                            *ngIf="paiement?.type == typePaiement.PAR_AVOIR" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput18d9">{{ 'labels.description' | translate }}</label>
+                        <div class="col-md-9">
+                          <textarea id="projectinput18d9" class="form-control" rows="5"
+                            disabled>{{ paiement?.description }}</textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- Document associé-->
+                  <ng-container
+                    *ngIf="paiement?.facturePaiements?.length > 0 || paiement?.idAvoir != null || paiement?.depense != null">
+                    <h4 class="form-section"><i class="fa fa-files-o"></i>{{'labels.documentAssocie' | translate}}</h4>
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>{{ 'labels.type' | translate }}</th>
+                            <th>{{ 'labels.reference' | translate }}</th>
+                            <th>
+                              <!-- <ng-container *ngIf="">
+                                {{ 'labels.client' | translate }}
+                              </ng-container>
+                              <ng-container>
+                                {{ 'labels.client' | translate }} / {{ 'labels.chantier' | translate }}
+                              </ng-container> -->
+                              {{ 'labels.client' | translate }} / {{ 'labels.chantier' | translate }}
+                            </th>
+                            <th>{{ 'labels.dateCreation' | translate }}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- factures -->
+                          <tr *ngFor="let item of paiement?.facturePaiements">
+                            <td> {{ 'labels.facture' | translate }} </td>
+                            <td><a
+                                [routerLink]="[ '/factures/detail', item?.facture?.id ]">{{ item?.facture?.reference }}</a>
+                            </td>
+                            <td> {{ item?.facture?.client?.nom }} </td>
+
+                            <td> {{ item?.facture?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                          </tr>
+                          <!-- Avoir -->
+                          <tr *ngIf="paiement?.idAvoir != null">
+                            <td> {{ 'labels.avoir' | translate }} </td>
+                            <td><a
+                                [routerLink]="[ '/avoirs/detail', paiement?.avoir?.id ]">{{ paiement?.avoir?.reference }}</a>
+                            </td>
+                            <td> {{ paiement?.avoir?.client?.nom }} </td>
+
+                            <td> {{ paiement?.avoir?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                          </tr>
+                          <!-- Depense -->
+                          <tr *ngIf="paiement?.idDepense != null">
+                            <td> {{ 'labels.depense' | translate }}</td>
+                            <td>
+                              <a
+                                [routerLink]="[ '/depense/detail', paiement?.depense?.id]">{{paiement?.depense?.id}}</a>
+                            </td>
+                            <td *ngIf="paiement?.depense?.idChantier != null">{{ paiement?.depense?.chantier?.nom}}</td>
+                            <td>{{ paiement?.depense?.dateCreation | date:'dd/MM/yyyy' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-container>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

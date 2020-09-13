@@ -1,0 +1,60 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{'labels.title' | translate}} </h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-primary" (click)="formConfig.operation = 'add';formConfig.value.label = ''" 
+          data-toggle="modal" data-target="#updateParamter"  
+          placement="bottom" ngbTooltip="{{ 'labels.nouveau' | translate }} {{ 'labels.label' | translate }} ">
+          {{ 'labels.nouveau' | translate }} <i class="ft-plus"></i>
+        </button>
+    </div>
+  </div>
+
+</div>
+<section id="multi-column">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-content collapse show">
+          <div class="card-body init-card-body card-dashboard">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered labelsTable" ng-if="Labels"
+              id="fournisseurTable" style="width:100%">
+              <thead>
+                <tr>
+                  <th *ngFor="let column of labelTableColumns">{{column}}</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="Labels?.list?.length > 0">
+                <tr *ngFor="let Label of Labels?.list">
+                  <td>{{ Label?.label }}</td>
+                  <td>{{ Label?.nobmbreDEFois }}</td>
+                  <td class="actions">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                 
+                        <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal" data-target="#updateParamter"
+                          (click)="formConfig.operation = 'update';formConfig.value = Label" placement="bottom" ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.label' | translate }} "><i class="ft-edit"></i></button>
+                        <button type="button" class="btn btn-danger btn-md btn-actions" (click)="delete(Label?.id)" 
+                        *ngIf="Label?.nobmbreDEFois == 0"
+                        placement="bottom" ngbTooltip="{{ 'labels.supprimer' | translate }} {{ 'labels.label' | translate }} "><i class="ft-trash-2"></i></button>
+                 
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="Labels?.list?.length == 0">
+                <tr>
+                  <td colspan="4" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+                </tr>
+              <tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<label-form [formConfig]="formConfig" (OnFormSubmit)="FormSubmit($event)"></label-form>

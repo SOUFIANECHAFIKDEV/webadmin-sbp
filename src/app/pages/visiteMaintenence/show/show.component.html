@@ -1,0 +1,116 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown"
+    style="margin-top: 1rem;">
+
+    <span style="width:12px"></span>
+
+  </div>
+
+
+
+</div>
+
+<div class="content-header row">
+  <div class="content-header-left  col-12 mb-2">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title">{{'show.title' | translate}} </h3>
+
+      </div>
+      <div>
+
+        <!-- <span class="btn btn-round badge-brouillon"
+            *ngIf="contratEntretien?.statut == statutContratEntretien.Brouillon">{{
+              'labels.brouillon' | translate
+            }}</span>
+          <span class="btn btn-round badge-planifiee" *ngIf="contratEntretien?.statut == statutContratEntretien.Encours">{{
+                'labels.encours' | translate
+              }}</span>
+          <span class="btn btn-round badge-success" *ngIf="contratEntretien?.statut == statutContratEntretien.Termine">{{
+                  'labels.termine' | translate
+                }}</span>
+          <span class="btn btn-round badge-annuler" *ngIf="contratEntretien?.statut == statutContratEntretien.Annule">{{
+                    'labels.annulee' | translate
+                  }}</span>
+          <span class="btn btn-round badge-enretard" *ngIf="contratEntretien?.statut == statutContratEntretien.Enattente">{{
+                      'labels.enattente' | translate
+                    }}</span>
+  
+        -->
+        <button type="button" class="btn btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          [ngClass]="{
+                          'badge-brouillon':visiteMaintenance?.statut == statutVisiteMaintenance.NonFait, 
+                          'badge-planifiee': visiteMaintenance?.statut == statutVisiteMaintenance.Fait,
+                          'badge-success':visiteMaintenance?.statut == statutVisiteMaintenance.Planifier,
+                          'badge-annuler':visiteMaintenance?.statut == statutVisiteMaintenance.Annule,
+                          'badge-enretard':visiteMaintenance?.statut == statutVisiteMaintenance.APlanifier,
+                          'dropdown-toggle':visiteMaintenance?.statut == statutVisiteMaintenance.APlanifier || visiteMaintenance?.statut == statutVisiteMaintenance.Annule
+              
+                          }">
+          {{ getLabelleByStatut(visiteMaintenance?.statut) }}
+        </button>
+        <div class="dropdown-menu" x-placement="bottom-start">
+          <p class="dropdown-item title">{{'labels.changementstatus' | translate}}</p>
+          <p class="dropdown-item" (click)="changeStatut(statutVisiteMaintenance.APlanifier)"
+            *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.Annule">
+            {{'labels.aplanifier' | translate}}
+          </p>
+          <p class="dropdown-item" (click)="changeStatut(statutVisiteMaintenance.Annule)"
+            *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.APlanifier ">
+            {{'labels.annulee' | translate}}
+          </p>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/visitesMaintenance']">{{'title' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'show.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <!-- <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client" aria-expanded="true">{{
+                        'show.information' | translate }}</a>
+            </li>
+          
+           
+        
+          </ul> -->
+          <!-- <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+              <information-contratEntretien [contratEntretien]="contratEntretien">
+              </information-contratEntretien>
+            </div>
+          
+
+          
+
+          </div> -->
+          <app-information [visiteMaintenance]="visiteMaintenance"></app-information>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<custom-loader [displayLoader]="processing"></custom-loader>

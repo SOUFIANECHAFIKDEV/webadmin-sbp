@@ -1,0 +1,35 @@
+
+input#addInDsdb {
+  margin-right: 0.5rem;
+  position: relative;
+  top: 0.1rem;
+}
+
+.modal-body {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.card-body[_ngcontent-c16] {
+  height: auto;
+}
+  
+
+
+.input-number {
+  text-align: right;
+}
+
+.custom-control.custom-checkbox {
+  width: 5%;
+  float: right;
+}
+
+
+
+
+
+.custom-control-label::after {
+	
+	background-color: #065cb3 !important;
+}

@@ -1,0 +1,32 @@
+<div class="page-size">
+  Afficher  
+  <select #pageSize (change)="PageSize(pageSize.value)">
+      <option *ngFor="let size of pageSizes" [value]="size">{{size}}</option>
+  </select>
+  éléments
+</div>
+<div class="pagination">
+
+  <a class="page-link" (click)="Premier()">Premier</a>
+
+
+  <a class="page-link" (click)="Precedent()">Précédent</a>
+
+
+  <a class="page-link" *ngIf="painationInfo?.previousPageNumber != painationInfo?.pageNumber" (click)="changePage(painationInfo?.previousPageNumber)">
+    {{painationInfo?.previousPageNumber}}</a>
+
+
+  <a class="page-link active">{{painationInfo?.pageNumber}}</a>
+
+
+  <a class="page-link" 
+  *ngIf="painationInfo?.nextPageNumber != painationInfo?.pageNumber && painationInfo?.nextPageNumber != 0" 
+  (click)="changePage(painationInfo?.nextPageNumber)">{{painationInfo?.nextPageNumber}}</a>
+
+
+  <a class="page-link" (click)="Suivant()">Suivant</a>
+
+  <a class="page-link" (click)="Dernier()">Dernier</a>
+
+</div>

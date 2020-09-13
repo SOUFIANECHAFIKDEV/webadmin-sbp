@@ -1,0 +1,12 @@
+<div class="card card-search">
+  <div class="card-header">
+    <h4 class="card-title">Filtre
+      <i *ngIf="!showCardBody" class="ft-maximize" style="float: right;" (click)="open();showCardBody = !showCardBody"></i>
+      <i *ngIf="showCardBody" class="ft-minimize" style="float: right;" (click)="showCardBody = !showCardBody"></i>
+      <!-- <ng-content select=".recherche-avancee-header"></ng-content> -->
+    </h4>
+  </div>
+  <div *ngIf="showCardBody" style="padding: 1vw 1vw 1vw 1vw;">
+    <ng-content select=".recherche-avancee-body"></ng-content>
+  </div>
+</div>

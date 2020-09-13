@@ -1,0 +1,607 @@
+<div style="overflow-x:auto;">
+  <table class="">
+    <ng-container *ngFor="let visite of visitesMaintenances;let i=index">
+      <tr>
+        <td scope="row" colspan="13"
+          style="text-align: center;font-weight: bold;background-color: #04B2D9;color: #FFF;">
+          <span *ngIf="i==0">{{i+1}} {{'labels.ereannee' | translate}} {{visite.year}}</span>
+          <span *ngIf="i!=0">{{i+1}} {{'labels.emeannee' | translate}} {{visite.year}}</span>
+
+        </td>
+      </tr>
+      <tr style="text-align: center;background-color: #048ABF;color: #FFF;">
+        <td style="text-align: left;">{{'labels.visiteMaintenance' | translate}}</td>
+        <td>{{'labels.mois.janvier' | translate}}</td>
+        <td>{{'labels.mois.fevrier' | translate}}</td>
+        <td>{{'labels.mois.mars' | translate}}</td>
+        <td>{{'labels.mois.avril' | translate}}</td>
+        <td>{{'labels.mois.mai' | translate}}</td>
+        <td>{{'labels.mois.juin' | translate}}</td>
+        <td>{{'labels.mois.juillet' | translate}}</td>
+        <td>{{'labels.mois.aout' | translate}}</td>
+        <td>{{'labels.mois.septembre' | translate}}</td>
+        <td>{{'labels.mois.octobre' | translate}}</td>
+        <td>{{'labels.mois.novembre' | translate}}</td>
+        <td>{{'labels.mois.decembre' | translate}}</td>
+
+      </tr>
+      <tr style="text-align: center;background-color: #DCEAF2;color: #0b1721;height: 30px;">
+        <td scope="row" style="text-align: left;">{{'labels.statut' | translate}}</td>
+        <td>
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.janvier)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.janvier)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.janvier)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.janvier)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.janvier)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.janvier)">{{'labels.planifier' | translate}}</a>
+                      -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.janvier)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.janvier)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.janvier)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.janvier)">{{'labels.annulee' | translate}}</a>
+                    <!--   <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.janvier)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.janvier)">{{'labels.createfiche' | translate}}</a> 
+    
+                      </ng-container>-->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.fevrier)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.fevrier)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                {{conditionStatut}}
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.fevrier)}}</button>
+
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.fevrier)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.fevrier)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier)">{{'labels.planifier' | translate}}</a> -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.fevrier)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.fevrier)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.fevrier)">
+                        <div class="dropdown-divider">
+                        </div>
+                      <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.fevrier)">{{'labels.createfiche' | translate}}</a> 
+                      </ng-container>
+    -->
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.mars)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.mars)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.mars)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.mars)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.mars)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.mars)">{{'labels.planifier' | translate}}</a>
+                     -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.mars)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.mars)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.mars)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.mars)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.mars)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.mars)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.avril)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.avril)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.avril)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.avril)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.avril)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.avril)">{{'labels.planifier' | translate}}</a>
+                      -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.avril)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.avril)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.avril)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.avril)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.avril)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.avril)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.mai)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye" (click)="voirDetails(visite?.visitesMaintenances,moisEnum.mai)"
+                    placement="bottom" ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.mai)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.mai)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.mai)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.mai)">{{'labels.planifier' | translate}}</a>
+                       -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.mai)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.mai)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.mai)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.mai)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.mai)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.mai)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.juin)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.juin)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.juin)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.juin)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.juin)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.juin)">{{'labels.planifier' | translate}}</a>
+                       -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.juin)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.juin)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.juin)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.juin)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.juin)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.juin)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.juillet)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.juillet)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.juillet)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.juillet)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.juillet)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.juillet)">{{'labels.planifier' | translate}}</a>
+                       -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.juillet)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.juillet)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.juillet)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.juillet)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.juillet)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.juillet)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.aout)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.aout)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.aout)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.aout)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.aout)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.aout)">{{'labels.planifier' | translate}}</a>
+                       -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.aout)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.aout)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.aout)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.aout)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.aout)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.aout)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.septembre)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.septembre)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.septembre)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.septembre)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.septembre)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.septembre)">{{'labels.planifier' | translate}}</a>
+                     -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.septembre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.septembre)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.septembre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.septembre)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.septembre)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.septembre)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.octobre)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.octobre)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.octobre)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.octobre)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                    *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.octobre)"
+                    (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.octobre)">{{'labels.planifier' | translate}}</a>
+                   -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.octobre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.octobre)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.octobre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.octobre)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                    *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.octobre)">
+                    <div class="dropdown-divider">
+                    </div>
+                    <a class="dropdown-item"
+                      (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.octobre)">{{'labels.createfiche' | translate}}</a>
+                  </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.novembre)!=null">
+
+              <div class="btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.novembre)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.novembre)}}</button>
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.novembre)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                    *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.novembre)"
+                    (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.novembre)">{{'labels.planifier' | translate}}</a>
+                 -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.novembre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.novembre)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.novembre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.novembre)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                    *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.novembre)">
+                    <div class="dropdown-divider">
+                    </div>
+                    <a class="dropdown-item"
+                      (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.novembre)">{{'labels.createfiche' | translate}}</a>
+                  </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+          </span>
+        </td>
+        <td>
+
+          <span>
+            <ng-container *ngIf="getStatutByMonth(visite?.visitesMaintenances,moisEnum.decembre)!=null">
+              <div class=" btn-group btn-actions-custom">
+                <span class="iconEye"> <i class="ft-eye"
+                    (click)="voirDetails(visite?.visitesMaintenances,moisEnum.decembre)" placement="bottom"
+                    ngbTooltip="{{ 'toolip.detailvisite' | translate }}"></i></span>
+
+                <button type="button"
+                  class="btn btn-secondary">{{getStatutByMonth(visite?.visitesMaintenances,moisEnum.decembre)}}</button>
+
+                <ng-container *ngIf="conditionsDropdownMenu(visite?.visitesMaintenances,moisEnum.decembre)">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" x-placement="top-start"
+                    style="position: absolute; transform: translate3d(97px, -141px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <!-- <a class="dropdown-item">Action</a> -->
+                    <!-- <a class="dropdown-item"
+                        *ngIf="getConditionActions('planifier',visite?.visitesMaintenances,moisEnum.decembre)"
+                        (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Planifier,visite?.visitesMaintenances,moisEnum.decembre)">{{'labels.planifier' | translate}}</a>
+                      -->
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('aplanifier',visite?.visitesMaintenances,moisEnum.decembre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.APlanifier,visite?.visitesMaintenances,moisEnum.decembre)">{{'labels.aplanifier' | translate}}</a>
+                    <a class="dropdown-item"
+                      *ngIf="getConditionActions('annelee',visite?.visitesMaintenances,moisEnum.decembre)"
+                      (click)="changeStatutVisiteMaintenance(this.statutVisiteMaintenance.Annule,visite?.visitesMaintenances,moisEnum.decembre)">{{'labels.annulee' | translate}}</a>
+                    <!-- <ng-container
+                        *ngIf="getConditionActions('ficheintervention',visite?.visitesMaintenances,moisEnum.decembre)">
+                        <div class="dropdown-divider">
+                        </div>
+                        <a class="dropdown-item"
+                          (click)="createFicheIntervention(visite?.visitesMaintenances,moisEnum.decembre)">{{'labels.createfiche' | translate}}</a>
+                      </ng-container> -->
+
+                  </div>
+                </ng-container>
+
+              </div>
+
+
+            </ng-container>
+
+          </span>
+        </td>
+
+      </tr>
+      <tr style="text-align: center;background-color: #DCEAF2; color:#0b1721;">
+        <td scope="row" style="text-align: left;">{{'labels.nficheintervention'|translate}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+      </tr>
+      <tr style="text-align: center;background-color: #DCEAF2; color:#0b1721;">
+        <td scope=" row" style="text-align: left;">{{'labels.nfacture'|translate}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+      </tr>
+
+    </ng-container>
+  </table>
+</div>
+
+
+
+<!-- <div *ngFor="let item of visiteMaintenance; let i = index;">
+  <div *ngIf="i > 0 && item.annee !== list[i-1].annee">{{item.annee}}</div>
+</div> -->

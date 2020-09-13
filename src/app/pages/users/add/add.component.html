@@ -1,0 +1,255 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{'labels.infoUtilisateurs' | translate}}</h3>
+        <div class="row breadcrumbs-top">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a [routerLink]="['/utilisateurs']">{{'title' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ 'add.title' | translate}}
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group">
+            <button type="button" [routerLink]="['/utilisateurs']" class="btn btn-warning mr-1" placement="bottom"
+                ngbTooltip="{{'labels.cancel' | translate}}">
+                <i class="ft-x"></i> {{'labels.cancel' | translate}}
+            </button>
+            <button (click)="add()" type="submit" class="btn btn-primary" placement="bottom"
+                ngbTooltip="{{ 'labels.sauvegarder' | translate }} {{ 'labels.utilisateur' | translate }}">
+                <i class="fa fa-check-square-o"></i> {{ 'labels.sauvegarder' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+<div class="content-body">
+
+    <section id="horizontal-form-layouts">
+        <!-- Form d'information de utilisateurs -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="zoom: 1;">
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form class="form form-horizontal" [formGroup]="form" (ngSubmit)="add()">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput1">{{'labels.nom'
+                                                    | translate}}</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" formControlName="nom" id="projectinput1"
+                                                        class="form-control" placeholder="{{'labels.nom' | translate}}">
+                                                    <small class="text-danger" *ngIf="f?.nom?.errors?.required">{{'errors.required'
+                                                        | translate }}</small>
+                                                    <small class="text-danger" *ngIf="f?.nom?.errors?.minlength">{{'errors.minLength'
+                                                        | translate:{ number:2} }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput2">{{'labels.prenom'
+                                                    | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" formControlName="prenom" id="projectinput2"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.prenom' | translate}}">
+                                                    <small class="text-danger" *ngIf="f?.prenom?.errors?.required">{{'errors.required'
+                                                        | translate }}</small>
+                                                    <small class="text-danger" *ngIf="f?.prenom?.errors?.minlength">{{'errors.minLength'
+                                                        | translate:{number:2} }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput17">{{'labels.matricule'
+                                                    | translate}}</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" formControlName="matricule" id="projectinput17"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.matricule' | translate}}">
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.matricule?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control paddingTop" for="projectinput3">{{'labels.Actif'
+                                                    | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" formControlName="actif"
+                                                            class="custom-control-input" id="projectinput3">
+                                                        <label class="custom-control-label"
+                                                            for="projectinput3">Actif</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput4">{{'labels.Username'
+                                                    | translate}}</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" formControlName="username" id="projectinput4"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.Username' | translate}}">
+                                                    <small class="text-danger" *ngIf="f?.username?.errors?.minlength">{{'errors.minLength'
+                                                        | translate:{number:6} }}</small>
+                                                    <small class="text-danger" *ngIf="f?.username?.errors?.required">{{'errors.required'
+                                                        | translate }}</small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput3">{{'labels.Profile'
+                                                    | translate}}</label>
+                                                <div
+                                                    [ngClass]="{'col-md-9': userProfile.technicien!=f?.idprofile?.value, 'col-md-5': userProfile.technicien==f?.idprofile?.value }">
+                                                    <ng-select labelForId=projectinput16 formControlName="idprofile">
+                                                        <ng-option *ngFor="let profile of Profiles;let i = index"
+                                                            value="{{profile?.id}}">{{profile?.libelle}}</ng-option>
+                                                    </ng-select>
+                                                    <small class="text-danger" *ngIf="f?.idprofile?.errors?.required">{{'errors.required'
+                                                        | translate }}</small>
+
+                                                </div>
+                                                <div class="col-md-4"
+                                                    *ngIf="userProfile.technicien==f?.idprofile?.value">
+                                                    <ng-select labelForId=projectinput16
+                                                        formControlName="typeTechnicien">
+                                                        <ng-option
+                                                            *ngFor="let profile of ProfilesTechnicien;let i = index"
+                                                            value="{{profile?.id}}">{{profile?.libelle}}</ng-option>
+                                                    </ng-select>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.typeTechnicien?.errors?.required">{{'errors.required'
+                                                                | translate }}</small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput5">{{'labels.email'
+                                                    | translate}}</label>
+                                                <div class="col-md-8">
+                                                    <input type="email" formControlName="email" id="projectinput5"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.email' | translate}}">
+                                                    <small class="text-danger" *ngIf="f?.email?.errors?.pattern">
+                                                        {{'errors.pattern' | translate}}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput6">{{'labels.telephone'
+                                                    | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" formControlName="phonenumber" id="projectinput6"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.telephone' | translate}}">
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.phonenumber?.errors?.minlength">{{'errors.minLength'
+                                                        | translate:{number:10} }}</small>
+                                                    <small class="text-danger" *ngIf="f?.phonenumber?.errors?.pattern">
+                                                        {{'errors.pattern' | translate}}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput7">{{'labels.Password'
+                                                    | translate}}</label>
+                                                <div class="col-md-8">
+                                                    <input type="password" formControlName="password" id="projectinput7"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.Password' | translate}}">
+                                                    <small class="text-danger" *ngIf="f?.password?.errors?.minlength">{{'errors.minLength'
+                                                        | translate:{number:6} }}</small>
+                                                    <small class="text-danger" *ngIf="f?.password?.errors?.required">{{'errors.required'
+                                                        | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput8">{{'labels.ConfirmPassword'
+                                                    | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="password" formControlName="confirmpassword"
+                                                        id="projectinput8" class="form-control"
+                                                        placeholder="{{'labels.ConfirmPassword' | translate}}">
+
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.confirmpassword?.errors?.required">{{'errors.required'
+                                                        | translate }}</small>
+
+                                                    <small class="text-danger"
+                                                        *ngIf="form?.hasError('notSame') && !f?.confirmpassword?.errors?.required">
+                                                        {{'errors.passwordsDoNotMatch' | translate}}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-12" style="zoom: 1;">
+                    <div class="btn-group float-md-left" role="group">
+                        <button type="button" [routerLink]="['/utilisateurs']" class="btn btn-warning mr-1"
+                            placement="top" ngbTooltip="{{'labels.cancel' | translate}}">
+                            <i class="ft-x"></i> {{'labels.cancel' | translate}}
+                        </button>
+                        <button (click)="add()" type="submit" class="btn btn-primary" placement="top"
+                            ngbTooltip="{{ 'labels.sauvegarder' | translate }} {{ 'labels.utilisateur' | translate }}">
+                            <i class="fa fa-check-square-o"></i> {{ 'labels.sauvegarder' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+</div>

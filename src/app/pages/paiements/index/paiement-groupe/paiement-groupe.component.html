@@ -1,0 +1,197 @@
+<choix-client-popup [id]="'choixClient'" [clients]="clients" (client)="choisirClient($event)"></choix-client-popup>
+
+<!-- Ajouter ou Modifier paiement-->
+<div class="modal fade text-left" id="ajouterPaiement" (click)="getClients('');GetModeRegelement('');GetCompte('')"
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel98" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel98">
+                    <i class="fa fa-credit-card"></i> {{ 'labels.ajouterPaiement'  | translate }}
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <form [formGroup]="form">
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="moyenPaiement">{{ 'labels.moyenPaiement' | translate }} : </label>
+                                <ng-select formControlName="idModePaiement" (change)="onChangeMoyenPaiement($event)"
+                                    notFoundText="{{'labels.noFoundItem' | translate}}" labelForId=projectinput485>
+                                    <ng-option *ngFor="let modeRegelement of modesRegelement;let i = index"
+                                        value="{{modeRegelement?.id}}">{{modeRegelement?.nom}}</ng-option>
+                                </ng-select>
+                                <small class="text-danger"
+                                    *ngIf="f?.idModePaiement?.errors?.required">{{'errors.required' | translate }}</small>
+                            </div>
+                        </div>
+
+                        <div class="row form-group" *ngIf="dateLang">
+                            <div class="col-md-12">
+                                <label for="date">{{ 'labels.date' | translate }} : </label>
+                                <p-calendar formControlName="datePaiement" dateFormat="dd/mm/yy"
+                                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [locale]="dateLang"
+                                    showButtonBar="true"></p-calendar>
+                                <small class="text-danger"
+                                    *ngIf="f?.datePaiement?.errors?.required">{{'errors.required' | translate }}</small>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="compteCredit">{{ 'labels.compteCredit' | translate }} : </label>
+                                <ng-select formControlName="idCaisse"
+                                    notFoundText="{{'labels.noFoundItem' | translate}}" labelForId=projectinput4877>
+                                    <ng-option *ngFor="let compte of comptes;let i = index" value="{{compte?.id}}">
+                                        {{compte?.nom}}</ng-option>
+                                </ng-select>
+                                <small class="text-danger"
+                                    *ngIf="f?.idCaisse?.errors?.required">{{'errors.required' | translate }}</small>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="montant">{{ 'labels.montant' | translate }} : </label>
+                                <input formControlName="montant" type="number" class="form-control">
+                                <small class="text-danger"
+                                    *ngIf="f?.montant?.errors?.required">{{'errors.required' | translate }}</small>
+                                <small class="text-danger"
+                                    *ngIf="f?.montant?.hasError('CheckValidPrice')">{{'errors.invalid' | translate }}</small>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="description">{{ 'labels.description' | translate }} : </label>
+                                <textarea formControlName="description" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-light" data-dismiss="modal">
+                    {{ 'labels.cancel' | translate }}</button>
+                <button type="button" class="btn btn-success btn-lg" (click)="savePaiement()">
+                    {{ 'labels.sauvegarder' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- pop up de choix les factures -->
+<div class="modal fade text-left" id="choixFacture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel9">
+                    <i class="fa fa-list"></i> {{ 'labels.choixFacture' | translate }}
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="content-body">
+
+                    <!-- search -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="button"><i class="ft-search"></i></button>
+                        </div>
+                        <input type="text" (input)="searchFacture()" [(ngModel)]="search" class="form-control"
+                            placeholder="{{ 'labels.search' | translate }}">
+                    </div>
+
+                    <br>
+
+                    <table class="table shopping-cart-wrap">
+                        <tbody infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+                            [infiniteScrollContainer]="'.container-scroll'" [fromRoot]="true" (scrolled)="onScroll()"
+                            class="container-scroll">
+                            <tr *ngFor="let facture of (factures | OrderListFacturePaiement); let i=index">
+                                <td>
+                                    <figure class="media">
+                                        <div class="img-wrap">
+                                            <input type="checkbox" (click)="onFactureCheck(facture.checked,i)"
+                                                class="form-control img-sm" [(ngModel)]="facture.checked">
+                                            <!--" -->
+                                        </div>
+                                        <figcaption class="media-body">
+                                            <h6 class="title text-truncate">{{ facture?.reference }} </h6>
+                                            <dl class="param param-inline small">
+                                                <dt>{{ 'labels.dateEchéance' | translate }} :</dt>
+                                                <dd>{{ facture?.dateEcheance | date:'dd/MM/yyyy' }}</dd>
+                                            </dl>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <span [hidden]="!facture.checked">
+                                        <input [ngModel]="facture.montant | RoudingNumberInput"
+                                            (ngModelChange)="facture.montant = $event" type="number"
+                                            class="form-control" placeholder="{{ 'labels.montant' | translate }}">
+                                        <small class="text-danger" *ngIf="checkValidMontant(i)">
+                                            {{ 'errors.invalidMontant' | translate }}
+                                        </small>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">{{ 'labels.totalTTC' | translate }}:
+                                            {{ facture?.total | RoudingNumber | ShowCurrency }}</var>
+                                        <small class="text-muted"
+                                            style="font-style: italic;">({{ 'labels.restePayer' | translate }}
+                                            {{ facture?.total | RestePayer:facture?.facturePaiements | RoudingNumber | ShowCurrency }})</small>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="text-center" *ngIf="!finished">
+                                {{ 'labels.loading' | translate }}
+                            </tr>
+                            <tr *ngIf="factures.length == 0" colspan="3" class="chantierHasNoFacture">
+                                {{ 'clientHasNoFacture' | translate }}
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <span><strong style="font-style: italic">{{ 'labels.montantPaiement' | translate }} :
+                            </strong>{{ montant | RoudingNumber | ShowCurrency }}</span>
+                        <br>
+                        <span><strong style="font-style: italic">{{ 'labels.totalMontantFacture' | translate }} :
+                            </strong>{{ totalMontant() | RoudingNumber | ShowCurrency }}</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-light" data-dismiss="modal">{{ 'labels.cancel' |translate }}
+                </button>
+                <button type="button" class="btn btn-success btn-lg"
+                    (click)="save()">{{ 'labels.choisir' | translate }}</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Loading -->
+<!-- <div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+    <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div> -->

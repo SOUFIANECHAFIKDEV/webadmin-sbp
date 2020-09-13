@@ -1,0 +1,128 @@
+<!-- Table des articles -->
+<div class="row">
+  <div class="col-sm-12">
+
+    <!-- les action -->
+    <div style="margin-bottom: 10px">
+      <div class="row">
+        <div class="col-md-3 col-12 col-sm-12 col-md-3" *ngIf="!readOnly">
+          <button type="button" data-backdrop="false" class="btn btn-info square btn-block" (click)="LoadListProduit()"
+            data-toggle="modal" data-target="#selectProduits" placement="bottom"
+            ngbTooltip="{{'labels.selectArticle' | translate}}" [disabled]="IdFournisseur==null">
+            <i class="ft-list"></i>
+            {{ 'labels.selectArticle' | translate }}
+          </button>
+        </div>
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-acrticles">
+            <thead>
+              <tr class="text-center">
+                <th colspan="2" style="width: 15rem;">
+                  <i class="ft-chevron-right" *ngIf="AllCollapsesIsClosed" (click)="setAllCollapsesClosed()"
+                    style="float: left;"></i>
+                  <i class="ft-chevron-down" *ngIf="!AllCollapsesIsClosed"
+                    (click)="AllCollapsesIsClosed = true;collapseClosed = []" style="float: left;"></i>
+                  {{ 'labels.nom' | translate }}</th>
+                <th>{{ 'labels.qte' | translate }}</th>
+                <th>{{ 'labels.prixparfournisseur' | translate }}</th>
+                <th>{{ 'labels.tva' | translate }}</th>
+                <th>Total HT</th>
+                <th>Total TTC</th>
+                <th *ngIf="!readOnly">{{ 'labels.actions' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let article of articles;let i= index">
+
+                <tr>
+                  <td colspan="2">{{article.data.nom}}</td>
+                  <td>{{article?.qte}}</td>
+                  <td *ngIf="!readOnly"> <input type="number" (input)="setPrixFournisseurArticle(i,$event)"
+                      value={{selectPrixParFounisseur(article?.data?.prixParFournisseur,article?.id)}} />
+                  <td class="display-price" *ngIf="readOnly">
+                    {{selectPrixParFounisseur(article?.data?.prixParFournisseur,article?.id) | RoudingNumber | ShowCurrency}}
+                  </td>
+
+                  <td *ngIf="!readOnly"> <input type="text" (input)="setTvaArticle(i,$event)"
+                      value={{article.data.tva}} />
+                  </td>
+                  <td *ngIf="readOnly"> {{article.data.tva}} </td>
+
+
+                  <td class="display-price">
+                    {{ prixHt(i,article.data.qte) | RoudingNumber | ShowCurrency }}
+                  </td>
+                  <td class="display-price">
+                    {{ prixTtc( article.data.qte, i) | RoudingNumber | ShowCurrency}}
+                  </td>
+
+                  <td *ngIf="!readOnly">
+                    <!-- <button type="button" data-toggle="modal" data-target="#produitForm"
+                      class="btn btn-primary btn-md btn-actions"
+                      (click)="createProduitForm(article);lastUpdatedProduit = i;idLotUsedForAddProduit = null "
+                      ngbTooltip="{{'labels.modifier' | translate}} {{'labels.article' | translate}}">
+                      <i class="ft-edit"></i>
+                    </button> -->
+                    <button type="button" class="btn btn-danger btn-md btn-actions" (click)="removeArticle(i,null)"
+                      ngbTooltip="{{'labels.supprimer' | translate}}  {{'labels.article' | translate}}">
+                      <i class="ft-trash-2"></i>
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+
+
+
+
+              <tr *ngIf="articles?.length == 0" class="text-center">
+                <td colspan="10"> {{ 'labels.msgEmptyTable' | translate }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+
+            <tr>
+              <th>TOTAL GENERAL HT :
+                <i class="ft-info" placement="bottom"></i>
+              </th>
+              <td class="text-right">{{ clalcTotalGeneral() | RoudingNumber | ShowCurrency}}</td>
+            </tr>
+
+
+            <tr *ngFor="let T of groupTVA()">
+              <th>TVA {{ T.tva | RoudingNumber }} % :
+              </th>
+              <td class="text-right">
+                {{ T.totalTVA | RoudingNumber }}
+              </td>
+
+            </tr>
+
+            <tr>
+              <th>TOTAL GENERAL TTC
+                <i class="ft-info" placement="bottom"></i>
+              </th>
+              <td class="text-right">{{ calcTotalGeneralTtc() | RoudingNumber | ShowCurrency }}</td>
+            </tr>
+
+
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+    <select-produit-fournisseur [reload]="emitter" (ONAdd)="addProduits($event)" [IdFournisseur]="IdFournisseur">
+    </select-produit-fournisseur>
+
+
+    <app-produit-form [reload]="emitter"></app-produit-form>

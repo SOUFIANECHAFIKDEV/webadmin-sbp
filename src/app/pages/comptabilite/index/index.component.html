@@ -1,0 +1,41 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'title' | translate }}</h3>
+  </div>
+</div>
+
+<ul class="nav nav-tabs nav-top-border no-hover-bg nav-justified">
+  <li class="nav-item">
+    <a class="nav-link active" id="journalVente-tab1" data-toggle="tab" href="#journalVente"
+      aria-controls="journalVente" role="tab" aria-selected="true"><i class="fa fa-align-justify"></i>
+      {{ 'labels.journalVente' | translate }}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="journalAchat-tab1" data-toggle="tab" href="#journalAchat" aria-controls="journalAchat"
+      role="tab" aria-selected="false"><i class="fa fa-align-justify"></i> {{ 'labels.journalAchat' | translate }}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="journalBanque-tab1" data-toggle="tab" href="#journalBanque" aria-controls="journalBanque"
+      role="tab" aria-selected="true"><i class="fa fa-align-justify"></i> {{ 'labels.journalBanque' | translate }}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="journalCaisse-tab1" data-toggle="tab" href="#journalCaisse" aria-controls="journalCaisse"
+      role="tab" aria-selected="false"><i class="fa fa-align-justify"></i> {{ 'labels.journalCaisse' | translate }}</a>
+  </li>
+</ul>
+
+
+<div class="tab-content px-1 pt-1">
+  <div class="tab-pane active" id="journalVente" aria-labelledby="journalVente-tab1" role="tabpanel">
+    <journal-vente [nameModule]="'JournalVente'"></journal-vente>
+  </div>
+  <div class="tab-pane in" id="journalAchat" aria-labelledby="journalAchat-tab1" role="tabpanel">
+    <journal-achat [nameModule]="'JournalAchat'"></journal-achat>
+  </div>
+  <div class="tab-pane in" id="journalBanque" aria-labelledby="journalBanque-tab1" role="tabpanel">
+    <journal-banque [isCaisse]="false" [nameModule]="'journal_banque'"></journal-banque>
+  </div>
+  <div class="tab-pane in" id="journalCaisse" aria-labelledby="journalCaisse-tab1" role="tabpanel">
+    <journal-banque [isCaisse]="true" [nameModule]="'journal_caisse'"></journal-banque>
+  </div>
+</div>

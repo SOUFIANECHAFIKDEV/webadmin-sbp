@@ -1,0 +1,400 @@
+<ng-container *ngIf="!readOnly">
+    <form class="form form-horizontal" [formGroup]="form">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="label-control" for="puc">{{'labels.articles' | translate}}</label>
+                    </div>
+                    <div class="col-md-9" *ngIf="f?.devisExel.value == null && !readOnly">
+                        <label class="label-control" for="devisExel"
+                            class="btn-file-upload">{{'labels.chooseFile' | translate}}</label>
+                        <input class="file-input" type="file" (change)="startUpload($event.target.files)" id="devisExel"
+                            name="files" style="visibility:hidden;" /><br />
+                        <small class="text-danger"
+                            *ngIf="f?.devisExel?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                    <div class="col-md-9" *ngIf="f?.devisExel.value != null">
+                        <p>{{ f?.devisExel?.value?.orignalName }} <i class="ft-download" (click)="downloadFile()"
+                                ngbTooltip="{{'labels.telecharger' | translate}}"></i>
+                            <i class="ft-trash" *ngIf="!readOnly" ngbTooltip="{{'labels.supprimer' | translate}}"
+                                (click)="removeFile()"></i></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- nomber_heure & cout_vente -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                        for="nombre_heure">{{'labels.nombre_heure' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" formControlName="nomber_heure" id="nombre_heure"
+                            class="form-control currency-input" min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.nomber_heure?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="cout_horaire">
+                        {{'labels.cout_horaire' | translate}}
+                        <i class="ft-info" placement="bottom"
+                            ngbTooltip="{{ f?.nomber_heure?.value}} ({{ 'labels.nombre_heure' | translate }}) × {{ f?.cout_vente?.value }} ({{ 'labels.cout_vente' | translate }})"></i>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="f?.nomber_heure?.value * f?.cout_vente?.value" disabled
+                            id="cout_horaire" class="form-control currency-input" min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.cout_vente?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- cout_materiel & devisExel-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                        for="cout_materiel">{{'labels.cout_materiel' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" formControlName="cout_materiel" id="cout_materiel"
+                            class="form-control currency-input" min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.cout_materiel?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                        for="achat_materiel">{{'labels.achat_materield' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" formControlName="achat_materiel" id="achat_materiel"
+                            class="form-control currency-input" min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.achat_materiel?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- puc & prorata-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="puc">{{'labels.puc' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" formControlName="puc" id="puc" class="form-control currency-input"
+                            min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.puc?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="prorata">{{'labels.prorata' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" formControlName="prorata" id="prorata" class="form-control currency-input"
+                            min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.prorata?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- totalHt & tva-->
+        <div class="row">
+            <div class="col-md-6  offset-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="tva">{{'labels.tva' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" formControlName="tva" id="tva" class="form-control currency-input"
+                            min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.tva?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="totalHt">{{'labels.totalHt' | translate}}</label>
+                    <div class="col-md-9">
+                        <!-- <input type="number" formControlName="totalHt" id="totalHt" class="form-control" min="0" />
+                        <small class="text-danger"
+                            *ngIf="f?.totalHt?.errors?.required">{{'errors.required' | translate }}</small> -->
+                        <input type="text" id="TotalHt" class="form-control currency-input"
+                            placeholder="{{ 'labels.TotalHt' | translate }}"
+                            value="  {{ TotalHt(f?.nomber_heure?.value , f?.cout_vente?.value,f?.cout_materiel?.value) }} "
+                            disabled appInputRemoveDefaultZero>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- totalTtc-->
+        <div class="row">
+
+            <div class="col-md-6 offset-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="TotalTtc">{{'labels.totalTTC' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="text" id="TotalTtc" class="form-control currency-input"
+                            placeholder="{{ 'labels.TotalHt' | translate }}"
+                            value="  {{ TotalTtc(f?.nomber_heure?.value , f?.cout_vente?.value,f?.cout_materiel?.value,f?.tva?.value) }} "
+                            disabled appInputRemoveDefaultZero>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-6">
+                <div class="row" style="min-height: 60px;">
+                    <div class="col-3 custom-control custom-checkbox" style="position: relative;
+                    top: 10px;">
+                        <input class="custom-control-input ng-valid ng-dirty ng-touched" id="projectinput3"
+                            type="checkbox" ng-reflect-model="true" [(ngModel)]="retenueGarantie"
+                            [ngModelOptions]="{standalone: true}">
+                        <label class="custom-control-label" for="projectinput3">Retenue de garantie</label>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <input type="number" class="form-control text-right" appInputRemoveDefaultZero
+                                [(ngModel)]="retenueGarantieValue" [ngModelOptions]="{standalone: true}"
+                                placeholder="retenueGarantie" [disabled]="readOnly" *ngIf="retenueGarantie == 1"
+                                max="100" min="0">
+                            <div class="input-group-prepend" *ngIf="retenueGarantie == 1">
+                                <div class="input-group-text">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <select style="min-height: 40px; width: 9vw !important;" [(ngModel)]="delaiGarantie"
+                                [ngModelOptions]="{standalone: true}" [disabled]="readOnly"
+                                *ngIf="retenueGarantie == 1">
+                                <option [value]="null">{{ 'delai_garantie.question' | translate }}</option>
+                                <option [value]="delaiGarantiesEnum.TroisMois">
+                                    {{ 'delai_garantie.troisMois' | translate }}</option>
+                                <option [value]="delaiGarantiesEnum.SixMois">
+                                    {{ 'delai_garantie.sixMois' | translate }}</option>
+                                <option [value]="delaiGarantiesEnum.UnAns">
+                                    {{ 'delai_garantie.unAns' | translate }}</option>
+                                <option [value]="delaiGarantiesEnum.DeuxAns">
+                                    {{ 'delai_garantie.deuxAns' | translate }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="retenueGarantie == 1">
+                        <input type="text" id="TotalTtc" class="form-control currency-input" value=" {{ TotalHt(f?.nomber_heure?.value , f?.cout_vente?.value,f?.cout_materiel?.value) * (retenueGarantieValue/100) | RoudingNumber | ShowCurrency }}
+                                " disabled appInputRemoveDefaultZero>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </form>
+</ng-container>
+<ng-container *ngIf="readOnly">
+    <form class="form form-horizontal" [formGroup]="form">
+        <!-- devisExel -->
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="label-control" for="puc">{{'labels.articles' | translate}}</label>
+                    </div>
+                    <div class="col-md-9" *ngIf="f?.devisExel.value == null && !readOnly">
+                        <label class="label-control" for="devisExel"
+                            class="btn-file-upload">{{'labels.chooseFile' | translate}}</label>
+                        <input class="file-input" type="file" (change)="startUpload($event.target.files)" id="devisExel"
+                            name="files" style="visibility:hidden;" /><br />
+                        <small class="text-danger"
+                            *ngIf="f?.devisExel?.errors?.required">{{'errors.required' | translate }}</small>
+                    </div>
+                    <div class="col-md-9" *ngIf="f?.devisExel.value != null">
+                        <p>{{ f?.devisExel?.value?.orignalName }}
+                            <i class="ft-download" ngbTooltip="{{'labels.telecharger' | translate}}"
+                                (click)="downloadFile()"></i>
+                            <i class="ft-trash" ngbTooltip="{{'labels.supprimer' | translate}}" *ngIf="!readOnly"
+                                (click)="removeFile()"></i>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- nbr heure & coutVente-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                        for="nombre_heure">{{'labels.nombre_heure' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data?.nomberHeure" class="form-control currency-input"
+                            id="nombre_heure" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="cout_horaire">
+                        {{'labels.cout_horaire' | translate}}
+                        <i class="ft-info" placement="bottom"
+                            ngbTooltip="{{ data?.nomberHeure }} ({{ 'labels.nombre_heure' | translate }}) × {{ data?.coutVente }} ({{ 'labels.cout_vente' | translate }})"></i>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data?.nomberHeure * data?.coutVente"
+                            class="form-control currency-input" id="cout_horaire" disabled />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- coutMateriel & cout achat Materiel -->
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                        for="cout_materiel">{{'labels.cout_materiel' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data?.coutMateriel" class="form-control currency-input"
+                            id="cout_materiel" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                        for="cout_materiel">{{'labels.achat_materield' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data?.achatMateriel" class="form-control currency-input"
+                            id="cout_materiel" disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- puc & prorata-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="puc">{{'labels.puc' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data.puc" class="form-control currency-input" id="totalHt"
+                            disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="prorata">{{'labels.prorata' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data.prorata" class="form-control currency-input" id="totalHt"
+                            disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- totalHt & tva-->
+        <div class="row">
+            <div class="col-md-6 offset-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="tva">{{'labels.tva' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data.tva" class="form-control currency-input" id="totalHt"
+                            disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="totalHt">{{'labels.totalHt' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="number" [value]="data.totalHt" class="form-control currency-input" id="totalHt"
+                            disabled />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- totalTtc-->
+        <div class="row">
+
+            <div class="col-md-6 offset-md-6">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="TotalTtc">{{'labels.totalTTC' | translate}}</label>
+                    <div class="col-md-9">
+                        <input type="text" id="TotalTtc" class="form-control currency-input"
+                            placeholder="{{ 'labels.TotalTtc' | translate }}"
+                            [value]="data.total | RoudingNumber | ShowCurrency " disabled>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 offset-md-6">
+            <div class="row" style="min-height: 60px;">
+                <div class="col-3  " style="position: relative;
+                    top: 10px;">
+
+                    <label class="control-label" for="projectinput3">Retenue de garantie</label>
+                </div>
+                <p *ngIf="retenueGarantie == 0" style="font-weight: bold;
+                margin-left: 514px;
+                margin-top: 4px;">
+                    Non</p>
+                <div class="col-3">
+                    <div class="input-group">
+                        <input type="number" class="form-control text-right" appInputRemoveDefaultZero
+                            [(ngModel)]="retenueGarantieValue" [ngModelOptions]="{standalone: true}"
+                            placeholder="retenueGarantie" *ngIf="retenueGarantie == 1" max="100" min="0" disabled>
+                        <div class="input-group-prepend" *ngIf="retenueGarantie == 1">
+                            <div class="input-group-text">%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <select style="min-height: 40px; width: 9vw !important;" [(ngModel)]="delaiGarantie"
+                            [ngModelOptions]="{standalone: true}" disabled *ngIf="retenueGarantie == 1">
+                            <option [value]="null">{{ 'delai_garantie.question' | translate }}</option>
+                            <option [value]="delaiGarantiesEnum.TroisMois">
+                                {{ 'delai_garantie.troisMois' | translate }}</option>
+                            <option [value]="delaiGarantiesEnum.SixMois">
+                                {{ 'delai_garantie.sixMois' | translate }}</option>
+                            <option [value]="delaiGarantiesEnum.UnAns">
+                                {{ 'delai_garantie.unAns' | translate }}</option>
+                            <option [value]="delaiGarantiesEnum.DeuxAns">
+                                {{ 'delai_garantie.deuxAns' | translate }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3" *ngIf="retenueGarantie == 1">
+                    <input type="text" id="TotalTtc" class="form-control currency-input" value="{{data.totalHt * (retenueGarantieValue/100) | RoudingNumber | ShowCurrency }}
+                                " disabled appInputRemoveDefaultZero>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </form>
+</ng-container>

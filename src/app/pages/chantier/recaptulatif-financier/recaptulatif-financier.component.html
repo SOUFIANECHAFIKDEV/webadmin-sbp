@@ -1,0 +1,670 @@
+<div class="row">
+  <!-- previsionnel -->
+  <div class="col-6">
+
+    <div class="Recapitulatif-financier-header col-12">
+      {{'labels.previsionnel' | translate}}
+      <span class="ft-help-circle" style="float: right; font-size: 20px;"
+        ngbTooltip="{{'labels.previsionnelInfo' | translate}}"></span>
+    </div>
+    <!-- total_devis -->
+    <div class="Recapitulatif-financier-body total_devis">
+      <div class="container">
+        <div class="row">
+          <!-- section 1 -->
+          <div class="col-3 section-left">
+            <i class="fa fa-sign-in title-icon"></i>
+            <p class="recupitilatif-title"> {{'labels.total_devis' | translate}}</p>
+            <p class="sum recupitilatif-title">{{  total_devis?.sum | RoudingNumber | ShowCurrency}}</p>
+            <p class="sum" *ngIf="total_devis?.pourcentage!=null">
+              {{  total_devis?.pourcentage | RoudingNumber }} %</p>
+          </div>
+
+          <!-- section 2 -->
+          <div class="col-7">
+            <!-- vente_materiel -->
+            <div class="row section-meduim-card">
+              <div class="col-8 title" style="background-color: rgb(159, 197, 248)">
+                {{'labels.vente_materiel' | translate}}
+                <span *ngIf="total_devis?.elements[0]?.nbrHeure != null"> {{ total_devis?.elements[0]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ total_devis?.elements[0]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{ total_devis?.elements[0]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- vente_main_oveure -->
+            <div class="row section-meduim-card" style="margin: 15px 5px;">
+              <div class="col-8 title" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{'labels.vente_main_oveure' | translate}}
+                <span *ngIf="total_devis?.elements[1]?.nbrHeure != null"> {{ total_devis?.elements[1]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ total_devis?.elements[1]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{ total_devis?.elements[1]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+          </div>
+          <!-- section 3 -->
+          <div class="col-2">
+            <!-- ghaphe -->
+            <div class="chart-container">
+              <canvas baseChart [data]="pieChartData?.total_devis" [labels]="pieChartLabels?.total_devis"
+                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                [colors]="pieChartColors" [legend]="pieChartLegend">
+              </canvas>
+              <div class="chart-legend">
+                <!-- previsionnel => total_devis => vente_materiel  -->
+                <div class="chart-legend-color legend-color-one"></div>
+                <div class="chart-legend-label">
+                  {{'labels.vente_materiel' | translate}}
+                </div>
+                <!-- previsionnel => total_devis => vente_materiel  -->
+                <div class="chart-legend-color legend-color-tow "></div>
+                <div class="chart-legend-label">
+                  {{'labels.vente_main_oveure' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- depensee_Aprevoir -->
+    <div class="Recapitulatif-financier-body depensee_Aprevoir">
+      <div class="container">
+        <div class="row">
+          <!-- section 1 -->
+          <div class="col-3 section-left">
+            <i class="fa fa-sign-out title-icon"></i>
+            <p class="recupitilatif-title"> {{'labels.depensee_Aprevoir' | translate}}</p>
+            <p class="sum recupitilatif-title">{{  depensee_Aprevoir?.sum | RoudingNumber | ShowCurrency}}</p>
+            <p class="sum" *ngIf="depensee_Aprevoir?.pourcentage!=null">
+              {{  depensee_Aprevoir?.pourcentage | RoudingNumber }} %</p>
+          </div>
+
+          <!-- section 2 -->
+          <div class="col-7">
+            <!-- vente_materiel -->
+            <div class="row section-meduim-card" style="margin: 0px 5px 24px 5px;">
+              <div class="col-8 title" style="background-color: rgb(234, 153, 153);padding: 20px 10px;">
+                {{'labels.achat_materiel' | translate}}
+                <span *ngIf="depensee_Aprevoir?.elements[0]?.nbrHeure != null">
+                  {{ depensee_Aprevoir?.elements[0]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ depensee_Aprevoir?.elements[0]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(234, 153, 153);padding: 20px 10px;">
+                {{ depensee_Aprevoir?.elements[0]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- achat_main_oveure -->
+            <div class="row section-meduim-card" style="margin: 0px 5px 24px 5px;">
+              <div class="col-8 title" style="background-color: rgb(234, 153, 153);padding: 20px 10px;">
+                {{'labels.achat_main_oveure' | translate}}
+                <span *ngIf="depensee_Aprevoir?.elements[1]?.nbrHeure != null">
+                  {{ depensee_Aprevoir?.elements[1]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ depensee_Aprevoir?.elements[1]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(234, 153, 153);padding: 20px 10px;">
+                {{ depensee_Aprevoir?.elements[1]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- sous_traitance -->
+            <div class="row section-meduim-card" style="margin: 0px 5px 24px 5px;">
+              <div class="col-8 title" style="background-color: rgb(234, 153, 153);padding: 20px 10px;">
+                {{'labels.sous_traitance' | translate}}
+                <span *ngIf="depensee_Aprevoir?.elements[2]?.nbrHeure != null">
+                  {{ depensee_Aprevoir?.elements[2]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ depensee_Aprevoir?.elements[2]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(234, 153, 153);padding: 20px 10px;">
+                {{ depensee_Aprevoir?.elements[2]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+          </div>
+          <!-- section 3 -->
+          <div class="col-2">
+            <!-- ghaphe -->
+            <div class="chart-container">
+              <canvas baseChart [data]="pieChartData?.depensee_Aprevoir" [labels]="pieChartLabels?.depensee_Aprevoir"
+                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                [colors]="pieChartColors" [legend]="pieChartLegend">
+              </canvas>
+              <div class="chart-legend">
+                <!-- previsionnel => depensee_Aprevoir => achat_materiel  -->
+                <div class="chart-legend-color legend-color-one"></div>
+                <div class="chart-legend-label">
+                  {{'labels.achat_materiel' | translate}}
+                </div>
+                <!-- previsionnel => depensee_Aprevoir => achat_main_oveure  -->
+                <div class="chart-legend-color legend-color-tow"></div>
+                <div class="chart-legend-label">
+                  {{'labels.achat_main_oveure' | translate}}
+                </div>
+                <!-- previsionnel => depensee_Aprevoir => sous_traitance  -->
+                <div class="chart-legend-color legend-color-three"></div>
+                <div class="chart-legend-label">
+                  {{'labels.sous_traitance' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- marge_Previsionnel -->
+    <div class="Recapitulatif-financier-body marge_Previsionnel">
+      <div class="container">
+        <div class="row">
+          <!-- section 1 -->
+          <div class="col-3 section-left">
+            <i class="fa fa-flag-checkered title-icon"></i>
+            <p class="recupitilatif-title"> {{'labels.marge_Previsionnel' | translate}}</p>
+            <p class="sum recupitilatif-title">{{  marge_Previsionnel?.sum | RoudingNumber | ShowCurrency}}</p>
+            <p class="sum" *ngIf="marge_Previsionnel?.pourcentage!=null">
+              {{  marge_Previsionnel?.pourcentage | RoudingNumber }} %</p>
+          </div>
+
+          <!-- section 2 -->
+          <div class="col-7">
+            <!-- retenueGarantier -->
+            <div class="row section-meduim-card" style="margin: 0px 5px;">
+              <div class="col-8 title"
+                [ngClass]="{'element-positive':marge_Previsionnel?.elements[0]?.sum >= 0 ,'element-negative':marge_Previsionnel?.elements[0]?.sum < 0 }">
+                {{'labels.retenueGarantier' | translate}}
+                <span *ngIf="marge_Previsionnel?.elements[0]?.nbrHeure != null">
+                  {{ marge_Previsionnel?.elements[0]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ marge_Previsionnel?.elements[0]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right"
+                [ngClass]="{'element-positive':marge_Previsionnel?.elements[0]?.sum >= 0 ,'element-negative':marge_Previsionnel?.elements[0]?.sum < 0 }">
+                {{ marge_Previsionnel?.elements[0]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- margeMateriel -->
+            <div class="row section-meduim-card" style="margin: 15px 5px;">
+              <div class="col-8 title"
+                [ngClass]="{'element-positive':marge_Previsionnel?.elements[1]?.sum >= 0 ,'element-negative':marge_Previsionnel?.elements[1]?.sum < 0 }">
+                {{'labels.margeMateriel' | translate}}
+                <span *ngIf="marge_Previsionnel?.elements[1]?.nbrHeure != null">
+                  {{ marge_Previsionnel?.elements[1]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ marge_Previsionnel?.elements[1]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right"
+                [ngClass]="{'element-positive':marge_Previsionnel?.elements[1]?.sum >= 0 ,'element-negative':marge_Previsionnel?.elements[1]?.sum < 0 }">
+                {{ marge_Previsionnel?.elements[1]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- margeMainOeuvre -->
+            <div class="row section-meduim-card" style="margin: 15px 5px;">
+              <div class="col-8 title"
+                [ngClass]="{'element-positive':marge_Previsionnel?.elements[2]?.sum >= 0 ,'element-negative':marge_Previsionnel?.elements[2]?.sum < 0 }">
+                {{'labels.margeMainOeuvre' | translate}}
+                <span *ngIf="marge_Previsionnel?.elements[2]?.nbrHeure != null">
+                  {{ marge_Previsionnel?.elements[2]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ marge_Previsionnel?.elements[2]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right"
+                [ngClass]="{'element-positive':marge_Previsionnel?.elements[2]?.sum >= 0 ,'element-negative':marge_Previsionnel?.elements[2]?.sum < 0 }">
+                {{ marge_Previsionnel?.elements[2]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+          </div>
+          <!-- section 3 -->
+          <div class="col-2">
+            <!-- ghaphe -->
+            <div class="chart-container">
+              <canvas baseChart [data]="pieChartData?.marge_Previsionnel" [labels]="pieChartLabels?.marge_Previsionnel"
+                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                [colors]="pieChartColors" [legend]="pieChartLegend">
+              </canvas>
+              <div class="chart-legend">
+                <!-- previsionnel => marge_Previsionnel => retenueGarantier  -->
+                <div class="chart-legend-color legend-color-one"></div>
+                <div class="chart-legend-label">
+                  {{'labels.retenueGarantier' | translate}}
+                </div>
+                <!-- previsionnel => marge_Previsionnel => margeMateriel  -->
+                <div class="chart-legend-color legend-color-tow"></div>
+                <div class="chart-legend-label">
+                  {{'labels.margeMateriel' | translate}}
+                </div>
+                <!-- previsionnel => marge_Previsionnel => margeMainOeuvre  -->
+                <div class="chart-legend-color legend-color-three"></div>
+                <div class="chart-legend-label">
+                  {{'labels.margeMainOeuvre' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- facturation_tresorie -->
+  <div class="col-6">
+    <div class="Recapitulatif-financier-header col-12">
+      {{'labels.facturationtresorie' | translate}}
+      <span class="ft-help-circle" style="float: right; font-size: 20px;"
+        ngbTooltip="{{'labels.facturationtresorieInfo' | translate}}"></span>
+    </div>
+    <!-- caFacture -->
+    <div class="Recapitulatif-financier-body caFacture">
+      <div class="container">
+        <div class="row">
+          <!-- section 1 -->
+          <div class="col-3 section-left">
+            <i class="fa fa-sign-in title-icon"></i>
+            <p class="recupitilatif-title"> {{'labels.caFacture' | translate}}</p>
+            <p class="sum recupitilatif-title">{{  caFacture?.sum | RoudingNumber | ShowCurrency}}</p>
+            <p class="sum" *ngIf="caFacture?.pourcentage!=null">
+              {{  caFacture?.pourcentage | RoudingNumber }} %</p>
+          </div>
+
+          <!-- section 2 -->
+          <div class="col-7">
+            <!-- payes -->
+            <div class="row section-meduim-card" style="margin: 0px 5px;">
+              <div class="col-8 title" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{'labels.payes' | translate}}
+                <span *ngIf="caFacture?.elements[0]?.nbrHeure != null"> {{ caFacture?.elements[0]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ caFacture?.elements[0]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{ caFacture?.elements[0]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- enAttentepaiement -->
+            <div class="row section-meduim-card" style="margin: 15px 5px;">
+              <div class="col-8 title" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{'labels.enAttentepaiement' | translate}}
+                <span *ngIf="caFacture?.elements[1]?.nbrHeure != null"> {{ caFacture?.elements[1]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ caFacture?.elements[1]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(159, 197, 248);padding: 10px 10px;">
+                {{ caFacture?.elements[1]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <div class="row" *ngIf="caFacture?.defference != null">
+              <div class="col-12">
+                <div class="progress">
+                  <div class="progress-bar"
+                    [ngClass]="{'bg-success':caFacture?.defference <=100 ,'bg-danger':caFacture?.defference >100 }"
+                    [style.width]="caFacture?.defference+ '%'" role="progressbar">
+                    <p class="progress-bar-pourcentage"> {{caFacture?.defference | RoudingNumber}}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- section 3 -->
+          <div class="col-2">
+            <!-- ghaphe -->
+            <div class="chart-container">
+              <canvas baseChart [data]="pieChartData?.caFacture" [labels]="pieChartLabels?.total_devis"
+                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                [colors]="pieChartColors" [legend]="pieChartLegend">
+              </canvas>
+              <div class="chart-legend">
+                <!-- previsionnel => caFacture => payes  -->
+                <div class="chart-legend-color legend-color-one"></div>
+                <div class="chart-legend-label">
+                  {{'labels.payes' | translate}}
+                </div>
+                <!-- previsionnel => caFacture => enAttentepaiement  -->
+                <div class="chart-legend-color legend-color-tow "></div>
+                <div class="chart-legend-label">
+                  {{'labels.enAttentepaiement' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- depenseeEngagees -->
+    <div class="Recapitulatif-financier-body depenseeEngagees">
+      <div class="container">
+        <div class="row">
+          <!-- section 1 -->
+          <div class="col-3 section-left">
+            <i class="fa fa-sign-out title-icon"></i>
+            <p class="recupitilatif-title"> {{'labels.depenseeEngagees' | translate}}</p>
+            <p class="sum recupitilatif-title">{{  depenseeEngagees?.sum | RoudingNumber | ShowCurrency}}</p>
+            <p class="sum" *ngIf="depenseeEngagees?.pourcentage!=null">
+              {{  depenseeEngagees?.pourcentage | RoudingNumber }} %</p>
+          </div>
+
+          <!-- section 2 -->
+          <div class="col-7">
+            <!-- achat_materiel -->
+            <div class="row section-meduim-card" style="margin: 0px 5px;">
+              <div class="col-8 title" style="background-color: rgb(234, 153, 153);padding: 10px 10px;">
+                <p style="margin-bottom: 0.1rem;"> {{'labels.achat_materiel' | translate}}
+                  <span *ngIf="depenseeEngagees?.elements[0]?.nbrHeure != null">
+                    {{ depenseeEngagees?.elements[0]?.nbrHeure | RoudingNumber }} h
+                  </span>
+                  <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                    {{ depenseeEngagees?.elements[0]?.pourcentage | RoudingNumber }}
+                    %
+                  </span></p>
+                <p class="sous-element">
+                  {{'labels.payes' | translate}}
+                  {{ depenseeEngagees?.elements[0]?.souselements[0]?.pourcentage | RoudingNumber  }} %
+                </p>
+                <p class="sous-element">
+                  {{'labels.enAttentepaiement' | translate}}
+                  {{ depenseeEngagees?.elements[0]?.souselements[1]?.pourcentage | RoudingNumber }} %
+                </p>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(234, 153, 153);padding: 10px 10px;">
+                <p style="margin-bottom: 0.1rem;">
+                  {{ depenseeEngagees?.elements[0]?.sum | RoudingNumber | ShowCurrency }}</p>
+                <p class="sous-element">{{ depenseeEngagees?.elements[0]?.souselements[0]?.sum | RoudingNumber }}</p>
+                <p class="sous-element">{{ depenseeEngagees?.elements[0]?.souselements[1]?.sum | RoudingNumber  }}</p>
+              </div>
+              <div class="col-12" style="padding:0;" *ngIf="depenseeEngagees?.elements[0]?.defference != null">
+                <div class="progress progress-sous-element" style="margin: 0;">
+                  <div class="progress-bar"
+                    [ngClass]="{'bg-success':depenseeEngagees?.elements[0]?.defference <=100 ,'bg-danger':depenseeEngagees?.elements[0]?.defference >100 }"
+                    [style.width]="depenseeEngagees?.elements[0]?.defference+ '%'" role="progressbar">
+                    <p class="progress-bar-pourcentage">
+                      {{depenseeEngagees?.elements[0]?.defference | RoudingNumber}}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- interventions -->
+            <div class="row section-meduim-card" style="margin: 0px 5px;">
+              <div class="col-8 title" style="background-color: rgb(234, 153, 153);padding: 10px 10px;">
+                <p style="margin-bottom: 0.1rem;"> {{'labels.achat_main_oveure' | translate}}
+                  <span *ngIf="depenseeEngagees?.elements[1]?.nbrHeure != null">
+                    {{ depenseeEngagees?.elements[1]?.nbrHeure | RoudingNumber }} h
+                  </span>
+                  <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                    {{ depenseeEngagees?.elements[1]?.pourcentage | RoudingNumber }}
+                    %
+                  </span></p>
+                <p class="sous-element">
+                  {{'labels.nbPanier' | translate}}
+                  {{ depenseeEngagees?.elements[1]?.souselements[0]?.nbrPanierOrDeplacement  }}
+                </p>
+                <p class="sous-element">
+                  {{'labels.nbDeplacement' | translate}}
+                  {{ depenseeEngagees?.elements[1]?.souselements[1]?.nbrPanierOrDeplacement  }}
+                </p>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(234, 153, 153);padding: 10px 10px;">
+                <p style="margin-bottom: 0.1rem;">
+                  {{ depenseeEngagees?.elements[1]?.sum | RoudingNumber | ShowCurrency }}</p>
+                <p class="sous-element">{{ depenseeEngagees?.elements[1]?.souselements[0]?.sum | RoudingNumber  }}</p>
+                <p class="sous-element">{{ depenseeEngagees?.elements[1]?.souselements[1]?.sum| RoudingNumber  }}</p>
+              </div>
+
+              <div class="col-12" style="padding:0;" *ngIf="depenseeEngagees?.elements[1]?.defference != null">
+                <div class="progress progress-sous-element" style="margin: 0;">
+                  <div class="progress-bar"
+                    [ngClass]="{'bg-success':depenseeEngagees?.elements[1]?.defference <=100 ,'bg-danger':depenseeEngagees?.elements[1]?.defference >100 }"
+                    [style.width]="depenseeEngagees?.elements[1]?.defference+ '%'" role="progressbar">
+                    <p class="progress-bar-pourcentage">
+                      {{depenseeEngagees?.elements[1]?.defference | RoudingNumber}}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- sous_traitance -->
+            <div class="row section-meduim-card" style="margin: 0px 5px;">
+              <div class="col-8 title" style="background-color: rgb(234, 153, 153);padding: 10px 10px;">
+                <p style="margin-bottom: 0.1rem;">{{'labels.sous_traitance' | translate}}
+                  <span *ngIf="depenseeEngagees?.elements[2]?.nbrHeure != null">
+                    {{ depenseeEngagees?.elements[2]?.nbrHeure }} h
+                  </span>
+                  <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                    {{ depenseeEngagees?.elements[2]?.pourcentage | RoudingNumber }}
+                    %
+                  </span></p>
+                <p class="sous-element">
+                  {{'labels.payes' | translate}}
+                  {{ depenseeEngagees?.elements[2]?.souselements[0]?.pourcentage | RoudingNumber  }} %
+                </p>
+                <p class="sous-element">
+                  {{'labels.enAttentepaiement' | translate}}
+                  {{ depenseeEngagees?.elements[2]?.souselements[1]?.pourcentage | RoudingNumber  }} %
+                </p>
+              </div>
+              <div class="col-4 title text-right" style="background-color: rgb(234, 153, 153);padding: 10px 10px;">
+                <p style="margin-bottom: 0.1rem;">
+                  {{ depenseeEngagees?.elements[2]?.sum | RoudingNumber | ShowCurrency }}</p>
+                <p class="sous-element">{{ depenseeEngagees?.elements[2]?.souselements[0]?.sum | RoudingNumber  }}</p>
+                <p class="sous-element">{{ depenseeEngagees?.elements[2]?.souselements[1]?.sum | RoudingNumber  }}</p>
+              </div>
+              <div class="col-12" style="padding:0;" *ngIf="depenseeEngagees?.elements[2]?.defference != null">
+                <div class="progress progress-sous-element" style="margin: 0;">
+                  <div class="progress-bar"
+                    [ngClass]="{'bg-success':depenseeEngagees?.elements[2]?.defference <=100 ,'bg-danger':depenseeEngagees?.elements[2]?.defference >100 }"
+                    [style.width]="depenseeEngagees?.elements[2]?.defference+ '%'" role="progressbar">
+                    <p class="progress-bar-pourcentage">
+                      {{depenseeEngagees?.elements[2]?.defference | RoudingNumber}}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- section 3 -->
+          <div class="col-2">
+            <!-- ghaphe -->
+            <div class="chart-container">
+              <canvas baseChart [data]="pieChartData?.depenseeEngagees" [labels]="pieChartLabels?.depensee_Aprevoir"
+                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                [colors]="pieChartColors" [legend]="pieChartLegend">
+              </canvas>
+              <div class="chart-legend">
+                <!-- previsionnel => depenseeEngagees => achatsMateriels  -->
+                <div class="chart-legend-color legend-color-one"></div>
+                <div class="chart-legend-label">
+                  {{'labels.achatsMateriels' | translate}}
+                </div>
+                <!-- previsionnel => depenseeEngagees => interventions  -->
+                <div class="chart-legend-color legend-color-tow"></div>
+                <div class="chart-legend-label">
+                  {{'labels.interventions' | translate}}
+                </div>
+                <!-- previsionnel => depenseeEngagees => sousTraitance  -->
+                <div class="chart-legend-color legend-color-three"></div>
+                <div class="chart-legend-label">
+                  {{'labels.sousTraitance' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- margeReele -->
+    <div class="Recapitulatif-financier-body margeReele">
+      <div class="container">
+        <div class="row">
+          <!-- section 1 -->
+          <div class="col-3 section-left">
+            <i class="fa fa-flag-checkered title-icon"></i>
+            <p class="recupitilatif-title"> {{'labels.margeReele' | translate}}</p>
+            <p class="sum recupitilatif-title">{{  margeReele?.sum | RoudingNumber | ShowCurrency}}</p>
+            <p class="sum" *ngIf="margeReele?.pourcentage!=null">
+              {{  margeReele?.pourcentage | RoudingNumber }} %</p>
+          </div>
+
+          <!-- section 2 -->
+          <div class="col-7">
+            <!-- retenueGarantier -->
+            <div class="row section-meduim-card" style="margin: 0px 5px;">
+              <div class="col-8 title"
+                [ngClass]="{'element-positive':margeReele?.elements[0]?.sum >= 0 ,'element-negative':margeReele?.elements[0]?.sum < 0 }">
+                {{'labels.retenueGarantier' | translate}}
+                <span *ngIf="margeReele?.elements[0]?.nbrHeure != null">
+                  {{ margeReele?.elements[0]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ margeReele?.elements[0]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right"
+                [ngClass]="{'element-positive':margeReele?.elements[0]?.sum >= 0 ,'element-negative':margeReele?.elements[0]?.sum < 0 }">
+                {{ margeReele?.elements[0]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- margeMateriel -->
+            <div class="row section-meduim-card" style="margin: 15px 5px;">
+              <div class="col-8 title"
+                [ngClass]="{'element-positive':margeReele?.elements[1]?.sum >= 0 ,'element-negative':margeReele?.elements[1]?.sum < 0 }">
+                {{'labels.margeMateriel' | translate}}
+                <span *ngIf="margeReele?.elements[1]?.nbrHeure != null">
+                  {{ margeReele?.elements[1]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ margeReele?.elements[1]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right"
+                [ngClass]="{'element-positive':margeReele?.elements[1]?.sum >= 0 ,'element-negative':margeReele?.elements[1]?.sum < 0 }">
+                {{ margeReele?.elements[1]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <!-- margeMainOeuvre -->
+            <div class="row section-meduim-card" style="margin: 15px 5px;">
+              <div class="col-8 title"
+                [ngClass]="{'element-positive':margeReele?.elements[2]?.sum >= 0 ,'element-negative':margeReele?.elements[2]?.sum < 0 }">
+                {{'labels.margeMainOeuvre' | translate}}
+                <span *ngIf="margeReele?.elements[2]?.nbrHeure != null">
+                  {{ margeReele?.elements[2]?.nbrHeure }} h
+                </span>
+                <span *ngIf="total_devis?.elements[0]?.pourcentage != null">
+                  {{ margeReele?.elements[2]?.pourcentage | RoudingNumber }}
+                  %
+                </span>
+              </div>
+              <div class="col-4 title text-right"
+                [ngClass]="{'element-positive':margeReele?.elements[2]?.sum >= 0 ,'element-negative':margeReele?.elements[2]?.sum < 0 }">
+                {{ margeReele?.elements[2]?.sum | RoudingNumber | ShowCurrency }}
+              </div>
+            </div>
+
+            <div class="row" *ngIf="margeReele?.defference != null">
+              <div class="col-12">
+                <div class="progress">
+                  <div class="progress-bar"
+                    [ngClass]="{'bg-success':margeReele?.defference <=100 ,'bg-danger':margeReele?.defference >100 }"
+                    [style.width]="margeReele?.defference+ '%'" role="progressbar">
+                    <p class="progress-bar-pourcentage"> {{margeReele?.defference | RoudingNumber}}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- section 3 -->
+          <div class="col-2">
+            <!-- ghaphe -->
+            <div class="chart-container">
+              <canvas baseChart [data]="pieChartData?.margeReele" [labels]="pieChartLabels?.marge_Previsionnel"
+                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                [colors]="pieChartColors" [legend]="pieChartLegend">
+              </canvas>
+              <div class="chart-legend">
+                <!-- previsionnel => margeReele => retenueGarantier  -->
+                <div class="chart-legend-color legend-color-one"></div>
+                <div class="chart-legend-label">
+                  {{'labels.retenueGarantier' | translate}}
+                </div>
+                <!-- previsionnel => margeReele => margeMateriel  -->
+                <div class="chart-legend-color legend-color-tow"></div>
+                <div class="chart-legend-label">
+                  {{'labels.margeMateriel' | translate}}
+                </div>
+                <!-- previsionnel => margeReele => margeMainOeuvre  -->
+                <div class="chart-legend-color legend-color-three"></div>
+                <div class="chart-legend-label">
+                  {{'labels.margeMainOeuvre' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- vide -->
+  <div class=" col-6"></div>
+
+  <!-- tresorerie chantier -->
+  <div class="col-6 tresorieChantier">
+    <p [ngStyle]="{'background-color': tresorerieChantier >= 0 ? '#93c47d' : '#FFC107' }"
+      style="padding: 20px 20px;font-weight: bold;color: #fff;">
+      <i class="ft-alert-triangle"
+        style="margin-right: 20px; font-weight: bold; font-size: 20px; position: relative; top: 2px;"></i>
+      {{'labels.tresorieChantier' | translate}}
+      <span style="float: right; ">{{ tresorerieChantier | RoudingNumber | ShowCurrency }}</span>
+    </p>
+  </div>
+</div>

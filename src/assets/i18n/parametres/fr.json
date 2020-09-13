@@ -1,0 +1,506 @@
+{
+    "title": "Catégories",
+    "titlemodereglement": "Mode Réglement",
+    "numerotationPrefixe": {
+        "title": "Paramétrage des numérotations et préfixes des documents",
+        "LabelFournisseurTitle": "Paramétrage des numérotations et préfixes des labels et fournisseurs",
+        "documentTitle": "Numérotations et préfixes des documents",
+        "clientFournisseurTitle": "Numérotations et préfixes des agents, clients, fournisseurs"
+    },
+    "messagerie": {
+        "title": "Messagerie",
+        "config": "Configuration Messagerie"
+    },
+    "unite": {
+        "title": "unités",
+        "list": "Liste des unités",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer cette unité ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur"
+        },
+        "search": "Nom complet ou abréviation"
+    },
+    "synagenda": {
+        "title": "Synchronisation Agenda Google"
+    },
+    "labels": {
+        "Label": "Label",
+        "fournisseur": "Fournisseur",
+        "racine": "Racine",
+        "formatDate": "Format de la date",
+        "compteur": "Valeur du compteur",
+        "longeurCompteur": "Longeur du compteur",
+        "showResult": "Aperçu du résultat",
+        "edit": "Modifier",
+        "modifierSuccess": "Modifier avec succès",
+        "error": "Erreur",
+        "pasDate": "Pas de date",
+        "annee": "Année",
+        "anneeMois": "Année/Mois",
+        "bonLivraison": "Bon de livraison",
+        "demandePrestation": "Demande de prestation",
+        "add": "Ajouter",
+        "nomcomplet": "Nom complet",
+        "abreviation": "Abréviation",
+        "ajouterUnite": "Ajouter unité",
+        "ajouterSuccess": "Ajouter avec succés",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "server": "Serveur",
+        "ssl": "SSL",
+        "port": "Port",
+        "save": "Enregistrer",
+        "agent": "Agent",
+        "title": "Gestion des labels",
+        "pageTitle": "Labels",
+        "label": "Label",
+        "nombreDeFois": "Nombre de fois",
+        "actions": "Actions",
+        "id": "Id",
+        "Nom": "Nom",
+        "Description": "Description",
+        "Code_comptable": "Code Comptable",
+        "action": "Action",
+        "info": "Information",
+        "sauvegarder": "Sauvegarder",
+        "update": "Mettre à jour",
+        "cancel": "Annuler",
+        "selectionner": "-- Sélectionner une valeur --",
+        "date": "Date",
+        "utilisateur": "Utilisateur",
+        "Detailshistorique": "Détails d'historique",
+        "Attribute": "Attribut",
+        "After": "Valeur après modification",
+        "Before": "Valeur avant modification",
+        "ajouter": "Ajout",
+        "modifier": "Modifier",
+        "validermodifier": "Valider les modifications",
+        "modification": "Modification",
+        "ajout": "Ajouter unité",
+        "ajoutt": "Ajouter catégorie",
+        "modif": "Modifier unité",
+        "modiff": "Modifier catégorie",
+        "supprimer": "Supprimer",
+        "close": "Fermer",
+        "updateSuccess": "Modifier avec succés",
+        "modifierUnite": "Modifier unité",
+        "client": "Client",
+        "nouveau": "Nouveau",
+        "franchise": "Franchisé",
+        "bonCommand": "Bon de commande",
+        "devis": "Devis",
+        "fiche_intervention": "Fiche Intervention",
+        "fiche_interventionMaintenance": "Fiche Intervention Maintenance",
+        "facture": "Facture",
+        "nouvelle": "Nouvelle",
+        "unite": "unité",
+        "ficheTravail": "Fiche de travail",
+        "typedocument": "Type de document",
+        "modifiertypedoc": "Modifier type de document",
+        "sujetmail": "Sujet Mail",
+        "contenumail": "Contenu Mail",
+        "sujetrelance": "Sujet Relance",
+        "contenurelance": "Contenu Relance",
+        "parametragedocument": "Paramétrage des Documents",
+        "parametragecouthoraire": "Paramétrage des coûts horaires",
+        "parametragehorairestravail": "Paramétrage des horaires de travail",
+        "clientId": " Id Client",
+        "clientSecret": " Secret client",
+        "ApplicationName": "Nom Application",
+        "calendarId": " Id Agenda",
+        "confAgenda": "Configuration Paramétrage Agenda Google",
+        "parametreavoir": "Paramétrage Avoirs",
+        "parametrefichetravail": "Paramétrage Fiche Travail",
+        "delaivalidite": "Délai de validité",
+        "envoimail": "Envoi de mail",
+        "envoirelance": "Envoi de relance",
+        "AUJOURDHUI": "Aujourd'hui",
+        "JR7": " 7 Jours",
+        "JR15": "15 Jours",
+        "JR30": "30 Jours",
+        "JR45": "45 Jours",
+        "JR60": "60 Jours",
+        "JR90": "90 Jours",
+        "JR180": "180 Jours",
+        "JR365": "365 Jours",
+        "validite": "Validité",
+        "entete": "Entête",
+        "note": "Note",
+        "avoir": "Avoir",
+        "objet": "Objet",
+        "compte": "Compte bancaire ",
+        "code_comptable": "Code comptable",
+        "updatemodereglement": "Modifier mode de réglement",
+        "boncommande_fournisseur": "Bon Commande Fournisseur",
+        "caisse": "Caisse",
+        "banque": "banque",
+        "bancaire": "Bancaire",
+        "virements_internes": "Virements internes",
+        "tva": "TVA",
+        "codeComptable": "Code Comptable",
+        "produit": "Produit",
+        "depense": "Dépense",
+        "categorie": "Catégorie",
+        "service": "Service",
+        "autre": "Autre",
+        "achat": "Achat",
+        "soustraitance": "Sous traitance",
+        "modifierTvaCodeComptable": "Modifier Tva",
+        "noDataAvaiblePeriodeComptable": "Aucune donnée disponible",
+        "coutDeplacement": "Coût  déplacement",
+        "coutPanier": "Coût  panier",
+        "coutHoraire": "Coût horaires",
+        "couthT": "Coût (HT)",
+        "type": "Type"
+    },
+    "errors": {
+        "required": "Ce champs est requis",
+        "unique": "Ce champs existé déjà",
+        "minLength": "Ce champs doit être au moins de {{number}} caractères",
+        "pattern": "Ce champs est invalide",
+        "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider"
+    },
+    "noDataAvaible": "Aucune donnée disponible dans le tableau",
+    "list": {
+        "title": "Liste des catégories",
+        "montreTout": "Montrer tout",
+        "montrerAucun": "Montrer aucun",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce type document ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "failed": "Suppression annulé",
+            "categorie": {
+                "question": "Êtes-vous sûr supprimer cette catégorie ?"
+            }
+        },
+        "categorie": {
+            "title": "Liste des catégories"
+        },
+        "search": "Nom ou code comptable"
+    },
+    "typedocument": {
+        "titletete": "Paramétrage des Types des documents ",
+        "title": "Liste de type des documents ",
+        "montreTout": "Montrer tout",
+        "montrerAucun": "Montrer aucun",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce type de document ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur"
+        },
+        "add": {
+            "title": "Ajouter type de document",
+            "msg": "Ajouter avec succès",
+            "categorie": {
+                "title": "Ajouter type de document"
+            }
+        },
+        "update": {
+            "msg": "Modifier avec succès",
+            "typedocument": {
+                "title": "Modifier type de document"
+            }
+        },
+        "categorie": {
+            "title": "Liste des types des documents"
+        },
+        "search": "Nom "
+    },
+    "add": {
+        "msg": "Ajouter avec succès",
+        "categorie": {
+            "title": "Ajouter catégorie"
+        }
+    },
+    "update": {
+        "msg": "Modifier avec succès",
+        "categorie": {
+            "title": "Modifier catégorie"
+        }
+    },
+    "show": {
+        "categorie": {
+            "title": "Détails catégorie"
+        }
+    },
+    "dataTables": {
+        "processing": "Traitement en cours...",
+        "search": "Rechercher&nbsp;:",
+        "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+        "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "infoPostFix": "",
+        "loadingRecords": "Chargement en cours...",
+        "zeroRecords": "",
+        "emptyTable": "",
+        "paginate": {
+            "first": "Premier",
+            "previous": "Pr&eacute;c&eacute;dent",
+            "next": "Suivant",
+            "last": "Dernier"
+        },
+        "aria": {
+            "sortAscending": ": activer pour trier la colonne par ordre croissant",
+            "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        }
+    },
+    "Afficher_Masquées_Les_Colonnes": "Colonnes",
+    "parametragePrix": {
+        "title": "PARAMÉTRAGE DES COÛTS par défaut",
+        "prixVente": "Coût vente horaire global(HT)",
+        "prixAchat": "Coût revient horaire global (HT)"
+    },
+    "parametrageHoraireTravail": {
+        "title": "PARAMÉTRAGE D'Horaires du Travail",
+        "heureDebut": "Heure d'entrée",
+        "heureFin": "Heure de sortie"
+    },
+    "parametrageTva": {
+        "title": "Paramétrage TVA par défaut",
+        "tvaDefaut": "TVA par défaut"
+    },
+    "parametrageDevis": {
+        "title": "Paramétrage Devis",
+        "note": "Note",
+        "objet": "Objet",
+        "conditions": "Conditions",
+        "sujetmail": "Sujet Mail",
+        "contenumail": "Contenu Mail",
+        "sujetrelance": "Sujet Relance",
+        "contenurelance": "Contenu Relance",
+        "entete": "En-tête",
+        "envoimail": "Envoi de Mail",
+        "envoirelance": "Envoi de relance",
+        "retenueGarantie": "Retenue de garantie %"
+    },
+    "parametrageplanComptable": {
+        "title": "Plan Comptable",
+        "avoir": "Avoir",
+        "code_comptable": "Code comptable",
+        "caisse": "Caisse",
+        "banque": "Banque",
+        "bancaire": "Bancaire",
+        "virements_internes": "Virements internes",
+        "tva": "TVA",
+        "codeComptable": "Code Comptable",
+        "categorie": "Catégorie",
+        "categorie_produit": "Produit",
+        "categorie_autre": "Autre",
+        "categorie_services": "Service",
+        "depense": "Dépense",
+        "depense_achat": "Achat",
+        "depense_soustraitant": "Sous Traitant",
+        "fournisseur": "Fournisseur",
+        "msgAdd": "Ajouter avec succès",
+        "msgUpdate": "Modifier avec succès",
+        "client": "Client",
+        "modifierTvaCodeComptable": "Modifier Tva",
+        "addTvaCodeComptable": "Ajouter Tva",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce TVA ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "document": {
+                "question": "Êtes-vous sûr supprimer ce TVA ?"
+            }
+        }
+    },
+    "parametrageperiodeComptable": {
+        "title": "Periode Comptable"
+    },
+    "parametrageIntervention": {
+        "title": "Paramétrage Fiche Intervention"
+    },
+    "parametrageFacture": {
+        "title": "Paramétrage Facture"
+    },
+    "parametrageAvoir": {
+        "title": "Paramétrage Avoir"
+    },
+    "parametrageBonCommande": {
+        "title": "Paramétrage Bon Commande Fournisseur"
+    },
+    "parametrageDepense": {
+        "title": "Paramétrage Dépense"
+    },
+    "listPC": {
+        "title": "Paramétrage des comptes bancaires",
+        "tit": " Ajouter le compte bancaire",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce compte bancaire ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "compte": {
+                "question": "Êtes-vous sûr supprimer ce compte bancaire ?"
+            }
+        },
+        "search": "Nom ",
+        "add": {
+            "msg": "Ajouter avec succès",
+            "compte": {
+                "title": "Ajouter Compte Bancaire"
+            }
+        },
+        "update": {
+            "msg": "Modifier avec succès",
+            "compte": {
+                "title": "Modifier Compte Bancaire"
+            }
+        },
+        "show": {
+            "compte": {
+                "title": "Détails compte bancaire"
+            }
+        },
+        "Type": {
+            "bancaire": "Bancaire",
+            "caisse": "Caisse"
+        }
+    },
+    "listm": {
+        "title": "Liste des mode de réglement",
+        "tit": " Ajouter le mode de réglement",
+        "delete": {
+            "title": "Supprimer",
+            "question": "Êtes-vous sûr supprimer ce mode de régleemnt ?",
+            "cancel": "Annuler",
+            "confirm": "Oui, supprimez-le!",
+            "success": "Supprimer avec succès",
+            "error": "Erreur du serveur",
+            "categorie": {
+                "question": "Êtes-vous sûr supprimer ce mode de réglement ?"
+            }
+        },
+        "search": "Nom ",
+        "add": {
+            "msg": "Ajouter avec succès",
+            "categorie": {
+                "title": "Ajouter mode de réglement"
+            }
+        },
+        "update": {
+            "msg": "Modifier avec succès",
+            "categorie": {
+                "title": "Modifier mode de réglement"
+            }
+        },
+        "show": {
+            "categorie": {
+                "title": "Détails mode de réglement"
+            }
+        }
+    },
+    "form": {
+        "add": "Ajouter",
+        "update": "Modifier",
+        "label": "Label",
+        "close": "Fermer",
+        "alreadyExists": "Label déja existe",
+        "edit": {
+            "success": "Ajouter avec succès ",
+            "Ajouter": "Ajouter Label",
+            "modifier": "Modifier avec succès ",
+            "Modifier": "Modifier Label"
+        },
+        "addd": {
+            "success": "Ajout avec succès",
+            "title": "Ajouter Labels"
+        }
+    },
+    "comptabilite": {
+        "title": "Comptabilité",
+        "periodeComptable": "Période comptable",
+        "dateDebut": "La date de début de l'exercice comptable",
+        "duree": "Durée",
+        "modifierPeriodeComptable": "Modifier période comptable",
+        "cloture": "Clôturer",
+        "loading": "Cette opération peut prendre plusieurs minutes",
+        "cloturePeriode": "Période comptable clôturée avec succès",
+        "confirmCloture": {
+            "title": "Confirmation",
+            "question": "Êtes-vous sûr clôturer cette période comptable ?",
+            "cancel": "Annuler",
+            "confirm": "Oui",
+            "success": "Clôturé avec succès",
+            "error": "Erreur du serveur"
+        }
+    },
+    "datePicker": {
+        "firstDayOfWeek": 1,
+        "dayNames": [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi"
+        ],
+        "dayNamesShort": [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi"
+        ],
+        "dayNamesMin": [
+            "Dimanche",
+            "Lundi",
+            "Mardi",
+            "Mercredi",
+            "Jeudi",
+            "Vendredi",
+            "Samedi"
+        ],
+        "monthNames": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "monthNamesShort": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+        ],
+        "today": "Aujourd'hui",
+        "clear": "Valider"
+    }
+}

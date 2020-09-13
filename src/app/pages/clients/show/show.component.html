@@ -1,0 +1,81 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown"
+    style="margin-top: 1rem;">
+    <a *ngIf="client" class="btn btn-primary" [routerLink]="['/clients/modifier',client.id]" placement="bottom"
+      ngbTooltip="{{'labels.modifier' | translate}} {{'labels.client' | translate}}">
+      {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+    </a>
+    <a *ngIf="!client" class="btn btn-primary">
+      {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+    </a>
+  </div>
+</div>
+
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{'show.title' | translate}} {{ client?.codeclient }}</h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/clients']">{{'title' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'show.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client" aria-expanded="true">{{
+                  'show.information' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="clientAuth-tab" data-toggle="pill" href="#clientAuth" aria-expanded="false">
+                {{ 'show.accessApp' | translate }}
+                <i class="ft ft-check-circle icon-user-client" *ngIf="userClientIsActif"></i>
+                <i class="ft ft-x-circle icon-user-client" *ngIf="!userClientIsActif"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="memos-tab" data-toggle="pill" href="#memos" aria-expanded="false">{{
+                  'show.memo' | translate }} <span class="memo-badge">{{ memos?.length }}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique" aria-expanded="false">{{
+                  'show.historique' | translate }}</a>
+            </li>
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+              <client-informations [client]="client" [contacts]="contacts" [adresses]="adresses"></client-informations>
+            </div>
+
+            <div class="tab-pane" id="clientAuth" role="tabpanel" aria-labelledby="clientAuth-tab"
+              aria-expanded="false">
+              <client-Auth [client]="client" (userClientIsActif)="getUserClientStaut($event)"></client-Auth>
+            </div>
+            <div class="tab-pane" id="memos" role="tabpanel" aria-labelledby="memos-tab" aria-expanded="false">
+              <common-memos [memos]="memos" (valueChange)='saveMemo($event)' (download)="downloadPieceJointe($event)"
+                [processIsStarting]="processIsStarting" 
+                (OnDeleteMemo)="deleteMemo($event)" (OnUpdateMemo)="updateMemo($event)"
+                [modificationPermission]="true"
+                ></common-memos>
+            </div>
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <custom-loader [displayLoader]="processIsStarting"></custom-loader>

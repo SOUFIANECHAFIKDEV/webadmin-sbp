@@ -1,0 +1,145 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{ 'parametragePrix.title' | translate }} </h3>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group">
+            <button (click)="update()" type="submit" class="btn btn-success" placement="bottom"
+                ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.parametragecouthoraire' | translate }}">
+                <i class="fa fa-check-square-o"></i> {{ 'labels.modifier' | translate }}
+            </button>
+        </div>
+    </div>
+</div><br>
+
+<form class="form form-horizontal" [formGroup]="form">
+    <section id="multi-column">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card box-shadow-0 border-primary">
+                    <div class="card-header card-head-inverse bg-primary">
+                        <h4 class="card-title">
+                            {{ 'labels.coutHoraire' | translate }}</h4>
+                    </div>
+                    <div class="card collapse-icon accordion-icon-rotate">
+                        <div class="card-content">
+                            <div class="card-body">
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 label-control"
+                                            for="prixVente">{{ 'parametragePrix.prixVente' | translate }}</label>
+                                        <div class="col-md-4">
+                                            <input type="number" id="prixVente" class="form-control currency-input"
+                                                appInputRemoveDefaultZero formControlName="prixVente"
+                                                placeholder="{{ 'parametragePrix.prixVente' | translate }}">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 label-control"
+                                            for="prixAchat">{{ 'parametragePrix.prixAchat' | translate }}</label>
+                                        <div class="col-md-4">
+                                            <input type="number" id="prixAchat" class="form-control currency-input"
+                                                appInputRemoveDefaultZero formControlName="prixAchat"
+                                                placeholder="{{ 'parametragePrix.prixAchat' | translate }}">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="multi-column">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card box-shadow-0 border-primary">
+                    <div class="card-header card-head-inverse bg-primary">
+                        <h4 class="card-title">
+                            {{ 'labels.coutDeplacement' | translate }}</h4>
+                    </div>
+
+
+                    <div class="card collapse-icon accordion-icon-rotate">
+                        <div class="card-content">
+                            <div class="card-body">
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 label-control"
+                                            for="coutDeplacement">{{ 'labels.couthT' | translate }}</label>
+                                        <div class="col-md-4">
+                                            <input type="number" id="coutDeplacement"
+                                                class="form-control currency-input" appInputRemoveDefaultZero
+                                                formControlName="coutDeplacement"
+                                                placeholder="{{ 'labels.coutDeplacement' | translate }}">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="multi-column">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card box-shadow-0 border-primary">
+                    <div class="card-header card-head-inverse bg-primary">
+                        <h4 class="card-title">
+                            {{ 'labels.coutPanier' | translate }}</h4>
+                    </div>
+
+
+                    <div class="card collapse-icon accordion-icon-rotate">
+                        <div class="card-content">
+                            <div class="card-body">
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 label-control"
+                                            for="coutPanier">{{ 'labels.couthT' | translate }}</label>
+                                        <div class="col-md-4">
+                                            <input type="number" id="coutPanier" class="form-control currency-input"
+                                                appInputRemoveDefaultZero formControlName="coutPanier"
+                                                placeholder="{{ 'labels.coutPanier' | translate }}">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+<div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+    <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div>

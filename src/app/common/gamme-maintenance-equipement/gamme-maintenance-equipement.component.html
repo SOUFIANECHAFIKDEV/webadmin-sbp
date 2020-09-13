@@ -1,0 +1,285 @@
+<table>
+    <!-- ////////////////////////////////////////////////////////////////// -->
+    <!-- header -->
+    <thead>
+        <tr>
+            <td rowspan="2">Operations</td>
+            <td>Périodicité</td>
+        </tr>
+        <tr>
+            <td style="background-color: #f3f3f3">
+                <ul class="custom-list-group-horizontal-lg">
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.janvier' | translate">J</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.fevrier' | translate">F</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.mars' | translate">M</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.avril' | translate">A</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.mai' | translate">M</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.juin' | translate">J</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.juillet' | translate">J</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.aout' | translate">A</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.septembre' | translate">S</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.octobre' | translate">O</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.novembre' | translate">N</li>
+                    <li data-toggle="tooltip" placement="top" [ngbTooltip]="'labels.mois.decembre' | translate">D</li>
+                </ul>
+            </td>
+        </tr>
+    </thead>
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+    <tbody>
+        <ng-container *ngFor="let lot of libelles;let indexLot = index">
+            <tr class="lot">
+                <td>
+                    <!-- ////////////////////////////////////////////////////////////////// -->
+                    <!-- show libellé -->
+                    <ng-container *ngIf="libelleCrud.indexLibelle_A_Modifier != indexLot">
+                        {{ lot?.nom }}
+                        <ng-container *ngIf="!readOnly">
+                            <div class="btn-group float-right  btn-group-custom" role="group"
+                                *ngIf="libelleCrud?.ajouterPeriodiciteAuLibelleIndex != indexLot">
+                                <button type="button" class="btn  btn-sm btn-success" data-toggle="tooltip"
+                                    placement="top" ngbTooltip="ajouter une periodicite"
+                                    (click)="ouverirPeriodiciteAuLibelle(indexLot)"
+                                    *ngIf="libelles[indexLot].periodicite == null && lot?.operations.length == 0">
+                                    <i class="ft-list"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip"
+                                    placement="top" ngbTooltip="supprimer la periodicite"
+                                    (click)="libelles[indexLot].periodicite = null"
+                                    *ngIf="libelles[indexLot].periodicite != null">
+                                    <i class="ft-trash-2"></i>
+                                </button>
+
+
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="tooltip"
+                                    placement="top" ngbTooltip="Modifier ce libelle"
+                                    (click)="openLabelleEditForm(indexLot)">
+                                    <i class="ft-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip"
+                                    placement="top" ngbTooltip="Supprimer ce libelle"
+                                    (click)="initAll();supprimerLibelle(indexLot)">
+                                    <i class="ft-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-primary" 
+                                    *ngIf="libelles[indexLot].periodicite == null"
+                                    (click)="initAll();operationCrud.indexLibelle_Ajouter = indexLot;">
+                                    <i class="ft-plus"></i>
+                                </button>
+                            </div>
+                            <div class="btn-group float-right btn-group-custom" role="group"
+                                *ngIf="libelleCrud?.ajouterPeriodiciteAuLibelleIndex == indexLot">
+                                <button type="button" class="btn btn-success float-right btn-sm-action"
+                                    (click)="ajouterPeriodiciteAuLibelle()">
+                                    <ng-container *ngIf="libelles[indexLot].periodicite == null">Ajouter</ng-container>
+                                    <ng-container *ngIf="libelles[indexLot].periodicite != null">Modifier</ng-container>
+                                </button>
+                                <button type="button" class="btn grey btn-light float-right btn-sm-action" (click)="initAll()">
+                                    Annuler
+                                </button>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+                    <!-- ////////////////////////////////////////////////////////////////// -->
+                    <!-- modifier un libellé -->
+                    <ng-container *ngIf="libelleCrud.indexLibelle_A_Modifier == indexLot">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <label style="line-height: 34px;">Nom:</label>
+                                    </div>
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" [(ngModel)]="formInputs.inputString" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <button type="button" class="btn btn-success float-right" (click)="modifierLot()">Modifier</button>
+                                <button type="button" class="btn grey btn-light float-right mr-1" (click)="initAll()">
+                                    Annuler
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                </td>
+                <td>
+
+                    <ul
+                        *ngIf="libelleCrud?.ajouterPeriodiciteAuLibelleIndex == indexLot || (libelleCrud.indexLibelle_A_Modifier == indexLot && libelles[indexLot].periodicite != null)">
+                        <ng-container *ngFor="let periode of formInputs.periodiciteList ;let ii = index">
+                            <li data-toggle="tooltip" placement="top" [ngbTooltip]="getMois(ii)"
+                                (click)="formInputs.periodiciteList[ii].value = !formInputs.periodiciteList[ii].value"
+                                [ngClass]="{'text-success':periode?.value == true ,'text-danger':periode?.value == false}">
+                                <i [ngClass]="{'ft-check':periode?.value == true ,'ft-x':periode?.value == false}"></i>
+                            </li>
+                        </ng-container>
+                    </ul>
+                    <ul
+                        *ngIf="(libelleCrud?.ajouterPeriodiciteAuLibelleIndex == indexLot) == false && ((libelleCrud.indexLibelle_A_Modifier == indexLot && libelles[indexLot].periodicite != null)  == false)">
+                        <ng-container *ngFor="let periode of lot?.periodicite ;let ii = index">
+                            <li data-toggle="tooltip" placement="top" [ngbTooltip]="getMois(ii)"
+                                [ngClass]="{'text-success':periode?.value == true ,'text-danger':periode?.value == false}">
+                                <i [ngClass]="{'ft-check':periode?.value == true ,'ft-x':periode?.value == false}"></i>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </td>
+            </tr>
+
+            <!-- ////////////////////////////////////////////////////////////////// -->
+            <!-- Ajouter un nouvelle operation -->
+            <tr *ngIf="operationCrud.indexLibelle_Ajouter == indexLot">
+                <td>
+                    <div class="row" style="margin: 5px 0px;">
+                        <div class="col-6">
+                            <input type="text" class="form-control input-sm" placeholder="Nom d'operation"
+                                [(ngModel)]="formInputs.inputString" />
+                        </div>
+                        <div class="col-6">
+                            <button type="button"  class="btn btn-success float-right btn-sm-action"
+                                (click)="ajouterOperation()">Ajouter</button>
+                            <button type="button"  class="btn grey btn-light float-right btn-sm-action" (click)="initAll()">
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </td>
+                <td class="periodicite">
+                    <ul>
+                        <ng-container *ngFor="let periode of formInputs?.periodiciteList;let ii = index">
+
+                            <li data-toggle="tooltip" placement="top" [ngbTooltip]="getMois(ii)"
+                                (click)="formInputs?.periodiciteList[ii].value = !formInputs?.periodiciteList[ii].value"
+                                [ngClass]="{'text-success':periode?.value == true ,'text-danger':periode?.value == false}">
+                                <i [ngClass]="{'ft-check':periode?.value == true ,'ft-x':periode?.value == false}"></i>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </td>
+            </tr>
+            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+            <!-- ////////////////////////////////////////////////////////////////// -->
+            <!-- liste des operation -->
+            <ng-container *ngFor="let operation of lot?.operations;let idOperation = index">
+                <!-- ////////////////////////////////////////////////////////////////// -->
+                <!-- show operation -->
+                <!-- shoowOperation(indexLot, idOperation) -->
+                <tr *ngIf="shoowOperation(indexLot, idOperation)">
+                    <!-- (mouseenter)="showOperationAction = idOperation;" (mouseleave)="showOperationAction = null" -->
+                    <td style="padding: 6px 20px 5px 20px !important; height: 35px;line-height: 25px;">
+                        <div class="btn-group float-right btn-group-sm" role="group" *ngIf=" !readOnly">
+                            <button type="button" class="btn btn-danger btn-sm" toggle="tooltip" placement="top"
+                                ngbTooltip="Supprimer cette operation"
+                                (click)="supprimerOperation(indexLot,idOperation)">
+                                <i class="ft-trash-2"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-warning" data-toggle="tooltip" placement="top"
+                                ngbTooltip="Modifier cette Operation"
+                                (click)="openOperationEditForm(indexLot,idOperation)">
+                                <i class="ft-edit"></i>
+                            </button>
+                        </div>
+                        {{ operation?.nom }}
+                    </td>
+                    <td class="periodicite">
+                        <ul>
+                            <ng-container *ngFor="let periode of operation?.periodicite;let ii = index">
+                                <li data-toggle="tooltip" placement="top" [ngbTooltip]="getMois(ii)"
+                                    [ngClass]="{'text-success':periode?.value == true ,'text-danger':periode?.value == false}">
+                                    <i
+                                        [ngClass]="{'ft-check':periode?.value == true ,'ft-x':periode?.value == false}"></i>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <!-- ////////////////////////////////////////////////////////////////// -->
+                <!-- Edit operation -->
+                <!-- <p>{{ operationCrud.indexLibelle_A_Modifie }} -- {{ operationCrud.indexOperation_A_Modifier }} || {{indexLot}} -- {{idOperation}}</p> -->
+
+                <tr
+                    *ngIf="operationCrud.indexLibelle_A_Modifie == indexLot && operationCrud.indexOperation_A_Modifier == idOperation">
+                    <td>
+                        <div class="row" style="margin: 5px 0px;">
+                            <div class="col-6">
+                                <input type="text" class="form-control input-sm" placeholder="Nom d'operation"
+                                    [(ngModel)]="formInputs.inputString" />
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-success float-right btn-sm-action"
+                                    (click)="modifierOperation()">Modifier</button>
+                                <button type="button" class="btn grey btn-light float-right btn-sm-action" (click)="initAll()">
+                                    Annuler
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="periodicite">
+                        <ul>
+                            <ng-container *ngFor="let periode of formInputs.periodiciteList ;let ii = index">
+                                <li data-toggle="tooltip" placement="top" [ngbTooltip]="getMois(ii)"
+                                    (click)="formInputs.periodiciteList[ii].value = !formInputs.periodiciteList[ii].value"
+                                    [ngClass]="{'text-success':periode?.value == true ,'text-danger':periode?.value == false}">
+                                    <i
+                                        [ngClass]="{'ft-check':periode?.value == true ,'ft-x':periode?.value == false}"></i>
+                                </li>
+
+                            </ng-container>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+            </ng-container>
+            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        </ng-container>
+
+        <!-- ////////////////////////////////////////////////////////////////// -->
+        <!-- ajouter un nouveau libellé -->
+        <tr class="lot" *ngIf="libelleCrud?.showAddLibelleform == true">
+            <td colspan="2">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="row">
+                            <input type="text" class="form-control input-sm" placeholder="Libellé"
+                                [(ngModel)]="formInputs.inputString" #inputString />
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-success float-right btn-sm-action"
+                            (click)="ajouterLot()">Ajouter</button>
+                        <button type="button" class="btn grey btn-light float-right mr-1 btn-sm-action" (click)="initAll()">
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- ////////////////////////////////////////////////////////////////// -->
+        <!-- Aucune donnée disponible -->
+        <tr *ngIf="libelles.length == 0 && !libelleCrud.showAddLibelleform">
+            <td colspan="2">
+                <p class="text-center" style="margin: 0;padding: 6px 20px 5px 20px !important;">Aucune donnée disponible
+                </p>
+            </td>
+        </tr>
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    </tbody>
+</table>
+
+
+<button type="button" class="btn btn-primary float-right" style="margin-top: 10px;" data-toggle="tooltip" placement="top"
+    ngbTooltip="Ajouter un nouveau libelle" (click)="initAll();libelleCrud.showAddLibelleform = true;"
+    *ngIf="!readOnly">Ajouter un
+    nouveau libelle
+    <i class="ft-plus"></i>
+</button>

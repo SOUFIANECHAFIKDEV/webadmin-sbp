@@ -1,0 +1,139 @@
+<div class="content-header row">
+    <div class="content-header col-12">
+        <div class="row">
+            <div class="">
+                <h3 class="content-header-title ">{{ 'labels.chantier' | translate }} : {{ chantier?.nom }}</h3>
+            </div>
+
+            <div class="">
+                <button type="button" class="btn btn-round" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" [ngClass]="{
+            'statut-Brouillon': chantier?.statut == statutChantier.EnEtude,
+            'statut-Planifiee': chantier?.statut == statutChantier.Termine,
+            'statut-Realise':chantier?.statut == statutChantier.Accepte,
+            'statut-Annulee':chantier?.statut == statutChantier.NonAcceptee,
+            'dropdown-toggle':chantier?.statut != statutChantier.Termine}">
+                    {{ getLabelleByStatut(chantier?.statut) }}
+                </button>
+                <div *ngIf="chantier?.statut != statutChantier.Termine" class="dropdown-menu"
+                    x-placement="bottom-start">
+                    <p class="dropdown-item title">{{'labels.ChangementStatut' | translate}}</p>
+                    <p class="dropdown-item" (click)="changeStatutChantier(statutChantier.EnEtude)"
+                        *ngIf="chantier?.statut ==  statutChantier.Accepte">
+                        {{'labels.retourAuEnEtude' | translate}}
+                    </p>
+                    <p class="dropdown-item" (click)="changeStatutChantier(statutChantier.Accepte)"
+                        *ngIf="chantier?.statut ==  statutChantier.NonAcceptee">
+                        {{'labels.AccepterChantier' | translate}}
+                    </p>
+                    <p class="dropdown-item" (click)="changeStatutChantier(statutChantier.NonAcceptee)"
+                        *ngIf="chantier?.statut ==  statutChantier.Accepte">
+                        {{'labels.NoAccepterChantier' | translate}}
+                    </p>
+                    <p class="dropdown-item" (click)="changeStatutChantier(statutChantier.Termine)"
+                        *ngIf="chantier?.statut ==  statutChantier.Accepte">
+                        {{'labels.TerminerChantier' | translate}}
+                    </p>
+                    <p class="dropdown-item" (click)="changeStatutChantier(this.statutChantier.Accepte)"
+                        *ngIf="chantier?.statut ==  statutChantier.EnEtude">
+                        {{'labels.AccepterChantier' | translate}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row breadcrumbs-top">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/chantiers']">{{'title' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{'show.title' | translate}}
+                    </li>
+
+                </ol>
+
+
+                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#Model"
+                    style="position: absolute; bottom: 14px; right: 30px;" placement="bottom"
+                    ngbTooltip="{{'labels.modifier' | translate}} {{'labels.chantier' | translate}}"
+                    (click)="setformConfig(chantier,formType.update)">
+                    {{'labels.modifier' | translate}}
+                    <i class="ft-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-body">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card">
+            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+            <div class="card-content">
+                <div class="card-body">
+                    <ul class="nav nav-pills nav-pill-bordered">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client" Nom="true"
+                                placement="bottom"
+                                ngbTooltip="{{'show.information'|translate}}">{{'show.information'|translate}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="potes-tab" data-toggle="pill" href="#potes" aria-expanded="false"
+                                placement="bottom" ngbTooltip="{{'show.documents'|translate}}"
+                                (click)="getNbDocuments()">{{'show.documents'|translate}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="recaptulatiffinancier-tab" data-toggle="pill"
+                                href="#recaptulatiffinancier" aria-expanded="false" placement="bottom"
+                                (click)="GetRecapitulatifFinancier()"
+                                ngbTooltip="{{'show.recaptulatiffinancier'|translate}}">{{'show.recaptulatiffinancier'|translate}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="retenuegarantie-tab" data-toggle="pill" href="#retenuegarantie"
+                                aria-expanded="false" placement="bottom" (click)="getRetenueGarantie()"
+                                ngbTooltip="{{'show.retenuegarantie'|translate}}">{{'show.retenuegarantie'|translate}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique"
+                                aria-expanded="false" placement="bottom"
+                                ngbTooltip="{{'show.historique'|translate}}">{{'show.historique'|translate}}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content px-1 pt-1">
+                        <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab"
+                            aria-expanded="true">
+                            <chantier-information [chantier]="chantier"></chantier-information>
+                        </div>
+
+                        <div class="tab-pane" id="recaptulatiffinancier" role="tabpanel"
+                            aria-labelledby="recaptulatiffinancier-tab" aria-expanded="false">
+                            <app-recaptulatif-financier [recapitulatifFinancierData]="recapitulatifFinancierData">
+                            </app-recaptulatif-financier>
+                        </div>
+                        <div class="tab-pane" id="retenuegarantie" role="tabpanel" aria-labelledby="retenuegarantie-tab"
+                            aria-expanded="false">
+                            <app-retenue-garantie [listRetenueGaranties]="listRetenueGaranties"
+                                (ChangeStatut)="changeStatut($event)"></app-retenue-garantie>
+                        </div>
+                        <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+                            aria-expanded="false">
+                            <common-historiques [historique]="historique"></common-historiques>
+                        </div>
+                        <div class="tab-pane" id="potes" role="tabpanel" aria-labelledby="potes-tab"
+                            aria-expanded="false">
+                            <app-rebrique (OnRefresh)="refresh($event)" [nbDocuments]="nbDocuments">
+                            </app-rebrique>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<chantier-from [type]="formConfig.type" [defaultData]="formConfig.defaultData" (OnSave)="update($event)">
+</chantier-from>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

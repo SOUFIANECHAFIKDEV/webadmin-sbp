@@ -1,0 +1,157 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown"
+    style="margin-top: 1rem;">
+
+
+
+
+
+    <a class="btn " style="color:white;background-color: #2ecc71" placement="bottom" (click)="exportExel()">
+      {{ 'labels.exportExel' | translate }} <i class="fa fa-upload"></i>
+    </a>
+    <span style="width:12px"></span>
+    <a class="btn " style="color:white;background-color: #636e72" placement="bottom"
+      (click)="dupliquerContratEntretien()">
+      {{ 'labels.dupliquer' | translate }} <i class="ft-copy"></i>
+    </a>
+
+    <span style="width:12px"></span>
+    <a *ngIf="contratEntretien?.statut == statutContratEntretien.Brouillon" class="btn btn-primary text-white"
+      [routerLink]="['/contratentretiens/modifier',contratEntretien?.id]">
+      {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+    </a>
+    <!-- <span style="width:12px"></span>
+    <p-splitButton label="{{ 'labels.actions' | translate }}" [model]="items" styleClass="ui-button-primary">
+    </p-splitButton> -->
+
+  </div>
+
+
+
+</div>
+
+<div class="content-header row">
+  <div class="content-header-left  col-12 mb-2">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title">{{'show.title' | translate}} </h3>
+
+      </div>
+      <div>
+
+        <!-- <span class="btn btn-round badge-brouillon"
+          *ngIf="contratEntretien?.statut == statutContratEntretien.Brouillon">{{
+            'labels.brouillon' | translate
+          }}</span>
+        <span class="btn btn-round badge-planifiee" *ngIf="contratEntretien?.statut == statutContratEntretien.Encours">{{
+              'labels.encours' | translate
+            }}</span>
+        <span class="btn btn-round badge-success" *ngIf="contratEntretien?.statut == statutContratEntretien.Termine">{{
+                'labels.termine' | translate
+              }}</span>
+        <span class="btn btn-round badge-annuler" *ngIf="contratEntretien?.statut == statutContratEntretien.Annule">{{
+                  'labels.annulee' | translate
+                }}</span>
+        <span class="btn btn-round badge-enretard" *ngIf="contratEntretien?.statut == statutContratEntretien.Enattente">{{
+                    'labels.enattente' | translate
+                  }}</span>
+
+      -->
+        <button type="button" class="btn btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          [ngClass]="{
+                        'badge-brouillon':contratEntretien?.statut == statutContratEntretien.Brouillon, 
+                        'badge-planifiee': contratEntretien?.statut == statutContratEntretien.Encours,
+                        'badge-success':contratEntretien?.statut == statutContratEntretien.Termine,
+                        'badge-annuler':contratEntretien?.statut == statutContratEntretien.Annule,
+                        'badge-enretard':contratEntretien?.statut == statutContratEntretien.Enattente,
+                        'dropdown-toggle':contratEntretien?.statut != statutContratEntretien.Termine
+            
+                        }">
+          {{ getLabelleByStatut(contratEntretien?.statut) }}
+        </button>
+        <div class="dropdown-menu" x-placement="bottom-start">
+          <p class="dropdown-item title">{{'labels.changementstatus' | translate}}</p>
+          <p class="dropdown-item" (click)="changeStatut(statutContratEntretien.Enattente)"
+            *ngIf="contratEntretien?.statut == statutContratEntretien.Brouillon || contratEntretien?.statut == statutContratEntretien.Annule ">
+            {{'labels.enattente' | translate}}
+          </p>
+          <p class="dropdown-item" (click)="changeStatut(statutContratEntretien.Annule)"
+            *ngIf="contratEntretien?.statut == statutContratEntretien.Encours || contratEntretien?.statut == statutContratEntretien.Enattente ">
+            {{'labels.annulee' | translate}}
+          </p>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/contratentretiens']">{{'title' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'show.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client" aria-expanded="true">{{
+                      'show.information' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="memos-tab" data-toggle="pill" href="#memos" aria-expanded="false">{{
+                    'show.notes' | translate }} <span class="memo-badge">{{ memos?.length }}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique" aria-expanded="false">{{
+                      'show.historique' | translate }}</a>
+            </li>
+            <li class="nav-item" *ngIf="contratEntretien?.statut != statutContratEntretien.Brouillon">
+              <a class="nav-link" id="visiteMaintenance-tab" data-toggle="pill" href="#visiteMaintenance"
+                aria-expanded="false">
+                {{'show.visiteMaintenance' | translate }}
+
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+              <information-contratEntretien [contratEntretien]="contratEntretien">
+              </information-contratEntretien>
+            </div>
+            <div class="tab-pane" id="memos" role="tabpanel" aria-labelledby="memos-tab" aria-expanded="false">
+              <common-memos [memos]="memos" (valueChange)='saveMemo($event)' (download)="downloadPieceJointe($event)">
+              </common-memos>
+            </div>
+
+            <div class="tab-pane" id="visiteMaintenance" role="tabpanel" aria-labelledby="visiteMaintenance-tab"
+              araia-expanded="false">
+              <app-visite-maintenance [contratEntretien]="contratEntretien" (OnRefresh)="refresh()">
+              </app-visite-maintenance>
+            </div>
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <custom-loader [displayLoader]="processing"></custom-loader>

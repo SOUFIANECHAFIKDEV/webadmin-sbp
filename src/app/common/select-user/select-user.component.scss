@@ -1,0 +1,101 @@
+div#selectUserModal {
+  background: rgba(9, 30, 66, 0.54);
+  transition: opacity 220ms ease 0s;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+.card-container {
+  border: 1px solid;
+  padding: 0.5em 1em;
+  box-shadow: 4px 4px #656565 !important;
+  margin: 0rem 0rem 3rem 2rem;
+  color: #656565;
+  .header {
+    text-align: right;
+    margin-bottom: 2%;
+    button {
+      background: transparent;
+      border: navajowhite;
+      font-size: 1.5rem;
+      padding: 0;
+      margin-left: 0.5rem;
+    }
+  }
+  .body {
+    font-size: 14.5px;
+    span {
+      padding-left: 0.5rem;
+    }
+  }
+}
+.card-container:hover {
+  border: 1px #065cb3 solid;
+  box-shadow: 4px 4px #065cb3 !important;
+}
+
+.card-footer {
+  padding: 0.6rem 1rem !important;
+}
+
+.input {
+  text-align: right;
+}
+
+.btn-lg {
+  // padding: 1rem 1.25rem !important;
+  // font-size: 1.25rem !important;
+  // line-height: 1.25 !important;
+  // border-radius: 0.27rem !important;
+  // line-height: 0.55rem !important;
+
+  padding: 1rem 1.25rem !important;
+  font-size: 1.25rem !important;
+  line-height: 0.75 !important;
+  border-radius: 0.27rem !important;
+  font-size: 15px !important;
+}
+
+.external-link {
+  font-size: 1.3rem;
+  position: relative;
+  top: -0.15rem;
+  color: #656565;
+}
+
+.deleteCard {
+  color: #656565;
+}
+
+.ft-edit-2 {
+  color: #656565;
+}
+
+.card-container:hover {
+  color: #065cb3;
+  border: 1px #065cb3 solid;
+  box-shadow: 4px 4px #065cb3 !important;
+  strong {
+    color: #656565;
+  }
+  .ft-edit-2 {
+    color: #065cb3;
+  }
+  .deleteCard {
+    color: #065cb3;
+  }
+  .external-link {
+    color: #065cb3;
+  }
+  .external-link:hover {
+    color: #2dcee3 !important;
+  }
+  .deleteCard:hover {
+    color: #ffa87d;
+  }
+  .ft-edit-2:hover {
+    color: #065cb3;
+  }
+}

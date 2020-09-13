@@ -1,0 +1,91 @@
+<div class="tab-pane" id="toutesDevis" aria-labelledby="aboutIcon11-tab1" role="tab" aria-selected="false">
+    <section id="multi-column">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fa fa-list-alt"></i>
+                        {{'labels.listDocumentAttacher' | translate}}
+                        <button type="button" class="btn btn-primary btn-add-from-outSide" data-toggle="modal"
+                            data-toggle="modal" data-target="#DocumentationModel" placement="bottom"
+                            (click)="setformConfig(null,formType.add);emptyList()"
+                            ngbTooltip="{{'labels.attacherPieceJointe' | translate}}">
+                            {{'labels.attacherPieceJointe' | translate}} <i class="ft-plus"></i></button>
+                    </h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body init-card-body card-dashboard">
+                        <!-- <recherche-avancee>
+                            <div class="recherche-avancee-body">
+                                <div class="ui-g ui-fluid" *ngIf="dateLang">
+                                    <div class="ui-g-6 ui-md-4">
+                                        <h6 style="font-weight: bold">{{ 'labels.filtrerLabel' | translate }} ....................</h6>
+                                        <ng-select [items]="allTagsList" [multiple]="true" [closeOnSelect]="false"
+                                            [hideSelected]="true" bindLabel="name"
+                                            [placeholder]="'labels.filtrerLabel' | translate"
+                                            [(ngModel)]="selectedLables" (change)="filterParLabel()"
+                                            class="tags-select">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </recherche-avancee> -->
+                        <table datatable [dtOptions]="dtOptionsDocument" [dtTrigger]="dtTriggerDocument"
+                            class="table table-striped table-bordered" style="width:100%" id="documentsTable">
+                            <thead>
+                                <tr>
+                                    <ng-container *ngFor="let column of tableColumnsDocuments;let index = index">
+                                        <th> <span [innerHTML]="column"></span> </th>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="documents?.list?.length > 0">
+                                <tr *ngFor="let document of documents?.list">
+                                    <td>{{ document?.designation }}</td>
+                                    <td>{{ document?.commentaire }}</td>
+
+                                    <td [innerHtml]="insialazeLabels(document?.labelDocument)"></td>
+                                    <td>
+                                        {{ document?.idUser | GetNameOfUserById }}
+                                    </td>
+
+                                    <td class="actions">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-primary btn-md btn-actions"
+                                                placement="bottom" (click)="setformConfig(document,formType.preview);"
+                                                data-toggle="modal" data-target="#DocumentationModel" placement="bottom"
+                                                ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                                    class="ft-eye"></i></button>
+                                            <button type="button" class="btn btn-warning btn-md btn-actions"
+                                                (click)="setformConfig(document,formType.update)" data-toggle="modal"
+                                                data-target="#DocumentationModel" placement="bottom"
+                                                ngbTooltip="{{'labels.modifier' | translate}}"><i
+                                                    class="ft-edit"></i></button>
+                                            <button type="button" class="btn btn-danger btn-md btn-actions"
+                                                (click)="delete(document?.id)" placement="bottom"
+                                                ngbTooltip="{{'labels.supprimer' | translate}}"><i
+                                                    class="ft-trash-2"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="documents?.list?.length == 0">
+                                <tr>
+                                    <td colspan="14" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+                                </tr>
+                            <tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<app-form-rubrique [load]="emitter" [typesDocuments]="typesDocuments" [type]="formConfig.type"
+  [defaultData]="formConfig.defaultData" (OnSave)="OnSave($event)">
+</app-form-rubrique>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

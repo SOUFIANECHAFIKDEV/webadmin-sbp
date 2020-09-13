@@ -1,0 +1,57 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown" style="margin-top: 1rem;">
+      <a *ngIf="fournisseur" class="btn btn-primary" [routerLink]="['/fournisseurs/modifier',fournisseur?.id]"  placement="bottom" ngbTooltip="{{'labels.modifier' | translate}} {{'labels.fournisseur' | translate}}">
+        {{'labels.modifier' | translate}}  <i class="ft-edit"></i>
+      </a>
+      <a *ngIf="!fournisseur" class="btn btn-outline-primary">
+          {{'labels.modifier' | translate}} <i class="ft-edit"></i>
+      </a>
+  </div>
+</div>
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{'show.title' | translate}} {{fournisseur?.reference}}</h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/fournisseurs']">{{'title' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'show.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pill-bordered">
+              <li class="nav-item">
+                <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client" aria-expanded="true" placement="bottom" ngbTooltip="{{ 'show.information' | translate }}">{{ 'show.information' | translate }}</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="memos-tab" data-toggle="pill" href="#memos" aria-expanded="false" placement="bottom" ngbTooltip="{{ 'show.memo' | translate }}">{{ 'show.memo' | translate }} <span class="memo-badge">{{ memos.length }}</span></a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique" aria-expanded="false" placement="bottom" ngbTooltip="{{ 'show.historique' | translate }}">{{ 'show.historique' | translate }}</a>
+              </li>
+             
+            </ul>
+            <div class="tab-content px-1 pt-1">
+              <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+                <fournisseur-information [fournisseur]="fournisseur" [contacts]="contacts"></fournisseur-information>
+              </div>
+              <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab" aria-expanded="false">
+                <common-historiques [historique]="historique"></common-historiques>
+              </div>
+              <div class="tab-pane" id="memos" role="tabpanel" aria-labelledby="memos-tab" aria-expanded="false">
+                <common-memos [memos]="memos" (valueChange)='saveMemo($event)' (download)="downloadPieceJointe($event)" [processIsStarting]="processIsStarting"></common-memos>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>

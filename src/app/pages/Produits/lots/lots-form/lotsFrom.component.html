@@ -1,0 +1,167 @@
+<div class="modal fade text-left" id="lotsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> <i class="ft-plus"></i>{{ getmodelName() }}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow: auto !important;">
+                <div class="container">
+
+                    <form class="form form-horizontal" [formGroup]="form">
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="racine">
+                                <strong>Nom</strong>
+                            </label>
+                            <div class="col-md-8" *ngIf="type != formType.preview">
+                                <input type="text" class="form-control" formControlName="lotName" />
+                                <small class="text-danger" *ngIf="f?.lotName?.hasError('CheckUniqueReference')">{{'errors.unique'
+                                            | translate }}</small>
+                                <small class="text-danger" *ngIf="f?.lotName?.errors?.required">{{'errors.required' |
+                                                    translate }}</small>
+                                <small class="text-danger" *ngIf="form.hasError('minlength', 'lotName')">
+                                    {{'errors.minLength'|translate:{ number:3} }}
+                                </small>
+                            </div>
+                            <div class="col-md-8" *ngIf="type == formType.preview">
+                                <input type="text" class="form-control" [value]="f?.lotName?.value" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="racine">
+                                <strong>Description</strong>
+                            </label>
+                            <div class="col-md-8" *ngIf="type != formType.preview">
+                                <textarea rows="4" formControlName="description" class="form-control"
+                                    placeholder="{{'labels.commentaire' | translate}}"></textarea>
+                            </div>
+                            <div class="col-md-8" *ngIf="type == formType.preview">
+                                <input type="text" class="form-control" [value]="f?.description?.value" disabled />
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                    <div class="form-group row">
+                        <h4 class="header"><i class="ft-shopping-cart"></i>{{'labels.listeproduits' | translate}}</h4>
+                    </div>
+                    <div class="row">
+                        <div class="input-group" *ngIf="type != formType.preview">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-primary" type="button"><i class="ft-search"></i></button>
+                            </div>
+                            <input type="text" [(ngModel)]="search" (input)="searche()" class="form-control"
+                                placeholder="{{ 'labels.search' | translate }}">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th *ngIf="type == formType.preview">{{ 'labels.reference' | translate }}</th>
+                                        <!-- <th *ngIf="type == formType.preview">{{ 'labels.designation' | translate }}</th> -->
+                                        <th *ngIf="type == formType.preview">Prix TTC</th>
+                                        <th *ngIf="type == formType.preview">Quantité</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="!loading">
+                                    <tr *ngFor="let produit of produitsSelectionneeProvisoirement;let index = index">
+                                        <td *ngIf="type != formType.preview">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" name="customCheck"
+                                                    id="chechboxTmp{{ index+100 }}" (click)="removeProduit(index)"
+                                                    [checked]="checkProduitIsSelectedOrNot(produit?.id)">
+                                                <label class="custom-control-label"
+                                                    for="chechboxTmp{{ index+100 }}"></label>
+                                            </div>
+                                        </td>
+                                        <td>{{ produit?.reference }}</td>
+                                        <!-- <td>{{ produit?.designation }}</td> -->
+                                        <td class="display-price">{{prixTtc(produit) | RoudingNumber | ShowCurrency }}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group col-md-4" *ngIf="type != formType.preview">
+                                                <button type="button" id="{{i+1000*24}}" class="btn btn-primary btn-md"
+                                                    (click)="changetQte(index, -1)"><i class="ft-minus"></i></button>
+                                                <input type="number" appInputRemoveDefaultZero id="{{i+1000*25}}"
+                                                    style="text-align: center" min="0" [value]="produit.qte"
+                                                    (input)="changetQte(index,$event.target.value,true)" />
+                                                <button type="button" id="{{i+1000*26}}" class="btn btn-primary btn-md"
+                                                    (click)="changetQte(index,1)"><i class="ft-plus"></i></button>
+                                            </div>
+                                            <ng-container *ngIf="type == formType.preview">
+                                                {{ produit?.qte }}
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                    <ng-container *ngIf="type != formType.preview">
+                                        <!-- <h4><i class="ft-map-pin"></i>{{'labels.listeproduits' | translate}}</h4> -->
+                                        <tr *ngFor="let produit of produits?.list;let index = index">
+
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        name="customCheck" id="chechbox{{ index+100 }}"
+                                                        (change)="addProduit(index,1)"
+                                                        [checked]="checkProduitIsSelectedOrNot(produit?.id)">
+                                                    <label class="custom-control-label"
+                                                        for="chechbox{{ index+100 }}"></label>
+                                                </div>
+                                            </td>
+                                            <td>{{ produit?.reference }}</td>
+                                            <!-- <td>{{ produit?.designation }}</td> -->
+                                            <td class="display-price">
+                                                {{prixTtc(produit) | RoudingNumber | ShowCurrency }}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group col-md-4">
+                                                    <button type="button" id="{{i+1000*24}}"
+                                                        class="btn btn-primary btn-md"><i class="ft-minus"></i></button>
+                                                    <input type="number" appInputRemoveDefaultZero id="{{i+1000*25}}"
+                                                        style="text-align: center" min="0" value="0"
+                                                        (input)="addProduit(index,$event.target.value)" />
+                                                    <button type="button" id="{{i+1000*26}}"
+                                                        class="btn btn-primary btn-md" (click)="addProduit(index,1)"><i
+                                                            class="ft-plus"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+
+                                    <!-- <tr class="text-center">
+                                        <td colspan="9"> {{ 'labels.msgEmptyTable' | translate }} </td>
+                                    </tr> -->
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+                        <div class="table-responsive">
+                            <div class="row">
+                                <div *ngIf="loading" style="text-align: center;padding: 5rem;" class="col-md-12">
+                                    <i class="fa fa-spinner fa-spin"></i>Loading
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <paination [painationInfo]="produits" (chagePageNamber)="chagePageNamber($event)"
+                            (changePageSize)="changePageSize($event)"></paination> -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" (click)="initialiser()" class="btn grey btn-light" data-dismiss="modal"
+                    [value]="'labels.btnCancel' | translate " placement="bottom"
+                    [ngbTooltip]="'labels.btnCancel' | translate " />
+                <input type="submit" class="btn btn-success btn-lg" [value]="'labels.btnSave' | translate "
+                    (click)="submit()" placement="bottom" [ngbTooltip]="'labels.btnSave' | translate " />
+            </div>
+        </div>
+    </div>
+</div>

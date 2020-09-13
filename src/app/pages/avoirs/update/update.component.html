@@ -1,0 +1,316 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'update.title' | translate }}</h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/avoirs']">{{ 'title' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'update.title' | translate }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group">
+      <button type="button" [routerLink]="['/avoirs']" class="btn btn-warning mr-1">
+        <i class="ft-x"></i> {{ 'labels.cancel' | translate }}
+      </button>
+
+      <button type="submit" (click)="update(statutAvoir.Brouillon)" class="btn btn-light">
+        <i class="fa ft-edit-3"></i> {{ 'labels.brouillon' | translate }}
+      </button>
+
+      <button type="submit" (click)="update(statutAvoir.Encours)" class="btn btn-success">
+        <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <section id="horizontal-form-layouts">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <!-- Information à saisir -->
+              <form class="form form-horizontal" [formGroup]="form">
+                <div class="form-body">
+                  <!-- Information avoir-->
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i>{{ 'labels.infoAvoir' | translate }}
+                  </h4>
+
+                  <!-- Reference + chantier -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput189">{{
+                            'labels.reference' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" formControlName="reference" id="projectinput189" class="form-control"
+                            placeholder="{{ 'labels.reference' | translate }}" />
+                          <small class="text-danger" *ngIf="f?.reference?.errors?.required">{{
+                              'errors.required' | translate
+                            }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- chantier -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                            'labels.chantier' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <ng-select notFoundText="{{ 'labels.noFoundItem' | translate }}"
+                            (search)="getChantiers($event)" labelForId="projectinput48" formControlName="idChantier"
+                            (change)="loadChantierClient(f?.idChantier?.value)" (clear)="clearChantier()">
+                            <ng-option *ngFor="let chantier of chantiers; let i = index" value="{{ chantier?.id }}">
+                              {{ chantier?.nom }}</ng-option>
+                          </ng-select>
+                          <small class="text-danger" *ngIf="f?.idChantier?.errors?.required">{{
+                              'errors.required' | translate
+                            }}</small>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="client">{{'labels.client' | translate}}</label>
+                        <div class="col-md-9" *ngIf="f?.idChantier?.value != null">
+
+                          <input type="text" disabled [value]="client?.nom" id="client" class="form-control">
+
+                          <small class="text-danger"
+                            *ngIf="f?.client?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                        <div class="col-md-9" *ngIf="f?.idChantier?.value == null">
+
+                          <ng-select notFoundText="{{'labels.noFoundItemclient' | translate}}" labelForId=projectinput48
+                            (change)="loadClientAdresse(f?.client?.value)" formControlName="client"
+                            (search)="getClients($event)" (clear)="getClients('')">
+                            <ng-option *ngFor=" let cli of clients;let i=index" [value]="cli">
+                              {{ cli?.nom }}
+                            </ng-option>
+                          </ng-select>
+                          <small class="text-danger"
+                            *ngIf="f?.client?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput4">{{'labels.adresseFacturation' | translate}}</label>
+                        <div class="col-md-9">
+                          <input type="text" disabled [value]="f?.adresseFacturation?.value?.designation" id="client"
+                            class="form-control">
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- date creation + date echeance -->
+                  <div class="row">
+                    <!-- <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control" for="projectinput3">{{
+                            'labels.dateCreation' | translate
+                          }}</label>
+                          <div class="col-md-9">
+                            <p-calendar
+                              formControlName="dateCreation"
+                              [readonlyInput]="true"
+                              dateFormat="dd/mm/yy"
+                              [style]="{ width: '100%' }"
+                              [inputStyle]="{ width: '100%' }"
+                              [locale]="dateLang"
+                              showButtonBar="true"
+                            ></p-calendar>
+                            <small class="text-danger" *ngIf="f?.dateCreation?.errors?.required">{{
+                              'errors.required' | translate
+                            }}</small>
+                          </div>
+                        </div>
+                      </div> -->
+                    <!-- 
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control" for="dateCreation">{{
+                            'labels.dateCreation' | translate
+                          }}</label>
+                          <div class="col-md-9">
+                            <p-calendar
+                              formControlName="dateCreation"
+                              [readonlyInput]="true"
+                              dateFormat="dd/mm/yy"
+                              [style]="{ width: '100%' }"
+                              [inputStyle]="{ width: '100%' }"
+                              [locale]="dateLang"
+                              showButtonBar="true"
+                            ></p-calendar>
+                            <small class="text-danger" *ngIf="f?.dateCreation?.errors?.required">{{
+                              'errors.required' | translate
+                            }}</small>
+                          </div>
+                        </div>
+                      </div> -->
+                    <!-- dateDebut -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="dateDebut">{{
+                            'labels.dateCreation' | translate
+                          }}</label>
+                        <div class="col-md-9" *ngIf="dateLang">
+                          <p-calendar formControlName="dateCreation" dateFormat="dd/mm/yy" [style]="{ width: '100%' }"
+                            [inputStyle]="{ width: '100%' }" [locale]="dateLang" showButtonBar="true">
+                          </p-calendar>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- dateFin -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="dateEcheance">{{
+                            'labels.dateEcheance' | translate
+                          }}</label>
+                        <div class="col-md-9" *ngIf="dateLang">
+                          <p-calendar formControlName="dateEcheance" dateFormat="dd/mm/yy" [style]="{ width: '100%' }"
+                            [inputStyle]="{ width: '100%' }" [locale]="dateLang" showButtonBar="true">
+                          </p-calendar>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control" for="projectinput39">{{
+                            'labels.dateEcheance' | translate
+                          }}</label>
+                          <div class="col-md-9">
+                            <p-calendar
+                              formControlName="dateEcheance"
+                              [readonlyInput]="true"
+                              dateFormat="dd/mm/yy"
+                              [style]="{ width: '100%' }"
+                              [inputStyle]="{ width: '100%' }"
+                              [locale]="dateLang"
+                              showButtonBar="true"
+                            ></p-calendar>
+                            <small class="text-danger" *ngIf="f?.dateEcheance?.errors?.required">{{
+                              'errors.required' | translate
+                            }}</small>
+                          </div>
+                        </div>
+                      </div> -->
+                  </div>
+
+                  <!-- Objet -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-1 label-control" for="projectinput19">{{
+                            'labels.objet' | translate
+                          }}</label>
+                        <div class="col-md-11">
+                          <input type="text" formControlName="object" id="projectinput19"
+                            class="form-control textarea-single-ligne" placeholder="{{ 'labels.objet' | translate }}" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 class="form-section"> <i class="ft-shopping-cart"></i>{{'labels.articles' | translate}}</h4>
+                <!-- Choisir les articles -->
+                <table-article [load]="emitter" [puc]="f?.puc.value" [remiseGloabl]="f?.remise.value"
+                  [typeRemiseGloabl]="f?.typeRemise.value" [partProrata]="f?.prorata.value"
+                  [tvaGlobal]="f?.tvaGlobal.value" [retenueGarantieValue]="f?.retenueGarantie.value"
+                  [delaiGarantie]="f?.delaiGarantie.value" [readOnly]="false" [articles]="articles" [isAvoir]="true">
+                </table-article>
+
+
+
+                <!-- Section d'autre -->
+                <h4 class="form-section">
+                  <i class="ft-message-circle"></i>{{ 'labels.autres' | translate }}
+                </h4>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="conditionRegelement">{{
+                          'labels.conditionRegelement' | translate
+                        }}</label>
+                      <div class="col-md-12">
+                        <!-- <textarea type="text" formControlName="conditionRegelement" id="conditionRegelement"
+                          class="form-control" placeholder="{{ 'labels.conditionRegelement' | translate }}"></textarea> -->
+                        <angular-editor id="conditionRegelement" [config]="editorConfig"
+                          formControlName="conditionRegelement">
+                        </angular-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="note">{{
+                          'labels.note' | translate
+                        }}</label>
+                      <div class="col-md-12">
+                        <!-- <textarea type="text" formControlName="note" id="note" class="form-control"
+                          placeholder="{{ 'labels.note' | translate }}"></textarea> -->
+                        <angular-editor id="note" [config]="editorConfig" formControlName="note">
+                        </angular-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Button de validation avoir -->
+<div class="row">
+  <div class="col-md-12" style="zoom: 1;">
+    <div class="btn-group float-md-left" role="group">
+      <button type="button" [routerLink]="['/avoirs']" class="btn btn-warning mr-1">
+        <i class="ft-x"></i> {{ 'labels.cancel' | translate }}
+      </button>
+
+      <button type="submit" (click)="update(statutAvoir.Brouillon)" class="btn btn-light">
+        <i class="fa ft-edit-3"></i> {{ 'labels.brouillon' | translate }}
+      </button>
+
+      <button type="submit" (click)="update(statutAvoir.Encours)" class="btn btn-success">
+        <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<br /><br />
+
+<!-- <div class="page-loading" [ngClass]="{ 'page-loading-active': loading }">
+  <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div> -->
+
+<custom-loader [displayLoader]="processing"></custom-loader>

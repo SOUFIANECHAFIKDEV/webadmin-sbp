@@ -1,0 +1,97 @@
+<div class="modal fade text-left" id="DocumentationModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+  aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel35">{{ getmodelName() }}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form form-horizontal" [formGroup]="documentationForm">
+        <div class="modal-body">
+          <div class="container">
+            <!-- designation -->
+            <div class="form-group row">
+              <label class="col-md-4 label-control" for="designation">
+                <strong>Désignation : </strong>
+              </label>
+              <div class="col-md-8" *ngIf="type != formType.preview">
+                <input type="text" class="form-control" id="designation" formControlName="designation" />
+                <small class="text-danger" *ngIf="f?.designation?.errors?.required">{{'errors.required' | translate
+                                        }}</small>
+                <small class="text-danger" *ngIf="f?.designation?.errors?.minlength">{{'errors.minLength'
+                                                | translate:{ number:2} }}</small>
+              </div>
+              <div class="col-md-8" *ngIf="type == formType.preview">
+                <input type="text" class="form-control" id="designation" [value]="defaultData.designation" disabled />
+              </div>
+            </div>
+            <!-- commantaire -->
+            <div class="form-group row">
+              <label class="col-md-4 label-control" for="commentaire">
+                <strong>Commentaire : </strong>
+              </label>
+              <div class="col-md-8" *ngIf="type != formType.preview">
+                <textarea type="text" class="form-control" id="commentaire" formControlName="commentaire"></textarea>
+              </div>
+              <div class="col-md-8" *ngIf="type == formType.preview">
+                <textarea type="text" class="form-control" id="commentaire"
+                  disabled>{{ defaultData.commentaire }}</textarea>
+              </div>
+            </div>
+            <!-- fichier attacher -->
+            <div class="form-group row">
+              <label class="col-md-4 label-control" for="commentaire">
+                <strong>Fichier : </strong>
+              </label>
+              <div class="col-md-8">
+                <div class="file" *ngIf="file == null">
+                  <label class="file-label text-center">
+                    <label for="file21" class="btn btn-light"> Choisir le ficher <i class="ft-upload"></i></label>
+                    <input class="file-input" type="file" (change)="startUpload($event.target.files)" id="file21"
+                      name="files" style="visibility:hidden;">
+                  </label>
+                </div>
+
+                <div *ngIf="file != null" style="border: 1px #ccd6e6 solid;padding: 1rem 1rem 0rem 1rem;"
+                  [ngStyle]="{'background':type == formType.preview ? '#ebebeb':'#fff'}">
+                  <p>
+                    {{ parseFileInfos(file).orignalName }}
+                    <i class="ft-trash btn-remove" style="font-size: 20px; color: red; position: relative; top: 3px; "
+                      (click)="removeFile()" *ngIf="type != formType.preview"></i>
+                    <i class="ft-download btn-download"
+                      style="font-size: 20px; color: #065cb3; position: relative; top: 3px; "
+                      (click)="downloadPieceJointe()" *ngIf="type != formType.add"></i>
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <!-- label document -->
+            <div class="form-group row">
+              <label class="col-md-4 label-control" for="commentaire">
+                <strong>{{ 'tags.title' | translate }}</strong>
+              </label>
+              <div class="col-md-8">
+                <ino-tags [load]="emitter" [allTagsList]="allTagsList" [newTags]="listLabelTags"
+                  (onTagsChange)="onTagsChange($event)" [readOnly]="type != formType.preview" [size]="'small'">
+                </ino-tags>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn grey btn-light" data-dismiss="modal" [value]="'labels.btnCancel' | translate"
+            [ngbTooltip]="'labels.btnCancel' | translate">{{ 'labels.btnCancel' | translate }}</button>
+          <ng-container *ngIf="type != formType.preview">
+            <button type="button" class="btn btn-success btn-lg" [value]="'labels.btnSave' | translate "
+              (click)="submit()"
+              [ngbTooltip]="'labels.btnSave' | translate ">{{ 'labels.btnSave' | translate }}</button>
+          </ng-container>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

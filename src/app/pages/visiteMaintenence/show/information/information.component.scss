@@ -1,0 +1,78 @@
+.input-currency {
+  //text-align: right;
+  padding: 10px 10px 8px 10px;
+  background-color: #ebebeb;
+  border: 1px solid #babfc7;
+  border-radius: 4px;
+}
+
+.card-body {
+  overflow: inherit !important;
+}
+.dropzone { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  font-weight: 200;
+  height: 300px;
+  border: 2px dashed #065cb3;
+  border-radius: 5px;
+  background: white;
+  margin: 10px 0;
+
+  &.hovering {
+      border: 2px solid #f16624;
+      color: #dadada !important;
+  }
+
+  .file-label {
+      font-size: 1.2em;
+  }
+}
+
+.btn-sm{
+ // padding: 0.25rem 0.5rem  !important;
+  font-size: 0.875rem  !important;
+  line-height: 1.73rem  !important;
+  border-radius: 0.21rem  !important;
+  padding-top: 0px !important;
+}
+
+.btn-mail {
+  color: white !important;
+  background-color: #0f9497 !important;
+  border-color: #2DCEE3 !important;
+}
+.cssAngular{
+   
+  padding-left: 80px;
+}
+
+/* fix = code from bootstrap 3 */
+tbody.collapse.in {
+  display: table-row-group;
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.tree-equipepent>div:nth-child(1) {
+  background-color: #e3ebf3;
+  font-style: italic;
+  font-weight: 600;
+  padding: 10px 5px;
+  margin: 0;
+}
+
+ul{
+  list-style-type: none;
+}

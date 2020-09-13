@@ -1,0 +1,31 @@
+<div class="modal fade text-left" id="updateParamter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35">{{ modelName }}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group row">
+                        <label class="col-md-4 label-control" for="racine">
+                            <strong>Label : </strong>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" #labelInput [value]="formConfig.value.label" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="reset" class="btn grey btn-light" data-dismiss="modal" [value]="btnCancel"
+                    placement="bottom" [ngbTooltip]="btnCancel" />
+                <input type="submit" class="btn btn-success btn-lg" [value]="btnAdd" (click)="submit()"
+                    placement="bottom" [ngbTooltip]="btnAdd" [disabled]="labelInput.value.length < 2" />
+            </div>
+        </div>
+    </div>
+</div>

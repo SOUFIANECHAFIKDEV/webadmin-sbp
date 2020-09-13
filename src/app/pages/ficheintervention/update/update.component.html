@@ -1,0 +1,250 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+
+
+        <h3 class="content-header-title mb-0">{{ 'update.title' | translate}}</h3>
+        <div class="row breadcrumbs-top">
+            <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="backLink"
+                            [routerLink]="['/ficheintervention']">{{'title' | translate}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ 'update.title' | translate}}
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group">
+            <button type="button" [routerLink]="['/ficheintervention']" class="btn btn-warning mr-1" placement="bottom"
+                ngbTooltip="{{'labels.cancel' | translate}}">
+                <i class="ft-x"></i> {{'labels.cancel' | translate}}
+            </button>
+            <button type="submit" (click)="update()" class="btn btn-success" placement="bottom"
+                ngbTooltip="{{'labels.modifier' | translate}}">
+                <i class="fa ft-check"></i> {{ 'labels.modifier' | translate }}
+            </button>
+        </div>
+    </div>
+</div>
+<div class="content-body">
+
+    <section id="horizontal-form-layouts">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="zoom: 1;">
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form class="form form-horizontal" [formGroup]="form" (ngSubmit)="update()">
+                                <div class="form-body">
+                                    <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+                                    <div class="row">
+                                        <!-- reference -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="projectinput1">{{'labels.reference' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" formControlName="reference" id="projectinput1"
+                                                        class="form-control"
+                                                        placeholder="{{'labels.reference' | translate}}">
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.reference?.hasError('CheckUniqueReference')">{{'errors.unique' | translate }}</small>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.reference?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- chantier -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="projectinput2">{{'labels.chantier' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <ng-select notFoundText="{{'labels.noFoundItem' | translate}}"
+                                                        (search)="getChantiers($event)" labelForId=projectinput48
+                                                        formControlName="idChantier"
+                                                        (change)="loadChantierInformation(f?.idChantier?.value)"
+                                                        (clear)="getChantiers('')">
+                                                        <ng-option *ngFor="let chantier of chantiers;let i = index"
+                                                            value="{{chantier?.id}}">
+                                                            {{chantier?.nom}}</ng-option>
+                                                    </ng-select>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.idChantier?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- client -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="client">{{'labels.client' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" disabled [value]="f?.client?.value?.nom"
+                                                        id="client" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- adresseFacturation -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="adresseFacturation">{{'labels.siteIntervention' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" disabled
+                                                        [value]="f?.adresseIntervention?.value?.designation"
+                                                        id="adresseFacturation" class="form-control">
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.adresseIntervention?.value?.designation?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- dateDebut -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="dateDebut">{{'labels.dateDebut' | translate}}</label>
+                                                <div class="col-md-9" *ngIf="dateLang">
+                                                    <p-calendar formControlName="dateDebut" dateFormat="dd/mm/yy"
+                                                        [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        [locale]="dateLang" showButtonBar="true" showTime="true">
+                                                    </p-calendar>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.dateDebut?.errors?.required">{{'errors.required' | translate }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- dateFin -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="dateFin">{{'labels.dateFin' | translate}}</label>
+                                                <div class="col-md-9" *ngIf="dateLang">
+                                                    <p-calendar formControlName="dateFin" dateFormat="dd/mm/yy"
+                                                        [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                        [locale]="dateLang" showButtonBar="true" showTime="true">
+                                                    </p-calendar>
+                                                    <small class="text-danger"
+                                                        *ngIf="f?.dateFin?.errors?.required">{{'errors.required' | translate }}</small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- nbr Panier -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="nombrePanier">{{'labels.nombrePanier' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="number" formControlName="nombrePanier"
+                                                        id="nombrePanier" class="form-control"></div>
+                                            </div>
+                                        </div>
+                                        <!-- nbr deplacement -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control"
+                                                    for="nombreDeplacement">{{'labels.nombreDeplacement' | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <input type="number" formControlName="nombreDeplacement"
+                                                        id="nombreDeplacement" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- objet -->
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-1 label-control"
+                                                    for="objet">{{'labels.objet' | translate}}</label>
+                                                <div class="col-md-11 cssAngular">
+                                                    <textarea formControlName="objet"
+                                                        placeholder="{{'labels.objet' | translate}}" id="objet"
+                                                        class="form-control textarea-single-ligne"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- rapport -->
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-1 label-control"
+                                                    for="rapport">{{'labels.rapport' | translate}}</label>
+                                                <div class="col-md-11 cssAngular" style="width: 95.5%;float: right;">
+                                                    <angular-editor id="rapport" [config]="editorConfig"
+                                                        formControlName="rapport">
+                                                    </angular-editor>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <h4 class="form-section"> <i class="ft-users"></i>{{'labels.techniciens' | translate}}
+                                </h4>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <select-user (returnSelectedItems)="getTechniciens($event)"
+                                            [usersToDispaly]="techniciens" [selected]="techniciens"></select-user>
+                                        <button type="button" data-backdrop="false"
+                                            class="btn btn-success square btn-md" data-toggle="modal"
+                                            data-target="#selectUserModal" placement="bottom" style="float: right;"> <i
+                                                class="ft-add"></i>
+                                            <i class="ft-plus"></i> {{ 'labels.addTechnicien' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <h4 class="form-section"> <i
+                                        class="ft-shopping-cart"></i>{{'labels.prestations' | translate}}</h4>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table-article [articles]="prestations" [readOnly]="false" [isIntervention]=true
+                                            [load]="emitter" [showPrices]="false" [displaysGeneralCalculation]="false">
+                                        </table-article>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="row">
+                <div class="col-md-12" style="zoom: 1;">
+                    <div class="btn-group float-md-left" role="group">
+                        <button type="button" [routerLink]="['/ficheintervention']" class="btn btn-warning mr-1"
+                            placement="top" ngbTooltip="{{'labels.cancel' | translate}}">
+                            <i class="ft-x"></i> {{'labels.cancel' | translate}}
+                        </button>
+                        <button type="submit" (click)="update()" class="btn btn-success" placement="top"
+                            ngbTooltip="{{'labels.modifier' | translate}}">
+                            <i class="fa ft-check"></i> {{ 'labels.modifier' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+    </section>
+</div>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

@@ -1,0 +1,120 @@
+<!-- <body> -->
+<div class="content-header-right col-md-12 col-12">
+    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown"
+        style="margin-top: 1rem;z-index:100">
+        <button class="btn btn-primary" (click)="openModel('add')" placement="bottom"
+            ngbTooltip="Ajouter">Ajouter
+            <i class="ft-plus"></i></button>
+    </div>
+</div>
+
+<div class="content-wrapper" style="padding: 0px 0.8rem 0px 23px;">
+    <div class="content-body">
+
+        <section id="timeline" class="timeline-left timeline-wrapper">
+            <ul class="timeline">
+                <ng-container *ngFor="let memo of memos; let i=index">
+                    <li class="timeline-item mt-3">
+                        <div class="timeline-badge">
+                            <span class="bg-white" data-toggle="tooltip" data-placement="right">
+                                {{i+1}}
+                            </span>
+                        </div>
+                        <div class="timeline-card card border-grey border-lighten-2">
+                            <div class="card-body">
+                                <h6 class="card-title"><a [routerLink]="['/utilisateurs/detail',memo.idUser]">
+                                        {{ memo?.idUser | GetNameOfUserById }}</a>
+                                    {{ memo?.date | date:'dd/MM/yyyy HH:mm' }}
+                                    <div class="btn-group" *ngIf="modificationPermission">
+                                        <button type="button" class="btn btn-success btn-sm"
+                                            (click)="openModel('edit',memo,i)" placement="bottom"
+                                            ngbTooltip="{{'labels.modifier' | translate}}"><i
+                                                class="ft-edit"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteMemo(i)">
+                                            <i class="ft-trash-2" placement="bottom"
+                                                ngbTooltip="{{'labels.supprimer' | translate}}"></i>
+                                        </button>
+                                    </div>
+                                </h6>
+                                <p class="card-subtitle text-muted mb-0 pt-1">
+                                    <span class="font-small-3">{{ memo?.commentaire }}</span>
+                                </p>
+                                <div class="piecesJointe">
+                                    <p *ngFor="let piece of memo.pieceJointes;let j = index">
+                                        <a (click)="downloadFile(i,j)">{{ piece.orignalName }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<!-- </body> -->
+
+<!-- Modal -->
+<div class="modal fade text-left" id="memoPopu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> {{ formTitle }}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <fieldset class="form-group floating-label-form-group">
+                        <label for="title1">{{'commun.Comment' | translate}}</label>
+                        <textarea class="form-control" [(ngModel)]="commentaire" name="commentaire" id="title1" rows="3"
+                            placeholder="saisir ici un commentaire"></textarea>
+                    </fieldset>
+                    <div class="dropzone" (dropped)="startUpload($event.target.files)">
+
+                        <h3>{{'commun.PieceJoint' | translate}}</h3>
+                        <div class="file">
+                            <label class="file-label text-center">
+                                <label for="file21" class="btn btn-light"> {{ 'commun.chooseFile' | translate }}
+                                </label>
+                                <input class="file-input" type="file" (change)="startUpload($event.target.files)"
+                                    id="file21" [(ngModel)]="files" name="files" style="visibility:hidden;">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="upload-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'commun.name' | translate }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="upload-name-style">
+                                <tr *ngFor="let item of newMemos?.pieceJointes; let i=index">
+                                    <td>{{ item.orignalName }}</td>
+                                    <td>
+                                        <i (click)="deleteFile(i)" style="color: red;font-size: 14px"
+                                            class="ft-trash-2"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="reset" class="btn grey btn-light" data-dismiss="modal"
+                        [value]="'commun.close' | translate" placement="top"
+                        ngbTooltip="{{'commun.close' | translate}}">
+                    <input type="submit" (click)="save()" class="btn btn-success btn-lg" data-dismiss="modal"
+                        [value]="'commun.save' | translate" placement="top" ngbTooltip="{{'commun.save' | translate}}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<custom-loader [displayLoader]="processIsStarting"></custom-loader>

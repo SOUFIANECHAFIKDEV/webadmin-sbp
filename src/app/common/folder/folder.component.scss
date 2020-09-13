@@ -1,0 +1,79 @@
+.chantier-folder {
+    background-image: url("./../../../assets/app-assets/images/folder-blue.png");
+    width: 15rem;
+    height: 15rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 5rem;
+    .chantier-name {
+      // color: #fff;
+      // margin: 0 10px;
+      // position: fixed;
+      // top: 42%;
+      // width: 14rem;
+      // text-align: center;
+      // overflow: hidden;
+      // display: -webkit-box;
+      // -webkit-line-clamp: 3;
+      // -webkit-box-orient: vertical;
+      color: #fff;
+      text-align: center !important;
+      margin-top: 2rem;
+    }
+  }
+  
+  .btn-group {
+    position: relative;
+    margin-top: 1rem;
+    // margin-left: 4rem;
+}
+
+.open-folder{
+  button {
+    position: absolute;
+    bottom: 11.15rem;
+    height: 2rem;
+    width: 6.2rem;
+    line-height: 0rem;
+    left: 1.5rem;
+    background-color: #3498db;
+    color: white;
+  }
+}
+
+.btn-actions{
+  background-color: #3498db !important;
+  border: 1px #fff solid !important;
+  color: #fff;
+}
+
+.chantie-statut{
+  position: absolute;
+  bottom: 11.55rem;
+  height: 1.4rem;
+  width: 6.4rem;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 0.2rem;
+  font-size: 0.9rem;
+  left: 1.6rem;
+  padding: 0.1rem;
+  // background-color: #16d39a;
+}
+
+.statut-EnEtude {
+  background-color: #ffa87d !important;
+}
+
+.statut-Accepte {
+  background-color: #16d39a !important;
+}
+
+.statut-Termine {
+  background-color: #2dcee3 !important;
+}
+
+.statut-NonAccepte {
+  background-color: #ff7588 !important;
+}

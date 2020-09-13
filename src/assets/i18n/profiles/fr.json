@@ -1,0 +1,131 @@
+{
+  "title": "Profils",
+  "errors": {
+    "unique": "Cette valeur est déjà utilisée",
+    "required": "Ce champs est requis",
+    "minLength": "Ce champs doit être au moins de {{number}} caractères",
+    "pattern": "Ce champs est invalide"
+  },
+  "action":{
+    "title":"Actions",
+    "toggle": "Toggle avec succès",    
+    "error": "Erreur du serveur"
+  },
+
+  "labels": {
+    "libelle":"Libellé",
+    "id": "Id",
+    "nom": "Nom",
+    "reference": "Référence",
+    "raisonSociale": "Raison Sociale",
+    "telephone": "Téléphone",
+    "fax": "Fax",
+    "email": "Email",
+    "siteWeb": "Site Web",
+    "siret": "Siret",
+    "tvaIntraCommunautaire": "TVA Intra-Communautaire",
+    "codeComptable": "Code Comptable",
+    "typeClient": "Type Client",
+    "adresses": "Adresses",
+    "memos": "Mémos",
+    "contacts": "Contacts",
+    "historique": "Historique",
+    "pays": "Pays",
+    "departement": "Département",
+    "ville": "Ville",
+    "autreVille": "Autre Ville",
+    "codePostal": "Code Postal",
+    "adresse": "Adresse",
+    "complementAdresse": "Complément Adresse",
+    "contact": "Contact",
+    "civilite": "Civilité",
+    "prenom": "Prénom",
+    "mobile": "Mobile",
+    "fixe": "Fixe",
+    "fonction": "Fonction",
+    "commentaire": "Commentaire",
+    "action": "Actions",
+    "infoClient": "Information client",
+    "info": "Information",
+    "sauvegarder": "Sauvegarder",
+    "add": "Ajouter",
+    "update": "Mettre à jour",
+    "cancel": "Annuler",
+    "modifier": "Modifier",
+    "modification": "Modification",
+    "monsieur": "Monsieur",
+    "madame": "Madame",
+    "mademoiselle": "Mademoiselle",
+    "selectionner": "-- Sélectionner une valeur --",
+    "date": "Date",
+    "utilisateur": "Utilisateur",
+    "nouveau": "Nouveau",
+    "supprimer":"Supprimer",
+    "profile":"Profil"
+  },
+  "typeClient": {
+    "professionnel": "Professionnel",
+    "particulier": "Particulier"
+  },
+  "list": {
+    "title": "Liste des Profils",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr supprimer ce profil ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "error": "Erreur du serveur"
+    }
+  },
+  "add": {
+    "title": "Ajouter Profil",
+    "msg": "Ajouter avec succès"
+  },
+  "update": {
+    "title": " Profil",
+    "msg": "Modifier avec succès"
+  },
+  "show": {
+    "title": "Détails Profil"
+  },
+  "dataTables": {
+    "processing": "Traitement en cours...",
+    "search": "Rechercher&nbsp;:",
+    "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+    "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "infoPostFix": "",
+    "loadingRecords": "Chargement en cours...",
+    "zeroRecords": "",
+    "emptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+    "paginate": {
+      "first": "Premier",
+      "previous": "Pr&eacute;c&eacute;dent",
+      "next": "Suivant",
+      "last": "Dernier"
+    },
+    "aria": {
+      "sortAscending": ": activer pour trier la colonne par ordre croissant",
+      "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+    }
+  },
+  "noDataAvaible": "Aucune donnée disponible dans le tableau",
+  "historique": {
+    "AjouterUnCommentaire": "Ajouter un commentaire",
+    "Comment": "Commentaire",
+    "PieceJoint": "Piece jointe",
+    "DropFilesHereToUpload": "Déposer des fichiers ici pour télécharger",
+    "close": "Fermer",
+    "Add": "Ajouter"
+  },  
+  "Afficher_Masquées_Les_Colonnes": "Colonnes"
+}
+
+
+
+
+
+
+

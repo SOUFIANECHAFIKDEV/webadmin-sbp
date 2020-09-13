@@ -1,0 +1,154 @@
+<!-- Form d'information de client -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="zoom: 1;">
+      <div class="card-content collpase show">
+        <div class="card-body">
+          <form class="form form-horizontal">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="codeclient">{{'labels.codeclient' | translate}}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.codeclient}}" id="codeclient" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="nom">{{ 'labels.nom' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.nom}}" id="nom" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="groupe">{{'labels.groupe' | translate}}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{ client?.idGroupe | GetNameOfGroupe }}" id="groupe"
+                        class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="reference">{{'labels.reference' | translate}}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.reference}}" id="reference" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="telephone">{{ 'labels.telephone' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.telephone}}" id="telephone" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="fax">{{ 'labels.fax' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.fax}}" id="fax" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="email">{{'labels.email' | translate}} </label>
+                    <div class="col-md-9">
+                      <input type="email" value="{{client?.email}}" id="email" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="siteWeb">{{ 'labels.siteWeb' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.siteWeb}}" id="siteWeb" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="siret">{{ 'labels.siret' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.siret}}" id="siret" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="tvaIntraCommunautaire">{{ 'labels.tvaIntraCommunautaire' |
+                      translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.tvaIntraCommunautaire}}" id="tvaIntraCommunautaire"
+                        class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                      for="defaultAgent">{{'labels.defaultAgent' | translate}}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{ client?.idAgent | GetNameOfUserById }}" id="defaultAgent"
+                        class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control"
+                      for="codeComptable">{{ 'labels.codeComptable' | translate }}</label>
+                    <div class="col-md-9">
+                      <input type="text" value="{{client?.codeComptable}}" id="codeComptable" class="form-control"
+                        disabled>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- listes des adresses -->
+<list-address [addresses]="adresses" [show]="false"></list-address>
+
+<!-- listes des contacts -->
+<liste-contacts [contacts]="contacts" [show]="false"></liste-contacts>

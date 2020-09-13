@@ -1,0 +1,280 @@
+<form class="form form-horizontal">
+    <h4 class="form-section"><i class="ft-users"></i>{{'labels.contacts' | translate}}</h4>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let item of contacts;let i=index">
+            <div class="card">
+                <div class="card-header">
+                    <div class="custom" *ngIf="show">
+                        <ul class="list-inline">
+                            <li><a data-toggle="modal" data-target="#editContact" (click)="chargeContact(i)"><i
+                                        class="ft-edit-2 btn-edit"></i></a></li>
+                            <li (click)="removeContact(i)"><a><i class="ft-x btn-remove"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collpase show">
+                    <div class="card-body" [ngClass]="{'card-body-custom': show}">
+                        <h5 style="font-weight: bold">{{item.civilite}} {{item.nom }} {{item.prenom}} </h5>
+                        <h5 style="font-weight: 500"> {{item?.fonction}}</h5>
+                        <div class="card-text" style="line-height: 1.8 !important;">
+                            <ng-container *ngIf="item?.email != '' && item?.email != null">
+                                <i class="fa fa-at" style="font-size: 15px;padding: 5px 5px;"
+                                    *ngIf="item?.email != ''"></i>{{item?.email}} <br>
+                            </ng-container>
+                            <ng-container *ngIf="item?.mobile != '' && item?.mobile != null">
+                                <i class="fa fa-mobile" style="font-size: 20px;padding: 5px 5px;"
+                                    *ngIf="item?.mobile != ''"></i> &nbsp;{{item?.mobile}} <br />
+                            </ng-container>
+                            <ng-container *ngIf="item?.fixe != '' && item?.fixe != null">
+                                <i class="fa fa-phone" style="font-size: 15px;padding: 5px 5px;"
+                                    *ngIf="item?.fixe != ''"></i> {{item?.fixe}}
+                            </ng-container>
+                        </div>
+                        <br>
+                        <div id="scrollable-content">
+                            {{item?.commentaire}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="float: right;margin-right: 15px;">
+        <div class="row" *ngIf="show">
+            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addContact" placement="bottom"
+                ngbTooltip="{{'labels.addContact' | translate}}"> <i class="fa fa-plus"></i>
+                {{'labels.addContact' | translate}} </button>
+        </div>
+    </div>
+    <br> <br> <br>
+</form>
+
+<!-- Modal Add contact -->
+<div class="modal fade text-left" id="addContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> {{'labels.addContact' | translate}}</h3>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="add()">
+                <div class="modal-body">
+                    <div class="container">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.civilite' | translate}}</label>
+                            <div class="col-md-9">
+                                <select class="form-control" formControlName="civilite">
+                                    <option value="">{{ 'labels.selectionner' | translate }} </option>
+                                    <option value="M.">{{'labels.monsieur' | translate }} </option>
+                                    <option value="Mme.">{{ 'labels.madame' | translate }}</option>
+                                    <option value="Mlle">{{'labels.mademoiselle' | translate}}</option>
+                                </select>
+                                <ng-container *ngIf="form.touched && form.invalid">
+                                    <small class="text-danger" *ngIf="f?.civilite?.errors?.required">
+                                        {{'errors.required' | translate}}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.nom' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="nom" class="form-control"
+                                    placeholder="{{'labels.nom' | translate}}">
+                                <ng-container *ngIf="form.touched && form.invalid">
+                                    <small class="text-danger" *ngIf="f?.nom?.errors?.required">
+                                        {{'errors.required' | translate}}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.prenom' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="prenom" class="form-control"
+                                    placeholder="{{'labels.prenom' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.fonction' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="fonction" class="form-control"
+                                    placeholder="{{'labels.fonction' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.email' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="email" formControlName="email" class="form-control"
+                                    placeholder="{{'labels.email' | translate}}">
+                                <small class="text-danger" *ngIf="f?.email?.errors?.pattern">
+                                    {{'errors.pattern' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.mobile' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="mobile" class="form-control"
+                                    placeholder="{{'labels.mobile' | translate}}">
+                                <small class="text-danger" *ngIf="f?.mobile?.errors?.pattern">
+                                    {{'errors.pattern' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.fixe' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="fixe" class="form-control"
+                                    placeholder="{{'labels.fixe' | translate}}">
+                                <small class="text-danger" *ngIf="f?.fixe?.errors?.pattern">
+                                    {{'errors.pattern' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.commentaire' | translate}}</label>
+                            <div class="col-md-9">
+                                <textarea rows="4" formControlName="commentaire" class="form-control"
+                                    placeholder="{{'labels.commentaire' | translate}}">
+                </textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn grey btn-light" (click)="modalDismiss()"
+                        ngbTooltip="{{ 'labels.close'| translate }}"> {{ 'labels.close'| translate }} </button>
+                    <button type="submit" class="btn btn-success btn-lg" placement="bottom"
+                        ngbTooltip="{{ 'labels.add' | translate }}"> <i class="fa fa-plus"></i>
+                        {{ 'labels.add' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edit contact -->
+<div class="modal fade text-left" id="editContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    ria-hidden="true" *ngIf="editForm">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35"> {{'labels.editContact' | translate}}</h3>
+            </div>
+            <form [formGroup]="editForm" (ngSubmit)="update()">
+                <div class="modal-body">
+                    <div class="container">
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.civilite' | translate}}</label>
+                            <div class="col-md-9">
+                                <select class="form-control" formControlName="civilite" id="basicSelect">
+                                    <option value="">{{ 'labels.selectionner' | translate }} </option>
+                                    <option value="M.">{{'labels.monsieur' | translate }} </option>
+                                    <option value="Mme.">{{ 'labels.madame' | translate }}</option>
+                                    <option value="Mlle">{{'labels.mademoiselle' | translate}}</option>
+                                </select>
+                                <ng-container *ngIf="editForm.touched && editForm.invalid">
+                                    <small class="text-danger" *ngIf="fEdit?.civilite?.errors?.required">
+                                        {{'errors.required' | translate}}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.nom' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="nom" class="form-control"
+                                    placeholder="{{'labels.nom' | translate}}">
+                                <ng-container *ngIf="editForm.touched && editForm.invalid">
+                                    <small class="text-danger" *ngIf="fEdit?.nom?.errors?.required">
+                                        {{'errors.required' | translate}}
+                                    </small>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.prenom' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="prenom" class="form-control"
+                                    placeholder="{{'labels.prenom' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.fonction' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="fonction" class="form-control"
+                                    placeholder="{{'labels.fonction' | translate}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.email' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="email" formControlName="email" class="form-control"
+                                    placeholder="{{'labels.email' | translate}}">
+                                <small class="text-danger" *ngIf="f?.email?.errors?.pattern">
+                                    {{'errors.pattern' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.mobile' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="mobile" class="form-control"
+                                    placeholder="{{'labels.mobile' | translate}}">
+                                <small class="text-danger" *ngIf="fEdit?.mobile?.errors?.pattern">
+                                    {{'errors.pattern' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.fixe' | translate}}</label>
+                            <div class="col-md-9">
+                                <input type="text" formControlName="fixe" class="form-control"
+                                    placeholder="{{'labels.fixe' | translate}}">
+                                <small class="text-danger" *ngIf="fEdit?.fixe?.errors?.pattern">
+                                    {{'errors.pattern' | translate}}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control">{{'labels.commentaire' | translate}}</label>
+                            <div class="col-md-9">
+                                <textarea rows="4" formControlName="commentaire" class="form-control"
+                                    placeholder="{{'labels.commentaire' | translate}}">
+                  </textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn grey btn-light" (click)="modalDismiss()"
+                        ngbTooltip="{{ 'labels.close'| translate }}">{{ 'labels.close'| translate }} </button>
+                    <button type="submit" class="btn btn-success btn-lg" placement="bottom"
+                        ngbTooltip="{{ 'labels.update' | translate }}"> <i class="fa fa-edit"></i>
+                        {{ 'labels.update' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

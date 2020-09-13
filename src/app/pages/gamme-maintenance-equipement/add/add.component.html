@@ -1,0 +1,108 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'add.title' | translate}}</h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/gammemaintenanceequipements']">{{'title' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'add.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group">
+
+      <button type="button" [routerLink]="['/gammemaintenanceequipements']" class="btn btn-warning mr-1">
+        <i class="ft-x"></i> {{'labels.cancel' | translate}}
+      </button>
+
+
+      <button type="submit" (click)="add()" class="btn btn-success">
+        <i class="fa ft-check"></i> {{ 'labels.sauvegarder' | translate }}
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+
+  <section id="horizontal-form-layouts">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+
+              <!-- Information à saisir -->
+              <form class="form form-horizontal" [formGroup]="form">
+                <div class="form-body">
+
+                  <!-- Information depense-->
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i>{{'labels.infogammemaintenanceequipement' | translate}}</h4>
+
+                  <!-- Nom -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="nom">{{ 'labels.nom' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" formControlName="nom" id="nom" class="form-control">
+                          <small class="text-danger"
+                            *ngIf="f?.nom?.errors?.required">{{'errors.required'| translate }}</small>
+                          <small class="text-danger"
+                            *ngIf="f?.nom?.hasError('checkUniqueNom')">{{'errors.unique' | translate }}</small>
+                          <small class="text-danger"
+                            *ngIf="f?.nom?.errors?.minlength">{{'errors.minLength' | translate:{number:3} }}</small>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i>{{'labels.operations' | translate}}</h4>
+                  <div class="row">
+                    <div class="col-12">
+                      <gamme-maintenance-equipement [load]="emitter"></gamme-maintenance-equipement>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Button de validation depense -->
+<div class="row">
+  <div class="col-md-12" style="zoom: 1;">
+    <div class="btn-group float-md-left" role="group">
+
+      <button type="button" [routerLink]="['/gammemaintenanceequipements']" class="btn btn-warning mr-1">
+        <i class="ft-x"></i> {{'labels.cancel' | translate}}
+      </button>
+
+
+      <button type="submit" (click)="add()" class="btn btn-success">
+        <i class="fa ft-check"></i> {{ 'labels.sauvegarder' | translate }}
+      </button>
+
+    </div>
+  </div>
+</div>
+<br><br>
+
+
+<custom-loader [displayLoader]="processing"></custom-loader>

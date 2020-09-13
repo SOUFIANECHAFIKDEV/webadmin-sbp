@@ -1,0 +1,113 @@
+// Range CSS
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+    background-color: #0275d8;
+    color: white;
+}
+.faded {
+    opacity: 0.5;
+}
+
+// Toggle button
+$btn-height: 40px;
+$btn-width: 100px;
+$btn-padding: 4px;
+.checkbox-btn {
+    width: $btn-width;
+    height: $btn-height;
+    position: relative;
+  }
+  
+.checkbox {
+position: relative;
+z-index: 2;
+width: 100%;
+height: 100%;
+background: #f00;
+margin: 0;
+padding: 0;
+cursor: pointer;
+opacity: 0;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.toggler {
+background: #f00;
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1;
+background-color: white;
+line-height: 1;
+color: #fff;
+transition: background-color .15s ease-out;
+border-radius: 2px;
+text-transform: uppercase;
+font-size: 12px;
+font-weight: 700;
+
+.checkbox-btn--rounded & {
+    border-radius: $btn-height;
+}
+
+&::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: $btn-padding;
+    left: $btn-padding;
+    bottom: $btn-padding;
+    padding: 0 12px;
+    border-radius: 2px;
+    background-color: rgb(218, 118, 118);
+    content: attr(data-label-unchecked);
+    transition: all .15s ease-out;
+    min-width: $btn-height - (2 * $btn-padding);
+    
+    .checkbox-btn--rounded & {
+    border-radius: $btn-height;
+    }
+}
+
+.checkbox:hover + & {
+    background-color: rgb(187, 192, 212);
+}
+
+.checkbox:active + &::before {
+    padding: 0 20px;
+}
+
+.checkbox:checked + &::before {
+    background-color: rgb(16, 168, 168);
+    content: attr(data-label-checked);
+    left: calc(100% - #{$btn-padding});
+    transform: translateX(-100%);
+}
+}
+.card-body{
+    overflow: inherit !important;
+}
+.btn-min-width{
+    float: right;
+    width: 20vw;
+}
+
+.currency-input{
+    text-align: right;
+}
+.content-body {
+    margin-bottom: 25px !important;
+ }
+

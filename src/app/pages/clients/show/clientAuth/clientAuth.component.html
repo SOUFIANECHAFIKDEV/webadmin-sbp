@@ -1,0 +1,39 @@
+<div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin">
+                <div class="card-body">
+                    <h5 class="card-title text-center"></h5>
+                    <form class="form-signin" [formGroup]="form">
+    
+                        <div class="form-label-group">
+                            <label for="inputEmail">{{'labels.Username' | translate}}</label>
+                            <input type="text" formControlName="username" id="inputEmail" class="form-control" placeholder="{{'labels.Username' | translate}}" required autofocus>
+                            <small class="text-danger" *ngIf="f?.username?.errors?.minlength">{{'errors.minLength' | translate:{number:4} }}</small>
+                            <small class="text-danger" *ngIf="f?.username?.errors?.required">{{'errors.required' | translate }}</small>
+                            <small class="text-danger" *ngIf="f?.username?.hasError('CheckUniqueUserName')">{{'errors.unique' | translate }}</small>
+                        </div>
+    
+                        <div class="form-label-group pt-1">
+                            <label for="inputPassword">{{'labels.Password' | translate}}</label>
+                            <show-hide-password size="md" icon="fontawesome" btnStyle="secondary" [btnOutline]="true">
+                                <input type="password" formControlName="password" id="inputPassword" class="form-control" placeholder="{{'labels.Password' | translate}}" required>
+                            </show-hide-password>
+                            <small class="text-danger" *ngIf="f?.password?.errors?.minlength">{{'errors.minLength' | translate:{number:6} }}</small>
+                            <small class="text-danger" *ngIf="f?.password?.errors?.required && insertOrUpdate">{{'errors.required' | translate }}</small>
+                        </div>
+    
+                        <div class="custom-control custom-checkbox mt-1 mb-2">
+                            <input type="checkbox" formControlName="actif"  class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">{{'labels.Actif' | translate}}</label>
+                        </div>
+    
+                        <button class="btn btn-md btn-primary btn-block text-uppercase" (click)="saveInfos()" placement="top" [container]="'body'" ngbTooltip="{{ 'labels.sauvegarder' | translate }}">
+                            <i class="fa fa-check-square-o"></i>
+                            {{ 'labels.sauvegarder' | translate }}
+                        </button>
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

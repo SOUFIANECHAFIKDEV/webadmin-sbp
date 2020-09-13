@@ -1,0 +1,38 @@
+.content-header-right {
+  text-align: right;
+  margin-bottom: 1%;
+}
+
+table {
+  width: 100%;
+}
+
+.badge-brouillon {
+  background-color: #636e72 !important;
+}
+.badge-annuler {
+  background-color: #fe0000 !important;
+}
+.badge-enretard {
+  background-color: #ffa87d !important;
+}
+.badge-planifiee {
+  background-color: #00d2d3 !important;
+}
+.badge-success {
+  background-color: #2ecc71 !important;
+}
+
+.badge-cloture {
+  background-color: #0f9497 !important;
+}
+
+.resteAPayer {
+  position: absolute;
+  bottom: -10px;
+  background: #fafbfc;
+  padding: 0.5rem 0.7rem;
+  color: #404e67;
+  border: 1px #e3ebf3 solid;
+  font-weight: bold;
+}

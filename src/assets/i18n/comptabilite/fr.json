@@ -1,0 +1,127 @@
+{
+  "title": "Comptabilité",
+  "list": {
+    "montreTout": "Montrer tout",
+    "montrerAucun": "Montrer aucun"
+  },
+  "labels": {
+    "journalVente": "Journal de vente",
+    "journalAchat": "Journal d'Achat",
+    "journalBanque": "Journal de banque",
+    "journalCaisse": "Journal de caisse",
+    "filter": "Filtrer",
+    "dateMaximale": "Date maximale",
+    "dateMinimale": "Date minimale",
+    "choisirPeriode": "Choisir une période",
+    "tous": "Tous",
+    "intervalle": "Période",
+    "moisCourant": "Mois courant",
+    "troisMois": "3 dernièrs mois",
+    "sixMois": "6 dernièrs mois",
+    "anneeCourant": "Année courante",
+    "anneeDerniere": "Année dernière",
+    "exerciceComptableCourant": "Exercice comptable courant",
+    "codeJournal": "Code journal",
+    "date": "Date",
+    "numeroCompte": "Numéro de compte",
+    "numeroPiece": "Numéro de pièce",
+    "tiers": "Tiers",
+    "debit": "Débit",
+    "credit": "Crédit",
+    "typePaiement": "Type paiement",
+    "banque": "BANQUE",
+    "caisse": "CAISSE",
+    "client": "Client",
+    "fournisseur": "Fournisseur",
+    "export": "Export"
+  },
+  "dataTables": {
+    "processing": "Traitement en cours...",
+    "search": "Rechercher&nbsp; ",
+    "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+    "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "infoPostFix": "",
+    "loadingRecords": "Chargement en cours...",
+    "zeroRecords": "",
+    "emptyTable": "",
+    "paginate": {
+      "first": "Premier",
+      "previous": "Pr&eacute;c&eacute;dent",
+      "next": "Suivant",
+      "last": "Dernier"
+    },
+    "aria": {
+      "sortAscending": ": activer pour trier la colonne par ordre croissant",
+      "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+    },
+    "searchPlaceholder": "Numéro de pièce",
+    "searchPlaceholderFranchise": "Réference et objet"
+  },
+  "errors": {
+    "server": "Erreur serveur"
+  },
+  "noDataAvaible": "Aucune donnée disponible dans le tableau",
+  "Afficher_Masquées_Les_Colonnes": "Colonnes",
+  "datePicker": {
+    "firstDayOfWeek": 1,
+    "dayNames": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dayNamesShort": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dayNamesMin": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "monthNames": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "monthNamesShort": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "today": "Aujourd'hui",
+    "clear": "Valider"
+  }
+}

@@ -1,0 +1,43 @@
+// .mb-2, .my-2 {
+//     margin-top: 1rem !important;
+//    // padding-right: 1rem !important;
+//    // padding: 1.8rem !important;
+//  //  padding-right: 1rem !important;
+//   //   margin-bottom: 1.5rem !important;
+//  }
+//  .content-header .row {
+//      padding-right: 1rem !important;
+//  }
+//   html body .content .content-wrapper {
+//      padding-left: 1rem !important;
+//      margin-right: 15px;
+//    //  margin-left: 15px;
+     
+//   }
+ 
+//  .col-md-12 {
+//      padding-right: 1rem !important;
+//  }
+
+//  .modal-content {
+//     padding: 1rem 2rem;
+// }
+
+// div#add_client_modal {
+//     height: 90%;
+// }
+
+// .modal-dialog.modal-xl {
+//     height: 90%;
+//     overflow: auto;
+// }
+
+.modal-content{
+    max-height: 45vw;
+    overflow: scroll;
+}
+
+.modal-body {
+    max-height: 150vw !important;
+    overflow: auto;
+}

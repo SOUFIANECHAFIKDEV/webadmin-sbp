@@ -1,0 +1,64 @@
+body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  background: #1e6fc2;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #1e6fc2;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.tags-auto-complete {
+  position: relative;
+  background-color: #065cb3;
+  color: #fff;
+  width: 100%;
+  text-align: left;
+  height: 10rem;
+  z-index: 1;
+  border-radius: 0.25rem;
+  border: 1px solid #ccd6e6;
+  margin-bottom: 50px;
+  div {
+    overflow: auto;
+    height: 100%;
+    ul {
+      list-style-type: none;
+      padding: 0.5rem 1rem;
+      li {
+        border-bottom: 1px #ffffff40 solid;
+        margin: 0.5rem 0;
+        cursor: pointer;
+      }
+    }
+  }
+}

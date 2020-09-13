@@ -1,0 +1,84 @@
+<div style="margin: 2rem 0rem;">
+  <div class="row">
+    <div class="col-md-2 card-container" *ngFor="let item of technicientToDispaly; let index=  index">
+      <!-- <div class="header" *ngIf="!readOnly"> -->
+      <div class="header">
+        <button *ngIf="!readOnly" type="button" (click)="delete(index)" placement="top"
+          ngbTooltip="{{'labels.remove' | translate}}"><i class="ft-x deleteCard"></i></button>
+      </div>
+      <div class="body">
+        <ul>
+          <li>{{ 'labels.nom' | translate }} : <strong>{{item?.nom }} </strong>
+          </li>
+          <li>{{ 'labels.prenom' | translate }} : <span><strong>{{ item?.prenom  }}</strong></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade text-left" id="selectUserModal" tabindex="-1" role="dialog" aria-labelledby="selectUserModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-users"></i> {{ 'labels.listTechniciens' | translate }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary" type="button"><i class="ft-search"></i></button>
+            </div>
+            <input type="text" [(ngModel)]="search" (input)="getTechniciens()" class="form-control"
+              placeholder="{{ 'labels.searchTechniciens' | translate }}">
+          </div>
+          <div class="container-scroll">
+            <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+              [infiniteScrollContainer]="'.container-scroll'" [fromRoot]="true" (scrolled)="onScrollLots()">
+              <ul class="list-group list-group-flush">
+                <!-- Liste des techniciens sélectionnés -->
+                <li class="list-group-item" *ngFor="let technicien of technicienTmp;let i = index">
+                  <div class="form-inline">
+                    <div class="form-group col-md-12">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" (change)="removeTmpTechnicien(i)" class="custom-control-input"
+                          id="{{i+1000*22}}" checked>
+                        <label class="custom-control-label" for="{{i+1000*22}}">{{ technicien?.nom}} -
+                          {{ technicien?.prenom }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- Liste des techniciens ne sont pas sélectionnés -->
+                <li class="list-group-item" *ngFor="let technicien of techniciens;let i = index">
+                  <div class="form-inline">
+                    <div class="form-group col-md-12">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" (change)="addTmpTechnicien(i)" class="custom-control-input"
+                          id="{{i+2000*27}}">
+                        <label class="custom-control-label" for="{{i+2000*27}}">{{ technicien?.nom}} -
+                          {{ technicien?.prenom }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-light" data-dismiss="modal">{{ 'labels.cancel' |translate }}
+        </button>
+        <button type="button" class="btn btn-success btn-lg"
+          (click)="returnSelectedItems()">{{ 'labels.sauvegarder' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

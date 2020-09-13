@@ -1,0 +1,124 @@
+ul {
+  li {
+    line-height: 1.4 !important;
+    label {
+      font-size: 15px !important;
+      font-weight: 600;
+    }
+  }
+}
+
+.modal {
+  .card-body {
+    padding: 0px !important;
+    overflow: inherit !important;
+  }
+}
+
+#detailsArticle {
+  .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    margin-bottom: 8px;
+  }
+}
+
+#selectProduits {
+  .container-scroll {
+    height: 350px;
+    width: 100%;
+    overflow-y: scroll;
+  }
+}
+#selectLots {
+  .container-scroll {
+    height: 350px;
+    width: 100%;
+    overflow-y: scroll;
+  }
+}
+
+#btn-detail {
+  padding: 8px;
+  font-size: 13px;
+}
+
+.scroll-container {
+  height: 400px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: inherit;
+  padding: 10px;
+}
+
+.card-body {
+  overflow: inherit !important;
+}
+
+.input-calc{
+  width: 10%;
+  float: right;
+  height: 2rem;
+}
+
+.custom-control.custom-checkbox {
+  width: 5%;
+  float: right;
+}
+
+.btn-info {
+  border-color: #22C2DC !important;
+  background-color: #2DCEE3 !important;
+ 
+  margin-right: 10px !important;
+  border-radius: 0.21rem !important;
+}
+
+.btn-success {
+  color: #ffffff !important;
+  margin-right: 10px !important;
+  border-radius: 0.21rem !important;
+}
+
+
+.table-acrticles th, .table-acrticles td {
+ // padding: 0.75rem 2rem;
+  text-align: center !important;
+ 
+}
+.table-acrticles{
+  margin-top: 20px  !important;
+}
+.nomlot{
+  text-align: left  !important;
+}
+.btn-cancel{
+  border-radius: 0.2rem  !important;
+}
+
+td.display-price {
+  min-width: 10rem;
+}
+
+.name-lot{
+  background-color: #e3ebf3;
+  font-style: italic;
+  font-weight: 600;
+  border-bottom: 2px #ffffff solid;
+  .total-lot{
+    font-weight: 500;
+  }
+}
+
+.custom-control.custom-checkbox {
+  width: 15%;
+}
+
+.custom-select:disabled {
+  color: #3f587e;
+  background-color: #ebebeb;
+}
+
+select:disabled {
+  background: #ebebeb !important;
+}

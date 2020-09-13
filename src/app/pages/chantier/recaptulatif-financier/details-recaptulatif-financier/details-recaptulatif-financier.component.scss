@@ -1,0 +1,92 @@
+// .mat-icon {
+//   margin: 20px;
+// }
+.tp-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+.tp-margin {
+  margin: 0 10px;
+}
+
+.section-left {
+  color: white;
+  font-size: 10px;
+  float: right;
+  margin-bottom: 20px;
+  min-height: 130px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.section-meduim-card {
+  // color: black;
+  // font-size: 12px;
+  // font-weight: bold;
+  // // background-color: #7ea0e4;
+  // margin: 5px;
+  // height: 60px;
+  color: black;
+  font-size: 12px;
+  // margin: 0px 0px 20px 10px;
+  // padding: 10px 0px;
+}
+
+.sous-element {
+  color: gray;
+  font-size: 9px;
+  height: 10px;
+  padding: 0px;
+}
+
+.progress {
+  margin: 0px 0px 20px 10px;
+}
+
+.progress-bar.bg-success {
+  color: #000 !important;
+}
+.title {
+  font-size: 0.8rem;
+}
+
+.progress-bar-pourcentage {
+  position: absolute;
+  margin-left: 40%;
+}
+.recupitilatif-title {
+  margin-bottom: 5px;
+  font-size: 1.3rem;
+}
+.chart-legend {
+  position: relative;
+  left: 35px;
+  width: 80%;
+  margin-top: 10px;
+}
+.chart-legend-color {
+  height: 8px;
+  width: 15px;
+  margin-top: -5px;
+}
+.chart-legend-label {
+  position: relative;
+  top: -11px;
+  left: 20px;
+  font-size: 10px;
+}
+.legend-color-one {
+  background: #81ecec;
+}
+.legend-color-tow {
+  background: rgb(234, 153, 153);
+}
+.legend-color-three {
+  background: #a29bfe;
+}
+// p.chart-legend-label {
+//   color: red !important;
+// }

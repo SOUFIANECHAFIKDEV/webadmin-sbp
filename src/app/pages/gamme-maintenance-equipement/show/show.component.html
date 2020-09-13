@@ -1,0 +1,54 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" style="margin-top: 1rem;">
+
+    <span style="width:12px"></span>
+    <a class="btn btn-primary" style="color:white;" placement="bottom"
+      ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.equipement' | translate }}"
+      [routerLink]="['/gammemaintenanceequipements/modifier',gammeMaintenanceEquipement?.id]">
+      {{ 'labels.modifier' | translate }} <i class="ft-edit"></i>
+    </a>
+
+  </div>
+</div>
+
+<div class="content-header row">
+  <div class="content-header-left col-12 mb-1">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title ">
+          {{ 'show.title' | translate }}
+          <!-- {{ reccurente?.reference }} -->
+        </h3>
+      </div>
+
+    </div>
+
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/gammemaintenanceequipements']">{{ 'show.title' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'show.title' | translate }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <information-gammeMaintenanceEquipement [gammeMaintenanceEquipement]="gammeMaintenanceEquipement">
+          </information-gammeMaintenanceEquipement>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<custom-loader [displayLoader]="processing"></custom-loader>

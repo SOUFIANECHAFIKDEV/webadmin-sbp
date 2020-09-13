@@ -1,0 +1,89 @@
+<!-- Multi-column ordering table -->
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'groupes.list' | translate }}</h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+      <button (click)="formReset.reset();" type="button" class="btn btn-primary btn-md" data-toggle="modal"
+        data-target="#add" placement="bottom"
+        ngbTooltip="{{ 'labels.nouveau' | translate }}">{{ 'groupes.nouveau' | translate }} <i
+          class="ft-plus"></i></button>
+    </div>
+  </div>
+
+</div>
+<section id="multi-column">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-content collapse show">
+          <div class="card-body init-card-body card-dashboard">
+
+            <!-- ==============================================================-->
+            <show-hide-table-columns [columns]="groupeTableColumns" [tableName]="'groupeTable'"
+              [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate" [showAll]=" 'list.montreTout'  | translate"
+              [showNone]=" 'list.montrerAucun'  | translate" [checkedColumns]="checkedColumns"
+              (selectColumn)="SetCheckedColmuns($event)">
+            </show-hide-table-columns>
+
+            <!-- ====================== montrer les enregistrements===========================-->
+
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered"
+              id="groupeTable" style="width:100%">
+              <!-- ============================================================================== -->
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of groupeTableColumns;let index = index">
+                    <th *ngIf="groupeTableColumns.length-1 != index"> {{column}}</th>
+                  </ng-container>
+                  <th class="actions">
+                    {{groupeTableColumns[groupeTableColumns.length-1]}}
+                  </th>
+                </tr>
+              </thead>
+              <!-- ============================================================================== -->
+              <tbody *ngIf="Groupe?.list?.length > 0">
+                <tr *ngFor="let groupe of Groupe?.list">
+                  <td>{{ groupe?.nom }}</td>
+                  <td class="actions">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary btn-md btn-actions"
+                        (click)="GetGroupeById(groupe?.id)" placement="bottom"
+                        ngbTooltip="{{'labels.afficher' | translate}} {{'labels.client' | translate}}"><i
+                          class="ft-users"></i></button>
+                      <!-- <button type="button" class="btn btn-success btn-md btn-actions" 
+                        (click)="GetGroupeById(groupe?.id)" placement="bottom"
+                        ngbTooltip="{{ 'labels.modifier' | translate }}"><i class="ft-edit"></i></button> -->
+                      <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                        data-target="#update" (click)="initializeEditForm.setData(groupe)" placement="bottom"
+                        ngbTooltip="{{ 'labels.modifier' | translate }}"><i class="ft-edit"></i></button>
+                      <button type="button" class="btn btn-danger btn-md btn-actions" (click)="delete(groupe?.id)"
+                        placement="bottom" ngbTooltip="{{ 'labels.supprimer' | translate }}"><i
+                          class="ft-trash-2"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- ============================================================================== -->
+              <tbody *ngIf="Groupe?.list?.length == 0">
+                <tr>
+                  <td colspan="2" class="no-data-available">{{'noDataAvaible' | translate}}</td>
+                </tr>
+              <tbody>
+                <!-- ============================================================================== -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Multi-column ordering table -->
+</section>
+<Edit-Groupe [initializeEditForm]="initializeEditForm" (OnEdit)="OnEdit($event)"></Edit-Groupe>
+<Add-Groupe [formReset]="formReset" (OnAdd)="OnAdd($event)"></Add-Groupe>
+<show-Groupe [groupe]="groupe" (refresh)="refresh($event)"></show-Groupe>
+
+<div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+  <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div>

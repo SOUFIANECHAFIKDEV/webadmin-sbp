@@ -1,0 +1,133 @@
+.card-body {
+  overflow: inherit !important;
+}
+.currency-input{
+  text-align: right;
+}
+
+.form-section {
+  line-height: 3rem;
+  margin-bottom: 20px;
+  color: #065cb3;
+  border-bottom: 1px solid #065cb3;
+  font-family: montserrat;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+// .slidecontainer {
+//   width: 100%;
+// }
+
+// .slider {
+//   -webkit-appearance: none;
+//   width: 100%;
+//   height: 25px;
+//   background: #d3d3d3;
+//   outline: none;
+//   opacity: 0.7;
+//   -webkit-transition: .2s;
+//   transition: opacity .2s;
+// }
+
+// .slider:hover {
+//   opacity: 1;
+// }
+
+// .slider::-webkit-slider-thumb {
+//   -webkit-appearance: none;
+//   appearance: none;
+//   width: 25px;
+//   height: 25px;
+//   background: #4CAF50;
+//   cursor: pointer;
+// }
+
+// .slider::-moz-range-thumb {
+//   width: 25px;
+//   height: 25px;
+//   background: #4CAF50;
+//   cursor: pointer;
+// }
+input[type="range"] {
+  outline: 0;
+  border: 0;
+  border-radius: 500px;
+  width: 600px;
+  max-width: 100%;
+  margin: 24px 0;
+  transition: box-shadow 0.2s ease-in-out;
+  // Chrome
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    & {
+      overflow: hidden;
+      height: 30px;
+      -webkit-appearance: none;
+      background-color: #ddd;
+    }
+    &::-webkit-slider-runnable-track {
+      height: 30px;
+      -webkit-appearance: none;
+      color: #444;
+     // margin-top: -1px;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    &::-webkit-slider-thumb {
+      width: 30px;
+      -webkit-appearance: none;
+      height: 30px;
+      cursor: ew-resize;
+      background: #fff;
+      box-shadow: -340px 0 0 320px   #2dcee3 , inset 0 0 0 30px #065cb3;
+      border-radius: 50%;
+      transition: box-shadow 0.2s ease-in-out;
+      position: relative;
+      // top: 1px;
+    }
+    &:active::-webkit-slider-thumb {
+      background: #fff;
+      box-shadow: -340px 0 0 320px  #2dcee3, inset 0 0 0 3px  #065cb3;
+    }
+  }
+  // Firefox
+  &::-moz-range-progress {
+    background-color: #43e5f7; 
+  }
+  &::-moz-range-track {  
+    background-color: #9a905d;
+  }
+  // IE
+  &::-ms-fill-lower {
+    background-color: #43e5f7; 
+  }
+  &::-ms-fill-upper {  
+    background-color: #9a905d;
+  }
+}
+
+// .tp-section {
+//    display: flex;
+//    align-content: center;
+//    align-items: center;
+//    height: 60px;
+// }
+// .tp-margin {
+//    margin: 30px;
+// }
+
+// .mat-slider-horizontal {
+//    width: 300px;
+// }
+// .mat-slider-vertical {
+//    height: 300px;
+// }
+
+.input-currency {
+  text-align: right;
+  padding: 10px 10px 8px 10px;
+  background-color: #ebebeb;
+  border: 1px solid #babfc7;
+  border-radius: 4px;
+}
+
+

@@ -1,0 +1,37 @@
+.eye-icone{
+    text-align: center;
+    font-size: 1.5em;
+    color: #065cb3;
+    i{
+        cursor: pointer;
+    }
+}
+.table-header{
+    text-align: center;
+}
+
+tr{
+    td{
+        word-break: break-all;
+    }
+}
+
+
+
+.btn-lg{
+    // padding: 1rem 1.25rem !important;
+    // font-size: 1.25rem !important;
+    // line-height: 1.25 !important;
+    // border-radius: 0.27rem !important;
+    // line-height: 0.55rem !important;
+
+    padding: 1rem 1.25rem  !important;
+    font-size: 1.25rem  !important;
+    line-height: 0.75  !important;
+    border-radius: 0.27rem  !important;
+    font-size: 15px  !important;
+}
+
+.modal-body {
+    overflow: auto;
+}

@@ -1,0 +1,84 @@
+.btn-add {
+    border-color: #37474f !important;
+    background-color: #37474f !important;
+    color: #FFFFFF;
+    width: 160px;
+    height: 36px;
+    text-align: center;
+}
+
+.modal-content {
+    max-height: 45vw;
+    // overflow: scroll;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem 1rem 2rem 0rem;
+    border-top: 1px solid #98A4B8;
+}
+.modal-body {
+    overflow: auto;
+ }
+
+// .btn .btn-secondary .btn-lg{
+//    // border-color: #065cb3 !important;
+//     //   background-color: #065cb3 !important;
+//     //   color: #ffffff !important;
+//       border-radius: 0.25rem !important;
+//       font-weight: 400 !important;
+//       user-select: none !important;
+//       border: 1px solid transparent !important;
+//       padding: 0.75rem 1rem !important;
+//       font-size: 1rem !important;
+//       line-height: 1.25 !important;
+// }
+// .btn .btn-primary .btn-lg{
+//     border-radius: 0.25rem !important;
+//     font-weight: 400 !important;
+//     user-select: none !important;
+//     border: 1px solid transparent !important;
+//     padding: 0.75rem 1rem !important;
+//     font-size: 1rem !important;
+//     line-height: 1.25 !important;
+// }
+.btn-lg,
+.btn-group-lg>.btn {
+    padding: 1rem 1.25rem !important;
+    font-size: 1.25rem !important;
+    line-height: 0.75 !important;
+    border-radius: 0.27rem !important;
+    font-size: 15px !important;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.73rem !important;
+    border-radius: 0.21rem !important;
+}
+
+.currency-input{
+    text-align: right;
+  }
+  
+  .form-section {
+    line-height: 3rem;
+    margin-bottom: 20px;
+    color: #065cb3;
+    border-bottom: 1px solid #065cb3;
+    font-family: montserrat;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

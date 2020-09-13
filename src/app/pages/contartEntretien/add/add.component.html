@@ -1,0 +1,263 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'add.title' | translate}}</h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a
+              [routerLink]="['/contratentretiens']">{{'labels.contratEntretien' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'add.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group">
+      <button type="button" [routerLink]="['/contratentretiens']" class="btn btn-warning mr-1" placement="bottom"
+        ngbTooltip="{{'labels.cancel' | translate}}">
+        <i class="ft-x"></i> {{'labels.cancel' | translate}}
+      </button>
+      <button type="submit" (click)="add(statutContratEntretien.Brouillon)" class="btn btn-light" placement="bottom"
+        ngbTooltip="{{'labels.brouillon' | translate}}">
+        <i class="fa ft-edit-3"></i> {{ 'labels.brouillon' | translate }}
+      </button>
+      <button type="submit" (click)="add(statutContratEntretien.Enattente)" class="btn btn-success" placement="bottom"
+        ngbTooltip="{{'labels.valider' | translate}}">
+        <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+
+  <section id="horizontal-form-layouts">
+    <!-- Form d'information de contrat -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <form class="form form-horizontal" *ngIf="creationForm != null" [formGroup]="creationForm"
+                (ngSubmit)="add()">
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+
+                  <!-- client + site  -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="client">{{'labels.client' | translate}}</label>
+                        <div class="col-md-9">
+                          <ng-select notFoundText="{{'labels.noFoundItem' | translate}}" (click)="getClients()"
+                            (search)="getClients($event)" labelForId=client formControlName="idClient"
+                            (change)="loadAddreseClient(f?.idClient?.value)" (clear)="getClients('')">
+                            <ng-option *ngFor="let client of listClients;let i = index" value="{{client?.id}}">
+                              {{client?.nom}}</ng-option>
+                          </ng-select>
+                          <small class="text-danger"
+                            *ngIf="f?.idClient?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="site">{{'labels.site' | translate}} </label>
+                        <div class="col-md-6">
+                          <select formControlName="site" class="form-control" id="site">
+                            <option *ngFor="let adresse of adresses;let i = index" [value]="i">
+                              {{ adresse?.designation }}
+                            </option>
+                          </select>
+                          <small class="text-danger"
+                            *ngIf="f?.site?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                        <div class="col-md-3">
+                          <list-address (listContacts)="saveNewAddress($event)" [displayJustTheForm]="true"
+                            [show]="creationForm.value.idClient != null">
+                          </list-address>
+                        </div>
+
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                  <div class="row">
+                    <!-- dateDebut -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="dateDebut">{{'labels.dateDebut' | translate}}</label>
+                        <div class="col-md-9" *ngIf="dateLang">
+                          <p-calendar formControlName="dateDebut" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                            [inputStyle]="{'width':'100%'}" [locale]="dateLang" showButtonBar="true" showTime="true">
+                          </p-calendar>
+                          <small class="text-danger"
+                            *ngIf="f?.dateDebut?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- dateFin -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="dateFin">{{'labels.dateFin' | translate}}</label>
+                        <div class="col-md-9" *ngIf="dateLang">
+                          <p-calendar formControlName="dateFin" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                            [inputStyle]="{'width':'100%'}" [locale]="dateLang" showButtonBar="true" showTime="true">
+                          </p-calendar>
+                          <small class="text-danger"
+                            *ngIf="f?.dateFin?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ========================================= -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4 class="form-section"><i class="ft-file"></i>{{'labels.piecesJointes' | translate}}</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <table class="table">
+                            <tr>
+                              <th>{{'labels.nom' | translate}}</th>
+                              <th style="text-align: center !important;">{{'labels.action' | translate}}</th>
+                            </tr>
+                            <tr *ngFor="let pieceJointe of piecesJointes;let index= index">
+                              <td style="line-height: 40px;">
+                                {{ pieceJointe?.orignalName }}
+                              </td>
+                              <td style="text-align: center !important; line-height: 40px;">
+                                <div class="btn-group" role="group">
+                                  <button type="button" class="btn btn-primary btn-md btn-actions" placement="bottom"
+                                    ngbTooltip="{{ 'labels.downloadFile' | translate }}"
+                                    (click)="downloadPieceJointe(index)">
+                                    <i class="ft-download"></i>
+                                  </button>
+
+                                  <button type="button" class="btn btn-danger btn-md btn-actions" placement="bottom"
+                                    ngbTooltip="{{ 'labels.deleteFile' | translate }}" (click)="removeFile(index)">
+                                    <i class="ft-trash-2"></i>
+                                  </button>
+                                </div>
+
+                              </td>
+                            </tr>
+                            <tr *ngIf="piecesJointes.length == 0">
+                              <td colspan="2" class="text-center">
+                                {{'noDataAvaible' | translate}}
+                              </td>
+                            </tr>
+                          </table>
+                          <div class="file float-right;">
+                            <label for="file21" class="btn btn-primary" style="float:right"> Choisir le ficher <i
+                                class="ft-upload"></i></label>
+                            <input class="file-input" type="file" (change)="startUpload($event.target.files)"
+                              id="file21" name="files" style="visibility:hidden;">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ========================================= -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4 class="form-section"><i class="ft-list"></i>{{'labels.equipement' | translate}}</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <button type="button" class="btn btn-success btn-md btn-actions float-right"
+                            style="margin-bottom: 20px;" placement="top" (click)="select_gamme_maintenance_equipement()"
+                            ngbTooltip="{{ 'labels.selectGammemaintenanceEquipement' | translate }}"><i
+                              class="ft-list"></i>
+                            {{'labels.selectGammemaintenanceEquipement'|translate}}
+                          </button>
+                        </div>
+                        <div class="col-12">
+                          <div class="nav-pills">
+                            <div class="btn-groupbtn-group-custom" role="group">
+                              <ng-container
+                                *ngFor="let libelle of gamme_maintenance_equipement_Selected_libelles;let index = index">
+                                <button type="button" class="btn gamme-maintenance-equipement"
+                                  (click)="changeTab(index)"
+                                  [ngClass]="{'gamme-maintenance-equipement-active': selectedGammeMaintenanceEquipement == index}">
+                                  {{ libelle}}
+                                  <i class="ft ft-x removeEquipement" (click)="removeEquipement(index)" placement="top"
+                                    ngbTooltip="{{ 'labels.retirer' | translate }}"></i>
+                                </button>
+                              </ng-container>
+                            </div>
+                          </div>
+                          <div class="tab-content-custom">
+                            <ng-container *ngFor="let gamme of gamme_maintenance_equipement_Selected;let index = index">
+                              <div class="tab-pane-custom" *ngIf="selectedGammeMaintenanceEquipement == index">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <div class="form-group row">
+                                      <label class="col-md-3 label-control" for="nom">{{ 'labels.nom' | translate }}
+                                      </label>
+                                      <div class="col-md-9">
+                                        <input type="text" [(ngModel)]="gamme.nom" [ngModelOptions]="{standalone: true}"
+                                          id="nom" class="form-control">
+                                        <small class="text-danger"
+                                          *ngIf="gamme?.nom?.length < 3 && gamme?.nom?.length != 0">
+                                          {{'errors.minLength'|translate:{ number:3} }}
+                                        </small>
+                                        <small class="text-danger"
+                                          *ngIf="gamme?.nom?.length == 0">{{'errors.required' | translate }}</small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <gamme-maintenance-equipement [libelles]="gamme?.equipement" [load]="emitter">
+                                    </gamme-maintenance-equipement>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <!-- ============================================= -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="row">
+        <div class="col-md-12" style="zoom: 1;">
+          <div class="btn-group float-md-left" role="group">
+            <button type="button" [routerLink]="['/contratentretiens']" class="btn btn-warning mr-1" placement="bottom"
+              ngbTooltip="{{'labels.cancel' | translate}}">
+              <i class="ft-x"></i> {{'labels.cancel' | translate}}
+            </button>
+            <button type="submit" (click)="add(statutContratEntretien.Brouillon)" class="btn btn-light"
+              placement="bottom" ngbTooltip="{{'labels.brouillon' | translate}}">
+              <i class="fa ft-edit-3"></i> {{ 'labels.brouillon' | translate }}
+            </button>
+            <button type="submit" (click)="add(statutContratEntretien.Enattente)" class="btn btn-success"
+              placement="bottom" ngbTooltip="{{'labels.valider' | translate}}">
+              <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+  </section>
+</div>
+
+
+<custom-loader [displayLoader]="processing"></custom-loader>

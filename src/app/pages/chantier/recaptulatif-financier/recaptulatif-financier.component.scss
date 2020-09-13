@@ -1,0 +1,255 @@
+.nav.nav-tabs .nav-item {
+  background-color: white !important;
+  color: #41b1e6 !important;
+  border-color: #f5f7fa !important;
+}
+
+.nav.nav-tabs .nav-item .nav-link.active {
+  color: white !important;
+  width: 300px !important;
+  background-color: #065cb3 !important;
+  border-radius: 0.25rem 0.25rem 0 0 !important;
+  border-color: lightsteelblue !important;
+}
+
+.nav.nav-tabs .nav-item .nav-link {
+  background-color: white !important;
+  width: 300px !important;
+  background-color: #065cb3 !important;
+  padding: 0.5rem 0.7rem;
+  display: inline-flex !important;
+  border-radius: 0.25rem 0.25rem 0 0 !important;
+  border-color: #626e82 !important;
+}
+
+nav-link {
+  color: #065cb3 !important;
+}
+.card-title {
+  color: white !important;
+}
+
+.title {
+  display: inline-block !important;
+  max-width: 100% !important;
+  margin-bottom: 5px !important;
+  font-weight: 700 !important;
+  background-color: cyan;
+}
+
+.Recapitulatif-financier-header {
+  background-color: #999999;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.tp-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+.tp-margin {
+  margin: 0 10px;
+}
+
+.section-left {
+  color: white;
+  margin-bottom: 8px;
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.section-meduim-card {
+  color: black;
+  font-size: 12px;
+}
+
+.sous-element {
+  color: #fff;
+  font-size: 0.6vw;
+  margin: 0;
+  height: 10px;
+}
+
+.progress {
+  margin: 0px 0.3vw 20px 8px !important;
+}
+.progress.progress-sous-element {
+  margin: 0px 0vw 10px 0px !important;
+}
+
+.progress-bar.bg-success {
+  color: #000 !important;
+}
+.title {
+  font-size: 10px;
+}
+
+.progress-bar-pourcentage {
+  position: absolute;
+  margin-left: 40%;
+}
+.recupitilatif-title {
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.chart-legend {
+  position: relative;
+  left: 20px;
+  width: 80%;
+  margin-top: 8px;
+}
+.chart-legend-color {
+  height: 8px;
+  width: 15px;
+  margin-top: -5px;
+}
+.chart-legend-label {
+  font-size: 8px;
+  margin-bottom: 8px;
+}
+.legend-color-one {
+  background: #81ecec;
+}
+.legend-color-tow {
+  background: rgb(234, 153, 153);
+}
+.legend-color-three {
+  background: #a29bfe;
+}
+
+.Recapitulatif-financier-body {
+  padding-top: 10px;
+}
+
+.chart-container {
+  position: absolute;
+  width: 100%;
+  right: 0px;
+}
+
+.total_devis,
+.caFacture {
+  .section-left {
+    background-color: rgb(52, 152, 219);
+    height: 150px;
+  }
+  .section-meduim-card {
+    margin: 15px 5px;
+    div:nth-child(1) {
+      padding: 10px 10px;
+    }
+    .col-7 {
+      flex: 0 0 50%;
+    }
+  }
+  .section-meduim-card:nth-child(1) {
+    margin: 0px 5px;
+  }
+}
+.depenseeEngagees,
+.depensee_Aprevoir {
+  .section-left {
+    background-color: rgb(224, 102, 102);
+    height: 245px;
+  }
+}
+
+.margeReele,
+.marge_Previsionnel {
+  .section-left {
+    background-color: rgb(147, 196, 125);
+    height: 180px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .col-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .col-7 {
+    flex: 0 0 83.33333%;
+    max-width: 83.33333%;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .section-left {
+    height: 95px;
+  }
+  .total_devis,
+  .caFacture {
+    min-height: 255px;
+    .section-left {
+      height: 95px;
+    }
+    .section-meduim-card:nth-child(1) {
+      margin: 0px 5px;
+    }
+  }
+
+  .depenseeEngagees,
+  .depensee_Aprevoir {
+    min-height: 380px;
+    .section-left {
+      height: 95px;
+    }
+  }
+
+  .margeReele,
+  .marge_Previsionnel {
+    .section-left {
+      height: 115px;
+    }
+  }
+
+  .section-meduim-card {
+    .col-7 {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding: 10px 5px !important;
+    }
+  }
+  .chart-container {
+    position: absolute;
+    width: 120%;
+    right: -7px;
+  }
+  .chart-legend {
+    position: relative;
+    left: 21px;
+    width: 80%;
+    margin-top: 8px;
+  }
+  .progress {
+    margin: 0px 0.5vw 20px 8px !important;
+  }
+  .progress.progress-sous-element {
+    margin: 0px 0vw 10px 0px !important;
+  }
+  .sous-element {
+    font-size: 10px;
+  }
+  .col-6.tresorieChantier {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.title-icon {
+  font-size: 25px;
+}
+
+.element-positive {
+  background-color: rgb(182, 215, 168);
+  padding: 10px 10px;
+}
+
+
+.element-negative {
+  background-color: #facb9d;
+  padding: 10px 10px;
+}

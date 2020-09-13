@@ -1,0 +1,253 @@
+<!-- Afficher les informations de devis -->
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card" style="zoom: 1;">
+      <div class="card-header">
+
+        <div class="heading-elements pdfView" *ngIf="devis?.devisExel == null">
+          <a data-toggle="modal" data-target="#PdfView" class="btn btn-eye" (click)="generatePDFBase64(devis?.id)"
+            style="color:white; margin-right: 1rem;" placement="bottom"
+            ngbTooltip="{{'labels.VisualiserPdf' | translate}}">
+            <span>{{'labels.VisualiserPdf' | translate}}</span>
+            <i class="ft-eye" style="color:white;  background-color:#268EA6;"></i>
+
+          </a>
+        </div>
+      </div>
+      <div class="card-content collpase show">
+        <div class="card-body">
+          <form class="form form-horizontal">
+            <div class="form-body">
+              <!-- Information devis -->
+              <h4 class="form-section">
+                <i class="ft-file-text"></i>{{ 'labels.infoDevis' | translate }}
+              </h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput1">{{
+                      'labels.reference' | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <input type="text" [value]="devis?.reference" id="projectinput1" class="form-control" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput2">{{
+                      'labels.chantier' | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" [value]="devis?.chantier?.nom" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput2">{{
+                      'labels.client' | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" [value]="devis?.chantier?.client?.nom" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="adresse_facturation">{{
+                      'labels.adresseFacturation' | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control"
+                        [value]="jsonParse(devis?.adresseFacturation)?.designation" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="adresse_intervention">{{
+                      'labels.adresseIntervention' | translate
+                    }}</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control"
+                        [value]="jsonParse(devis?.adresseIntervention)?.designation" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-md-1 label-control" for="projectinput3">{{
+                      'labels.objet' | translate
+                    }}</label>
+                    <div class="col-md-11">
+                      <textarea type="text" class="form-control textarea-single-ligne"
+                        style="width: 95.5%;float: right;" [value]="devis?.objet" disabled></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4 class="form-section">
+                <i class="ft-shopping-cart"></i>{{ 'labels.articles' | translate }}
+              </h4>
+              <div class="row">
+                <div class="col-md-12" *ngIf="addType == 'complet'">
+                  <table-article [puc]="devis?.puc" [remiseGloabl]="devis?.remise"
+                    [retenueGarantieValue]="devis?.retenueGarantie" [delaiGarantie]="devis?.delaiGarantie"
+                    [typeRemiseGloabl]="devis?.typeRemise" [partProrata]="devis?.prorata" [tvaGlobal]="devis?.tvaGlobal"
+                    [articles]="articles" [readOnly]="true">
+                  </table-article>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="addType == 'minimaliste'">
+                <div class="col-md-12">
+                  <articles-minimaliste [data]="articlesInfo" [readOnly]="true"
+                    [retenueGarantieValue]="articlesInfo.retenueGarantie" [delaiGarantie]="articlesInfo?.delaiGarantie">
+                  </articles-minimaliste>
+                </div>
+              </div>
+
+              <ng-container *ngIf="addType == 'complet'">
+                <h4 class="form-section">
+                  <i class="ft-message-circle"></i>{{ 'labels.autres' | translate }}
+                </h4>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="note">{{
+                        'labels.note' | translate
+                      }}</label>
+                      <div class="col-md-12">
+                        <div class="rich-text-value" [innerHTML]="devis?.note"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="conditions">{{
+                        'labels.conditions' | translate
+                      }}</label>
+                      <div class="col-md-12">
+                        <div class="rich-text-value" [innerHTML]="devis?.conditionReglement"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <!-- Document associé-->
+            <ng-container *ngIf="devis?.facture?.length > 0 || devis?.bonCommandeFournisseur?.length > 0 ">
+              <h4 class="form-section"><i class="fa fa-files-o"></i>{{'labels.documentAssocie' | translate}}</h4>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>{{ 'labels.type' | translate }}</th>
+                      <th>{{ 'labels.reference' | translate }}</th>
+                      <th>{{ 'labels.dateCreation' | translate }}</th>
+                      <th>{{ 'labels.statut' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <!-- Facture -->
+                    <tr *ngFor="let item of devis?.facture">
+                      <td>
+                        <span
+                          *ngIf="item?.typeFacture == typeFacture.Acompte">{{ 'labels.factureAcompte' | translate }}</span>
+                        <span
+                          *ngIf="item?.typeFacture == typeFacture.Generale">{{ 'labels.factureGenerale' | translate }}</span>
+                        <span
+                          *ngIf="item?.typeFacture == typeFacture.Situation">{{ 'labels.factureSituation' | translate }}</span>
+                      </td>
+                      <td><a [routerLink]="[ '/factures/detail', item.id ]">{{ item?.reference }}</a></td>
+                      <td> {{ item?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                      <td>
+
+                        <span *ngIf="item?.status == statutFacture.Brouillon"
+                          class="badge badge-default badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+                        <span *ngIf="item?.status == statutFacture.Encours"
+                          class="badge badge-default badge-planifiee">{{ 'labels.encours' | translate }}</span>
+                        <span *ngIf="item?.status == statutFacture.Cloture"
+                          class="badge badge-default badge-success">{{ 'labels.cloturee' | translate }}</span>
+                        <span *ngIf="item?.status == statutFacture.Enretard"
+                          class="badge badge-default badge-enretard">{{ 'labels.enretard' | translate }}</span>
+                        <span *ngIf="item?.status == statutFacture.Annule"
+                          class="badge badge-default badge-annuler">{{ 'labels.annuleef' | translate }}</span>
+                      </td>
+                    </tr>
+                    <!-- Facture -->
+                    <!-- LES Bon des commandes fOURNISSEURS -->
+                    <tr *ngFor="let item of devis?.bonCommandeFournisseur">
+                      <td> {{ 'labels.bonCommandFournisseur' | translate }} </td>
+                      <td><a [routerLink]="[ '/bonCommandeFournisseur/detail', item.id ]">{{ item?.reference }}</a>
+                      </td>
+                      <td> {{ item?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                      <td>
+                        <span *ngIf="item?.status == statutBonCommandeFournisseur.Brouillon"
+                          class="badge badge-default badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+                        <span *ngIf="item?.status == statutBonCommandeFournisseur.Encours"
+                          class="badge badge-default badge-planifiee">{{ 'labels.encours' | translate }}</span>
+                        <span *ngIf="item?.status == statutBonCommandeFournisseur.Facturee"
+                          class="badge badge-default badge-success">{{ 'labels.facture' | translate }}</span>
+                        <span *ngIf="item?.status == statutBonCommandeFournisseur.Annule"
+                          class="badge badge-default badge-annuler">{{ 'labels.annule' | translate }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-container>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade text-left" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="PdfView">
+          <i class="ft-file-minus"></i>
+          {{ 'labels.VisualiserPdf' | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body download-Model">
+
+          <!-- <a class="btn btn-secondary" style="color:white;" (click)="generatePDF()" placement="bottom"
+              ngbTooltip="{{'labels.telecharger' | translate}}">
+              {{ 'labels.telecharger' | translate }} <i class="fa fa-download"></i>
+            </a> -->
+
+          <app-visualiser-pdf [base64]="base64"></app-visualiser-pdf>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary"
+          data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+        <button type="button" class="btn btn-success" (click)="generatePDF(devis?.id)">
+          {{ 'labels.telecharger' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

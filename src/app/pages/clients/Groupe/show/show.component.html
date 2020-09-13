@@ -1,0 +1,97 @@
+<div class="modal fade text-left" id="showgroupe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary white">
+        <h4 class="modal-title">
+          {{'groupes.listClients' | translate }}
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form form-horizontal">
+          <div class="form-body">
+            <div class="row">
+              <!-- <h6 style="font-weight: bold">{{'labels.client' | translate }}</h6> -->
+              <div class="col-md-9">
+
+                <!-- <ng-select [hideSelected]="true" placeholder="{{'labels.client' | translate }}"
+                  notFoundText="{{'labels.noFoundItem' | translate}}" (change)="setSelectedClient(InputString)"
+                  #InputString>
+                  <ng-option *ngFor="let item of listClients; let i = index" value="{{item?.id}}">
+                    {{ item?.nom }}</ng-option>
+                </ng-select> -->
+
+                <!-- <ng-select [(ngModel)]="name">
+                  <ng-container *ngFor="let vv of listClients">
+                    <ng-option [value]="vv?.nom">
+                      {{vv?.nom}}</ng-option>
+
+                  </ng-container>
+                </ng-select> -->
+                <ng-select (click)="getClients()" notFoundText="{{'labels.noFoundItemclient' | translate}}"
+                  labelForId=projectinput48 (change)="setSelectedClient($event)" #InputString>
+                  <ng-option *ngFor="let client of listClients;let i = index" [value]="client">
+                    {{client?.nom}} </ng-option>
+
+                </ng-select>
+                <!-- 
+                <ng-select [items]="listClients" bindValue="value" [(ngModel)]="name"
+                  (change)="setSelectedClient($event)">
+
+                  <ng-template ng-option-tmp let-item="item">
+                    {{ item.id }}
+                  </ng-template>
+                </ng-select> -->
+
+              </div>
+
+              <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn btnadd" placement="bottom"
+                  ngbTooltip="{{ 'labels.add' | translate }} {{ 'labels.client' | translate }}"
+                  (click)="addclientToGroupe()">{{ 'labels.add' | translate }}
+                  <i class="ft-plus"></i></button>
+              </div>
+              <!-- <input class="form-control" type="text" name="username" [(ngModel)]="name">
+              {{name}} -->
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered" *ngIf=" groupe?.clients.length> 0">
+
+                <tbody>
+
+                  <tr *ngFor="let client of groupe?.clients;let index = index">
+
+                    <td>{{client?.nom}}
+                      <button class="btn btn-danger btn-sm " style="float: right" type="button"
+                        (click)="removeClientFromGroupe(client,index)">
+                        <i class="ft-trash"></i>
+                      </button>
+                    </td>
+
+
+                  </tr>
+                </tbody>
+
+
+              </table>
+              <div class="no-data-available" *ngIf="groupe?.clients.length == 0">
+
+                <p>{{'groupes.noDataAvaibleClient' | translate}}</p>
+
+              </div>
+
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

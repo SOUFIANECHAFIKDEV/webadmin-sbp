@@ -1,0 +1,89 @@
+.rich-text-value {
+    border: 1px #ccd6e6 solid;
+    padding: 1.5rem 1rem;
+    min-height: 5rem;
+    background-color: #ebebeb;
+}
+
+.custom-badge {
+    padding: 10px 25px;
+    font-size: 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.statut-EnAttente {
+    background-color: #ffa87d !important;
+    color: #eceff1;
+}
+
+.statut-Accepte {
+    background-color: #16d39a !important;
+    color: #eceff1;
+}
+
+.statut-Annule {
+    background-color: #404e67 !important;
+    color: #eceff1;
+}
+
+.statut-NonAccepte {
+    background-color: #ff7588 !important;
+    color: #eceff1;
+}
+.statut-Facture{
+    background-color: #3498db !important;
+    color: #eceff1;  
+}
+
+.btn.btn-round {
+    margin-top: -130px !important;
+}
+
+.card-header {
+    background: #ffffff !important;
+    color: white !important;
+    font-size: 5px !important;
+    padding: 1rem 1.5rem;
+}
+
+.badge-brouillon {
+    background-color: #636e72 !important;
+}
+
+.badge-annuler {
+    background-color: #fe0000 !important;
+}
+
+.badge-enretard {
+    background-color: #ffa87d !important;
+}
+
+.badge-planifiee {
+    background-color: #00d2d3 !important;
+}
+
+.badge-success {
+    background-color: #2ecc71 !important;
+}
+
+.ft-eye{
+    //font-size: larger !important;
+    padding-left: 5px !important;}
+  .btn-eye{
+    background-color: #268EA6;
+  }
+    .pdfView{
+        color: white;
+         margin-right: 1rem;
+         margin-top: -70px;
+      //   background-color: #2DCEE3 ;
+    }
+  .card-body.download-Model {
+    max-height: 38vw;
+  }
+
+  .modal-body {
+    max-height: 100vw !important;
+    overflow: auto;
+}

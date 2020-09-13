@@ -1,0 +1,43 @@
+<h1 mat-dialog-title class="modal-title" *ngIf="!data.readOnly && data.listes == null  "
+    style=" padding-top: 10px  !important;">
+    {{ 'labels.ajouter' | translate }} {{'labels.equipement' | translate}}
+</h1>
+<h1 mat-dialog-title class="modal-title" *ngIf="!data.readOnly && data.listes != null "
+    style=" padding-top: 10px  !important;">
+    {{ 'labels.modifier' | translate }}
+    {{'labels.equipement' | translate}} </h1>
+<h1 mat-dialog-title class="modal-title" *ngIf="data.readOnly && data.listes != null  "
+    style=" padding-top: 10px  !important;">
+    {{ 'labels.details' | translate }} {{'labels.equipement' | translate}}</h1>
+
+<mat-dialog-content>
+    <div class="row" style="width: 100%;padding: 0px 0px 0px 30px;">
+        <div class="col-12">
+            <!-- <div > -->
+            <!-- <input type="text" class="form-control" [(ngModel)]="data.nom" [disabled]="data?.readOnly" /> -->
+            <!-- </div> -->
+            <div class="col-md-6 " style="padding: 0px 0px 0px 30px;">
+                <div class="form-group row">
+                    <label class="col-md-3 label-control" for="nom">{{ 'labels.nom' | translate }}</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" [(ngModel)]="data.nom" [disabled]="data?.readOnly" />
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" style="overflow: auto;height: 360px;padding-bottom: 10px;">
+            <gamme-maintenance-equipement [libelles]="data?.listes" [load]="emitter" [readOnly]="data?.readOnly">
+            </gamme-maintenance-equipement>
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<div class="footer">
+    <button mat-raised-button mat-dialog-close class="btn grey btn-light float-right">
+        Annuler
+    </button>
+    <button type="button" class="btn btn-success float-right" (click)="save()">Enregistrer</button>
+</div>

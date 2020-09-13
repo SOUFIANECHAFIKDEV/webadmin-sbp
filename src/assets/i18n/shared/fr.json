@@ -1,0 +1,42 @@
+{
+    "logout": "Déconnecter",
+    "editProfile": "Profil",
+    "droitReserver": ", Tous les droits sont réservés.",
+    "copyright": "Copyright",
+    "Dashboard": "Tableau de bord",
+    "Clients": "Clients",
+    "FicheIntervention": "Fiches Intervention",
+    "Fournisseurs": "Fournisseurs",
+    "Users": "Utilisateurs",
+    "parameteres": "Paramétrage",
+    "NumerotationPrefixe": "Numérotation et préfixe",
+    "Horairedutravail": "Horaire du travail",
+    "messagerie": "Messagerie",
+    "synagenda": "Synchronisation Agenda Google",
+    "labels": {
+        "changeThePassword": "Changer le mot de passe",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "edit": "Modifier",
+        "close": "Fermer"
+    },
+    "changePassword": {
+        "title": "Mot de passe",
+        "msg": "Modifié avec succès"
+    },
+    "errors": {
+        "unique": "Cette valeur est déjà utilisée",
+        "required": "Ce champs est requis",
+        "minLength": "Ce champs doit être au moins de {{number}} caractères",
+        "pattern": "Ce champs est invalide",
+        "passwordsDoNotMatch": "Le mot de passe ne correspond pas",
+        "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider"
+    },
+    "delai_garantie": {
+        "question": "Choisir un délai de garantie",
+        "troisMois": "3 Mois",
+        "sixMois": "6 Mois",
+        "unAns": "1 Ans",
+        "deuxAns": "2 Ans"
+    }
+}

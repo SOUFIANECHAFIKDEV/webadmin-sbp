@@ -1,0 +1,118 @@
+<div class="modal fade text-left" id="exportFactures" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel9">
+                    <i class="fa fa-list"></i> Export Factures
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <!-- sélectionner Type d'export  -->
+                    <div class="row margin-top">
+                        <label class="col-md-12 label-control font-weight-bold">Type Export :</label>
+                        <div class="col-md-12">
+                            <ng-select [(ngModel)]="typeExport">
+                                <ng-option value="0" selected>-- Sélectionner une valeur --</ng-option>
+                                <ng-option value="1">Relevé factures par période</ng-option>
+                                <ng-option value="2">Relevé de Relance Facture</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- end -->
+
+                    <ng-container *ngIf="typeExport != 0 &&  typeExport != null">
+
+                        <!-- sélectionner la date Maximal et la date Minimale -->
+                        <ng-container *ngIf="typeExport == 1">
+                            <div class="row margin-top">
+                                <label class="col-md-6 label-control font-weight-bold">
+                                    {{ 'labels.dateMinimale' | translate }}
+                                </label>
+                                <label class="col-md-6 label-control font-weight-bold">
+                                    {{ 'labels.dateMaximale' | translate }}
+                                </label>
+                            </div>
+                            <div class="row margin-top" *ngIf="dateLang">
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="DateDebut" [inputStyle]="{'height':'33px'}"
+                                        [locale]="dateLang" showButtonBar="true" dateFormat="dd/mm/yy" showIcon="true">
+                                    </p-calendar>
+                                </div>
+                                <div class="col-md-6">
+                                    <p-calendar [(ngModel)]="DateFin" [inputStyle]="{'height':'33px'}"
+                                        [locale]="dateLang" showButtonBar="true" dateFormat="dd/mm/yy" showIcon="true">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <!-- end -->
+
+                        <!-- sélectionner un Chantier -->
+                        <!-- <div class="row margin-top">
+                            <label class="col-md-12 label-control font-weight-bold">Chantier</label>
+                            <div class="col-md-12">
+                                <ng-select notFoundText="{{'labels.noFoundItem' | translate}}"
+                                    (search)="getClients($event)" labelForId=projectinput48 [(ngModel)]="IdChantier"
+                                    (clear)="getClients('')">
+                                    <ng-option *ngFor="let chantier of chantiers;let i = index"
+                                        value="{{chantier?.id}}">
+                                        {{chantier?.nom}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div> -->
+
+                        <div class="row margin-top">
+                            <label class="col-md-12 label-control font-weight-bold">Client</label>
+                            <div class="col-md-12">
+                                <ng-select notFoundText="{{'labels.noFoundItem' | translate}}"
+                                    (search)="getClients($event)" labelForId=projectinput48 [(ngModel)]="IdClient"
+                                    (clear)="getClients('')">
+                                    <ng-option *ngFor="let client of clients;let i = index" value="{{client?.id}}">
+                                        {{client?.nom}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <!-- end -->
+
+                        <!-- ExporterFacturesClient -->
+                        <!-- <div class="row margin-top">
+                            <div class="col-md-12">
+                                <input type="checkbox" [(ngModel)]="ExporterFacturesClient">
+                                <label class="custom-control-label">Exporter factures du client</label>
+                            </div> 
+                        </div>
+                        -->
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 label-control"></label>
+                            <div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="ExporterFacturesChantier"
+                                        class="custom-control-input" id="projectinput3">
+                                    <label class="custom-control-label" for="projectinput3">Exporter factures du
+                                        client</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end -->
+                    </ng-container>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn grey btn-light"
+                        data-dismiss="modal">{{ 'labels.cancel' |translate }} </button>
+                    <button type="button" class="btn btn-success btn-lg" (click)="export()"
+                        [disabled]="validate()">Export
+                        Relance Facture</button>
+                </div>
+
+            </div>
+        </div>
+    </div>

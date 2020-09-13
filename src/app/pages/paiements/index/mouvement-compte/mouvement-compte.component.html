@@ -1,0 +1,92 @@
+<div class="modal fade text-left" id="mouvementCompte" tabindex="-1" role="dialog" aria-labelledby="myModalLabel98"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel98">
+          <i class="ft-edit"></i> {{ 'labels.mouvementCompte'  | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form [formGroup]="form">
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="moyenPaiement">{{ 'labels.moyenPaiement' | translate }} : </label>
+                <ng-select formControlName="idModePaiement" notFoundText="{{'labels.noFoundItem' | translate}}"
+                  (click)="GetModeRegelement('')" labelForId=projectinput485>
+                  <ng-option *ngFor="let modeRegelement of modesRegelement;let i = index"
+                    value="{{modeRegelement?.id}}">{{modeRegelement?.nom}}</ng-option>
+                </ng-select>
+                <small class="text-danger"
+                  *ngIf="f?.idModePaiement?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group" *ngIf="dateLang">
+              <div class="col-md-12">
+                <label for="date">{{ 'labels.date' | translate }} : </label>
+                <p-calendar formControlName="datePaiement" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                  [inputStyle]="{'width':'100%'}" [locale]="dateLang" showButtonBar="true"></p-calendar>
+                <small class="text-danger"
+                  *ngIf="f?.datePaiement?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="compteCredit">{{ 'labels.compteDebiter' | translate }} : </label>
+                <ng-select formControlName="idCompteDebit" notFoundText="{{'labels.noFoundItem' | translate}}"
+                  (click)="GetCompte('')" labelForId=projectinput487>
+                  <ng-option *ngFor="let compte of comptes;let i = index" value="{{compte?.id}}">{{compte?.nom}}
+                  </ng-option>
+                </ng-select>
+                <small class="text-danger"
+                  *ngIf="f?.idCompteDebit?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="compteCredit">{{ 'labels.compteCrediter' | translate }} : </label>
+                <ng-select formControlName="idCompteCredit" notFoundText="{{'labels.noFoundItem' | translate}}"
+                  labelForId=projectinput487 (click)="GetCompte('')">
+                  <ng-option *ngFor="let compte of comptes;let i = index" value="{{compte?.id}}">{{compte?.nom}}
+                  </ng-option>
+                </ng-select>
+                <small class="text-danger"
+                  *ngIf="f?.idCompteCredit?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="montant">{{ 'labels.montant' | translate }} : </label>
+                <input formControlName="montant" type="number" class="form-control">
+                <small class="text-danger"
+                  *ngIf="f?.montant?.errors?.required">{{'errors.required' | translate }}</small>
+                <small class="text-danger"
+                  *ngIf="f?.montant?.hasError('CheckValidPrice')">{{'errors.invalid' | translate }}</small>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-light" data-dismiss="modal">
+          {{ 'labels.cancel' | translate }}</button>
+        <button type="button" class="btn btn-success btn-lg" (click)="saveMovement()">
+          {{ 'labels.sauvegarder' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

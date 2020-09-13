@@ -1,0 +1,272 @@
+<div class="tab-pane" id="toutesDevis" aria-labelledby="aboutIcon11-tab1" role="tab" aria-selected="false">
+
+  <section id="multi-column">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <!-- <div class="card-header">
+            <h4 class="card-title">
+              <i class="fa fa-list-alt"></i> {{'rubrique.title' | translate}}</h4>
+          </div> -->
+          <div class="card-content collapse show">
+            <div class="card-body init-card-body card-dashboard">
+              <div>
+                <div>
+
+
+                  <table style="overflow: hidden;">
+                    <thead>
+                      <tr>
+                        <th style="padding-left: 26px !important;"> {{'labels.rubrique' | translate}}</th>
+                        <th class="text-center"> {{'labels.nbrDocument' | translate}}</th>
+                        <th class="text-center"> {{'labels.derniermodificationt' | translate}}</th>
+
+                        <th class="text-center"> {{'labels.actions' | translate}}</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <tr>
+
+                        <!-- APPELE D OFFRE -->
+                      <tr (dblclick)="open('appel_offre')">
+                        <td> <span><img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.appeloffre' | translate}}</td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.appel_offre).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.appel_offre).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions"
+                              (click)="open('appel_offre')" [routerLink]="['/chantiers/detail',chantier?.id]"
+                              placement="bottom" ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.appel_offre,null,formType.add);" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr (dblclick)="open('commandes_devis')">
+                        <td> <span><img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.commandes' | translate}}
+                          <span class="badge badge-pill badge-primary badge-up" placement="bottom"
+                            ngbTooltip="Nombre des Bons de commande Fournisseur associés à ce chantier">{{ nbDocuments?.nbBC }}</span>
+                        </td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.commandes_devis).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.commandes_devis).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions"
+                              (click)="open('commandes_devis')" [routerLink]="['/chantiers/detail',chantier?.id]"
+                              placement="bottom" ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.commandes_devis,null,formType.add)" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+                          </div>
+                        </td>
+                      </tr>
+                      <!--  Devis -->
+                      <tr (dblclick)="open('devis')">
+                        <td>
+                          <span>
+                            <img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo">
+                          </span>
+                          {{'rubrique.devis' | translate}}
+                          <span class="badge badge-pill badge-primary badge-up" placement="bottom"
+                            ngbTooltip="Nombre des devis associés à ce chantier">{{ nbDocuments?.nbDevis }}</span>
+                        </td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.devis).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.devis).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions" (click)="open('devis')"
+                              placement="bottom" ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.devis,null,formType.add)" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+
+
+                          </div>
+                        </td>
+                      </tr>
+                      <!--  DOE -->
+                      <tr (dblclick)="open('doe')">
+                        <td><span><img src=" assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.DOE' | translate}}</td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.doe).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.doe).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions" (click)="open('doe')"
+                              [routerLink]="['/chantiers/detail',chantier?.id]" placement="bottom"
+                              ngbTooltip="{{'labels.voirDetails' | translate}}"><i class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.doe,null,formType.add)" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+
+
+
+                          </div>
+                        </td>
+                      </tr>
+                      <!--  FACTURATION -->
+                      <tr (dblclick)="open('facturation')">
+                        <td><span><img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.facturation' | translate}}
+                          <span class="badge badge-pill badge-primary badge-up" placement="bottom"
+                            ngbTooltip="Nombre des factures associés à ce chantier">{{ nbDocuments?.nbFacture }}</span>
+                        </td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.facturation).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.facturation).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions"
+                              (click)="open('facturation')" [routerLink]="['/chantiers/detail',chantier?.id]"
+                              placement="bottom" ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.facturation,null,formType.add)" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- PHOTOS -->
+                      <tr (dblclick)="open('photos')">
+                        <td><span><img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.photos' | translate}}</td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.photos).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.photos).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions" (click)="open('photos')"
+                              placement="bottom" ngbTooltip="{{'labels.voirDetails' | translate}}"><i
+                                class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.photos,null,formType.add)" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+
+
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- PLANNING -->
+                      <tr (dblclick)="open('planning')">
+                        <td><span><img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.planning' | translate}}</td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.planning).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.planning).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions" (click)="open('planning')"
+                              ngbTooltip="{{'labels.voirDetails' | translate}}"><i class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.planning,null,formType.add)"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- SUIVI CHANTIER -->
+                      <tr (dblclick)="open('suivi_chantier')">
+                        <td><span><img src="assets/app/images/folder-icon.png"
+                              style="width: 1.4rem; position: relative; top: -0.2rem;" alt="branding logo"></span>
+                          {{'rubrique.suiviChantier' | translate}}</td>
+                        <td class="text-center"> {{getRubriqueInfo(rubriqueEnum.suivi_chantier).nbrDoc }} </td>
+                        <td class="text-center">
+                          {{getRubriqueInfo(rubriqueEnum.suivi_chantier).lastEditDate | date:'dd/MM/yyyy HH:mm'}}
+                        </td>
+
+                        <td class="actions" style="text-align: center !important;">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-md btn-actions"
+                              (click)="open('suivi_chantier')" placement="bottom"
+                              ngbTooltip="{{'labels.voirDetails' | translate}}"><i class="ft-eye"></i></button>
+                            <button type="button" class="btn btn-success btn-md btn-actions" data-toggle="modal"
+                              data-target="#DocumentationModel"
+                              (click)="setformConfig(rubriqueEnum.suivi_chantier,null,formType.add)" placement="bottom"
+                              ngbTooltip="{{'labels.attacherPieceJointe' | translate}}"><i class="ft-plus"></i></button>
+
+
+                          </div>
+                        </td>
+                      </tr>
+
+
+                    </tbody>
+
+
+                  </table>
+
+                </div>
+                <!-- <div class="col-12" *ngIf="chantiers?.list.length == 0">
+                  <p class="no-data-available">{{ 'noDataAvaible' | translate }}</p>
+                </div> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<app-form-rubrique [load]="emitter" [typesDocuments]="typesDocuments" [type]="formConfig.type"
+  [defaultData]="formConfig.defaultData" (OnSave)="OnSave($event)">
+</app-form-rubrique>

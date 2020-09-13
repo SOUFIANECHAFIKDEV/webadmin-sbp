@@ -1,0 +1,44 @@
+@media only screen and (min-width: 1300px) {
+  show-hide-table-columns {
+    position: relative !important;
+    float: right !important;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  show-hide-table-columns {
+    position: relative !important;
+    margin-bottom: 5rem !important;
+    top: -2rem !important;
+  }
+}
+
+.card-body {
+  overflow: inherit;
+}
+
+.float-md-right{
+  a{
+    margin-left: 6px !important;
+  }
+}
+.no-data-available {
+  text-align: center;
+}
+
+.badge-brouillon{
+  background-color: #636e72 !important;  
+}
+.badge-annuler{
+  background-color:#fe0000  !important;
+
+}
+.badge-enretard{
+  background-color:#ffa87d  !important;
+}
+.badge-planifiee{
+  background-color :#00d2d3 !important;
+}
+.badge-success{
+  background-color: #2ecc71 !important;
+}

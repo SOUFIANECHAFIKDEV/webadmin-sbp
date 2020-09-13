@@ -1,0 +1,184 @@
+<div class="container">
+  <!-- [ngClass]="{'height': data?.typeElements ==  typePrevisionnel.depensee_Aprevoir ? '288px':'auto'}" -->
+  <div class="row" style="margin-top: 15px;"
+    [ngStyle]="{'height': data?.typeElements ==  typePrevisionnel.depensee_Aprevoir ? '370px' : 'auto'}">
+    <!-- section 1 -->
+    <div class="col-xl-2 section-left"
+      [ngStyle]="{'background-color':getColorByTypeAndSum(data?.sum,data?.typeElements)}">
+      <i class="fa" style="font-size: 3.3rem; margin-bottom: 10px;" [ngClass]="{
+        'fa-flag-checkered': getIcon(data?.typeElements) === 'fa-flag-checkered',
+        'fa-sign-in':getIcon(data?.typeElements) === 'fa-sign-in',
+        'fa-sign-out':getIcon(data?.typeElements)=== 'fa-sign-out'}"></i>
+      <p class="recupitilatif-title"> {{ getLabelByType(data?.typeElements) }} </p>
+      <p class="sum recupitilatif-title" style="font-weight: bold;">{{  data?.sum | RoudingNumber | ShowCurrency}}</p>
+      <p class="sum" *ngIf="data?.pourcentage!=null" style="margin-bottom: 10px;font-size: 1.5rem;">
+        {{  data?.pourcentage | RoudingNumber }} %</p>
+    </div>
+
+    <!-- section 2 -->
+    <div class="col-8">
+      <ng-container *ngFor=" let element of data?.elements">
+        <div class="row section-meduim-card" [ngStyle]="{
+            'background-color':getColorByTypeAndSum(element?.sum,data?.typeElements,element?.type),
+            'padding': getSectionMeduimCardPadding(data?.typeElements,element?.type),
+            'margin': getSectionMeduimCardMargin(data?.typeElements,element?.type)
+            }">
+          <div class="col-7 title">
+            {{ getLabelByType(data?.typeElements,element?.type) }}
+            <!-- -- {{ depenseAprevoir.achat_main_oveure }}
+            -!- {{ data?.typeElements ==  typePrevisionnel.depensee_Aprevoir  }}
+            -- {{  depenseAprevoir.achat_main_oveure != element?.type }} -->
+            <span *ngIf="element?.nbrHeure != null"> {{ element?.nbrHeure }} h </span>
+            <span *ngIf="element?.pourcentage != null"> {{ element?.pourcentage | RoudingNumber }} % </span>
+          </div>
+          <div class="col-5 title text-right">{{ element?.sum | RoudingNumber | ShowCurrency }}</div>
+          <div class="col-12" *ngIf="element.souselements != null" style="color: #fff; font-size: 11px;">
+            <div class="row" *ngFor="let sousElemnt of element.souselements">
+              <div class="col-8 title">
+                {{ getLabelByType(data?.typeElements,element?.type,sousElemnt?.typeSousElement ) }}
+                <span *ngIf="sousElemnt?.pourcentage != null">{{ sousElemnt?.pourcentage | RoudingNumber}} %</span>
+                <span *ngIf="sousElemnt?.nbrPanierOrDeplacement != null"> {{ sousElemnt?.nbrPanierOrDeplacement}}</span>
+              </div>
+              <div class="col-4 title text-right">{{ sousElemnt?.sum | RoudingNumber | ShowCurrency }}</div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+        <!-- <meter min="0" max="100" value=" {{element.defference | RoudingNumber}}">
+          {{element.defference | RoudingNumber}}</meter> -->
+
+        <div class="row">
+          <div class="container">
+            <div class="progress" *ngIf="element.defference != null">
+              <div class="progress-bar"
+                [ngClass]="{'bg-success':element?.defference <=100 ,'bg-danger':element?.defference >100}"
+                role="progressbar" [style.width]="element?.defference+ '%'">
+                <p class="progress-bar-pourcentage">{{element.defference | RoudingNumber}}%</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="row" *ngIf="data.defference != null">
+        <div class="col-12">
+          <div class="progress">
+            <div class="progress-bar"
+              [ngClass]="{'bg-success':data?.defference <=100 ,'bg-danger':data?.defference >100 }"
+              [style.width]="data?.defference+ '%'" role="progressbar">
+              <p class="progress-bar-pourcentage"> {{data.defference | RoudingNumber}}%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- section 3 -->
+    <div class="col-2">
+      <!-- ghaphe -->
+      <div class="chart-container" style="width: 180px; position: relative; right: 50px;">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
+        </canvas>
+        <div class="chart-legend">
+          <ng-container *ngIf="typeRecapitulatifFinancier == typeRecapitulatifFinancierEnum.previsionnel">
+            <!-- previsionnel => total_devis -->
+            <ng-container *ngIf="data?.typeElements == typePrevisionnel.total_devis">
+              <!-- previsionnel => total_devis => vente_materiel  -->
+              <div class="chart-legend-color legend-color-one"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,total_devis?.vente_materiel) }}</div>
+              <!-- previsionnel => total_devis => vente_materiel  -->
+              <div class="chart-legend-color legend-color-tow "></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,total_devis?.vente_main_oveure) }}
+              </div>
+            </ng-container>
+            <!-- Fin! previsionnel => total_devis -->
+
+            <!-- previsionnel => depensee_Aprevoir -->
+            <ng-container *ngIf="data?.typeElements == typePrevisionnel.depensee_Aprevoir">
+              <!-- previsionnel => depensee_Aprevoir => achat_materiel  -->
+              <div class="chart-legend-color legend-color-one"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,depenseAprevoir?.achat_materiel) }}
+              </div>
+              <!-- previsionnel => depensee_Aprevoir => achat_main_oveure  -->
+              <div class="chart-legend-color legend-color-tow "></div>
+              <div class="chart-legend-label">
+                {{ getLabelByType(data?.typeElements,depenseAprevoir?.achat_main_oveure) }}
+              </div>
+              <!-- previsionnel => depensee_Aprevoir => sous_traitance  -->
+              <div class="chart-legend-color legend-color-three"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,depenseAprevoir?.sous_traitance) }}
+              </div>
+            </ng-container>
+            <!-- Fin previsionnel => depensee_Aprevoir -->
+
+            <!-- previsionnel => marge_Previsionnel -->
+            <ng-container *ngIf="data?.typeElements == typePrevisionnel.marge_Previsionnel">
+              <!-- previsionnel => marge_Previsionnel => retenueGarantier  -->
+              <div class="chart-legend-color legend-color-one"></div>
+              <div class="chart-legend-label">
+                {{ getLabelByType(data?.typeElements,margePrevisionnel?.retenueGarantier) }}
+              </div>
+              <!-- previsionnel => marge_Previsionnel => margeMateriel  -->
+              <div class="chart-legend-color legend-color-tow"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,margePrevisionnel?.margeMateriel) }}
+              </div>
+              <!-- previsionnel => marge_Previsionnel => margeMainOeuvre  -->
+              <div class="chart-legend-color legend-color-three"></div>
+              <div class="chart-legend-label">
+                {{ getLabelByType(data?.typeElements,margePrevisionnel?.margeMainOeuvre) }}
+              </div>
+            </ng-container>
+            <!-- Fin! previsionnel => marge_Previsionnel -->
+
+          </ng-container>
+
+          <ng-container *ngIf="typeRecapitulatifFinancier == typeRecapitulatifFinancierEnum.facturation_tresorie">
+            <ng-container *ngIf="data?.typeElements == typeFactureTresorie.caFacture">
+              <!-- facturation_tresorie => caFacture => payes  -->
+              <div class="chart-legend-color legend-color-one"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,caFacture?.payes) }}
+              </div>
+              <!-- facturation_tresorie => caFacture => enAttentepaiement  -->
+              <div class="chart-legend-color legend-color-tow "></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,caFacture?.enAttentepaiement) }}
+              </div>
+            </ng-container>
+            <ng-container *ngIf="data?.typeElements == typeFactureTresorie.depenseeEngagees">
+              <!-- facturation_tresorie => depenseeEngagees => achatsMateriels  -->
+              <div class="chart-legend-color legend-color-one"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,depenseEngagees?.achatsMateriels) }}
+              </div>
+              <!-- facturation_tresorie => depenseeEngagees => interventions  -->
+              <div class="chart-legend-color legend-color-tow "></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,depenseEngagees?.interventions) }}
+              </div>
+              <!-- facturation_tresorie => depenseeEngagees => sousTraitance  -->
+              <div class="chart-legend-color legend-color-three"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,depenseEngagees?.sousTraitance) }}
+              </div>
+            </ng-container>
+            <ng-container *ngIf="data?.typeElements == typeFactureTresorie.margeReele">
+              <!-- facturation_tresorie => margeReele => retenueGarantier  -->
+              <div class="chart-legend-color legend-color-one"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,margeReelle?.retenueGarantier) }}
+              </div>
+              <!-- facturation_tresorie => margeReele => margeMateriel  -->
+              <div class="chart-legend-color legend-color-tow "></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,margeReelle?.margeMateriel) }}
+              </div>
+              <!-- facturation_tresorie => margeReele => margeMainOeuvre  -->
+              <div class="chart-legend-color legend-color-three"></div>
+              <div class="chart-legend-label">{{ getLabelByType(data?.typeElements,margeReelle?.margeMainOeuvre) }}
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

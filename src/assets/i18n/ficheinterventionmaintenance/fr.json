@@ -1,0 +1,570 @@
+{
+  "title": "Fiches Intervention Maintenance",
+  "Stock": "Stocké",
+  "errors": {
+    "unique": "Ce champs a déjà existé",
+    "required": "Ce champs est requis",
+    "minLength": "Ce champs doit être au moins de {{number}} caractères",
+    "pattern": "Ce champs est invalid",
+    "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider et ajouter au moins un article",
+    "technicienEffected": "Attention vous effectuez ce technicien 2 semaines d'affilées",
+    "articleRequired": "S'il vous plaît sélectionner au moins un article",
+    "CheckUniqueName": "Cette valeur est déjà utilisée",
+    "fournisseurRequired": "s'il vous plaît sélectionner un fournisseur",
+    "adresseRequired": "s'il vous plaît sélectionner une adresse",
+    "serveur": "Erreur du serveur",
+    "technicienRequired": "s'il vous plaît sélectionner au moins un technicien",
+    "datesIntervention": "La date fin d'intervention doit être supérieure à la date du début"
+  },
+  "action": {
+    "title": "Action",
+    "toggle": "Toggle avec succès",
+    "error": "Erreur du serveur"
+  },
+  "labels": {
+    "id": "Id",
+    "nom": "Nom",
+    "reference": "Référence",
+    "fonction": "Fonction",
+    "commentaire": "Commentaire",
+    "action": "Action",
+    "infoDevis": "Information Devis",
+    "infoFicheIntervention": "Information Fiche Intervention Maintenance",
+    "info": "Information",
+    "sauvegarder": "Sauvegarder",
+    "add": "Ajouter",
+    "addChantier": "Ajouter",
+    "addsite": "Site",
+    "update": "Mettre à jour",
+    "cancel": "Annuler",
+    "modifier": "Modifier",
+    "monsieur": "Monsieur",
+    "date": "Date",
+    "utilisateur": "Utilisateur",
+    "user": "Utilisateur",
+    "dateCreation": "Date Création",
+    "dateIntervention": "Date Intervention",
+    "client": "Client",
+    "note": "Note",
+    "conditions": "Conditions",
+    "prorata": "Prorata",
+    "puc": "PUC",
+    "total": "Total",
+    "dateInsertion": "Date Insertion",
+    "objet": "Objet",
+    "chantier": "Chantier",
+    "status": "Statut",
+    "articles": "Articles",
+    "article": "Article",
+    "listArticle": "Liste des articles",
+    "listPrestatins": "Liste des prestations",
+    "prestation": "Prestation",
+    "prestations": "Prestations",
+    "designation": "Désignation",
+    "qte": "Qté",
+    "loadingRecords": "Chargement en cours...",
+    "prixU": "Prix U",
+    "tva": "TVA",
+    "totalHT": "Total HT",
+    "prixHT": "Prix HT",
+    "actions": "Actions",
+    "addclient": "Ajouter un nouveau client",
+    "search": "Rechercher (désignation ou référence)",
+    "detailsArticle": "Détails article",
+    "remise": "Remise",
+    "autres": "Autres",
+    "unite": "Unité",
+    "categorie": "Catégorie",
+    "description": "Description",
+    "totalTTC": "Total TTC",
+    "totalHt": "Total HT",
+    "margeBruteHt": "Marge brute HT",
+    "remiseGlobalHT": "Remise globale HT",
+    "nouveauTotalHT": "Nouveau Total HT",
+    "prixTTC": "Prix TTC",
+    "fournisseur": "Fournisseur",
+    "loading": "Chargement ...",
+    "nouveau": "Nouveau",
+    "Nouvelle": "Nouvelle",
+    "ajouter": "Ajouter",
+    "brouillon": "Brouillon",
+    "enAttente": "En attente",
+    "valider": "Valider",
+    "historique": "Historique",
+    "Attribute": "Attribut",
+    "After": "Valeur après",
+    "close": "Fermer",
+    "Before": "Valeur avant",
+    "suppression": "Suppression",
+    "ajout": "Ajout",
+    "modification": "Modification",
+    "Detailshistorique": "Détail d'historique",
+    "noFoundItem": "Aucun élément trouvé",
+    "validerDemande": "Valider demande",
+    "validerDevis": "Valider Devis",
+    "choisirTechnicien": "Choisir technicien assigné",
+    "voirEnDetail": "Voir en détail",
+    "planing": "Planning du {{ date }} pour {{name}} :",
+    "heure": "Heure",
+    "adresse": "Adresse",
+    "ville": "Ville",
+    "cp": "CP",
+    "planingLe": "Planning des techniciens pour le {{date}}",
+    "recherche": "Recherche",
+    "choisir": "Choisir",
+    "dateDebut": "Date Début",
+    "dateFin": "Date Fin",
+    "motif": "Motif",
+    "aucun": "Aucun",
+    "techniciens": "Techniciens",
+    "aValider": "À valider",
+    "aVenir": "À venir",
+    "aReplanifier": "À replanifier",
+    "dateMaximale": "Date maximale",
+    "dateMinimale": "Date minimale",
+    "enattente": "En Attente",
+    "annuler": "Annuler",
+    "accepter": "Accepter",
+    "nonaccepter": "Refuser",
+    "acceptee": "Accepté",
+    "accepte": "Accepté",
+    "nonaccepte": "Refusé",
+    "franchise": "Franchisé",
+    "sourceCreation": "Source création",
+    "siteWeb": "Site web",
+    "appClientPro": "Application client pro",
+    "administration": "Administration",
+    "validee": "Validée",
+    "realisee": "Réalisée",
+    "replanifier": "Replanifier",
+    "supprimer": "Supprimer",
+    "voirDetails": "Voir Détails",
+    "rechercheAvancer": "Recherche avancée",
+    "msgEmptyTable": "Vous n'avez pas encore ajouté d'articles.",
+    "msgEmptyTablePrestations": "Vous n'avez pas encore ajouté des prestations.",
+    "telecharger": "Télécharger",
+    "infoProduit": "Information article",
+    "PrixHt": "Prix de vente HT",
+    "PrixTtc": "Prix de vente TTC",
+    "produit": "Article",
+    "afficher": "Afficher",
+    "dupliquer": "Dupliquer",
+    "annulation": "Annulation",
+    "statut": "Statut",
+    "date_creation": "Date du création",
+    "complementAdresse": "Complement Adresse",
+    "codePostal": "codePostal",
+    "btnCancel": "Annuler",
+    "btnSave": "Enregistrer",
+    "ChangementStatut": "Changement du statut",
+    "adresses": "Adresses",
+    "addadresse": "Ajouter Adresse",
+    "addAddress": "Ajouter un site",
+    "server": "Serveur",
+    "titre": "titre",
+    "lastupdate": "dernière modifications",
+    "document": "Document",
+    "type": "Type",
+    "departement": "Département",
+    "listdocumentations": "Liste Documentations",
+    "codeclient": " Code Client",
+    "adresseIntervention": "Adresse d'intervention",
+    "siteIntervention": "Site d'intervention",
+    "chooseFile": "Choisir le fichier",
+    "sendByMail": "Envoyer par email",
+    "revivalyMail": "Relance par email",
+    "send": "Envoyer",
+    "to": "À",
+    "contents": "Rediger votre message",
+    "emailRequired": "email est requis",
+    "objectRequired": "objet est requis",
+    "contentsRequired": "content est requis",
+    "annulee": "Annulée",
+    "nonacceptee": "Refusé",
+    "planifiee": "Planifiée",
+    "facturee": "Facturée",
+    "ficheIntervention": "Fiche Intervention Maintenance",
+    "intervention": "Intervention",
+    "searchTechniciens": "Rechercher (Nom ,Prénom ou Nom d'utilisateur)",
+    "listTechniciens": "Liste des Techniciens",
+    "goToDetails": "Accédez à la page de détails",
+    "remove": "Retirer",
+    "calendar": "Agenda",
+    "rapport": "Rapport",
+    "planification": "Planification",
+    "createFacture": "Créer une facture",
+    "documentAssocie": "Documents associés",
+    "facture": "Facture",
+    "encours": "En cours",
+    "cloture": "Clôturée",
+    "enretard": "En retard",
+    "PdfView": "Visualiser",
+    "VisualiserPdf": "Visualiser PDF",
+    "annuleef": "annulée",
+    "nombrePanier": "Nombre des Paniers",
+    "nombreDeplacement": "Nombre des Déplacements",
+    "equipement": "Gamme maintenance d'équipement",
+    "listequipement": "Liste des gamme maintenance des équipements",
+    "ficheintervention": "fiche intervention maintenance",
+    "msgEmtyListVide": "Aucun élément pour sélectionné",
+    "msgEmtyListSelectedVide": "Aucun élément  sélectionné",
+    "addTechnicien": "Ajouter Technicien"
+  },
+  "mois": {
+    "janvier": "Janvier",
+    "fevrier": "Février",
+    "mars": "Mars",
+    "avril": "Avril",
+    "mai": "Mai",
+    "juin": "Juin",
+    "juillet": "Juillet",
+    "aout": "Août",
+    "septembre": "Septembre",
+    "octobre": "Octobre",
+    "novembre": "Novembre",
+    "decembre": "Décembre"
+  },
+  "statut": {
+    "brouillon": "Brouillon",
+    "annulee": "Annulée",
+    "nonacceptee": "Refusé",
+    "planifiee": "Planifiée",
+    "facturee": "Facturée"
+  },
+  "fullcalendar": {
+    "today": "Aujourd'hui",
+    "month": "Mois",
+    "week": "Semaine",
+    "day": "Journée",
+    "list": "Liste",
+    "allday": "toute la journée"
+  },
+  "addchantier": {
+    "title": "Ajouter chantier",
+    "msg": "Ajouter avec succès"
+  },
+  "addproduit": {
+    "title": "Ajouter article",
+    "msg": "Ajouter avec succès"
+  },
+  "updatechantier": {
+    "title": "Modifier chantier",
+    "msg": "Modifier avec succès"
+  },
+  "list": {
+    "title": "Liste des Fiches d'Intervention maintenance",
+    "montreTout": "Montrer tout",
+    "montrerAucun": "Montrer Aucun",
+    "statut": "Sélectionner un statut",
+    "chantier": "Sélectionner un chantier",
+    "ficheIntervention": "Fiche Intervention Maintenance",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr supprimer cette Fiche Intervention maintenance ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "error": "Erreur du serveur",
+      "failed": "Suppression annulée"
+    }
+  },
+  "add": {
+    "title": "Ajouter Fiche Intervention Maintenance",
+    "msg": "Ajouter avec succès",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr de supprimer cet article ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-la!",
+      "success": "Supprimer avec succès",
+      "failed": "Suppression annulée"
+    }
+  },
+  "addClient": {
+    "title": "Ajouter client",
+    "msg": "Ajouter avec succès"
+  },
+  "update": {
+    "title": "Modifier Fiche Intervention Maintenance",
+    "msg": "Modifier avec succès"
+  },
+  "show": {
+    "title": "Détails Fiche Intervention Maintenance",
+    "information": "INFORMATION",
+    "historique": "HISTORIQUE",
+    "memo": "MÉMOS",
+    "emailHistorique": "EMAILS"
+  },
+  "commun": {
+    "name": "Nom fichier",
+    "AjouterUnCommentaire": "Ajouter un commentaire",
+    "AjouterUneFicheTechnique": "Ajouter Une Fiche Technique",
+    "EditUneFicheTechnique": "Modifier Une Fiche Technique",
+    "Comment": "Commentaire",
+    "PieceJoint": "Pièce jointe",
+    "chooseFile": "Choisir le fichier",
+    "close": "Fermer",
+    "Add": "Ajouter",
+    "save": "Sauvegarder",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr de supprimer cette label ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "failed": "Suppression annulé"
+    },
+    "update": {
+      "success": "Modifier avec succès"
+    }
+  },
+  "dataTables": {
+    "processing": "Traitement en cours...",
+    "search": "Rechercher&nbsp; ",
+    "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+    "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "infoPostFix": "",
+    "loadingRecords": "Chargement en cours...",
+    "zeroRecords": "",
+    "emptyTable": "",
+    "paginate": {
+      "first": "Premier",
+      "previous": "Pr&eacute;c&eacute;dent",
+      "next": "Suivant",
+      "last": "Dernier"
+    },
+    "aria": {
+      "sortAscending": ": activer pour trier la colonne par ordre croissant",
+      "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+    },
+    "searchPlaceholder": "Référence "
+  },
+  "noDataAvaible": "Aucune donnée disponible dans le tableau",
+  "historique": {
+    "AjouterUnCommentaire": "Ajouter un commentaire",
+    "Comment": "Commentaire",
+    "PieceJoint": "Piece joint",
+    "DropFilesHereToUpload": "Déposer des fichiers ici pour télécharger",
+    "close": "Fermer",
+    "Add": "Ajouter"
+  },
+  "Afficher_Masquées_Les_Colonnes": "Colonnes",
+  "datePicker": {
+    "firstDayOfWeek": 1,
+    "dayNames": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dayNamesShort": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dayNamesMin": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "monthNames": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "monthNamesShort": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "today": "Aujourd'hui",
+    "clear": "Valider"
+  },
+  "popupConfirmation": {
+    "title": "Confirmation",
+    "question": "Êtes-vous sûr supprimer d'effectuez ce technicien 2 semaines d'affilées ?",
+    "cancel": "Annuler",
+    "confirm": "Oui"
+  },
+  "Poid": "Poid lourd",
+  "annulation": {
+    "title": "Annulation",
+    "question": "Êtes-vous sûr annuler cette Fiche Intervention Maintenance ?",
+    "cancel": "Annuler",
+    "confirm": "Oui",
+    "success": "Annuler avec succès",
+    "error": "Erreur du serveur",
+    "failed": "Annulation annulé"
+  },
+  "Brouillon": {
+    "title": "Brouillon",
+    "question": "Êtes-vous sûr Brouillon cette Fiche Intervention Maintenance ?",
+    "cancel": "Annuler",
+    "confirm": "Oui",
+    "success": "Brouillon avec succès",
+    "error": "Erreur du serveur",
+    "failed": "Brouillon annulé"
+  },
+  "planification": {
+    "title": "Planification",
+    "question": "Êtes-vous sûr Planifiée cette Fiche Intervention Maintenance ?",
+    "cancel": "Annuler",
+    "confirm": "Oui",
+    "success": "Planification avec succès",
+    "error": "Erreur du serveur",
+    "failed": "Planification annulé"
+  },
+  "dupliquer": {
+    "title": "Dubliquer Fiche Intervention Maintenance",
+    "msg": "Dupliquer  avec succès",
+    "question": "Êtes-vous sûr dupliquer cette Fiche Intervention Maintenance?",
+    "cancel": "Annuler",
+    "confirm": "Oui",
+    "success": "Dupliquer avec succès",
+    "error": "Erreur du serveur",
+    "failed": "Duplication annulé"
+  },
+  "PrixParFournisseur": {
+    "title": "Prix Fournisseurs",
+    "ajoutersuccess": "Ajouter avec succès",
+    "modifiersucces": "Modifier avec succès",
+    "labels": {
+      "Prix": "Prix d'achat",
+      "PrixEtDevise": "Prix d'achat (€)",
+      "Fournisseur": "Fournisseur",
+      "btn_add": "Ajouter un prix fournisseur",
+      "btn_Close": "Fermer",
+      "model_add_title": "Ajouter un prix fournisseur",
+      "model_update_title": "Modifier le prix par fournisseur",
+      "ajouterPrixParFournisseur_btn": "Ajouter",
+      "modifierPrixParFournisseur_btn": "Modifier",
+      "default": "Fournisseur par défaut"
+    },
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr de supprimer ce prix ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès"
+    },
+    "errors": {
+      "required": "Veuillez sélectionner au moins un fournisseur par défaut"
+    }
+  },
+  "file": {
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr retirer ce fichier ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, retirer-le!",
+      "success": "Retirer avec succès"
+    }
+  },
+  "produit": {
+    "add": {
+      "title": "Ajouter article",
+      "msg": "Ajouter avec succès"
+    }
+  },
+  "sendMail": {
+    "responses": {
+      "serverConnectionError": "",
+      "argumentsError": "Les données envoyées ne sont pas correctes!",
+      "success": "Votre email a été envoyée avec succès.",
+      "internalError": "Erreur interne, veuillez réessayer!",
+      "serverHasNoConfig": "Erreur! Veuillez configurer Votre serveur de messagerie."
+    }
+  },
+  "statuts": [
+    {
+      "id": 1,
+      "label": "Brouillon",
+      "color": "#ff7588"
+    },
+    {
+      "id": 2,
+      "label": "Planifiée",
+      "color": "#16d39a"
+    },
+    {
+      "id": 3,
+      "label": "Refusée",
+      "color": "#404e67"
+    },
+    {
+      "id": 4,
+      "label": "Annulée",
+      "color": "#2dcee3"
+    },
+    {
+      "id": 5,
+      "label": "Facturée",
+      "color": "#404e78"
+    }
+  ],
+  "changeStatut": {
+    "brouillon": {
+      "title": "Brouillon la Fiche Intervention Maintenance",
+      "question": "voulez vous vraiment Brouillon cette Fiche Intervention Maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, Brouillon la Fiche Intervention Maintenance",
+      "success": "Le statut de cette Fiche Intervention Maintenance a été changé au statut brouillon avec succès.",
+      "error": "Erreur du serveur."
+    },
+    "annulee": {
+      "title": "Annulation du Fiche Intervention Maintenance",
+      "question": "voulez vous vraiment annuler cette Fiche Intervention Maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, Annuler la Fiche Intervention Maintenance",
+      "success": "Le statut de cette Fiche Intervention a été changé au statut annulé avec succès.",
+      "error": "Erreur du serveur."
+    },
+    "planifiee": {
+      "title": "Planifier la Fiche Intervention Maintenance",
+      "question": "voulez-vous vraiment planifier cette Fiche Intervention Maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, Planifier la Fiche Intervention Maintenance",
+      "success": "Le statut de cette Fiche Intervention a été changé au statut en planifiée avec succès.",
+      "error": "Erreur du serveur."
+    },
+    "nonacceptee": {
+      "title": "Refuser la Fiche Intervention Maintenance",
+      "question": "Voulez-vous vraiment Refuser  cette Fiche Intervention Maintenance?",
+      "cancel": "Annuler",
+      "confirm": "Oui, Refuser la Fiche Intervention Maintenance",
+      "success": "Le statut de cette Fiche Intervention Maintenance a été changé au statut refusée avec succès.",
+      "error": "Erreur du serveur."
+    }
+  }
+}

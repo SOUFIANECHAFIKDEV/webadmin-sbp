@@ -1,0 +1,41 @@
+<!-- <body> -->
+<div class="content-wrapper" style="padding: 0px 0.8rem 0px 23px;">
+  <div class="content-body">
+
+    <section id="timeline" class="timeline-left timeline-wrapper">
+      <ul class="timeline">
+        <ng-container *ngFor="let element of emails; let i=index">
+          <li class="timeline-item mt-3">
+            <div class="timeline-badge">
+              <span class="bg-white" data-toggle="tooltip" data-placement="right">
+                {{i+1}}
+              </span>
+            </div>
+            <div class="timeline-card card border-grey border-lighten-2">
+              <div class="card-header">
+                <h6 class="card-title"><a [routerLink]="['/utilisateurs/detail',element.idUser]">{{ element.idUser |
+                        GetNameOfUserById }}</a> {{ element?.date | date:'dd/MM/yyyy HH:mm' }}</h6>
+                <p class="card-subtitle text-muted mb-0 pt-1">
+                  <strong style="margin-right: 1rem !important;">Destinataire :</strong>
+                  <span class="font-small-3">{{element.email}}</span>
+                </p>
+                <p class="card-subtitle text-muted mb-0 pt-1">
+                  <strong style="margin-right: 1rem !important;">objet :</strong>
+                  <span class="font-small-3">{{element.subject}}</span>
+                </p>
+                <p class="card-subtitle text-muted mb-0 pt-1">
+                  <strong style="margin-right: 1rem !important;">contenu :</strong>
+                  <span class="font-small-3">{{element.content}}</span>
+                </p>
+              </div>
+            </div>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="emails?.length == 0 || emails == null">
+          <p style="text-align: center;">{{ 'noDataAvaible' | translate }}</p>
+        </ng-container>
+      </ul>
+    </section>
+  </div>
+</div>
+<!-- </body> -->

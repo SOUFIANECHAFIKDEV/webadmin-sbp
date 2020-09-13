@@ -1,0 +1,39 @@
+.btn-file-upload {
+  background: #065cb3;
+  padding: 1rem 1rem 1rem 1rem !important;
+  text-align: center !important;
+  border-color: #065cb3 !important;
+  background-color: #065cb3 !important;
+  color: #ffffff !important;
+  border-radius: 5px;
+}
+
+i{
+  font-size: 1.5rem;
+  margin: 0rem 0.5rem;
+}
+.ft-download {
+  color: #16d39a;
+}
+.ft-trash{
+  color: #ffa87d;
+}
+
+i{
+    cursor: pointer;
+}
+.currency-input{
+  text-align: right;
+}
+.custom-control.custom-checkbox {
+  width: 15%;
+}
+
+.custom-select:disabled {
+  color: #3f587e;
+  background-color: #ebebeb;
+}
+
+select:disabled {
+  background: #ebebeb !important;
+}

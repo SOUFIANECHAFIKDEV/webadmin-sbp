@@ -1,0 +1,261 @@
+<div *ngIf="creationForm">
+  <div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+      <h3 class="content-header-title mb-0">{{ 'addBonCommandeFournisseur.title' | translate}}</h3>
+      <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a (click)="navigateToBonCommandeList()">{{'addBonCommandeFournisseur.titleBonCommand' | translate}}</a>
+            </li>
+            <li class="breadcrumb-item active">{{ 'addBonCommandeFournisseur.title' | translate}}
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+      <div class="btn-group float-md-right" role="group">
+
+        <button type="button" (click)="navigateToBonCommandeList()" class="btn btn-warning mr-1">
+          <i class="ft-x"></i> {{'labels.cancel' | translate}}
+        </button>
+
+        <button type="submit" (click)="add(statutBonCommandeFournisseur.Brouillon)" class="btn btn-light">
+          <i class="fa ft-edit-3"></i> {{ 'labels.brouillon' | translate }}
+        </button>
+
+        <button type="submit" (click)="add(statutBonCommandeFournisseur.Encours)" class="btn btn-success">
+          <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="content-body">
+
+    <section id="horizontal-form-layouts">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" style="zoom: 1;">
+            <div class="card-content collpase show">
+              <div class="card-body">
+
+                <!-- Information à saisir -->
+                <form class="form form-horizontal" [formGroup]="creationForm">
+                  <div class="form-body">
+
+                    <!-- Information facture-->
+                    <h4 class="form-section">
+                      <i class="ft-file-text"></i>{{'labels.infoBonCommandeFournisseur' | translate}}</h4>
+
+                    <!-- Reference + Client -->
+                    <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control"
+                            for="projectinput189">{{ 'labels.reference' | translate }}</label>
+                          <div class="col-md-9">
+                            <input type="text" formControlName="reference" id="projectinput189" class="form-control"
+                              disabled>
+                            <small class="text-danger"
+                              *ngIf="f?.reference?.errors?.required">{{'errors.required'| translate }}</small>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- chantier -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control"
+                            for="projectinput2">{{'labels.chantier' | translate}}</label>
+                          <div class="col-md-9" *ngIf="idChantier != null">
+                            <input type="text" disabled [value]="f?.idChantier?.value" id="client" class="form-control">
+                          </div>
+                          <div class="col-md-9" *ngIf="idChantier == null">
+                            <ng-select notFoundText="{{'labels.noFoundItem' | translate}}"
+                              (search)="getChantiers($event)" labelForId=projectinput48 formControlName="idChantier"
+                              (clear)="getChantiers('')">
+
+                              <ng-option *ngFor="let chantier of chantiers;let i = index" value="{{chantier?.id}}">
+                                {{chantier?.nom}}</ng-option>
+                            </ng-select>
+                            <small class="text-danger"
+                              *ngIf="f?.idChantier?.errors?.required">{{'errors.required' | translate }}</small>
+                          </div>
+
+
+                        </div>
+
+                      </div>
+
+
+
+                    </div>
+
+
+                    <div class="row">
+                      <!-- client -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control"
+                            for="projectinput2">{{'labels.fournisseur' | translate}}</label>
+                          <div class="col-md-9">
+                            <ng-select notFoundText="{{'labels.noFoundItem' | translate}}"
+                              (search)="getFournisseurs($event)" labelForId=projectinput48
+                              formControlName="idFournisseur" (clear)="getFournisseurs('')">
+                              <ng-option *ngFor="let fournisseur of fournisseurs;let i = index"
+                                value="{{fournisseur?.id}}">
+                                {{fournisseur?.nom}}</ng-option>
+                            </ng-select>
+                            <small class="text-danger"
+                              *ngIf="f?.idFournisseur?.errors?.required">{{'errors.required' | translate }}</small>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <!-- <select formControlName="type" class="form-control" class="form-control"  [value]="1">
+        <option value="1">{{'listPC.Type.bancaire' | translate}}</option>
+      </select> -->
+
+
+
+
+                    </div>
+
+                    <!-- date creation + date echeance -->
+                    <div class="row" *ngIf="dateLang">
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control"
+                            for="projectinput3">{{ 'labels.dateCreation' | translate }}</label>
+                          <div class="col-md-9">
+                            <p-calendar formControlName="dateCreation" [readonlyInput]="true" dateFormat="dd/mm/yy"
+                              [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [locale]="dateLang"
+                              showButtonBar="true"></p-calendar>
+                            <small class="text-danger"
+                              *ngIf="f?.dateCreation?.errors?.required">{{'errors.required' | translate }}</small>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control"
+                            for="projectinput39">{{ 'labels.dateExpiration' | translate }}</label>
+                          <div class="col-md-9">
+                            <p-calendar formControlName="dateExpiration" dateFormat="dd/mm/yy"
+                              [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [locale]="dateLang"
+                              showButtonBar="true"></p-calendar>
+                            <small class="text-danger"
+                              *ngIf="f?.dateExpiration?.errors?.required">{{'errors.required' | translate }}</small>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group row">
+                          <label class="col-md-1 label-control"
+                            for="projectinput4">{{'labels.objet' | translate}}</label>
+                          <div class="col-md-11">
+                            <textarea formControlName="objet" placeholder="{{'labels.objet' | translate}}"
+                              id="projectinput4" class="form-control textarea-single-ligne"
+                              style="width: 95.5%;float: right;"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+                  <h4 class="form-section"> <i class="ft-shopping-cart"></i>{{'labels.articles' | translate}}</h4>
+
+                  <ng-container *ngIf="dataBonCommandeFournisseur!=null">
+
+                    <table-article-depense [load]="emitter" [readOnly]="false" [articles]="prestations"
+                      [IdFournisseur]="f?.idFournisseur?.value">
+                    </table-article-depense>
+                  </ng-container>
+                  <ng-container *ngIf="dataBonCommandeFournisseur==null">
+                    <table-article-depense [load]="emitter" [readOnly]="false"
+                      [IdFournisseur]="f?.idFournisseur?.value">
+                    </table-article-depense>
+
+                  </ng-container>
+
+
+
+                  <!-- Section d'autre -->
+                  <h4 class="form-section"><i class="ft-message-circle"></i>{{'labels.autres' | translate}}</h4>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-12 label-control"
+                          for="conditionRegelement">{{ 'labels.conditionRegelement' | translate }}</label>
+                        <div class="col-md-12">
+                          <!-- <textarea type="text" formControlName="conditionRegelement" id="conditionRegelement" class="form-control" placeholder="{{ 'labels.conditionRegelement' | translate }}"></textarea> -->
+                          <angular-editor id="unique1" [config]="editorConfig" formControlName="conditionRegelement">
+                          </angular-editor>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-12 label-control" for="note">{{ 'labels.note' | translate }}</label>
+                        <div class="col-md-12">
+                          <!-- <textarea type="text" formControlName="note" id="note" class="form-control" placeholder="{{ 'labels.note' | translate }}"></textarea> -->
+                          <angular-editor id="unique2" [config]="editorConfig" formControlName="note">
+                          </angular-editor>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Button de validation facture -->
+  <div class="row">
+    <div class="col-md-12" style="zoom: 1;">
+      <div class="btn-group float-md-left" role="group">
+
+        <button type="button" [routerLink]="['/bonCommandeFournisseur']" class="btn btn-warning mr-1">
+          <i class="ft-x"></i> {{'labels.cancel' | translate}}
+        </button>
+
+        <button type="submit" (click)="add(statutBonCommandeFournisseur.Brouillon)" class="btn btn-light">
+          <i class="fa ft-edit-3"></i> {{ 'labels.brouillon' | translate }}
+        </button>
+
+        <button type="submit" (click)="add(statutBonCommandeFournisseur.Encours)" class="btn btn-success">
+          <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <br><br>
+
+  <!-- <div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+      <img src="assets/app/images/oval.svg" class="loading-icon" />
+  </div> -->
+  <custom-loader [displayLoader]="processing"></custom-loader>
+</div>

@@ -1,0 +1,210 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" style="margin-top: 1rem;">
+
+
+    <a *ngIf="bonCommandeFournisseur" class="btn btn-secondary" style="color:white;"
+      (click)="dupliquerBonCommandeFournisseur()" placement="bottom" ngbTooltip="{{ 'labels.dupliquer' | translate }}">
+      {{ 'labels.dupliquer' | translate }} <i class="fa fa-copy"></i>
+    </a>
+    <span style="width:12px"></span>
+    <a class="btn btn-danger " style="color:white;" (click)="annulation()" placement="bottom"
+      ngbTooltip="{{'labels.annulation' | translate}}"
+      *ngIf="bonCommandeFournisseur?.status != statutBonCommandeFournisseur.Annule && bonCommandeFournisseur?.status != statutBonCommandeFournisseur.Facturee ">
+      {{ 'labels.annulation' | translate }} <i class="fa fa-x"></i>
+    </a>
+    <span style="width:12px"></span>
+
+    <button *ngIf="bonCommandeFournisseur?.status != statutBonCommandeFournisseur.Brouillon" type="button"
+      data-backdrop="false" class="btn btn-info square btn-md" data-toggle="modal" data-target="#createdepense"
+      placement="bottom" (click)="saveArticle()"> <i class="ft-plus"></i>
+      {{ 'labels.createdepense' | translate }}
+    </button>
+
+    <span style="width:12px"></span>
+
+    <a *ngIf="bonCommandeFournisseur && bonCommandeFournisseur?.status != statutBonCommandeFournisseur.Facturee"
+      class=" btn btn-primary" style="color:white;" placement="bottom"
+      ngbTooltip="{{ 'toolipBonCommandFournisseur.edit' | translate }}" (click)="navigateTo('Edit')">
+      {{ 'labels.modifier' | translate }} <i class="ft-edit"></i>
+    </a>
+
+
+
+  </div>
+</div>
+<div class="content-header row">
+  <div class="content-header-left  col-12 mb-1">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title ">
+          {{ 'showBonCommandeFournisseur.titleBC' | translate }} {{ bonCommandeFournisseur?.reference }}
+        </h3>
+      </div>
+      <div>
+        <span *ngIf="bonCommandeFournisseur?.status == statutBonCommandeFournisseur.Brouillon"
+          class="btn btn-round badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+        <span *ngIf="bonCommandeFournisseur?.status == statutBonCommandeFournisseur.Encours"
+          class="btn btn-round badge-planifiee">{{ 'labels.encours' | translate }}</span>
+        <span *ngIf="bonCommandeFournisseur?.status == statutBonCommandeFournisseur.Facturee"
+          class="btn btn-round badge-success">{{ 'labels.facture' | translate }}</span>
+        <!-- <span *ngIf="bonCommandeFournisseur?.status == statutFacture.Enretard"
+                class="badge badge-default badge-enretard">{{ 'labels.enretard' | translate }}</span> -->
+        <span *ngIf="bonCommandeFournisseur?.status == statutBonCommandeFournisseur.Annule"
+          class="btn btn-round badge-annuler">{{ 'labels.annule' | translate }}</span>
+      </div>
+    </div>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a (click)="navigateTo('BonCommandeList')">{{ 'showBonCommandeFournisseur.titleBC' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'showBonCommandeFournisseur.title' | translate }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client"
+                aria-expanded="true">{{ 'showBonCommandeFournisseur.information' | translate }}</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique"
+                aria-expanded="false">{{ 'showBonCommandeFournisseur.historique' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="memos-tab" data-toggle="pill" href="#memos" aria-expanded="false"
+                placement="bottom" ngbTooltip="{{ 'showBonCommandeFournisseur.notes' | translate }}">
+                {{ 'showBonCommandeFournisseur.notes' | translate }} <span class="memo-badge">{{ memos?.length }}</span>
+              </a>
+            </li>
+
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+              <bonCommandeFournisseur-informations [articles]="articles"
+                [bonCommandeFournisseur]="bonCommandeFournisseur">
+              </bonCommandeFournisseur-informations>
+            </div>
+
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+            <div class="tab-pane" id="memos" role="tabpanel" aria-labelledby="memos-tab">
+              <common-memos [memos]="memos" (valueChange)="saveMemo($event)" (download)="downloadPieceJointe($event)"
+                [processIsStarting]="processIsStarting"></common-memos>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade text-left" id="createdepense" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel9">
+          <i class="fa fa-list"></i> {{ 'labels.listProduit' | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary" type="button"><i class="ft-search"></i></button>
+            </div>
+            <input type="text" [(ngModel)]="search" (input)="searchArticle()" class="form-control">
+          </div>
+
+          <div class="text-center font-weight-bold font-italic"
+            *ngIf="articlesBc?.length == 0 &&  articlesSelected?.length == 0">
+            <br>
+            {{ 'produitGroupe.empty' | translate }}
+          </div>
+
+          <div class="container-scroll" *ngIf="articlesSelected?.length > 0 || articlesBc?.length > 0">
+
+            <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+              [infiniteScrollContainer]="'.container-scroll'" [fromRoot]="true" (scrolled)="onScroll()">
+
+              <ul class="list-group list-group-flush">
+
+                <!-- Liste des ft sélectionnés -->
+                <li class="list-group-item" *ngFor="let bcFournisseur of articlesSelected;let i = index">
+                  <div class="form-inline">
+                    <div class="form-group col-md-12">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" (change)="removeArticle(i)" class="custom-control-input"
+                          id="{{i+1000*301}}" checked>
+                        <label class="custom-control-label" for="{{i+1000*301}}" style="font-weight: bold;">
+                          {{ 'labels.nomProduit' | translate }} : {{ bcFournisseur?.data.nom}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Liste des ft ne sont pas sélectionnés -->
+                <li class="list-group-item" *ngFor="let bcFournisseur of articlesBc;let i = index">
+                  <div class="form-inline">
+                    <div class="form-group col-md-12">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" (change)="addArticle(i)" class="custom-control-input"
+                          id="{{i+1000*500}}">
+                        <label class="custom-control-label" for="{{i+1000*500}}" style="font-weight: bold;">
+                          {{ 'labels.nomProduit' | translate }} : {{ bcFournisseur?.data.nom}}
+                          <!-- {{ 'labels.dateCreation' | translate }} :
+                          {{ bcFournisseur?.dateCreation | date:'dd/MM/yyyy HH:mm' }} -->
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+
+            </div>
+
+            <div class="text-center" *ngIf="!finished">
+              {{ 'labels.loading' | translate }}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-light" data-dismiss="modal">{{ 'labels.cancel' |translate }}
+        </button>
+        <button type="button" class="btn btn-success btn-lg"
+          (click)="saveArticle()">{{ 'labels.sauvegarder' | translate }}</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

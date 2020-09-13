@@ -1,0 +1,79 @@
+button{
+    height: 2.5em;
+    padding: 0px 1em;
+    position: relative;
+    margin-right: 3px;
+    border: 1px solid #999;
+    cursor: pointer;
+    font-size: 0.88em;
+    color: black !important;
+    white-space: nowrap;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px #ccc;
+    background-color: #f5f5f5;
+    z-index: 720;
+}
+.list-container {
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    opacity: 0.1;
+
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.btn-li{
+    position: relative;
+    height: auto;
+    left: 0;
+    right: 0;
+    padding: 0.5em;
+    display: block;
+    float: none;
+    margin-bottom: 4px;
+    box-shadow: 1px 1px 3px #999;
+    min-width: 100%;
+    background: #fff;
+}
+
+
+.ul-container{
+    //min-width: 111%;
+    background-color: #e7e7e7;
+    color: #000;
+    margin: 0;
+    padding: 0.5rem 0.5rem;
+    border: 1px #babdc1 solid;
+    border-radius: 0.5rem;
+    position: absolute;
+    z-index: 1003;
+    margin-left: -100px;
+}
+
+.btn-li:hover { 
+    background-color: #e7e7e7; 
+    box-shadow: 1px 1px 15px #999;
+    border: 1px #0000004a solid;
+}
+
+.i-not-check{
+    margin-right: 1rem;
+    color: #000;
+    font-size: 0.9rem;
+}
+
+.i-check{
+    margin-right: 1rem;
+    color: #cecbcb;
+    font-size: 1rem;
+}

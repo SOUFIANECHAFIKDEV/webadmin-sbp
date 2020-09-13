@@ -1,0 +1,174 @@
+<div class="content-body">
+
+    <section id="horizontal-form-layouts">
+        <!-- Form d'information de chantier -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="zoom: 1;">
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <div class="form-body">
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control"
+                                                for="projectinput1">{{'labels.nom' | translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" [value]="chantier?.nom" id="projectinput1"
+                                                    class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row" *ngIf="chantier?.idClient != null">
+                                            <label class="col-md-3 label-control"
+                                                for="projectinput4">{{'labels.client' | translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" id="client"
+                                                    [value]="chantier?.client?.nom" disabled>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control"
+                                                for="projectinput4">{{'labels.date_creation' | translate }}</label>
+                                            <div class="col-md-9">
+                                                <input type="text"
+                                                    [value]="chantier?.date_creation | date : 'dd/MM/yyyy HH:mm'"
+                                                    id="projectinput3" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control"
+                                                for="projectinput4">{{'labels.statut' | translate }}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" [value]="getLabelleByStatut(chantier?.statut)"
+                                                    id="projectinput3" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control"
+                                                for="commentaire">{{'labels.commentaire' | translate}}</label>
+                                            <div class="col-md-9">
+                                                <textarea type="text" class="form-control" id="commentaire"
+                                                    [value]="(chantier?.commentaire == null || chantier?.commentaire == undefined) ? '':chantier?.commentaire"
+                                                    rows="5" disabled></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control"
+                                                for="projectinput4">{{'labels.description' | translate}}</label>
+                                            <div class="col-md-9">
+                                                <textarea type="text" class="form-control" id="commentaire"
+                                                    [value]="(chantier?.description == null || chantier?.description == undefined) ? '':chantier?.description"
+                                                    rows="5" disabled></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <h4 class="form-section"> <i
+                                        class="ft-file-text"></i>{{'labels.sousTraitance' | translate}}</h4>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control"
+                                                for="nombrHeure">{{'labels.nombrHeure' | translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control currency-input" id="nombrHeure"
+                                                    [value]="chantier?.nombrHeure " disabled>
+                                                <!--      <input type="text" class="form-control" id="client"
+                                                    [value]="chantier?.client?.nom" disabled> -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+
+                                            <label class="col-md-3 label-control"
+                                                for="montant">{{'labels.montant' | translate}}</label>
+                                            <div class="col-md-9">
+                                                <div class="input-currency">
+                                                    {{chantier?.montant| RoudingNumber | ShowCurrency  }}
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ng-container *ngIf="chantier.statut != statutChantier.EnEtude && chantier.statut != statutChantier.NonAcceptee
+                                ">
+                                    <h4 class="form-section"> <i
+                                            class="ft-file-text"></i>{{'labels.tauxAvancement' | translate}} </h4>
+
+                                    <div class="row">
+
+
+                                        <div class="col-md-8" style="margin-right: 0px;text-align: right;">
+                                            <input type="range" min="0" max="100" class="slider" id="myRange"
+                                                [(ngModel)]="tauxAvancement.currentValue"
+                                                [value]="tauxAvancement.currentValue">
+
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h4 style="margin-top: 25px;margin-left: 5px;">
+                                                {{tauxAvancement.currentValue}} %
+                                            </h4>
+                                        </div>
+                                        <div class=" col-md-2" style="margin-top: 15px;">
+                                            <button type="button" class="btn btn-success float-right" placement="bottom"
+                                                ngbTooltip="{{'labels.confirmModification' | translate}} {{'labels.tauxAvancement' | translate}}"
+                                                (click)="ChangementTauxAvencement()"
+                                                *ngIf="tauxAvancement.currentValue != tauxAvancement.valueInDb">
+                                                {{'labels.confirmModification' | translate}}
+                                                <i class="ft-edit"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <br><br>
+
+    </section>
+</div>

@@ -1,0 +1,843 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'labels.parametragedocument' | translate }} </h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group">
+      <button (click)="update()" type="submit" class="btn btn-success" placement="bottom"
+        ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.parametragedocument' | translate }}">
+        <i class="fa fa-check-square-o"></i> {{ 'labels.validermodifier' | translate }}
+      </button>
+    </div>
+  </div>
+</div><br>
+<section id="horizontal-form-layouts">
+  <form class="form form-horizontal" [formGroup]="form">
+
+
+    <!--Devis-->
+    <div class="card collapse-icon accordion-icon-rotate">
+      <div id="heading12" class="card-header card-head-inverse bg-primary">
+        <a data-toggle="collapse" href="#devis" aria-expanded="false" aria-controls="devis"
+          class="card-title lead collapsed">
+          <h4 class="card-title">{{'parametrageDevis.title' | translate}}</h4>
+        </a>
+      </div>
+      <div id="devis" role="tabpanel" data-parent="#accordionWrap1" aria-labelledby="heading12" class="collapse"
+        aria-expanded="false">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="zoom: 1;">
+                  <div class="card-content collpase show">
+                    <div class="card-body">
+                      <div class="form-body">
+                        <!-- objet -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control title"
+                                for="objet">{{ 'parametrageDevis.objet' | translate }}</label>
+                              <div class="col-md-10">
+                                <!-- <input type="text" id="objet" class="form-control wid" formControlName="objet"> -->
+                                <textarea formControlName="objet" placeholder="{{'labels.objet' | translate}}"
+                                  id="projectinput4" class="form-control textarea-single-ligne"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <!--  note Page -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control title"
+                                for="note">{{ 'parametrageDevis.note' | translate }}</label>
+                              <div class="col-md-10">
+                                <angular-editor id="unique12" [config]="editorConfig" formControlName="note">
+                                </angular-editor>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Conditions de règlement -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control title"
+                                for="conditionReglementdevis">{{ 'parametrageDevis.conditions' | translate }}</label>
+                              <div class="col-md-10">
+                                <angular-editor id="unique1" [config]="editorConfig" formControlName="conditions">
+                                </angular-editor>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- entetPage -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control title"
+                                for="entete">{{ 'parametrageDevis.entete' | translate }}</label>
+                              <div class="col-md-10">
+                                <angular-editor id="unique11" [config]="editorConfig" formControlName="entete">
+                                </angular-editor>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="label-control title">{{'parametrageDevis.envoimail' | translate}}</label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control"
+                                for="sujetmailda">{{ 'parametrageDevis.sujetmail' | translate }}</label>
+                              <div class="col-md-10">
+                                <input type="text" id="sujetmailda" class="form-control wid"
+                                  formControlName="sujetmail">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control"
+                                for="contenumail">{{ 'parametrageDevis.contenumail' | translate }}</label>
+                              <div class="col-md-10">
+                                <!-- <angular-editor  id="unique2" [config]="editorConfig" formControlName="contenumail">
+                                      </angular-editor> -->
+                                <textarea formControlName="contenumail" id="unique2"
+                                  style="width: 100%; border: 1px #ccd6e6 solid;padding: 1rem;min-height: 10rem;border-radius: 5px;"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label
+                                class=" label-control title">{{'parametrageDevis.envoirelance' | translate}}</label>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control"
+                                for="sujetrelance">{{ 'parametrageDevis.sujetrelance' | translate }}</label>
+                              <div class="col-md-10">
+                                <input type="text" id="sujetrelance" class="form-control"
+                                  formControlName="sujetrelance">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control"
+                                for="contenurelance">{{ 'parametrageDevis.contenurelance' | translate }}</label>
+                              <div class="col-md-10">
+                                <!-- <angular-editor  id="unique3" [config]="editorConfig" formControlName="contenurelance">
+                                      </angular-editor> -->
+                                <textarea formControlName="contenurelance" id="unique3"
+                                  style="width: 100%; border: 1px #ccd6e6 solid;padding: 1rem;min-height: 10rem;border-radius: 5px;"></textarea>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group row">
+                              <label class="col-md-2 label-control title"
+                                for="retenueGarantie">{{ 'parametrageDevis.retenueGarantie' | translate }}</label>
+                              <div class="col-md-10">
+                                <input type="text" id="objet" class="form-control wid"
+                                  formControlName="retenueGarantie">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fiche intervention -->
+    <div class="card collapse-icon accordion-icon-rotate">
+      <div id="headingIntervention" class="card-header card-head-inverse bg-primary">
+        <a data-toggle="collapse" href="#accordionIntervention" aria-expanded="false"
+          aria-controls="accordionIntervention" class="card-title lead collapsed">
+          <h4 class="card-title">{{'parametrageIntervention.title' | translate}}</h4>
+        </a>
+      </div>
+      <div id="accordionIntervention" role="tabpanel" data-parent="#accordionIntervention"
+        aria-labelledby="headingIntervention" class="collapse" aria-expanded="false">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="tab-content px-1 pt-1">
+              <div class="tab-pane active" id="parametrageIntervention" role="tabpanel"
+                aria-labelledby="parametrageIntervention-tab">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card" style="zoom: 1;">
+                        <div class="card-content collpase show">
+                          <div class="card-body">
+                            <div class="form-body">
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="objet_interventions">{{ 'parametrageDevis.objet' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <input type="text" id="objet_interventions" class="form-control"
+                                        formControlName="objet_interventions">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="entete_interventions">{{ 'parametrageDevis.entete' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="entete_interventions" [config]="editorConfig"
+                                        formControlName="entete_interventions">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label
+                                      class="label-control title">{{'parametrageDevis.envoimail' | translate}}</label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="sujetmail_interventions">{{ 'parametrageDevis.sujetmail' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <input type="text" id="sujetmail_interventions" class="form-control"
+                                        formControlName="sujetmail_interventions">
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="contenumail_interventions">{{ 'parametrageDevis.contenumail' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <!-- <angular-editor  id="unique3" [config]="editorConfig" formControlName="contenurelance">
+                                          </angular-editor> -->
+                                      <textarea formControlName="contenumail_interventions"
+                                        id="contenumail_interventions"
+                                        style="width: 100%; border: 1px #ccd6e6 solid;padding: 1rem;min-height: 10rem;border-radius: 5px;"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!--Factures-->
+
+    <div class="card collapse-icon accordion-icon-rotate">
+      <div id="headingFacture" class="card-header card-head-inverse bg-primary">
+        <a data-toggle="collapse" href="#parametrageFacture" aria-expanded="false" aria-controls="parametrageFacture"
+          class="card-title lead collapsed">
+          <h4 class="card-title">{{'parametrageFacture.title' | translate}}</h4>
+        </a>
+      </div>
+      <div id="parametrageFacture" role="tabpanelFacture" data-parent="#accordionWrapFacture"
+        aria-labelledby="headingFacture" class="collapse" aria-expanded="false">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="tab-content px-1 pt-1">
+              <div class="tab-pane active" id="parametragefacture" role="tabpanelFacture"
+                aria-labelledby="parametragefacture-tab">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card" style="zoom: 1;">
+                        <div class="card-content collpase show">
+                          <div class="card-body">
+                            <div class="form-body">
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class=" label-control title">{{'labels.delaivalidite' | translate}}</label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="validite">{{ 'labels.validite' | translate }}</label>
+                                    <div class="col-md-6">
+                                      <select class="form-control" formControlName="validite_facture">
+                                        <option value="1">{{'labels.AUJOURDHUI' | translate}}</option>
+                                        <option value="7">{{'labels.JR7' | translate}}</option>
+                                        <option value="15">{{'labels.JR15' | translate}}</option>
+                                        <option value="30">{{'labels.JR30' | translate}}</option>
+                                        <option value="45">{{'labels.JR45' | translate}}</option>
+                                        <option value="60">{{'labels.JR60' | translate}}</option>
+                                        <option value="90">{{'labels.JR90' | translate}}</option>
+                                        <option value="180">{{'labels.JR180' | translate}}</option>
+                                        <option value="365">{{'labels.JR365' | translate}}</option>
+
+                                      </select>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- objet -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="objet_facture">{{ 'parametrageDevis.objet' | translate }}</label>
+                                    <div class="col-md-10">
+
+                                      <textarea formControlName="objet_facture"
+                                        placeholder="{{'labels.objet' | translate}}" id="projectinput4"
+                                        class="form-control textarea-single-ligne"></textarea>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- en tete -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="enteteFacture">{{ 'labels.entete' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="enteteFacture" [config]="editorConfig"
+                                        formControlName="entete_facture">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!--  note  -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="note">{{ 'labels.note' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="note_facture" [config]="editorConfig"
+                                        formControlName="note_facture">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Conditions de règlement -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="conditions_facture">{{ 'parametrageDevis.conditions' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="conditions_facture" [config]="editorConfig"
+                                        formControlName="conditions_facture">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="label-control title">{{'labels.envoimail' | translate}}</label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="sujetmail_facture">{{ 'labels.sujetmail' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <input type="text" id="sujetmail_facture" class="form-control wid"
+                                        formControlName="sujetmail_facture">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="contenumail_facture">{{ 'labels.contenumail' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <!-- <angular-editor  id="unique2" [config]="editorConfig" formControlName="contenumail">
+                                                </angular-editor> -->
+                                      <textarea formControlName="contenumail_facture" id="contenumail_facture"
+                                        style="width: 100%; border: 1px #ccd6e6 solid;padding: 1rem;min-height: 10rem;border-radius: 5px;"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class=" label-control title">{{'labels.envoirelance' | translate}}</label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="sujetrelance_facture">{{ 'labels.sujetrelance' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <input type="text" id="sujetrelance_facture" class="form-control"
+                                        formControlName="sujetrelance_facture">
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="contenurelance_facture">{{ 'labels.contenurelance' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <!-- <angular-editor  id="unique3" [config]="editorConfig" formControlName="contenurelance">
+                                                </angular-editor> -->
+                                      <textarea formControlName="contenurelance_facture" id="contenurelance_facture"
+                                        style="width: 100%; border: 1px #ccd6e6 solid;padding: 1rem;min-height: 10rem;border-radius: 5px;"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <!--Avoirs-->
+    <div class="card collapse-icon accordion-icon-rotate">
+      <div id="headingAvoir" class="card-header card-head-inverse bg-primary">
+        <a data-toggle="collapse" href="#parametrageAvoir" aria-expanded="false" aria-controls="parametrageAvoir"
+          class="card-title lead collapsed">
+          <h4 class="card-title">{{'parametrageAvoir.title' | translate}}</h4>
+        </a>
+      </div>
+      <div id="parametrageAvoir" role="tabpanelAvoir" data-parent="#accordionWrapAvoir" aria-labelledby="headingAvoir"
+        class="collapse" aria-expanded="false">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="tab-content px-1 pt-1">
+              <div class="tab-pane active" id="parametrageAvoir" role="tabpanelAvoir"
+                aria-labelledby="parametrageAvoir-tab">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card" style="zoom: 1;">
+                        <div class="card-content collpase show">
+                          <div class="card-body">
+                            <div class="form-body">
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class=" label-control title">{{'labels.delaivalidite' | translate}}</label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="validite">{{ 'labels.validite' | translate }}</label>
+                                    <div class="col-md-6">
+                                      <select class="form-control" formControlName="validite_avoir">
+                                        <option value="1">{{'labels.AUJOURDHUI' | translate}}</option>
+                                        <option value="7">{{'labels.JR7' | translate}}</option>
+                                        <option value="15">{{'labels.JR15' | translate}}</option>
+                                        <option value="30">{{'labels.JR30' | translate}}</option>
+                                        <option value="45">{{'labels.JR45' | translate}}</option>
+                                        <option value="60">{{'labels.JR60' | translate}}</option>
+                                        <option value="90">{{'labels.JR90' | translate}}</option>
+                                        <option value="180">{{'labels.JR180' | translate}}</option>
+                                        <option value="365">{{'labels.JR365' | translate}}</option>
+
+                                      </select>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- objet -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="objet_facture">{{ 'parametrageDevis.objet' | translate }}</label>
+                                    <div class="col-md-10">
+
+                                      <textarea formControlName="objet_avoir"
+                                        placeholder="{{'labels.objet' | translate}}" id="projectinput4"
+                                        class="form-control textarea-single-ligne"></textarea>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- en tete -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="entete_avoir">{{ 'labels.entete' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="entete_avoir" [config]="editorConfig"
+                                        formControlName="entete_avoir">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!--  note  -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="note">{{ 'labels.note' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="note_avoir" [config]="editorConfig"
+                                        formControlName="note_avoir">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Conditions de règlement -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="conditions_facture">{{ 'parametrageDevis.conditions' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="conditions_avoir" [config]="editorConfig"
+                                        formControlName="conditions_avoir">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!--BonCommande-->
+    <div class="card collapse-icon accordion-icon-rotate">
+      <div id="headingBonCommande" class="card-header card-head-inverse bg-primary">
+        <a data-toggle="collapse" href="#parametrageBonCommande" aria-expanded="false"
+          aria-controls="parametrageBonCommande" class="card-title lead collapsed">
+          <h4 class="card-title">{{'parametrageBonCommande.title' | translate}}</h4>
+        </a>
+      </div>
+      <div id="parametrageBonCommande" role="tabpanelBonCommande" data-parent="#accordionWrapBonCommande"
+        aria-labelledby="headingBonCommande" class="collapse" aria-expanded="false">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="tab-content px-1 pt-1">
+              <div class="tab-pane active" id="parametrageBonCommande" role="tabpanelBonCommande"
+                aria-labelledby="parametrageBonCommande-tab">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card" style="zoom: 1;">
+                        <div class="card-content collpase show">
+                          <div class="card-body">
+                            <div class="form-body">
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class=" label-control title">{{'labels.delaivalidite' | translate}}</label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control"
+                                      for="validite">{{ 'labels.validite' | translate }}</label>
+                                    <div class="col-md-6">
+                                      <select class="form-control" formControlName="validite_boncommande">
+                                        <option value="1">{{'labels.AUJOURDHUI' | translate}}</option>
+                                        <option value="7">{{'labels.JR7' | translate}}</option>
+                                        <option value="15">{{'labels.JR15' | translate}}</option>
+                                        <option value="30">{{'labels.JR30' | translate}}</option>
+                                        <option value="45">{{'labels.JR45' | translate}}</option>
+                                        <option value="60">{{'labels.JR60' | translate}}</option>
+                                        <option value="90">{{'labels.JR90' | translate}}</option>
+                                        <option value="180">{{'labels.JR180' | translate}}</option>
+                                        <option value="365">{{'labels.JR365' | translate}}</option>
+
+                                      </select>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- objet -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="objet_facture">{{ 'parametrageDevis.objet' | translate }}</label>
+                                    <div class="col-md-10">
+
+                                      <textarea formControlName="objet_boncommande"
+                                        placeholder="{{'labels.objet' | translate}}" id="projectinput4"
+                                        class="form-control textarea-single-ligne"></textarea>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--  note  -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="note">{{ 'labels.note' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="note_boncommande" [config]="editorConfig"
+                                        formControlName="note_boncommande">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Conditions de règlement -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="conditions_facture">{{ 'parametrageDevis.conditions' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="conditions_boncommande" [config]="editorConfig"
+                                        formControlName="conditions_boncommande">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+    <!--Depense-->
+    <div class="card collapse-icon accordion-icon-rotate">
+      <div id="headingDepense" class="card-header card-head-inverse bg-primary">
+        <a data-toggle="collapse" href="#parametrageDepense" aria-expanded="false" aria-controls="parametrageDepense"
+          class="card-title lead collapsed">
+          <h4 class="card-title">{{'parametrageDepense.title' | translate}}</h4>
+        </a>
+      </div>
+      <div id="parametrageDepense" role="tabpanelDepense" data-parent="#accordionWrapDepense"
+        aria-labelledby="headingDepense" class="collapse" aria-expanded="false">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="tab-content px-1 pt-1">
+              <div class="tab-pane active" id="parametrageDepense" role="tabpanelDepense"
+                aria-labelledby="parametrageDepense-tab">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card" style="zoom: 1;">
+                        <div class="card-content collpase show">
+                          <div class="card-body">
+                            <div class="form-body">
+                              <!-- objet -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="objet_depense">{{ 'parametrageDevis.objet' | translate }}</label>
+                                    <div class="col-md-10">
+
+                                      <textarea formControlName="objet_depense"
+                                        placeholder="{{'labels.objet' | translate}}" id="projectinput4"
+                                        class="form-control textarea-single-ligne"></textarea>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--  note  -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="note">{{ 'labels.note' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="note_depense" [config]="editorConfig"
+                                        formControlName="note_depense">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- Conditions de règlement -->
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group row">
+                                    <label class="col-md-2 label-control title"
+                                      for="conditions_depense">{{ 'parametrageDevis.conditions' | translate }}</label>
+                                    <div class="col-md-10">
+                                      <angular-editor id="conditions_depense" [config]="editorConfig"
+                                        formControlName="conditions_depense">
+                                      </angular-editor>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+  <div>
+    <div class="row">
+      <div class="col-md-12" style="zoom: 1;">
+        <div class="btn-group float-md-left" role="group">
+          <button (click)="update()" type="submit" class="btn btn-success" placement="top"
+            ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.parametragedocument' | translate }}">
+            <i class="fa fa-check-square-o"></i> {{ 'labels.validermodifier' | translate }}
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-loading" [ngClass]="{'page-loading-active': loading}">
+  <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div>

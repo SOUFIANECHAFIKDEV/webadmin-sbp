@@ -1,0 +1,127 @@
+<div class="content-body">
+  <section id="horizontal-form-layouts">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <form class="form form-horizontal">
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+                  <div class="row">
+                    <!-- client -->
+                    <div class="col-6">
+                      <div class="form-group row">
+                        <label class="col-3 label-control" for="client">{{'labels.client' | translate}}</label>
+                        <div class="col-md-9">
+                          <input type="text" id="client" class="form-control"
+                            [value]="visiteMaintenance?.contratEntretien?.client?.nom" disabled>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- adresseIntervention -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="site">{{'labels.site' | translate}}</label>
+                        <div class="col-md-9">
+                          <input type="text" id="site" class="form-control"
+                            [value]="jsonParse(visiteMaintenance?.contratEntretien?.site)?.designation" disabled>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="site">{{'labels.date' | translate}}</label>
+                        <div class="col-md-9 currency-input">
+                          <!-- <div class="col-md-8  currency-input" *ngIf="type == formType.preview">
+                                <p>{{ defaultData.montant }}</p>
+                            </div> -->
+
+                          <div class="input-currency">
+                            {{date}}
+                          </div>
+                          <!-- <input type="text" id="site" class="form-control"
+                            [value]="jsonParse(visitesMaintenance?.contratEntretien?.site)?.designation" disabled> -->
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ========================================= -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4 class="form-section"><i class="ft-user"></i>{{'labels.equipement' | translate}}</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="tree-node-container">
+                            <div class="tree-equipepent"
+                              *ngFor="let equipement of ListGammeEquipement;let indexElemnet=index">
+                              <div>
+                                <i class="ft-chevron-right" (click)="openElement(indexElemnet)"
+                                  *ngIf="!checkElementIsOpen(indexElemnet)"></i>
+                                <i class="ft-chevron-down" (click)="openElement(indexElemnet)"
+                                  *ngIf="checkElementIsOpen(indexElemnet)"></i>
+                                {{equipement?.nom}}
+                              </div>
+
+
+                              <div class="tree-equipepent-libelle" *ngIf="checkElementIsOpen(indexElemnet)">
+                                <ul class="tree-equipepent-libelle-list"
+                                  *ngFor="let libelle of equipement?.libelle;let indexChild=index" style="padding: 0;
+                                    margin: 0;">
+                                  <li>
+                                    <div style="background: #e3ebf366; padding: 10px 0px 10px 15px;">
+
+                                      <i class="ft-chevron-right" (click)="openChild(indexElemnet,indexChild)"
+                                        *ngIf="!checkChildIsOpen(indexElemnet,indexChild)"></i>
+                                      <i class="ft-chevron-down" (click)="openChild(indexElemnet,indexChild)"
+                                        *ngIf="checkChildIsOpen(indexElemnet,indexChild)"></i>
+                                      <!-- [ngClass]="{'ft-chevron-right': (checkElementIsOpen(indexElemnet) == false),'ft-chevron-down': (checkElementIsOpen(indexElemnet) == true)}"
+                                            aria-hidden="true"></i>-->
+                                      {{libelle?.nom}}
+                                      <!-- sort-down -->
+                                    </div>
+                                    <!-- {{libelle?.operations | json}} -->
+                                    <div class="tree-equipepent-libelle-operation"
+                                      *ngIf="checkChildIsOpen(indexElemnet,indexChild)">
+                                      <ul class="tree-equipepent-libelle-operation-list"
+                                        *ngFor="let operations of libelle?.operations" style="padding: 0;
+                                          margin: 0;">
+                                        <li style="background: #ffffff; padding: 10px 5px 10px 40px;border-bottom: #e3ebf3 solid 1px;
+                                          ">
+                                          <div class="row">
+                                            <div class="col-md-6"> {{operations?.nom}}</div>
+                                            <div class="col-md-6">Observation</div>
+                                          </div>
+
+
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ============================================= -->
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

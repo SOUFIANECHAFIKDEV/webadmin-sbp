@@ -1,0 +1,93 @@
+<h1 mat-dialog-title class="modal-title">
+    {{ 'labels.ajouter' | translate }} {{'labels.lot' | translate}}
+</h1>
+<mat-dialog-content>
+    <div class="row">
+        <div class="col-5" style="overflow: auto;height: 370px;    border: none;">
+            <h4 class="form-section"><i class="ft-list"></i>{{ 'labels.listLots' | translate }}</h4>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-primary" type="button"><i class="ft-search"></i></button>
+                </div>
+                <input type="text" [(ngModel)]="search" (input)="searchLots()" class="form-control"
+                    placeholder="{{ 'labels.search' | translate }}">
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let gamme of lots;let i = index">
+
+                    <div class="form-inline">
+                        <div class="form-group col-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" (change)="checkElement(i,1)" class="custom-control-input"
+                                    id="{{i+2000*23}}">
+                                <label class="custom-control-label" for="{{i+2000*23}}">{{ gamme?.nom}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <ng-container *ngIf="lots.length == 0">
+                    <p class="msgEmtyListSelectedVide">{{'labels.msgEmtyListVide' | translate}}</p>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="col-7" style="overflow: auto;height: 370px;">
+            <h4 class="form-section"><i class="ft-list"></i>Éléments sélectionnés </h4>
+            <!-- <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let gamme of selected;let i = index">
+            
+                    <div clas="row">
+                        <div class="col-10 custom-control custom-checkbox">
+                            <label class="custom-control-label" for="{{i+2000*24}}">
+                                {{ gamme?.nom}}
+                            </label>
+                        </div>
+                        <div class="col-2">
+                            <input type="number" id="{{i+1000*19}}" style="text-align: center;width: 30px;" min="0"
+                                value="{{ tmp?.qte  }}" (input)="changeQuantiteLot(i,null,$event.target.value)"
+                                appInputRemoveDefaultZero />
+                        </div>
+                    </div>
+     
+                </li>
+                <ng-container *ngIf="selected.length == 0">
+                    <p class="msgEmtyListSelectedVide">{{'labels.msgEmtyListSelectedVide' | translate}}</p>
+                </ng-container>
+            </ul> -->
+
+            <ul class="list-group list-group-flush">
+                <!-- Liste des lots sélectionnés -->
+                <li class="list-group-item" *ngFor="let tmp of selected;let i = index">
+
+                    <div class="form-inline">
+                        <div class="form-group col-md-7">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" (change)="IncheckElement(i)" class="custom-control-input"
+                                    id="{{i+1000*22}}" checked>
+                                <label class="custom-control-label" for="{{i+1000*22}}">{{ tmp?.data?.nom }}</label>
+                            </div>
+                        </div>
+                        <div class="btn-group col-md-4">
+                            <button type="button" id="{{i+1000*21}}" class="btn btn-primary btn-md"
+                                (click)="changeQuantiteLot(i,-1,null)"><i class="ft-minus"></i></button>
+                            <input type="number" id="{{i+1000*19}}" style="text-align: center" min="0"
+                                value="{{ tmp?.qte  }}" (input)="changeQuantiteLot(i,null,$event.target.value)"
+                                appInputRemoveDefaultZero />
+                            <button type="button" id="{{i+1000*18}}" class="btn btn-primary btn-md" style="margin: 0"
+                                (click)="changeQuantiteLot(i,+1,null)"><i class="ft-plus"></i></button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<div class="footer">
+    <button mat-raised-button mat-dialog-close class="btn grey btn-light float-right">
+        Annuler
+    </button>
+    <button type="button" class="btn btn-success float-right" [disabled]="selected.length==0"
+        (click)="save()">Enregistrer</button>
+</div>

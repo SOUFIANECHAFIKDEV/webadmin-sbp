@@ -1,0 +1,254 @@
+<div class="content-body">
+  <section id="horizontal-form-layouts">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+
+
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <!-- Information à saisir -->
+              <form class="form form-horizontal">
+                <div class="form-body">
+                  <!-- Information facture-->
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i>{{ 'labels.infoBonCommandeFournisseur' | translate }}
+                  </h4>
+
+                  <!-- Reference + Chantier -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput189">{{
+                            'labels.reference' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="bonCommandeFournisseur?.reference" id="projectinput189"
+                            class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                            'labels.chantier' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" [value]="bonCommandeFournisseur?.chantier?.nom"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput189">{{
+                              'labels.client' | translate
+                            }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="client?.nom" id="projectinput189" class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                                'labels.adresseFacturation' | translate
+                            }}</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" [value]="getAdresseDesignation(client?.adresses)"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <!-- Fournisseur -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                     'labels.fournisseur' | translate}}</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" [value]="bonCommandeFournisseur?.fournisseur?.nom"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- date creation + date expiration -->
+                  <div class=" row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput3">{{
+                            'labels.dateCreation' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="bonCommandeFournisseur?.dateCreation | date: 'dd/MM/yyyy'"
+                            id="projectinput175" class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput39">{{
+                            'labels.dateExpiration' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="bonCommandeFournisseur?.dateExpiration | date: 'dd/MM/yyyy'"
+                            id="projectinput178" class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- objet -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-1 label-control" for="projectinput3">{{
+                              'labels.objet' | translate
+                            }}</label>
+                        <div class="col-md-11">
+                          <textarea type="text" class="form-control textarea-single-ligne"
+                            style="width: 95.5%;float: right;" [value]="bonCommandeFournisseur?.objet"
+                            disabled></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <h4 class="form-section">
+                  <i class="ft-shopping-cart"></i>{{ 'labels.articles' | translate }}
+                </h4>
+                <div class="row">
+                  <div class="col-md-12">
+
+                    <table-article-depense [readOnly]="true" [articles]="articles"
+                      [IdFournisseur]="bonCommandeFournisseur?.idFournisseur">
+                    </table-article-depense>
+                  </div>
+                </div>
+
+
+                <!-- Section d'autre -->
+                <h4 class="form-section">
+                  <i class="ft-message-circle"></i>{{ 'labels.autres' | translate }}
+                </h4>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="note">{{
+                            'labels.note' | translate
+                          }}</label>
+                      <div class="col-md-12">
+                        <angular-editor [config]="editorConfig" id="note" [ngModel]="bonCommandeFournisseur?.note"
+                          [ngModelOptions]="{standalone: true}"></angular-editor>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="conditionRegelement">{{
+                          'labels.conditionRegelement' | translate
+                        }}</label>
+                      <div class="col-md-12">
+                        <!-- <textarea type="text" id="conditionRegelement" class="form-control"
+                            disabled>{{ facture?.conditionRegelement }}</textarea> -->
+                        <angular-editor [config]="editorConfig" id="conditionRegelement"
+                          [ngModel]="bonCommandeFournisseur?.conditionsReglement" [ngModelOptions]="{standalone: true}">
+                        </angular-editor>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Document associé-->
+                <ng-container
+                  *ngIf="bonCommandeFournisseur?.depenseBonCommandeFournisseurs?.length > 0 || bonCommandeFournisseur?.devis != null ">
+                  <h4 class="form-section"><i class="fa fa-files-o"></i>{{'labels.documentAssocie' | translate}}</h4>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>{{ 'labels.type' | translate }}</th>
+                          <th>{{ 'labels.reference' | translate }}</th>
+                          <th>{{ 'labels.dateCreation' | translate }}</th>
+                          <th>{{ 'labels.statut' | translate }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- LES depenes -->
+                        <tr *ngFor="let item of bonCommandeFournisseur?.depenseBonCommandeFournisseurs">
+                          <td> {{ 'labels.depense' | translate }} </td>
+                          <td><a
+                              [routerLink]="[ '/depense/detail', item.depense.id ]">{{ item?.depense?.reference }}</a>
+                          </td>
+                          <td> {{ item?.depense?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                          <td>
+                            <span *ngIf="item?.depense?.status == statutDepense.Brouillon"
+                              class="badge badge-default badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+                            <span *ngIf="item?.depense?.status == statutDepense.Encours"
+                              class="badge badge-default badge-planifiee ">{{ 'labels.encours' | translate }}</span>
+                            <span *ngIf="item?.depense?.status == statutDepense.Cloture"
+                              class="badge badge-default badge-success">{{ 'labels.cloturee' | translate }}</span>
+                            <span *ngIf="item?.depense?.status == statutDepense.Enretard"
+                              class="badge badge-default badge-enretard">{{ 'labels.enretard' | translate }}</span>
+                            <span *ngIf="item?.depense?.status == statutDepense.Annule"
+                              class="badge badge-default badge-annuler">{{ 'labels.annulee' | translate }}</span>
+                          </td>
+                        </tr>
+
+                        <!-- devis -->
+                        <tr *ngIf="bonCommandeFournisseur?.devis != null ">
+                          <td> {{ 'labels.devis' | translate }} </td>
+                          <td><a
+                              [routerLink]="[ '/devis/detail', bonCommandeFournisseur?.devis?.id ]">{{ bonCommandeFournisseur?.devis?.reference }}</a>
+                          </td>
+                          <td> {{ bonCommandeFournisseur?.devis?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                          <td *ngIf="bonCommandeFournisseur?.devis?.status == statutDevis.EnAttente">
+                            <span
+                              class="badge badge-default badge-secondary">{{ 'labels.enAttente' | translate }}</span>
+                          </td>
+                          <td *ngIf="bonCommandeFournisseur?.devis?.status == statutDevis.Acceptee">
+                            <span class="badge badge-default badge-success">{{ 'labels.acceptee' | translate }}</span>
+                          </td>
+                          <td *ngIf="bonCommandeFournisseur?.devis?.status == statutDevis.Annule">
+                            <span
+                              class="badge badge-default badge-info badge-annuler-devis">{{ 'labels.annuleed' | translate }}</span>
+                          </td>
+                          <td *ngIf="bonCommandeFournisseur?.devis?.status == statutDevis.NonAcceptee">
+                            <span
+                              class="badge badge-default badge-info nonaccepter">{{ 'labels.nonacceptee' | translate }}</span>
+                          </td>
+                          <td *ngIf="bonCommandeFournisseur?.devis?.status == statutDevis.Facture">
+                            <span
+                              class="badge badge-default badge-info facture">{{ 'labels.facture' | translate }}</span>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-container>
+
+
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

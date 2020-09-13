@@ -1,0 +1,182 @@
+<div class="content-header row">
+  <div class="modal fade text-left" id="add_client_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="client">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="myModalLabel35">{{'labels.addclient' | translate}}</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form form-horizontal" [formGroup]="form">
+            <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput1">{{ 'labels.codeclient' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" (click)="generateCodeclient()" formControlName="codeclient" id="projectinput1" class="form-control"
+                      placeholder="{{ 'labels.codeclient' | translate }}">
+                    <small class="text-danger"
+                      *ngIf="f?.codeclient?.hasError('CheckUniqueCodeClient')">{{'errors.unique' | translate }}</small>
+                    <small class="text-danger"
+                      *ngIf="f?.codeclient?.errors?.required">{{'errors.required' | translate }}</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row ">
+                  <label class="col-md-3 label-control" for="projectinput2">{{ 'labels.nom' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" (input)="generateCodeComptable()" formControlName="nom" id="projectinput2"
+                      class="form-control" placeholder="{{ 'labels.nom' | translate }}">
+                    <small class="text-danger"
+                      *ngIf="f?.nom?.errors?.required">{{'errors.required' | translate }}</small>
+                    <small class="text-danger"
+                      *ngIf="f?.nom?.errors?.minlength">{{'errors.minLength' | translate:{number:2} }}</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput17">{{'labels.groupe' | translate}}</label>
+                  <div class="col-md-8">
+                    <ng-select labelForId=projectinput16 placeholder="{{'labels.groupe' | translate}}"
+                      [hideSelected]="true" formControlName="IdGroupe"
+                      notFoundText="{{'labels.noFoundItem' | translate}}" (click)="getGroupes()">
+                      <ng-option *ngFor="let item of groupes;let i = index" value="{{item.id}}">{{item.nom}}
+                      </ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput1">{{ 'labels.reference' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="reference" id="projectinput1" class="form-control"
+                      placeholder="{{ 'labels.reference' | translate }}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput5">{{ 'labels.telephone' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="telephone" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.telephone' | translate }}">
+                    <small class="text-danger"
+                      *ngIf="f?.telephone?.errors?.minlength">{{'errors.minLength' | translate:{number:10} }}</small><br>
+                    <small class="text-danger" *ngIf="f?.telephone?.errors?.pattern">
+                      {{'errors.pattern' | translate}}
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput6">{{ 'labels.fax' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="fax" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.fax' | translate }}">
+                    <small class="text-danger" *ngIf="f?.fax?.errors?.pattern">
+                      {{'errors.pattern' | translate}}
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput7">{{ 'labels.email' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="email" formControlName="email" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.email' | translate }}">
+                    <small class="text-danger" *ngIf="f?.email?.errors?.pattern">
+                      {{'errors.pattern' | translate}}
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput8">{{ 'labels.siteWeb' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="siteWeb" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.siteWeb' | translate }}">
+                    <small class="text-danger" *ngIf="f?.siteWeb?.errors?.pattern">
+                      {{'errors.pattern' | translate}}
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput9">{{ 'labels.siret' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="siret" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.siret' | translate }}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput10">{{ 'labels.tvaIntraCommunautaire' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="tvaIntraCommunautaire" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.tvaIntraCommunautaire' | translate }}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput16">{{'labels.defaultAgent' | translate}}</label>
+                  <div class="col-md-8">
+                    <ng-select labelForId=projectinput16 placeholder="{{'labels.defaultAgent' | translate}}"
+                      [hideSelected]="true" formControlName="idAgent"
+                      notFoundText="{{'labels.noFoundItem' | translate}}" (click)="GetAgents()">
+                      <ng-option *ngFor="let item of agents;let i = index" value="{{item.id}}">{{item.nom}}
+                        {{item.prenom}}</ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput11">{{ 'labels.codeComptable' | translate }}</label>
+                  <div class="col-md-8">
+                    <input type="text" formControlName="codeComptable" id="projectinput4" class="form-control"
+                      placeholder="{{ 'labels.codeComptable' | translate }}">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <list-address [addresses]="adresses" (remove)="removeAdresse($event)"
+                  (listContacts)="getListAdressesAAA($event)" [show]="true" [addModalId]="'addClientForm'"
+                  [editModalId]="'editClientForm'" [hideAddBtn]="adresses?.length == 1"></list-address>
+              </div>
+              <div class="col-md-12">
+                <liste-contacts [contacts]="contacts" (remove)="removeContact($event)"
+                  (listContacts)="getListContacts($event)" [show]="true"></liste-contacts>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="close()" class="btn grey btn-light" placement="top"
+            ngbTooltip="{{'labels.cancel' | translate}}">
+            <i class="ft-x"></i> {{'labels.cancel' | translate}}
+          </button>
+          <button (click)="add()" type="submit" class="btn btn-success btn-lg" placement="top"
+            ngbTooltip="{{ 'labels.sauvegarder' | translate }} {{ 'labels.client' | translate }}">
+            <i class="fa fa-check-square-o"></i> {{ 'labels.sauvegarder' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

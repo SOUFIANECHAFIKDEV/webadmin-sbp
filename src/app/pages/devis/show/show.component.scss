@@ -1,0 +1,82 @@
+.btn-secondary {
+  color: white !important;
+  background-color: #2dcee3 !important;
+  border-color: #2dcee3 !important;
+}
+.validationMsg {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.btn-mail {
+  color: white !important;
+  background-color: #0f9497 !important;
+  border-color: #0f9497 !important;
+}
+
+.textarea-single-ligne {
+  width: 95.5%;
+  float: right;
+}
+.card-body {
+  padding-bottom: 1.8vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.card-body.download-Model {
+  max-height: 28vw;
+  overflow-y: auto;
+}
+.statut-EnAttente {
+  background-color: #ffa87d !important;
+  color: #eceff1;
+}
+
+.statut-Accepte {
+  background-color: #16d39a !important;
+  color: #eceff1;
+}
+
+.statut-Annule {
+  background-color: #404e67 !important;
+  color: #eceff1;
+}
+
+.statut-NonAccepte {
+  background-color: #ff7588 !important;
+  color: #eceff1;
+}
+.statut-Facture{
+  background-color: #3498db !important;
+  color: #eceff1;  
+}
+
+.btn-round {
+  padding: 5px 10px 5px 10px;
+  //position: relative;
+
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  padding-top: 0;
+}
+
+p.dropdown-item {
+  cursor: pointer;
+  text-transform: none;
+}
+
+p.dropdown-item.title {
+  padding: 10px 5px 5px 5px !important;
+  background: #f5f5f5;
+  color: #000000;
+  margin-bottom: 5px;
+  font-size: 10px;
+  text-align: center;
+  border-bottom: 1px #d9d9d9 solid;
+  cursor: help;
+}
+
+
+

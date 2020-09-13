@@ -1,0 +1,117 @@
+<button type="button" class="btn btn-primary btn-min-width" placement="bottom" *ngIf="!readOnly"
+    ngbTooltip="{{ 'PrixParFournisseur.labels.btn_add' | translate }}" (click)="openAddForm()">
+    {{ 'PrixParFournisseur.labels.btn_add' | translate }} <i class="ft-plus"></i>
+</button>
+
+
+<div style="margin: 2rem 0rem;">
+    <div class="row">
+        <div class="card-container" [ngClass]="{'col-md-2':size == 'small','col-md-4':size == 'large'}"
+            *ngFor="let PrixParFournisseur of ListPrixParFournisseur; let index=  index">
+
+            <div class="header" *ngIf="!readOnly">
+                <button type="button" (click)="openEditForm(PrixParFournisseur,index)">
+                    <i class="ft-edit-2"></i>
+                </button>
+                <button type="button" (click)="remove(index)"><i class="ft-x"></i></button>
+            </div>
+            <div class="body">
+                <ul>
+                    <li>{{ 'PrixParFournisseur.labels.Fournisseur' | translate }} :
+                        <strong><strong>{{PrixParFournisseur?.fournisseur?.nom}} </strong> </strong>
+                    </li>
+                    <li>{{ 'PrixParFournisseur.labels.Prix' | translate }} :
+                        <span><strong>{{PrixParFournisseur?.prix | RoudingNumber }} €</strong></span></li>
+                </ul>
+            </div>
+
+
+            <div class="card-footer">
+                <span class="float-right" *ngIf="PrixParFournisseur?.default">
+                    <i style="color: #ffa502;font-size: 22px" class="fa fa-star"></i>
+                </span>
+                <span class="float-right" *ngIf="!PrixParFournisseur?.default">
+                    <i style="color: #ffffff;font-size: 22px" class="fa fa-star"></i>
+                </span>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade text-left" id="PopUpForm" tabindex="-1" role="dialog" aria-labelledby="PopUpForm"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35">
+                    <i class="fa" [class.fa-plus]="typeOfForm === TypeOfFormEnum.add"
+                        [class.fa-edit]="typeOfForm === TypeOfFormEnum.update"></i>
+                    {{ formLabels?.title }}
+                </h3>
+                <button type="button" class="close" (click)="closeForm()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <form class="form form-horizontal" [formGroup]="form">
+                        <!-- Prix -->
+                        <div class="form-group row">
+                            <label class="col-3 label-control" for="prix">
+                                {{ 'PrixParFournisseur.labels.Prix' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <input type="number" formControlName="prix" id="prix" class="form-control input-number"
+                                    min="0">
+                                <small class="text-danger" *ngIf="f?.prix?.errors?.required && form?.touched">
+                                    {{'errors.required'| translate }}
+                                </small>
+                            </div>
+                        </div>
+                        <!-- id Fournisseur -->
+                        <div class="form-group row">
+                            <label class="col-3 label-control" for="prix">
+                                {{ 'PrixParFournisseur.labels.Fournisseur' | translate }}
+                            </label>
+                            <div class="col-9">
+                                <select name="idFournisseur" class="form-control" formControlName="idFournisseur">
+                                    <option [value]="null"></option>
+                                    <option *ngFor="let Fournisseur of listFournisseurs" [value]="Fournisseur?.id">
+                                        {{Fournisseur?.nom}}
+                                    </option>
+                                </select>
+                                <small class="text-danger" *ngIf="listFournisseurs?.length == 0">
+                                    Aucun fournisseur est disponible
+                                </small>
+                                <small class="text-danger"
+                                    *ngIf="f?.idFournisseur?.errors?.required && form?.touched && listFournisseurs?.length != 0">
+                                    {{'errors.required'| translate }}
+                                </small>
+                            </div>
+                        </div>
+                        <!-- default -->
+                        <div class="form-group row">
+                            <div class="col-9 offset-3 custom-control custom-checkbox">
+                                <input type="checkbox" name="default" formControlName="default"
+                                    class="custom-control-input" id="default">
+                                <label class="custom-control-label" for="default">
+                                    {{ 'PrixParFournisseur.labels.default' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    {{ form?.invalid }}
+                    <input type="button" class="btn btn-light" [value]="formLabels?.btnClose | translate"
+                        (click)="closeForm()">
+                    <input type="button" (click)="saveData()" class="btn btn-success" [value]="formLabels?.btnSave">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

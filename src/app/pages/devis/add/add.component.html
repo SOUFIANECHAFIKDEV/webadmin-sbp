@@ -1,0 +1,236 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'addDevis.title' | translate}}</h3>
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a (click)="navigateToDevisList()">{{'labels.devis' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'addDevis.title' | translate}}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group">
+      <button type="button" (click)="goBack()" class="btn btn-warning mr-1" placement="bottom"
+        ngbTooltip="{{'labels.cancel' | translate}}">
+        <i class="ft-x"></i> {{'labels.cancel' | translate}}
+      </button>
+      <button type="submit" (click)="add()" class="btn btn-success" placement="bottom"
+        ngbTooltip="{{'labels.valider' | translate}}">
+        <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="content-body">
+
+  <section id="horizontal-form-layouts">
+    <!-- Form d'information de devis -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <form class="form form-horizontal" *ngIf="creationForm != null" [formGroup]="creationForm"
+                (ngSubmit)="add()">
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+
+                  <!-- reference + chantier  -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="reference">{{'labels.reference' | translate}}</label>
+                        <div class="col-md-9">
+                          <input type="text" formControlName="reference" id="reference" class="form-control"
+                            placeholder="{{'labels.reference' | translate}}">
+                          <small class="text-danger"
+                            *ngIf="f?.reference?.hasError('CheckUniqueReference')">{{'errors.unique' | translate }}</small>
+                          <small class="text-danger"
+                            *ngIf="f?.reference?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-6" *ngIf="idChantier == null">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="chantier">{{'labels.chantier' | translate}}</label>
+                        <div class="col-md-7">
+                          <ng-select notFoundText="{{'labels.noFoundItem' | translate}}" (click)="fristLoading()"
+                            (search)="getChantiers($event)" labelForId=chantier formControlName="idChantier"
+                            (change)="loadChantierClient(f?.idChantier?.value)" (clear)="getChantiers('')">
+                            <ng-option *ngFor="let chantier of chantiers;let i = index" value="{{chantier?.id}}">
+                              {{chantier?.nom}}</ng-option>
+                          </ng-select>
+                          <small class="text-danger"
+                            *ngIf="f?.idChantier?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                        <div class="col-md-2">
+                          <div class=" btn-sm" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                              data-target="#Model" placement="bottom"
+                              style="width: 100%; height: 30px !important; line-height: 30px !important;"
+                              ngbTooltip="{{'labels.ajouter' | translate}}  {{'labels.chantier' | translate}}">
+                              <i class="fa fa-plus"></i>
+                              {{'labels.chantier' | translate}}
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- client + adresse Facturation  -->
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="client">{{'labels.client' | translate}}
+                        </label>
+                        <div class="col-md-9">
+                          <input formControlName="idclient" style="display: none;" />
+                          <input type="text" id="client" class="form-control" [value]="f?.idclient?.value?.nom "
+                            disabled>
+                          <small class="text-danger"
+                            *ngIf="f?.idclient?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="adresseFacturation">{{'labels.adresseFacturation' | translate}}</label>
+                        <div class="col-md-9">
+                          <input formControlName="adresseFacturation" style="display: none;" />
+                          <input type="text" id="adresseFacturation" [value]="f?.adresseFacturation?.value?.designation"
+                            class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="adresseIntervention">{{'labels.adresseIntervention' | translate}} </label>
+                        <div class="col-md-7">
+                          <select formControlName="adresseIntervention" class="form-control" id="adresseIntervention">
+                            <option *ngFor="let adresse of newAddress" [value]="adresse">
+                              {{ adresse?.designation }}
+                            </option>
+                            <option *ngFor="let adresse of adresses;let i = index" [value]="i">
+                              {{ adresse?.designation }}
+                            </option>
+                          </select>
+                          <small class="text-danger"
+                            *ngIf="f?.adresseIntervention?.errors?.required">{{'errors.required' | translate }}</small>
+                        </div>
+                        <div class="col-md-2">
+                          <list-address (listContacts)="setNewAddress($event)" [displayJustTheForm]="true">
+                          </list-address>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-1 label-control" for="objet">{{'labels.objet' | translate}}</label>
+                        <div class="col-md-11">
+                          <textarea formControlName="objet" placeholder="{{'labels.objet' | translate}}" id="objet"
+                            class="form-control textarea-single-ligne"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section"> <i class="ft-shopping-cart"></i>
+                    {{'labels.articles' | translate}}
+                    <label class="devis-type">Choisir le type de devis </label>
+                    <div class="form-group" style="float: right;">
+                      <select class="form-control" style="color:#000" [(ngModel)]="typeDevis"
+                        [ngModelOptions]="{standalone: true}">
+                        <option value="complet">Saisir depuis l’application </option>
+                        <option value="minimaliste">Importer depuis Excel</option>
+                      </select>
+                    </div>
+
+                  </h4>
+
+                  <div class="row" *ngIf="typeDevis == 'complet'">
+                    <div class="col-md-12">
+                      <table-article [load]="emitter" [readOnly]="false">
+                      </table-article>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="typeDevis == 'minimaliste'">
+                    <div class="col-md-12">
+                      <articles-minimaliste [load]="emitter" [readOnly]="false"></articles-minimaliste>
+                    </div>
+                  </div>
+
+                  <!-- Section d'autre -->
+                  <ng-container *ngIf="typeDevis == 'complet'">
+                    <h4 class="form-section"><i class="ft-message-circle"></i>{{'labels.autres' | translate}}</h4>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group row">
+                          <label class="col-md-12 label-control"
+                            for="conditions">{{ 'labels.conditions' | translate }}</label>
+                          <div class="col-md-12">
+                            <angular-editor id="unique1" [config]="editorConfig" formControlName="conditionReglement">
+                            </angular-editor>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group row">
+                          <label class="col-md-12 label-control" for="note">{{ 'labels.note' | translate }}</label>
+                          <div class="col-md-12">
+                            <angular-editor id="unique2" [config]="editorConfig" formControlName="note">
+                            </angular-editor>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="row">
+        <div class="col-md-12" style="zoom: 1;">
+          <div class="btn-group float-md-left" role="group">
+            <button type="button" [routerLink]="['/devis']" class="btn btn-warning mr-1" placement="top"
+              ngbTooltip="{{'labels.cancel' | translate}}">
+              <i class="ft-x"></i> {{'labels.cancel' | translate}}
+            </button>
+            <button type="submit" (click)="add()" class="btn btn-success" placement="top"
+              ngbTooltip="{{'labels.valider' | translate}}">
+              <i class="fa ft-check"></i> {{ 'labels.valider' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+  </section>
+</div>
+
+<chantier-from [type]="formConfig?.type" [defaultData]="formConfig?.defaultData" (OnSave)="addNewChantier($event)">
+</chantier-from>
+
+<custom-loader [displayLoader]="processing"></custom-loader>

@@ -1,0 +1,242 @@
+<div class="content-body">
+  <section id="horizontal-form-layouts">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+          <div class="card-content collpase show">
+            <div class="card-body">
+
+              <!-- Information à saisir -->
+              <form class="form form-horizontal">
+                <div class="form-body">
+
+                  <!-- Information depense-->
+                  <h4 class="form-section"><i class="ft-file-text"></i>{{'labels.infoDepense' | translate}}</h4>
+
+                  <!-- Référence et montant -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput1899">{{ 'labels.reference' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="depense?.reference" id="projectinput1899" class="form-control"
+                            disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput1847">{{ 'labels.montant' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="depense?.total | RoudingNumber | ShowCurrency"
+                            id="projectinput1847" class="form-control text-right" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- Date écheance et le reste -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput39ds">{{ 'labels.dateExpiration' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="depense?.dateExpiration | date : 'dd/MM/yyyy'"
+                            id="projectinput39ds" class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control"
+                          for="projectinput39d">{{ 'labels.resPay' | translate }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="getResterPayer() | RoudingNumber | ShowCurrency"
+                            id="projectinput39d" class="form-control text-right" disabled>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <h4 class="form-section"><i class="ft-credit-card"></i>{{'show.listPaiement' | translate}}</h4>
+                  <div style="margin-bottom: 10px">
+                    <ng-container
+                      *ngIf="depense?.status == statutDepense.Encours || depense?.status == statutDepense.Enretard">
+                      <button type="button" (click)="chargeLists()" data-backdrop="false"
+                        (click)="GetCompte(''); GetModeRegelement('')" class="btn btn-info square btn-md"
+                        data-toggle="modal" data-target="#ajouterPaiement" placement="bottom"> <i class="ft-plus"></i>
+                        {{ 'labels.ajouterPaiement' | translate }}
+                      </button>
+                      <button type="button" data-backdrop="false" class="btn btn-secondary square btn-md"
+                        data-toggle="modal" data-target="#choixAvoir" placement="bottom"> <i class="ft-plus"></i>
+                        {{ 'labels.paiementParAvoir' | translate }}
+                      </button>
+                    </ng-container>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class="text-center">
+                          <th>{{ 'labels.description' | translate }}</th>
+                          <th>{{ 'labels.date' | translate }}</th>
+                          <th>{{ 'labels.moyen' | translate }}</th>
+                          <th>{{ 'labels.montant' | translate }}</th>
+                          <th>{{ 'labels.actions' | translate }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let paiement of depense?.paiements; let i = index">
+
+
+                          <td><a [routerLink]="[ '/paiements/detail', paiement.id ]">{{ paiement.description }}</a>
+                          </td>
+                          <td>{{ paiement.datePaiement | date: 'dd/MM/yyyy' }}</td>
+                          <td>{{ paiement.modeReglement.nom}}</td>
+                          <td class="text-right display-price">{{ paiement.montant | RoudingNumber | ShowCurrency }}
+                          </td>
+                          <td class="text-center">
+                            <!-- <div class="btn-group" role="group" *ngIf="paiement.paiement.comptabilise != statutComptabilise.Oui"> -->
+                            <div class="btn-group" role="group"
+                              *ngIf="paiement.comptabilise != statutComptabilise.Oui ">
+                              <button type="button"
+                                *ngIf="paiement?.type != typePaiement.PAYER_GROUPE && paiement.idAvoir == null"
+                                placement="bottom" [container]="'body'"
+                                ngbTooltip="{{ 'labels.modifierPaiement' | translate }}"
+                                class="btn btn-primary btn-md btn-actions" (click)="chargerModifierPaiement(i)">
+                                <i class="ft-edit"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-md btn-actions" placement="bottom"
+                                [container]="'body'" ngbTooltip="{{ 'labels.supprimerPaiement' | translate }}"
+                                (click)="removePaiement(i)">
+                                <i class="ft-trash-2"></i>
+                              </button>
+                            </div>
+                          </td>
+
+                        </tr>
+                        <!--.depense.paiement-->
+                        <tr *ngIf="depense?.paiements?.length == 0" class="text-center">
+                          <td colspan="9"> {{ 'labels.msgEmptyTablePaiement' | translate }} </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- Ajouter ou Modifier paiement-->
+<div class="modal fade text-left" id="ajouterPaiement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel98"
+  aria-hidden="true" *ngIf="form">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel98">
+          <i class="fa fa-credit-card"></i>
+          {{ (indexModified == null ? 'labels.ajouterPaiement' : 'labels.modifierPaiement') | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form [formGroup]="form">
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="moyenPaiement">{{ 'labels.moyenPaiement' | translate }} : </label>
+                <ng-select formControlName="idModePaiement" (change)="onChangeMoyenPaiement($event)"
+                  notFoundText="{{'labels.noFoundItem' | translate}}" labelForId=projectinput485>
+                  <ng-option *ngFor="let modeRegelement of modesRegelement;let i = index"
+                    value="{{modeRegelement?.id}}">{{modeRegelement?.nom}}</ng-option>
+                </ng-select>
+                <small class="text-danger"
+                  *ngIf="f?.idModePaiement?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group" *ngIf="dateLang">
+              <div class="col-md-12">
+                <label for="date">{{ 'labels.date' | translate }} : </label>
+                <p-calendar formControlName="datePaiement" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                  [inputStyle]="{'width':'100%'}" [locale]="dateLang" showButtonBar="true"></p-calendar>
+                <small class="text-danger"
+                  *ngIf="f?.datePaiement?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="compteCredit">{{ 'labels.compteCredit' | translate }} : </label>
+                <ng-select formControlName="idCaisse" notFoundText="{{'labels.noFoundItem' | translate}}"
+                  labelForId=projectinput487>
+                  <ng-option *ngFor="let compte of comptes;let i = index" value="{{compte?.id}}">{{compte?.nom}}
+                  </ng-option>
+                </ng-select>
+                <small class="text-danger"
+                  *ngIf="f?.idCaisse?.errors?.required">{{'errors.required' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="montant">{{ 'labels.montant' | translate }} : </label>
+                <input formControlName="montant" [value]="f?.montant?.value | RoudingNumberInput" type="number"
+                  class="form-control">
+                <small class="text-danger"
+                  *ngIf="f?.montant?.errors?.required">{{'errors.required' | translate }}</small>
+                <small class="text-danger"
+                  *ngIf="f?.montant?.hasError('CheckValidPrice')">{{'errors.invalid' | translate }}</small>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label for="description">{{ 'labels.description' | translate }} : </label>
+                <textarea formControlName="description" class="form-control"></textarea>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary" data-dismiss="modal">
+          {{ 'labels.cancel' | translate }}</button>
+        <button type="button" *ngIf="indexModified == null" class="btn btn-success" (click)="savePaiement()">
+          {{ 'labels.sauvegarder' | translate }}</button>
+        <button type="button" *ngIf="indexModified != null" class="btn btn-success" (click)="modifierPaiement()">
+          {{ 'labels.sauvegarder' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <pay-by-avoir [restPayer]="getResterPayer()" [idChantier]="depense?.idChantier" (refresh)="createPaiementAvoir($event)">
+</pay-by-avoir> -->
+<pay-by-avoir-depense [restPayer]="getResterPayer()" [idChantier]="depense?.idChantier"
+  (refresh)="createPaiementAvoir($event)"></pay-by-avoir-depense>

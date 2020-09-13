@@ -1,0 +1,148 @@
+<div class="modal fade text-left" id="Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel35">{{ getmodelName() }}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form form-horizontal" [formGroup]="form">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="nom">
+                                <strong>{{'labels.nom' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8" *ngIf="type != formType.preview">
+                                <input type="text" class="form-control" id="nom" formControlName="nom" />
+                                <small class="text-danger" *ngIf="f?.nom?.errors?.required">{{'errors.required'
+                                                    | translate }}</small>
+                                <small class="text-danger" *ngIf="f?.nom?.errors?.minlength">{{'errors.minLength'
+                                                            | translate:{ number:2} }}</small>
+
+                                <small class="text-danger" *ngIf="f?.nom?.errors?.CheckUniqueName">{{'errors.CheckUniqueName'
+                                        | translate }}</small>
+                            </div>
+                            <div class="col-md-8" *ngIf="type == formType.preview">
+                                <p>{{ defaultData.nom }}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="description">
+                                <strong>{{'labels.description' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8" *ngIf="type != formType.preview">
+                                <textarea type="text" class="form-control" id="description"
+                                    formControlName="description" rows="5"></textarea>
+                            </div>
+                            <div class="col-md-8" *ngIf="type == formType.preview">
+                                <p>{{ defaultData.description }}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="commentaire">
+                                <strong>{{'labels.commentaire' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8" *ngIf="type != formType.preview">
+                                <textarea type="text" class="form-control" id="commentaire"
+                                    formControlName="commentaire" rows="5"></textarea>
+                            </div>
+                            <div class="col-md-8" *ngIf="type == formType.preview">
+                                <p>{{ defaultData.commentaire }}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="client">
+                                <strong>{{'labels.client' | translate}} : </strong>
+                            </label>
+                            <div class="col-md-5" *ngIf="type != formType.preview">
+                                <ng-select (click)="getClients()"
+                                    notFoundText="{{'labels.noFoundItemclient' | translate}}" labelForId=projectinput48
+                                    formControlName="idclient">
+                                    <ng-option *ngFor="let client of clients;let i = index" [value]="client">
+                                        {{client?.codeclient}} : {{client?.nom}} </ng-option>
+
+                                </ng-select>
+                                <small class="text-danger" *ngIf="f?.idclient?.errors?.required">{{'errors.required'
+                                        | translate }}</small>
+                            </div>
+                            <div class="col-md-3">
+
+                                <button (click)="form" type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#add_client_modal" placement="bottom"
+                                    ngbTooltip="{{ 'labels.nouveau' | translate }} {{ 'labels.client' | translate }}">{{ 'labels.nouveau' | translate }}
+                                    <i class="ft-plus"></i></button>
+                            </div>
+                            <div class="col-md-8" *ngIf="type == formType.preview">
+                                <p>{{selectedClient.codeclient}} : {{selectedClient.nom}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf="type == formType.preview">
+                            <label class="col-md-4 label-control" for="type">
+                                <strong>{{'labels.statut' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8">
+                                <p>{{getLabelleByStatut(defaultData.statut)}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf="type == formType.preview ">
+                            <label class="col-md-4 label-control" for="date_creation">
+                                <strong>{{'labels.date_creation' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8">
+                                <p>{{ defaultData.date_creation | date:'dd/MM/yyyy HH:mm' }}</p>
+                            </div>
+                        </div>
+                        <h4 class="form-section"> <i class="ft-file-text"></i>{{'labels.sousTraitance' | translate}}
+                        </h4>
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control" for="nombrHeure">
+                                <strong>{{'labels.nombrHeure' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8" *ngIf="type != formType.preview">
+                                <input type="number" class="form-control  currency-input" id="nombrHeure"
+                                    formControlName="nombrHeure" />
+
+                            </div>
+                            <div class="col-md-8  currency-input" *ngIf="type == formType.preview">
+                                <p>{{ defaultData.nombrHeure }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 label-control " for="montant">
+                                <strong>{{'labels.montantTotal' | translate}} :</strong>
+                            </label>
+                            <div class="col-md-8 " *ngIf="type != formType.preview">
+                                <input type="number" class="form-control currency-input" id="montant"
+                                    formControlName="montant" />
+
+                            </div>
+                            <div class="col-md-8  currency-input" *ngIf="type == formType.preview">
+                                <p>{{ defaultData.montant }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn grey btn-light" data-dismiss="modal"
+                        ngbTooltip="{{ 'labels.btnCancel'| translate }}">{{ 'labels.btnCancel' |translate }}
+                    </button>
+
+                    <ng-container *ngIf="type != formType.preview">
+                        <input type="submit" class="btn btn-success btn-lg" [value]="'labels.btnSave' | translate "
+                            (click)="submit()" [ngbTooltip]="'labels.btnSave' | translate " />
+                    </ng-container>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<app-add-client-pop (retrunClient)="retrunNewClient($event)"></app-add-client-pop>

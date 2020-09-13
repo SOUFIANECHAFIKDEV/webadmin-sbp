@@ -1,0 +1,138 @@
+<div class="content-header-right col-md-12 col-12">
+  <div class="btn-group float-md-right" role="group" style="margin-top: 1rem;">
+
+    <span style="width:12px"></span>
+    <a *ngIf="avoir && avoir?.status == statutAvoir?.Brouillon" class="btn btn-primary" placement="bottom"
+      ngbTooltip="{{ 'toolip.edit' | translate }}" [routerLink]="['/avoirs/modifier', avoir?.id]">
+      {{ 'labels.modifier' | translate }} <i class="ft-edit"></i>
+    </a>
+
+    <span style="width:12px"></span>
+    <p-splitButton label="{{ 'labels.actions' | translate }}" [model]="items" styleClass="ui-button-primary">
+    </p-splitButton>
+  </div>
+</div>
+
+<div class="content-header row">
+  <div class="content-header-left col-12 mb-1">
+    <div class="row">
+      <div>
+        <h3 class="content-header-title  ">
+          {{ 'show.title' | translate }} {{ avoir?.reference }}
+        </h3>
+      </div>
+      <div>
+        <span *ngIf="avoir?.status == statutAvoir.Brouillon"
+          class="btn btn-round badge-brouillon">{{ 'labels.brouillon' | translate }}</span>
+        <span *ngIf="avoir?.status == statutAvoir.Encours"
+          class="btn btn-round badge-planifiee">{{ 'labels.encours' | translate }}</span>
+        <span *ngIf="avoir?.status == statutAvoir.Utilise"
+          class="btn btn-round badge-success">{{ 'labels.utilise' | translate }}</span>
+        <span *ngIf="avoir?.status == statutAvoir.Expire"
+          class="btn btn-round badge-annuler">{{ 'labels.expire' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="row breadcrumbs-top">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/avoirs']">{{ 'title' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item active">{{ 'show.title' | translate }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client"
+                aria-expanded="true">{{ 'show.information' | translate }}</a>
+            </li>
+            <!-- <li class="nav-item" *ngIf="
+              avoir?.status != statutAvoir?.Brouillon &&
+              avoir?.status != statutAvoir?.Annule
+                  ">
+                <a class="nav-link" id="paiement-tab" data-toggle="pill" href="#paiement"
+                  aria-expanded="true">{{ 'show.paiement' | translate }}</a>
+              </li> -->
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique"
+                aria-expanded="false">{{ 'show.historique' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="memos-tab" data-toggle="pill" href="#memos" aria-expanded="false"
+                placement="bottom" ngbTooltip="{{ 'show.notes' | translate }}">
+                {{ 'show.notes' | translate }} <span class="memo-badge">{{ memos?.length }}</span>
+              </a>
+            </li>
+
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+              <!-- <facture-information [articles]="articles" [avoir]="avoir" [client]="client">
+                </facture-information> -->
+              <avoir-information [articles]="articles" [avoir]="avoir" [client]="client"> </avoir-information>
+            </div>
+            <!-- <div role="tabpanel" class="tab-pane" id="paiement" aria-labelledby="paiement-tab" aria-expanded="true">
+             <paiement-facture [facture]="facture" (refresh)="refresh()"></paiement-facture> 
+              </div> -->
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+            <div class="tab-pane" id="memos" role="tabpanel" aria-labelledby="memos-tab">
+              <common-memos [memos]="memos" (valueChange)="saveMemo($event)" (download)="downloadPieceJointe($event)"
+                [processIsStarting]="processIsStarting"></common-memos>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="page-loading" [ngClass]="{ 'page-loading-active': processIsStarting }">
+  <img src="assets/app/images/oval.svg" class="loading-icon" />
+</div> -->
+<!-- <div class="modal fade text-left" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="PdfView">
+          <i class="ft-file-minus"></i>
+          {{ 'labels.VisualiserPdf' | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body download-Model">
+
+         
+          <app-visualiser-pdf [base64]="base64"></app-visualiser-pdf>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary"
+          data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+        <button type="button" class="btn btn-success" (click)="generatePDF()">
+          {{ 'labels.telecharger' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<custom-loader [displayLoader]="processing"></custom-loader>

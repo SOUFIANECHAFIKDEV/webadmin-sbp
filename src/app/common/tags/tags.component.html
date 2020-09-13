@@ -1,0 +1,44 @@
+<form class="tagsForm" *ngIf="readOnly">
+
+  <input type="text" placeholder="Saisir ici un label et puis cliquer sur entrer"
+    (keyup)="tagsInputkeyup(inputString.value,$event)" #inputString
+    [ngStyle]="{'width':size == 'large' ? (inputString.value.length != 0 ? '75%':'85%') : (inputString.value.length != 0 ? '45%':'55%') }">
+
+  <button type="button" (click)="addNewTagsFromInputClick();" [ngStyle]="{'width':size == 'large' ? '10%' : '25%' }"
+    style="background-color: #16d39a; border: 1px solid #13c590;" *ngIf="inputString.value.length != 0">
+    Ajouter <i class="ft-plus"></i>
+  </button>
+
+  <button type="button" (click)="showAllTags()" [ngStyle]="{'width':size == 'large' ? '15%' : '30%' }">Liste des
+    labels</button>
+
+</form>
+
+<small style="color: #FF7588 !important;" *ngIf="showTagsValidation">
+  <i class="ft-alert-triangle"></i>
+  Cette valeur est déja ajouté !
+</small>
+<div class="tags-auto-complete" *ngIf="AutoComplete.length != 0">
+  <div>
+    <ul>
+      <li *ngFor="let tag of AutoComplete;let i = index" (click)="addNewTags(tag);">
+        {{ tag.value}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="tags-list" *ngIf="readOnly">
+      <button type="button" *ngFor="let tag of newTags;let i = index">
+        {{ tag.value }}<i class="ft-x" (click)="removeTag(tag,i)"></i>
+      </button>
+    </div>
+    <div class="tags-list" *ngIf="!readOnly">
+      <button type="button" *ngFor="let tag of newTags;let i = index">
+        {{ tag.value }}
+      </button>
+    </div>
+  </div>
+</div>

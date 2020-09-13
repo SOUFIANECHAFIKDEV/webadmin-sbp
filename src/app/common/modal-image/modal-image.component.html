@@ -1,0 +1,44 @@
+<ng-container *ngIf="images != null">
+  <div class="container-fuild">
+    <div class="row">
+
+      <ng-container *ngFor="let image of images;let index = index">
+        <div class="col-lg-2 col-md-2 col-2 image-container">
+          <button class="btn-close" (click)="deleteImage();showImageByIndex=index" *ngIf="!readOnly">
+            <i class="ft-x"></i>
+          </button>
+          <img id="myImg" [src]="image?.base64" alt="image?.name" (click)="imgOnclick();showImageByIndex=index" class="img-thumbnail"/>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <span class="close" (click)="spanOnClick()">&times;</span>
+    <button class="images-counter">
+      {{showImageByIndex+1}} / {{images?.length}}
+    </button>
+    <div style="width: 60%;margin: 0 auto;">
+        <img class="modal-content" id="img01" [src]="images[showImageByIndex]?.base64">
+    </div>
+    <div id="caption">
+      <button class="pswp__button pswp__button--arrow--left icon-btn" title="Previous (arrow left)" style="color:#fff">
+        <i class="ft-arrow-left" (click)="Increment()"></i>
+      </button>
+      <button class="pswp__button pswp__button--arrow--right icon-btn" title="Next (arrow right)" style="color:#fff"
+        (click)="deleteImage()" *ngIf="!readOnly">
+        <i class="ft-trash-2"></i>
+      </button>
+      <!-- <button class="pswp__button pswp__button--arrow--right icon-btn" title="Next (arrow right)" style="color:#fff">
+      <i class="ft-x"></i>
+    </button> -->
+      <button class="pswp__button pswp__button--arrow--right icon-btn" title="Next (arrow right)" style="color:#fff">
+        <i class="ft-arrow-right" (click)="decrement()"></i>
+      </button>
+    </div>
+
+  </div>
+</ng-container>

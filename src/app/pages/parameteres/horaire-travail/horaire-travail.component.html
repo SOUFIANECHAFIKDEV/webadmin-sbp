@@ -1,0 +1,47 @@
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">{{ 'parametrageHoraireTravail.title' | translate }} </h3>
+    </div>
+    <div class="content-header-right col-md-6 col-12">
+        <div class="btn-group float-md-right" role="group">
+            <button (click)="update()" type="submit" class="btn btn-success" placement="bottom"
+                ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.parametragehorairestravail' | translate }}">
+                <i class="fa fa-check-square-o"></i> {{ 'labels.modifier' | translate }}
+            </button>
+        </div>
+    </div>
+</div><br>
+
+<form class="form form-horizontal" [formGroup]="form">
+    <div class="card collapse-icon accordion-icon-rotate">
+        <div class="card-content">
+            <div class="card-body">
+
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-md-2 label-control"
+                            for="heureDebut">{{ 'parametrageHoraireTravail.heureDebut' | translate }}</label>
+                        <div class="col-md-4">
+                            <input type="time" id="heureDebut" class="form-control " formControlName="heureDebut"
+                                placeholder="{{ 'parametrageHoraireTravail.heureDebut' | translate }}">
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-md-2 label-control"
+                            for="heureFin">{{ 'parametrageHoraireTravail.heureFin' | translate }}</label>
+                        <div class="col-md-4">
+                            <input type="time" id="heureFin" class="form-control " formControlName="heureFin"
+                                placeholder="{{ 'parametrageHoraireTravail.heureFin' | translate }}">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

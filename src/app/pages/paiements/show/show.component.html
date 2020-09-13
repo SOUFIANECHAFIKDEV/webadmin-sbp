@@ -1,0 +1,48 @@
+<div class="content-header-left col-md-6 col-12 mb-2">
+  <h3 class="content-header-title mb-0">
+    {{ 'show.title' | translate }}
+  </h3>
+  <div class="row breadcrumbs-top">
+    <div class="breadcrumb-wrapper col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/paiements']">{{ 'title' | translate }}</a>
+        </li>
+        <li class="breadcrumb-item active">{{ 'show.title' | translate }}</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+
+<div class="content-body">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card">
+
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pill-bordered">
+            <li class="nav-item">
+              <a class="nav-link active" id="client-tab" data-toggle="pill" href="#client"
+                aria-expanded="true">{{ 'show.information' | translate }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="historique-tab" data-toggle="pill" href="#historique"
+                aria-expanded="false">{{ 'show.historique' | translate }}</a>
+            </li>
+          </ul>
+          <div class="tab-content px-1 pt-1">
+            <div role="tabpanel" class="tab-pane active" id="client" aria-labelledby="client-tab" aria-expanded="true">
+              <information-paiements [paiement]="paiement"> </information-paiements>
+            </div>
+            <div class="tab-pane" id="historique" role="tabpanel" aria-labelledby="historique-tab"
+              aria-expanded="false">
+              <common-historiques [historique]="historique"></common-historiques>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

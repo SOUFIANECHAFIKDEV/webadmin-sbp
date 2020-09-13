@@ -1,0 +1,240 @@
+<div class="content-body">
+  <section id="horizontal-form-layouts">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="zoom: 1;">
+
+          <div class="card-content collpase show">
+            <div class="card-body">
+              <!-- Information à saisir -->
+              <form class="form form-horizontal">
+                <div class="form-body">
+                  <!-- Information facture-->
+                  <h4 class="form-section">
+                    <i class="ft-file-text"></i>{{ 'labels.infoDepense' | translate }}
+                  </h4>
+
+                  <!-- Reference + Chantier -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput189">{{
+                            'labels.reference' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="depense?.reference" id="projectinput189" class="form-control"
+                            disabled />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                            'labels.chantier' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" [value]="depense?.chantier?.nom" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <!-- Fournisseur -->
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                     'labels.fournisseur' | translate}}</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" [value]="depense?.fournisseur?.nom" disabled />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput2">{{
+                     'labels.categorie' | translate}}</label>
+
+                        <div class="col-md-9" *ngIf="depense?.categorie == categorieDepense.Achat">
+                          <input type="text" class="form-control" value="{{'labels.achat' | translate}}" disabled />
+                        </div>
+                        <div class="col-md-9" *ngIf="depense?.categorie == categorieDepense.SousTraitant">
+                          <input type="text" class="form-control" value="{{'labels.sousTraitant' | translate}}"
+                            disabled />
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- date creation + date echeance -->
+                  <div class=" row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput3">{{
+                            'labels.dateCreation' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="depense?.dateCreation | date: 'dd/MM/yyyy'" id="projectinput175"
+                            class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-md-3 label-control" for="projectinput39">{{
+                            'labels.dateExpiration' | translate
+                          }}</label>
+                        <div class="col-md-9">
+                          <input type="text" [value]="depense?.dateExpiration | date: 'dd/MM/yyyy'" id="projectinput178"
+                            class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- objet -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-md-1 label-control" for="projectinput3">{{
+              'labels.objet' | translate
+            }}</label>
+                        <div class="col-md-11">
+                          <textarea type="text" class="form-control textarea-single-ligne"
+                            style="width: 95.5%;float: right;" [value]="depense?.objet" disabled></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <h4 class="form-section">
+                  <i class="ft-shopping-cart"></i>{{ 'labels.articles' | translate }}
+                </h4>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <table-article-depense [readOnly]="true" [articles]="articles"
+                      [IdFournisseur]="depense?.idFournisseur">
+                    </table-article-depense>
+                  </div>
+                </div>
+                <!-- Section d'autre -->
+                <div *ngIf="depense?.documentAvoir != null">
+                  <h4 class="form-section">
+                    <i class="ft-message-circle"></i>{{ 'labels.avoirDocument' | translate }}
+                  </h4>
+                  <div class=" row">
+                    <ng-container *ngFor="let avoir of documentAvoir; let i=index">
+
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control" for="projectinput39">{{
+                              'labels.avoirDocument' | translate
+                            }} : </label>
+                          <div class="col-md-9" *ngFor="let piece of avoir.pieceJointes;let j = index">
+                            <label class="dropzone label-control " for="orignalName">{{ piece?.orignalName }}
+                            </label> <i class="ft-download" style="padding-bottom: 0px !important;"
+                              (click)="downloadFile()"> </i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-md-3 label-control" for="projectinput3">{{
+                              'labels.commentaire' | translate
+                            }} : </label>
+                          <div class="col-md-9">
+                            <input type="text" value="{{ avoir?.commentaire }}" id="ccc" class="form-control"
+                              disabled />
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+
+
+
+                </div>
+
+                <!-- Section d'autre -->
+                <h4 class="form-section">
+                  <i class="ft-message-circle"></i>{{ 'labels.autres' | translate }}
+                </h4>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="note">{{
+                            'labels.note' | translate
+                          }}</label>
+                      <div class="col-md-12">
+                        <angular-editor [config]="editorConfig" id="note" [ngModel]="depense?.note"
+                          [ngModelOptions]="{standalone: true}"></angular-editor>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <label class="col-md-12 label-control" for="conditionRegelement">{{
+                          'labels.conditionRegelement' | translate
+                        }}</label>
+                      <div class="col-md-12">
+                        <!-- <textarea type="text" id="conditionRegelement" class="form-control"
+                            disabled>{{ facture?.conditionRegelement }}</textarea> -->
+                        <angular-editor [config]="editorConfig" id="conditionRegelement"
+                          [ngModel]="depense?.conditionsReglement" [ngModelOptions]="{standalone: true}">
+                        </angular-editor>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Document associé-->
+                <ng-container *ngIf="depense?.depenseBonCommandeFournisseurs?.length > 0 ">
+                  <h4 class="form-section"><i class="fa fa-files-o"></i>{{'labels.documentAssocie' | translate}}</h4>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>{{ 'labels.type' | translate }}</th>
+                          <th>{{ 'labels.reference' | translate }}</th>
+                          <th>{{ 'labels.dateCreation' | translate }}</th>
+                          <th>{{ 'labels.statut' | translate }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- LES Bon des commandes fOURNISSEURS -->
+                        <tr *ngFor="let item of depense?.depenseBonCommandeFournisseurs">
+                          <td> {{ 'labels.bonCommandFournisseur' | translate }} </td>
+                          <td><a
+                              [routerLink]="[ '/bonCommandeFournisseur/detail', item.bonCommandeFournisseur.id ]">{{ item?.bonCommandeFournisseur?.reference }}</a>
+                          </td>
+                          <td> {{ item?.bonCommandeFournisseur?.dateCreation | date:'dd/MM/yyyy' }} </td>
+                          <td>
+                            <span class="badge badge-default badge-success">{{ 'labels.facture' | translate }}</span>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-container>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

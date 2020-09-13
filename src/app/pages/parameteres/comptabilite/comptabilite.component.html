@@ -1,0 +1,550 @@
+<!--Plan comptable-->
+<div class="card collapse-icon accordion-icon-rotate">
+  <div id="heading12" class="card-header card-head-inverse bg-primary">
+    <a data-toggle="collapse" href="#accordion12" aria-expanded="false" aria-controls="accordion12"
+      class="card-title lead collapsed">
+      <h4 class="card-title">{{'parametrageplanComptable.title' | translate}}</h4>
+    </a>
+  </div>
+  <section id="horizontal-form-layouts">
+    <div id="accordion12" role="tabpanel" data-parent="#accordionWrap1" aria-labelledby="heading12" class="collapse"
+      aria-expanded="false">
+      <div class="card-content">
+        <div class="card-body">
+
+          <section id="minimal-statistics">
+            <div class="row">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.client' | translate }}</h3>
+                          <h3>{{ getCodeComptableById(planComptableEnum?.client) }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <button class="btn btn-sm btn-success"
+                            (click)="OpenPopUpPlanComptable(planComptableEnum?.client)"> <i
+                              class="ft-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.fournisseur' | translate }}</h3>
+                          <h3>{{ getCodeComptableById(planComptableEnum?.fournisseur) }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <button class="btn btn-sm btn-success"
+                            (click)="OpenPopUpPlanComptable(planComptableEnum?.fournisseur)"> <i
+                              class="ft-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.avoir' | translate }}</h3>
+                          <h3>{{ getCodeComptableById(planComptableEnum?.avoir)}}</h3>
+
+                        </div>
+                        <div class="align-self-center">
+                          <button class="btn btn-sm btn-success"
+                            (click)="OpenPopUpPlanComptable(planComptableEnum?.avoir)"> <i class="ft-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- </div>
+
+            <div class="row"> -->
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.caisse' | translate }}</h3>
+                          <h3>{{ getCodeComptableById(planComptableEnum?.caisse) }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <button class="btn btn-sm btn-success"
+                            (click)="OpenPopUpPlanComptable(planComptableEnum?.caisse)"> <i
+                              class="ft-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.banque' | translate }}</h3>
+                          <h3>{{ getCodeComptableById(planComptableEnum?.banque) }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <button class="btn btn-sm btn-success"
+                            (click)="OpenPopUpPlanComptable(planComptableEnum?.banque)"> <i
+                              class="ft-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.virements_internes' | translate }}</h3>
+                          <h3>{{ getCodeComptableById(planComptableEnum?.virements_internes) }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <button class="btn btn-sm btn-success"
+                            (click)="OpenPopUpPlanComptable(planComptableEnum?.virements_internes)">
+                            <i class="ft-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.categorie' | translate }} </h3>
+                          <div class="row">
+                            <div class="col-10">
+                              <h3> <small>{{ 'labels.produit' | translate }} :</small>
+                                {{ getCodeComptableById(planComptableEnum?.categorie_produit) }}</h3>
+                            </div>
+                            <div class="col-2">
+                              <button class="btn btn-sm  btn-success float-right"
+                                (click)="OpenPopUpPlanComptable(planComptableEnum?.categorie_produit)"> <i
+                                  class="ft-edit"></i></button>
+                            </div>
+                          </div>
+
+
+                          <div class="row">
+                            <div class="col-10">
+                              <h3> <small>{{ 'labels.service' | translate }} :</small>
+                                {{ getCodeComptableById(planComptableEnum?.categorie_services) }}</h3>
+                            </div>
+                            <div class="col-2">
+                              <button class="btn btn-sm  btn-success float-right"
+                                (click)="OpenPopUpPlanComptable(planComptableEnum?.categorie_services)"> <i
+                                  class="ft-edit"></i></button>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-10">
+                              <h3> <small>{{ 'labels.autre' | translate }} :</small>
+                                {{ getCodeComptableById(planComptableEnum?.categorie_autre) }}</h3>
+                            </div>
+                            <div class="col-2">
+                              <button class="btn btn-sm  btn-success float-right"
+                                (click)="OpenPopUpPlanComptable(planComptableEnum?.categorie_autre)"> <i
+                                  class="ft-edit"></i></button>
+                            </div>
+                          </div>
+
+
+                        </div>
+                        <div class="align-self-center">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h3>{{ 'labels.depense' | translate }} </h3>
+
+                          <div class="row">
+                            <div class="col-10">
+                              <h3> <small>{{ 'labels.achat' | translate }} : </small>
+                                {{ getCodeComptableById(planComptableEnum?.depense_achat) }}</h3>
+                            </div>
+                            <div class="col-2">
+                              <button class="btn btn-sm  btn-success float-right"
+                                (click)="OpenPopUpPlanComptable(planComptableEnum?.depense_achat)"> <i
+                                  class="ft-edit"></i></button>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-10">
+                              <h3> <small>{{ 'labels.soustraitance' | translate }} : </small>
+                                {{ getCodeComptableById(planComptableEnum?.depense_soustraitant) }}</h3>
+                            </div>
+                            <div class="col-2">
+                              <button class="btn btn-sm  btn-success float-right"
+                                (click)="OpenPopUpPlanComptable(planComptableEnum?.depense_soustraitant)"> <i
+                                  class="ft-edit"></i></button>
+                            </div>
+                          </div>
+                          <h3><small>&nbsp;</small> &nbsp;</h3>
+                        </div>
+                        <div class="align-self-center">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <div class="card card-plan-comptable">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="row">
+                          <div class="col-6">
+                            <h3>Liste TVA</h3>
+                          </div>
+                          <div class="col-6">
+                            <button class="btn btn-sm  btn-success float-right"
+                              style="line-height: 20px; width: 50px; margin-right: 2px;"
+                              (click)="OpenFromTva('add',null)">
+                              <i class="ft-plus"></i>
+                            </button>
+                          </div>
+                          <div class="col-12">
+                            <table class=" table table-bordered text-center"
+                              style="overflow: hidden;background: #ffffff7a;">
+                              <thead>
+                                <tr class="text-center" style="background: #2c445a; color: #f9f9f9;">
+                                  <th> {{ 'labels.tva' | translate }} </th>
+                                  <th> {{ 'labels.codeComptable' | translate }}</th>
+                                  <th>{{ 'labels.actions' | translate }}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- List des tva -->
+                                <tr *ngFor="let element of TvaList;let i= index">
+                                  <td>{{element.tva }}</td>
+                                  <td>{{element.codeComptable}}</td>
+                                  <td class="text-center">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                      <button type="button" *ngIf="element.tva!='defaut'"
+                                        class="btn btn-success btn-sm btn-actions" data-toggle="modal"
+                                        data-target="#tvaForm" (click)="OpenFromTva('edit',i)">
+                                        <i class="ft-edit"></i>
+                                      </button>
+                                      <button type="button" *ngIf="element.tva!='defaut'"
+                                        class=" btn btn-danger btn-sm btn-actions" (click)="deleteTva(i)"><i
+                                          class="ft-trash-2" placement="bottom"
+                                          ngbTooltip="{{'labels.supprimer' | translate}} {{'labels.tva' | translate}}"></i></button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Periode Comptable -->
+<div class="card collapse-icon accordion-icon-rotate">
+  <div id="headingPeriodeComptable" class="card-header card-head-inverse bg-primary">
+    <a data-toggle="collapse" href="#accordionPeriodeComptable" aria-expanded="false"
+      aria-controls="accordionPeriodeComptable" class="card-title lead collapsed">
+      <h4 class="card-title"> {{'parametrageperiodeComptable.title' | translate}}</h4>
+    </a>
+  </div>
+  <div id="accordionPeriodeComptable" role="tabpanel" data-parent="#accordionPeriodeComptable"
+    aria-labelledby="headingPeriodeComptable" class="collapse" aria-expanded="false">
+    <div class="card-content">
+      <div class="card-body">
+        <div class="content-header row">
+
+          <div class="content-header-right  col-12">
+            <div class="btn-group float-md-right" style="padding-bottom: 10px;" role="group"
+              *ngIf="periodes?.length == 0">
+              <a style="color:white" (click)="ajouterPeriodeComptable()"
+                class="btn  btn-success">{{ 'labels.nouveau' | translate }}<i class="ft-plus"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <section id="multi-column">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+              <div class="card box-shadow-0 ">
+
+                <div class="card-content collapse show">
+                  <div class="card-body ">
+
+
+                    <ng-container *ngFor="let periode of periodes; let i = index">
+                      <!-- <div *ngIf="periodes?.length==0">Aucune donnée disponible</div> -->
+                      <div class="row" style="padding: 2px 15px;">
+
+                        <!-- Date de début -->
+                        <div class="col-lg-5">
+                          <div class="form-group row">
+                            <label class="col-md-7 label-control"
+                              for="projectinput189">{{ 'comptabilite.dateDebut' | translate }} :</label>
+                            <div class="col-md-5">
+                              <input type="text" value='{{ periode?.dateDebut | date:"dd/MM/yyyy" }}'
+                                id="projectinput189" class="form-control" disabled>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Dureé -->
+                        <div class="col-lg-3">
+                          <div class="form-group row">
+                            <label class="col-md-6 label-control"
+                              for="projectinput1897">{{ 'comptabilite.duree' | translate }}
+                              :</label>
+                            <div class="col-md-6">
+                              <input type="text" value='{{ periode?.periode }}' id="projectinput18970"
+                                class="form-control" disabled>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <!-- modifier periode comptable -->
+                        <div class="col-lg-4 text-center">
+                          <button class="btn btn-md btn-success" (click)="modifierPeriodeComptable(i)"> <i
+                              class="fa fa-edit"></i> {{ 'comptabilite.modifierPeriodeComptable' | translate }}
+                          </button>
+                          <button class="btn btn-md btn-info" style="margin-left:12px;margin-top: 2px"
+                            (click)="cloturPeriode(periode?.id)"> <i class="ft-lock"></i>
+                            {{ 'comptabilite.cloture' | translate }} </button>
+                        </div>
+
+                      </div>
+
+                    </ng-container>
+                    <div class="file-label text-center" *ngIf="periodes?.length == 0">
+                      {{ 'labels.noDataAvaiblePeriodeComptable' | translate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Modifier période comptable-->
+        <div class="modal fade text-left" id="modifierPeriodeComptable" tabindex="-1" role="dialog"
+          aria-labelledby="myModalLabel98" aria-hidden="true">
+          <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel98">
+                  <i class="fa fa-credit-card"></i>
+
+                  <ng-container *ngIf="!isAdd"> {{ 'labels.modifier' | translate }} </ng-container>
+                  <ng-container *ngIf="isAdd"> {{ 'labels.add' | translate }} </ng-container>
+                  {{ 'comptabilite.periodeComptable' | translate }}
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </div>
+              <div class="modal-body">
+                <div class="card-body" *ngIf="form">
+
+                  <form [formGroup]="form">
+
+                    <div class="row form-group" *ngIf="dateLang">
+                      <div class="col-md-12">
+                        <label for="date">{{ 'comptabilite.dateDebut' | translate }} : </label>
+                        <p-calendar formControlName="dateDebut" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                          [inputStyle]="{'width':'100%'}" [locale]="dateLang" showButtonBar="true"></p-calendar>
+                        <small class="text-danger"
+                          *ngIf="form?.controls?.dateDebut?.errors?.required">{{'errors.required' | translate }}</small>
+                      </div>
+                    </div>
+
+                    <div class="row form-group">
+                      <div class="col-md-12">
+                        <label for="montant">{{ 'comptabilite.duree' | translate }} : </label>
+                        <select formControlName="periode" class="form-control">
+                          <option *ngFor="let item of dureeComptables" [value]="item">{{ item  }}</option>
+                        </select>
+                        <small class="text-danger"
+                          *ngIf="form?.controls?.periode?.errors?.required">{{'errors.required' | translate }}</small>
+                      </div>
+                    </div>
+
+                  </form>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-secondary"
+                  data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+                <button type="button" class="btn grey  btn-success" *ngIf="!isAdd" (click)="updatePeriodeComptable()">
+                  {{ 'labels.sauvegarder' | translate }}</button>
+                <button type="button" class="btn grey  btn-success" *ngIf="isAdd" (click)="addPeriodeComptable()">
+                  {{ 'labels.sauvegarder' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+<!-- Modifier Plan Comptable-->
+<div class="modal fade text-left" id="modifierPlanComptable" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel98" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel98">
+          <i class="fa fa-credit-card"></i> {{modelName}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-md-6 label-control"> {{ 'labels.codeComptable' | translate }}</label>
+            <div class="col-md-6">
+              <input type=" text" id="codeComptable" class="form-control  text-center"
+                placeholder="{{ 'labels.codeComptable' | translate }}" [(ngModel)]="editPlanComptable.codeComptable">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary"
+          data-dismiss="modal">{{ 'labels.cancel' | translate }}</button>
+        <button type="button" class="btn grey  btn-success" (click)="UpdatePlanComptable()">
+          {{ 'labels.sauvegarder' | translate }}</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade text-left" id="formTva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h4 class="modal-title">
+          <i class="fa fa-plus"></i> {{ ModelNameTva }}
+        </h4>
+
+        <button type="button" class="close" (click)="closeFormTva()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <form class="form form-horizontal" [formGroup]="formtva">
+          <div class="form-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-md-5 label-control">{{'labels.tva' |
+                                  translate}}</label>
+                  <div class="col-md-7">
+                    <input type="number" formControlName="valeurtvaup" class="form-control"
+                      placeholder="{{'labels.tva' | translate}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-md-5 label-control">{{'labels.codeComptable' |
+                                  translate}}</label>
+                  <div class="col-md-7">
+                    <input type="number" formControlName="codecomptableup" class="form-control"
+                      placeholder="{{'labels.codeComptable' | translate}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary" (click)="closeFormTva()"
+          ngbTooltip=" {{'labels.cancel' | translate}}">
+          {{'labels.cancel' | translate}} </button>
+        <button type="button" (click)="saveFormTva()" class="btn btn-success" placement="bottom"
+          ngbTooltip="{{ 'labels.save' | translate }}"> {{ 'labels.save' | translate }} </button>
+      </div>
+    </div>
+  </div>
+</div>

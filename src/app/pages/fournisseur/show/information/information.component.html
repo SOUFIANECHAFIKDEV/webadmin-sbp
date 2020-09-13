@@ -1,0 +1,200 @@
+<!-- Afficher les informations de fournisseur -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="zoom: 1;">
+      <div class="card-content collpase show">
+        <div class="card-body">
+          <form class="form-body">
+
+
+            <h4 class="form-section"><i class="ft-user"></i>{{'labels.info' | translate}}</h4>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput1">{{'labels.reference' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.reference" id="projectinput1" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput2">{{'labels.nom' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.nom" id="projectinput2" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.telephone' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.telephone" id="projectinput4" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.fax' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.fax" id="projectinput4" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.email' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="email" [value]="fournisseur?.email" id="projectinput4" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.siteWeb' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.siteWeb" id="projectinput4" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.tvaIntraCommunautaire' |
+                    translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.tvaIntraCommunautaire" id="projectinput4"
+                      class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput4">{{'labels.codeComptable' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.codeComptable" id="projectinput4" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.siret' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.siret" id="projectinput4" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="form-section"><i class="ft-map-pin"></i> {{ 'labels.adresse' | translate }}</h4>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.adresse' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.adresse" id="projectinput4" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control"
+                    for="projectinput4">{{'labels.complementAdresse' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.complementAdresse" id="projectinput4" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.ville' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.ville" id="projectinput3" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.codePostal' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="number" [value]="fournisseur?.codePostal" id="projectinput4" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.departement' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.departement" id="projectinput3" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 label-control" for="projectinput4">{{'labels.pays' | translate}}</label>
+                  <div class="col-md-9">
+                    <input type="text" [value]="fournisseur?.pays?.nomFrFr" id="projectinput3" class="form-control"
+                      disabled>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- listes des contacts -->
+<liste-contacts [contacts]="contacts" [show]="false"></liste-contacts>

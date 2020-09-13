@@ -1,0 +1,22 @@
+<form class="example" action="/action_page.php" *ngIf="!readOnly">
+  <input type="text" placeholder="Ajouter un label et appuyez sur +" (keyup)="onSearch(inputString.value,$event)"
+    #inputString>
+  <button type="button" (click)="serach()"><i class="fa fa-search"></i></button>
+  <button type="button" (click)="showlist()"><i class="fa fa-list"></i></button>
+</form>
+<!-- <div class="row">
+  <div class="col-2"></div>
+  <div class="col-10"> -->
+    <div class="tags-auto-complete">
+      <div>
+        <ul>
+            <li>tag.value</li>
+            <li>tag.value</li>
+            <li>tag.value</li>
+            <li>tag.value</li>
+            <li>tag.value</li>
+        </ul>
+      </div>
+    </div>
+  <!-- </div>
+</div> -->

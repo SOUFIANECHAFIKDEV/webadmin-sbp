@@ -1,0 +1,116 @@
+{
+  "title": "Gamme de maintenance des équipements",
+  "errors": {
+    "unique": "Ce champs existe déjà",
+    "required": "Ce champs est requis",
+    "minLength": "Ce champs doit être au moins de {{number}} caractères",
+    "pattern": "Ce champs est invalide",
+    "fillAll": "Veuillez corriger les erreurs indiquées sous les champs avant de valider",
+    "fournisseurRequired": "s'il vous plaît sélectionner un fournisseur par défaut",
+    "serveur": "Erreur du serveur",
+    "perationsRequired": "Veuillez ajouter au moin une operation"
+  },
+  "labels": {
+    "nom": "Nom",
+    "actions": "Actions",
+    "sauvegarder": "Sauvegarder",
+    "add": "Ajouter",
+    "update": "Mettre à jour",
+    "cancel": "Annuler",
+    "modifier": "Modifier",
+    "nouveau": "Nouveau",
+    "supprimer": "Supprimer",
+    "voirDetails": "Voir Détails",
+    "infogammemaintenanceequipement": "Information gamme de maintenance d'équipement ",
+    "operations": "Operations",
+    "equipement": "gamme maintenance d'équipement",
+    "mois": {
+      "janvier": "Janvier",
+      "fevrier": "Février",
+      "mars": "Mars",
+      "avril": "Avril",
+      "mai": "Mai",
+      "juin": "Juin",
+      "juillet": "Juillet",
+      "aout": "Août",
+      "septembre": "Septembre",
+      "octobre": "Octobre",
+      "novembre": "Novembre",
+      "decembre": "Décembre"
+    }
+  },
+  "list": {
+    "title": "Liste des gammes de maintenance des équipements",
+    "montreTout": "Montrer tout",
+    "montrerAucun": "Montrer aucun",
+    "statut": "Sélectionner un statut",
+    "delete": {
+      "title": "Supprimer",
+      "question": "Êtes-vous sûr supprimer cet gammes de maintenance d'équipements ?",
+      "cancel": "Annuler",
+      "confirm": "Oui, supprimez-le!",
+      "success": "Supprimer avec succès",
+      "error": "Erreur du serveur",
+      "failed": "Suppression annulé",
+      "ImpossibleDeSuppression": "Impossible de supprimer cet gammes de maintenance d'équipements  car attaché à un document"
+    }
+  },
+  "add": {
+    "title": "Ajouter gamme de maintenance d'équipement",
+    "msg": "Ajouter avec succès"
+  },
+  "update": {
+    "title": "Modifier gamme de maintenance d'équipement",
+    "msg": "Modifier avec succès"
+  },
+  "show": {
+    "title": "Détails gamme de maintenance d'équipement",
+    "information": "INFORMATION",
+    "historique": "HISTORIQUE",
+    "FichesTechniques": "Fiches techniques"
+  },
+  "dataTables": {
+    "processing": "Traitement en cours...",
+    "search": "Rechercher",
+    "lengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+    "info": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "infoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    "infoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "infoPostFix": "",
+    "loadingRecords": "Chargement en cours...",
+    "zeroRecords": "",
+    "emptyTable": "",
+    "paginate": {
+      "first": "Premier",
+      "previous": "Pr&eacute;c&eacute;dent",
+      "next": "Suivant",
+      "last": "Dernier"
+    },
+    "aria": {
+      "sortAscending": ": activer pour trier la colonne par ordre croissant",
+      "sortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+    },
+    "searchPlaceholder": "Nom"
+  },
+  "noDataAvaible": "Aucune donnée disponible dans le tableau",
+  "Afficher_Masquées_Les_Colonnes": "Colonnes",
+  "equipement": {
+    "errors": {
+      "minLengthNom": "Le nom doit être au moins de 3 caractères",
+      "minLengthLibelle": "Le libellé doit être au moins de 3 caractères",
+      "periodicite": "Veuillez sélectionner au moin une periode"
+    },
+    "deleteLibelle": {
+      "title": "Supprimer un libellé",
+      "question": "Est-ce qu vous voulez vraiment supprimer ce libellé",
+      "cancel": "annuler",
+      "confirm": "Supprimer"
+    },
+    "deleteOperation": {
+      "title": "Supprimer une operation",
+      "question": "Est-ce qu vous voulez vraiment supprimer cette operation",
+      "cancel": "annuler",
+      "confirm": "Supprimer"
+    }
+  }
+}

@@ -1,0 +1,176 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12">
+    <h3 class="content-header-title mb-0">{{ 'list.title' | translate }}</h3>
+  </div>
+  <div class="content-header-right col-12">
+    <!-- <div class="float-md-right" style="padding-bottom: 10px;">
+  
+        <a class=" btn btn-primary" style="color:white;" [routerLink]="['/contratentretiens/ajouter']" placement="bottom"
+          ngbTooltip=" {{ 'labels.nouveau' | translate }}">
+          {{ 'labels.nouveau' | translate }} <i class="ft-plus"></i>
+        </a>
+      </div> -->
+  </div>
+</div>
+
+<section id="multi-column" *ngIf="tableColumns">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-content collapse show">
+          <div class="card-body card-dashboard">
+            <recherche-avancee>
+              <div class="recherche-avancee-body">
+                <div class="ui-g ui-fluid" *ngIf="dateLang">
+                  <div class="ui-g-3 ui-md-3">
+                    <h6 style="font-weight: bold">{{'list.statut' | translate }}</h6>
+                    <ng-select [hideSelected]="true" bindLabel="statut"
+                      notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="statut" #selecteStatus
+                      (click)="getlistStatus()" (change)="rerender()">
+                      <ng-option *ngFor="let item of listStatus" [value]="item?.value">
+                        {{ item?.name }}</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="ui-g-3 ui-md-3">
+                    <h6 style="font-weight: bold">{{'list.client' | translate }}</h6>
+                    <ng-select [hideSelected]="true" bindLabel="clients" #selecteClients (click)="getClients()"
+                      notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="idClient" (change)="rerender()">
+                      <ng-option *ngFor="let item of clients" [value]="item?.id">
+                        {{ item?.nom }}</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="ui-g-3 ui-md-3">
+                    <h6 style="font-weight: bold">{{'list.mois' | translate }}</h6>
+                    <ng-select [hideSelected]="true" bindLabel="mois"
+                      notFoundText="{{'labels.noFoundItem' | translate}}" [(ngModel)]="mois" #selecteMois
+                      (click)="getlistMois()" (change)="rerender()">
+                      <ng-option *ngFor="let item of listMois" [value]="item?.value">
+                        {{ item?.name }}</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="ui-g-3 ui-md-3">
+                    <h6 style="font-weight: bold">{{'list.annee' | translate }}</h6>
+                    <input id="annee" type="number" class="form-control currency-input" [(ngModel)]="annee"
+                      placeholder="{{ 'labels.annee' | translate }}" (keyup)="rerender()" style="height: 34px;">
+                  </div>
+                </div>
+
+
+              </div>
+            </recherche-avancee>
+
+
+            <show-hide-table-columns [columns]="tableColumns" [tableName]="'visiteMaintenanceTable'"
+              [btnLabel]="'Afficher_Masquées_Les_Colonnes' | translate" [showAll]="'list.montreTout' | translate"
+              [showNone]="'list.montrerAucun' | translate" [checkedColumns]="checkedColumns"
+              (selectColumn)="SetCheckedColmuns($event)">
+            </show-hide-table-columns>
+
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered"
+              style="width:100%" id="visiteMaintenanceTable">
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of tableColumns;let index = index">
+                    <th> <span [innerHTML]="column"></span> </th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody *ngIf="visitesMaintenances?.list?.length > 0">
+                <tr *ngFor="let visiteMaintenance of visitesMaintenances?.list"
+                  (dblclick)="doubleClick(visiteMaintenance?.id)">
+
+                  <td [hidden]="checkedColumns[0]">
+                    <!-- <i class="ft-lock" style="font-weight: 600;"></i> -->
+
+                    {{visiteMaintenance?.contratEntretien?.client?.nom}}
+                    <!-- {{getclientById(visiteMaintenance?.contratEntretien?.idClient).nom}} -->
+                  </td>
+
+                  <!-- status de visiteMaintenance-->
+                  <td *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.NonFait" [hidden]="checkedColumns[1]">
+                    <span class="badge badge-default badge-brouillon">{{
+                      'labels.nonfait' | translate
+                    }}</span>
+                  </td>
+                  <td *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.Fait" [hidden]="checkedColumns[1]">
+                    <span class="badge badge-default badge-planifiee">{{
+                      'labels.fait' | translate
+                    }}</span>
+                  </td>
+                  <td *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.APlanifier"
+                    [hidden]="checkedColumns[1]">
+                    <span class="badge badge-default badge-enretard ">{{
+                      'labels.aplanifier' | translate
+                    }}</span>
+                  </td>
+                  <td *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.Planifier"
+                    [hidden]="checkedColumns[1]">
+                    <span class="badge badge-default badge-success ">{{
+                      'labels.planifier' | translate
+                    }}</span>
+                  </td>
+                  <td *ngIf="visiteMaintenance?.statut == statutVisiteMaintenance.Annule" [hidden]="checkedColumns[1]">
+                    <span class="badge badge-default badge-annuler">{{
+                      'labels.annulee' | translate
+                    }}</span>
+                  </td>
+
+                  <td [hidden]="checkedColumns[2]">
+                    {{ visiteMaintenance?.annee }}
+                  </td>
+
+                  <td [hidden]="checkedColumns[3]">
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.janvier ">{{'mois.janvier' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.fevrier ">{{'mois.fevrier' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.mars ">{{'mois.mars' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.avril ">{{'mois.avril' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.mai ">{{'mois.mai' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.juin ">{{'mois.juin' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.juillet ">{{'mois.juillet' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.aout ">{{'mois.aout' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.septembre ">{{'mois.septembre' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.octobre ">{{'mois.octobre' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.novembre ">{{'mois.novembre' | translate}}</span>
+                    <span *ngIf="visiteMaintenance?.mois ==moisEnum.decembre ">{{'mois.decembre' | translate}}</span>
+                  </td>
+
+                  <td [hidden]="checkedColumns[4]">
+                    {{ visiteMaintenance?.ficheInterventionMaintenance?.reference  }}
+                  </td>
+                  <td class="actions" [hidden]="checkedColumns[5]">
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-primary btn-md btn-actions"
+                        [routerLink]="['/visitesMaintenance/detail',visiteMaintenance?.id]" placement="bottom"
+                        ngbTooltip="{{ 'toolip.detail' | translate }}"><i class="ft-eye"></i>
+                      </button>
+
+                      <!-- <ng-container>
+                    
+                          <button type="button" class="btn btn-danger btn-md btn-actions" placement="bottom"
+                            ngbTooltip="{{ 'toolip.delete' | translate }}" (click)="delete(contratEntretien?.id)">
+                            <i class="ft-trash-2"></i>
+                          </button>
+                        </ng-container> -->
+
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="visitesMaintenances?.list?.length == 0">
+                <tr>
+                  <td colspan="7" class="no-data-available">{{ 'noDataAvaible' | translate }}</td>
+                </tr>
+              </tbody>
+
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<custom-loader [displayLoader]="processing"></custom-loader>

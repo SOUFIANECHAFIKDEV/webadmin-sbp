@@ -1,0 +1,117 @@
+.card {
+    border: 1px #656565 solid !important;
+    box-shadow: 4px 4px #656565 !important;
+}
+
+h4.card-title,
+strong {
+    color: #065cb3 !important;
+}
+
+.card-footer {
+    padding: 0.6rem 1rem !important;
+}
+
+.custom {
+    float: right;
+    padding: 0px;
+    margin: 0px;
+    li {
+        padding-right: 10px;
+        padding-top: 15px;
+    }
+}
+
+.list-inline {
+    margin: 0px !important;
+    padding-right: 5px;
+    li {
+        margin: 0px !important;
+        padding-right: 2px;
+        padding-top: 9px;
+           a{
+            font-size: 20px;
+            }
+        
+    }
+}
+
+
+
+.card-body-custom {
+    padding-top: 12px;
+    padding-bottom: 9px;
+}
+
+.card-header {
+    padding: 0rem !important;
+    margin: 0px !important;
+}
+
+.card-body {
+    height: 10rem;
+    overflow: auto;
+}
+
+.card {
+    margin-top: 0.5rem;
+}
+
+.card-text {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.modal-content {
+    max-height: 40vw;
+    // overflow: scroll;
+}
+
+.btn-sm {
+    font-size: 0.875rem !important;
+    line-height: 1.5rem !important;
+    border-radius: 0.21rem !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+div#addAddress {
+    z-index: 100000000;
+}
+
+.card:hover {
+    border: 1px #065cb3 solid !important;
+    box-shadow: 4px 4px #065cb3 !important;
+    .adresseFacturation {
+        color: #065cb3;
+    }
+}
+
+.card-header {
+    background: transparent;
+    border: navajowhite;
+    font-size: 1.5rem;
+    padding: 0;
+    margin-left: 0.5rem;
+    .btn-edit {
+        color: #656565;
+        cursor: pointer;
+    }
+    .btn-remove {
+        color: #656565;
+        cursor: pointer;
+    }
+}
+
+.btn-edit:hover {
+    color: #2dcee3 !important;
+}
+
+.btn-remove:hover {
+    color: #ffa87d !important;
+}
+
+ .modal-body {
+    overflow: auto;
+ }

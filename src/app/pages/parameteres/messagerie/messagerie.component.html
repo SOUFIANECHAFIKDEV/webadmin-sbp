@@ -1,0 +1,112 @@
+<div class="content-header row">
+  <div class="content-header-left col-md-6 col-12 mb-2">
+    <h3 class="content-header-title mb-0">{{ 'messagerie.config' | translate }}</h3>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div class="btn-group float-md-right" role="group">
+      <button (click)="update()" type="submit" class="btn btn-success" placement="bottom"
+        ngbTooltip="{{ 'labels.modifier' | translate }} {{ 'labels.parametragecouthoraire' | translate }}">
+        <i class="fa fa-check-square-o"></i> {{ 'labels.modifier' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<section id="multi-column">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="card box-shadow-0 border-primary">
+        <div class="card-content collapse show">
+          <div class="card-body">
+            <form class="form form-horizontal" [formGroup]="form">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput1">{{'labels.username' | translate}} :
+                    </label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="username" class="form-control"
+                        placeholder="{{'labels.username' | translate}}">
+                      <small class="text-danger" *ngIf="f?.username?.errors?.required">
+                        {{'errors.required' | translate}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput1">{{'labels.password' | translate}} :
+                    </label>
+                    <div class="col-md-9">
+                      <!-- <input type="password" formControlName="password" class="form-control" placeholder="{{'labels.password' | translate}}"> -->
+                      <show-hide-password icon="fa fa eye" btnStyle="primary" [btnOutline]="false">
+
+                        <input type="password" formControlName="password" id="projectinput7" class="form-control"
+                          placeholder="{{'labels.password' | translate}}"
+                          style="font-size: 1rem;height: 3rem;width: 85%;">
+
+                      </show-hide-password>
+                      <small class="text-danger" *ngIf="f?.password?.errors?.required">
+                        {{'errors.required' | translate}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput1">{{'labels.server' | translate}} : </label>
+                    <div class="col-md-9">
+                      <input type="text" formControlName="serveur" class="form-control"
+                        placeholder="{{'labels.server' | translate}}">
+                      <small class="text-danger" *ngIf="f?.serveur?.errors?.required">
+                        {{'errors.required' | translate}}
+                      </small>
+                      <small class="text-danger" *ngIf="f?.serveur?.errors?.pattern">
+                        {{'errors.pattern' | translate}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput1">{{'labels.port' | translate}} : </label>
+                    <div class="col-md-9">
+                      <input type="number" appInputRemoveDefaultZero formControlName="port" class="form-control"
+                        placeholder="{{'labels.port' | translate}}">
+                      <small class="text-danger" *ngIf="f?.port?.errors?.required">
+                        {{'errors.required' | translate}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-control" for="projectinput1"></label>
+                    <div class="col-md-9">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" formControlName="ssl" class="custom-control-input" id="projectinput8">
+                        <label class="custom-control-label" for="projectinput8">{{'labels.ssl' | translate}}</label>
+                      </div>
+                      <small class="text-danger" *ngIf="f?.ssl?.errors?.required">
+                        {{'errors.required' | translate}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-actions ">
+                <div class="pull-right">
+                  <button class="btn btn-info" type="submit" placement="bottom"
+                    ngbTooltip="{{ 'labels.modifier' | translate }}"> {{ 'labels.modifier' | translate }} </button>
+                </div><br>
+              </div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

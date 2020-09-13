@@ -1,0 +1,158 @@
+
+
+ol li,
+ul li,
+dl li {
+  line-height: 1.4 !important;
+}
+
+.param {
+  margin-bottom: 7px;
+  line-height: 1.4;
+}
+.param-inline dt {
+  display: inline-block;
+}
+.param dt {
+  margin: 0;
+  margin-right: 7px;
+  font-weight: 600;
+}
+.param-inline dd {
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+.param dd {
+  margin: 0;
+  vertical-align: baseline;
+}
+
+.shopping-cart-wrap .price {
+  color: #065cb3;
+  opacity: 0.95;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 5px;
+  display: block;
+}
+var {
+  font-style: normal;
+}
+
+.media input {
+  margin-right: 1rem;
+}
+.img-sm {
+  width: 15px !important;
+}
+
+h6 {
+  font-weight: 500;
+}
+
+.table td {
+  padding: 8px 11px !important;
+  border-top: 0.02px solid #bdc3c7;
+}
+
+.table {
+  tbody {
+    display: block;
+    height: 350px;
+    overflow: auto;
+  }
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+}
+
+.content-body {
+  padding: 0px 14px !important;
+}
+
+.page-loading-active {
+  opacity: 1;
+  z-index: 1700 !important;
+}
+
+// .modal-body {
+//  // overflow: auto;
+//  overflow: inherit;
+// }
+// .param-inline dd {
+//   vertical-align: baseline;
+//   display: inline-block;
+// }
+
+// .param dd {
+//   margin: 0;
+//   vertical-align: baseline;
+// }
+
+// .shopping-cart-wrap .price {
+//   color: #065cb3;
+//   opacity: 0.95;
+//   font-size: 14px;
+//   font-weight: bold;
+//   margin-right: 5px;
+//   display: block;
+// }
+// var {
+//   font-style: normal;
+// }
+
+// .media input {
+//   margin-right: 1rem;
+// }
+// .img-sm {
+//   width: 15px !important;
+// }
+
+// h6 {
+//   font-weight: 500;
+// }
+
+// .table td {
+//   padding: 8px 11px !important;
+//   border-top: 0.02px solid #bdc3c7;
+// }
+
+// .table {
+//   tbody {
+//     display: block;
+//     height: 350px;
+//     overflow: auto;
+//   }
+//   thead,
+//   tbody tr {
+//     display: table;
+//     width: 100%;
+//     table-layout: fixed;
+//   }
+// }
+
+// .content-body {
+//   padding: 0px 14px !important;
+// }
+
+// .page-loading-active {
+//   opacity: 1;
+//   z-index: 1700 !important;
+// }
+
+
+// .modal-body {
+//   overflow: inherit !important;
+// }
+
+
+
+.modal-content {
+   overflow: auto !important; 
+ 
+ width:550px !important; 
+}

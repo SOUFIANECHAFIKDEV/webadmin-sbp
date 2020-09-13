@@ -1,0 +1,35 @@
+tr {
+  border: 1px  #9E98986E solid;
+  /* padding: 10px 0px; */
+}
+table{
+  width: 100%;
+}
+td{
+  border: 1px  #9E98986E solid;
+  height: 30px;
+}
+
+td:nth-child(1){
+  padding-left: 8px;
+}
+
+.btn-actions-custom{
+  button,button:active{
+    background-color: #DCEAF2;
+    border: none;
+    color: #0b1721;
+    padding: 1px 1px;
+  }
+   button:nth-child(2){
+    //font-size: 20px;
+  }
+}
+.iconEye{
+  padding-top: 4px;
+   padding-right: 5px;
+}
+
+
+
+

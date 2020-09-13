@@ -1,0 +1,304 @@
+<div class="row" *ngIf="!readOnly">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-acrticles">
+                <thead>
+                    <tr class="text-center">
+                        <th>{{ 'labels.description' | translate }}</th>
+                        <th>{{ 'labels.qte' | translate }}</th>
+                        <th>{{ 'labels.prixHT' | translate }}</th>
+                        <th>{{ 'labels.prixTTC' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td *ngIf="!userForAcompt">Facture situation {{ pourcentage }}% sur le devis
+                            {{ devisInfos?.reference }}</td>
+                        <td *ngIf="userForAcompt">Facture Acompte {{ pourcentage }}% sur le devis
+                            {{ devisInfos?.reference }}</td>
+                        <td>1</td>
+                        <td>{{ calcul?.prixHT | RoudingNumber | ShowCurrency }}</td>
+                        <td>{{ calcul?.prixTTC | RoudingNumber | ShowCurrency }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>TOTAL GENERAL HT : </th>
+                    <td class="text-right">{{ calcul?.prixHT | RoudingNumber | ShowCurrency }}</td>
+                </tr>
+                <tr>
+                    <th>Montant H.T </th>
+                    <td class="text-right">{{ calcul?.montantHT| RoudingNumber | ShowCurrency  }} </td>
+                </tr>
+                <tr>
+                    <th>Part Prorata : {{ devisInfos?.prorata | RoudingNumber }} %</th>
+                    <td class="text-right">{{ calcul?.partProrata | RoudingNumber | ShowCurrency }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>TVA : {{ calcul?.tva | RoudingNumber }} %</th>
+                    <td class="text-right">{{ calcul?.prixHT * (calcul?.tva / 100) | RoudingNumber | ShowCurrency }}
+                    </td>
+                </tr>
+                <tr>
+                    <th> PARTICIPATION PUC : {{ devisInfos?.puc }} %</th>
+                    <td class="text-right">{{ calcul?.prixHT * (devisInfos?.puc / 100) | RoudingNumber | ShowCurrency }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th> Reste À Payer TTC: </th>
+                    <td class="text-right">{{ calcul?.resteAPayerTTC | RoudingNumber | ShowCurrency }} </td>
+                </tr>
+
+                <tr>
+                    <th> Reste À Payer HT: </th>
+                    <td class="text-right">{{ calcul?.resteAPayerHT | RoudingNumber | ShowCurrency }} </td>
+                </tr>
+                <!-- <tr>
+                    <th>
+                        <div class="row">
+                            <div class="col-6 Retenue-garantie">
+                                Retenue de garantie {{ retenueGarantieValue }} %
+                            </div>
+                            <div class="col-6">
+                                <div class="custom-control custom-checkbox" style="float: right;">
+                                    <input type="checkbox" [(ngModel)]="retenueGarantie" class="custom-control-input"
+                                        id="projectinput3" />
+                                    <label *ngIf="retenueGarantie" class="custom-control-label"
+                                        for="projectinput3">Oui</label>
+                                    <label *ngIf="!retenueGarantie" class="custom-control-label"
+                                        for="projectinput3">Non</label>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr> -->
+                <tr>
+                    <th>
+                        <div class="row">
+                            <div class="col-5 Retenue-garantie">Retenue de garantie
+                                <!-- {{retenueGarantieValue}} % -->
+                            </div>
+
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <input type="number" class="form-control text-right" appInputRemoveDefaultZero
+                                        [(ngModel)]="retenueGarantieValue" placeholder="retenueGarantie"
+                                        [disabled]="readOnly" *ngIf="retenueGarantie == 1" max="100" min="0">
+                                    <div class="input-group-prepend" *ngIf="retenueGarantie == 1">
+                                        <div class="input-group-text">%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <select style="min-height: 40px; min-width: 210px;" [(ngModel)]="delaiGarantie"
+                                        [disabled]="readOnly" *ngIf="retenueGarantie == 1">
+                                        <option [value]="null">{{ 'delai_garantie.question' | translate }}</option>
+                                        <option [value]="delaiGarantiesEnum.TroisMois">
+                                            {{ 'delai_garantie.troisMois' | translate }}</option>
+                                        <option [value]="delaiGarantiesEnum.SixMois">
+                                            {{ 'delai_garantie.sixMois' | translate }}</option>
+                                        <option [value]="delaiGarantiesEnum.UnAns">
+                                            {{ 'delai_garantie.unAns' | translate }}</option>
+                                        <option [value]="delaiGarantiesEnum.DeuxAns">
+                                            {{ 'delai_garantie.deuxAns' | translate }}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-1">
+                                <ng-container *ngIf="!readOnly">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="retenueGarantie"
+                                            class="custom-control-input" id="projectinput3">
+                                        <label *ngIf="retenueGarantie == 1" class="custom-control-label"
+                                            for="projectinput3">Oui</label>
+                                        <label *ngIf="retenueGarantie == 0" class="custom-control-label"
+                                            for="projectinput3">Non</label>
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <ng-container *ngIf="readOnly">
+                                <div class="col-2 text-right" *ngIf="retenueGarantie == 0">
+                                    Non
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </th>
+                    <td>
+                        <div class="text-right" *ngIf="retenueGarantie == 1 && retenueGarantie ==true">
+                            {{ calcul?.prixHT  * (retenueGarantieValue/100) | RoudingNumber | ShowCurrency }}
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>TOTAL GENERAL TTC : </th>
+                    <td class="text-right">{{ calcul?.prixTTC | RoudingNumber | ShowCurrency }} </td>
+                </tr>
+
+            </table>
+
+            <table class="table table-bordered info-sup" *ngIf="!userForAcompt">
+                <tr>
+                    <th> MONTANT SITUATION CUMULLEE HT: </th>
+                    <td class="text-right">{{ calcul.situationCumulleeHT | RoudingNumber | ShowCurrency }} </td>
+                </tr>
+                <tr>
+                    <th> MONTANT SITUATION CUMULLEE TTC: </th>
+                    <td class="text-right">{{ calcul.situationCumulleeTTC | RoudingNumber | ShowCurrency }} </td>
+                </tr>
+
+            </table>
+
+            <table class="table table-bordered info-sup">
+                <tr>
+                    <th> TOTAL DES ACOMPTES PERCUS HT : </th>
+                    <td class="text-right"> {{ calcul.totalAcomptesHT | RoudingNumber | ShowCurrency }}</td>
+                </tr>
+                <tr>
+                    <th> TOTAL DES ACOMPTES PERCUS TTC : </th>
+                    <td class="text-right"> {{ calcul.totalAcomptesTTC | RoudingNumber | ShowCurrency }}</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="readOnly ">
+    <ng-container *ngFor="let article of prestation;let i= index">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-acrticles">
+                    <thead>
+
+                        <tr class="text-center">
+                            <th>{{ 'labels.description' | translate }}</th>
+                            <th>{{ 'labels.qte' | translate }}</th>
+                            <th>{{ 'labels.prixHT' | translate }}</th>
+                            <th>{{ 'labels.prixTTC' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>{{ article?.data?.description }}</td>
+                            <td>1</td>
+                            <td>{{ facture?.totalHt | RoudingNumber | ShowCurrency }}</td>
+                            <td>{{ facture?.total | RoudingNumber | ShowCurrency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>TOTAL GENERAL HT : </th>
+                        <td class="text-right">{{ facture?.totalHt | RoudingNumber | ShowCurrency }} </td>
+                    </tr>
+                    <tr>
+                        <th>Montant H.T </th>
+                        <td class="text-right">
+                            {{ clalcMontantHt(facture?.totalHt,facture?.prorata) | RoudingNumber | ShowCurrency  }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Part Prorata : {{ facture?.prorata | RoudingNumber }} %</th>
+                        <td class="text-right">
+                            {{ facture?.totalHt * (facture?.prorata / 100) | RoudingNumber | ShowCurrency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>TVA : {{ calcul.tva  | RoudingNumber }} %</th>
+                        <td class="text-right">
+                            {{ facture?.totalHt * (calcul.tva  / 100) | RoudingNumber | ShowCurrency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> PARTICIPATION PUC : {{ facture?.puc }} %</th>
+                        <td class="text-right">
+                            {{ facture?.totalHt * (facture?.puc / 100) | RoudingNumber | ShowCurrency }}</td>
+                    </tr>
+                    <!-- <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-6 Retenue-garantie">
+                                    Retenue de garantie {{ retenueGarantieValue }} %
+                                </div>
+                                <div class="col-6">
+                                    <label *ngIf="facture?.retenueGarantie == 1" style="float: right;"
+                                        for="projectinput3">Oui</label>
+                                    <label *ngIf="facture?.retenueGarantie == 0" style="float: right;"
+                                        for="projectinput3">Non</label>
+                                </div>
+                            </div>
+                        </th>
+                    </tr> -->
+                    <tr>
+                        <th>
+                            <div class="row">
+                                <div class="col-5 Retenue-garantie">Retenue de garantie
+                                    <!-- {{retenueGarantieValue}} % -->
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control text-right" appInputRemoveDefaultZero
+                                            [(ngModel)]="retenueGarantieValue" placeholder="Username"
+                                            [disabled]="readOnly" *ngIf="retenueGarantie == 1" max="100" min="0">
+                                        <div class="input-group-prepend" *ngIf="retenueGarantie == 1">
+                                            <div class="input-group-text">%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <select style="min-height: 40px; min-width: 210px;" [(ngModel)]="delaiGarantie"
+                                            [disabled]="readOnly" *ngIf="retenueGarantie == 1">
+                                            <option [value]="null">{{ 'delai_garantie.question' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.TroisMois">
+                                                {{ 'delai_garantie.troisMois' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.SixMois">
+                                                {{ 'delai_garantie.sixMois' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.UnAns">
+                                                {{ 'delai_garantie.unAns' | translate }}</option>
+                                            <option [value]="delaiGarantiesEnum.DeuxAns">
+                                                {{ 'delai_garantie.deuxAns' | translate }}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <ng-container *ngIf="readOnly">
+                                    <div class="col-2 text-right" *ngIf="retenueGarantie == 0">
+                                        Non
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </th>
+                        <td>
+                            <div class="text-right" *ngIf="retenueGarantie == 1 && retenueGarantie ==true">
+                                {{ calcul?.prixHT  * (retenueGarantieValue/100) | RoudingNumber | ShowCurrency }}
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>TOTAL GENERAL TTC : </th>
+                        <td class="text-right">{{ facture?.total | RoudingNumber | ShowCurrency }} </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

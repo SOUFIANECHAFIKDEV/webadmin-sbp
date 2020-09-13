@@ -1,0 +1,41 @@
+<div class="modal fade text-left" id="{{idPop}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel9">
+          <i class="fa fa-list"></i> {{ 'labels.choixClient' | translate }}
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-md-3 label-control font-weight-bold">{{ 'labels.client' | translate }} :</label>
+            <div class="col-md-9">
+              <ng-select notFoundText="{{'labels.noFoundItem' | translate}}"
+                labelForId=projectinput48 [(ngModel)]="idClient">
+                <ng-option *ngFor="let client of clients;let i = index" value="{{client?.id}}">{{client?.codeclient}} :
+                  {{client?.nom}}</ng-option>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn grey btn-secondary" data-dismiss="modal">{{ 'labels.cancel' |translate }}
+        </button>
+        <button type="button" class="btn btn-success" [disabled]="!idClient"
+          (click)="choisirClient()">{{ 'labels.choisir' | translate }}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
